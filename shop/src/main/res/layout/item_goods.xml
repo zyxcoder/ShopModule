@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/shape_ffffff_6"
+    android:paddingBottom="8dp"
+    tools:ignore="ContentDescription">
+
+
+    <ImageView
+        android:id="@+id/ivGoods"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_goods_demo"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNoInventory"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#4d333333"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/ivGoods"
+        app:layout_constraintLeft_toLeftOf="@+id/ivGoods"
+        app:layout_constraintRight_toRightOf="@+id/ivGoods"
+        app:layout_constraintTop_toTopOf="@+id/ivGoods"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_inventory"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/tvGoodsName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivGoods"
+        tools:text="福临门非转基因压榨福临门非转基因压榨玉米油1福临门非转基因压榨玉米油1福临门非转基因压榨玉米油1福临门非转基因压榨玉米油1玉米油1.8L玉米胚芽油含植..." />
+
+
+    <TextView
+        android:id="@+id/tvGoodsPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#fa5151"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
+        app:layout_constraintRight_toRightOf="@+id/tvGoodsName"
+        app:layout_constraintTop_toBottomOf="@+id/tvGoodsName"
+        tools:text="260" />
+</androidx.constraintlayout.widget.ConstraintLayout>

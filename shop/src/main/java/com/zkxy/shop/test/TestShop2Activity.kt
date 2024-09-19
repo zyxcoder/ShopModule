@@ -1,10 +1,11 @@
-package com.zkxy.shop
+package com.zkxy.shop.test
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.databinding.ActivityShopTest2Binding
+import com.zkxy.shop.mode_base_url
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 
 class TestShop2Activity : BaseViewBindActivity<TestShopActivityViewModel, ActivityShopTest2Binding>() {

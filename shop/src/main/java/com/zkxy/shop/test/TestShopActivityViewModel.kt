@@ -1,4 +1,4 @@
-package com.zkxy.shop
+package com.zkxy.shop.test
 
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 

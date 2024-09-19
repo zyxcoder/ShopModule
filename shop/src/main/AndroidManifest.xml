@@ -29,13 +29,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 后台位置信息 Android 10 (API level 29) 或更高版本 -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-    <application>
+    <application android:theme="@style/Theme.ShopModule"
+        android:name=".ShopApplication">
         <activity
-            android:name=".TestShopActivity"
-            android:exported="true"
-            android:theme="@style/Theme.ShopModule"/>
-        <activity android:name=".TestShop2Activity"
-            android:theme="@style/Theme.ShopModule"/>
+            android:name=".test.TestShopActivity"
+            android:exported="true" />
+        <activity android:name=".test.TestShop2Activity" />
+        <activity android:name=".ui.home.ShopHomeActivity" />
     </application>
 
 </manifest>

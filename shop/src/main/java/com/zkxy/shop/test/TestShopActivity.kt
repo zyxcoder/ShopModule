@@ -1,12 +1,13 @@
-package com.zkxy.shop
+package com.zkxy.shop.test
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.gxy.common.base.BaseViewBindActivity
-import com.zkxy.shop.adapter.TestListAdapter
+import com.zkxy.shop.test.adapter.TestListAdapter
 import com.zkxy.shop.databinding.ActivityShopTestBinding
 import com.zkxy.shop.entity.TestItemData
+import com.zkxy.shop.mode_base_url
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.loadImage

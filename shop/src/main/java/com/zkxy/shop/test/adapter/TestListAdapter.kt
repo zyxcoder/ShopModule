@@ -1,4 +1,4 @@
-package com.zkxy.shop.adapter
+package com.zkxy.shop.test.adapter
 
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemListTestBinding

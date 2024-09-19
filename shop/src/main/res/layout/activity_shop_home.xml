@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toobarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:right_icon="@drawable/ic_shop_search"
+    app:right_icon_isvisible="true"
+    app:title_content="商城"
+    tools:ignore="ContentDescription,HardcodedText">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2f5f9">
+
+        <com.gxy.common.view.refresh.HFSmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            app:backgroundColor="@color/color_666666"
+            app:srlFooterTranslationViewId="@+id/rvGoods">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvGoods"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:spanCount="2"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_goods" />
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appBarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:elevation="0dp">
+
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/collapsingToolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.youth.banner.Banner
+                                android:id="@+id/bannerHome"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                app:banner_indicator_normal_color="#99ffffff"
+                                app:banner_indicator_normal_width="6dp"
+                                app:banner_indicator_selected_color="#ffffff"
+                                app:banner_indicator_selected_width="6dp"
+                                app:banner_indicator_space="4dp"
+                                app:layout_constraintDimensionRatio="375:144"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/ivPointBg"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginRight="8dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_shop_point_bg"
+                                app:layout_constraintDimensionRatio="359:100"
+                                app:layout_constraintTop_toBottomOf="@+id/bannerHome" />
+
+                            <TextView
+                                android:id="@+id/tvPoint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:includeFontPadding="false"
+                                android:textColor="#ff333333"
+                                android:textSize="30sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tvMyOrder"
+                                app:layout_constraintLeft_toLeftOf="@+id/ivPointBg"
+                                app:layout_constraintTop_toTopOf="@+id/tvMyOrder"
+                                tools:text="26860" />
+
+                            <TextView
+                                android:id="@+id/tvMyOrder"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="18dp"
+                                android:background="@drawable/shape_ff8912_fa5151_20"
+                                android:paddingLeft="12dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="12dp"
+                                android:paddingBottom="6dp"
+                                android:text="我的订单"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/ivPointBg"
+                                app:layout_constraintRight_toRightOf="@+id/ivPointBg" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clAllGoods"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginBottom="13dp"
+                            android:src="@drawable/ic_shop_recommond_bg"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAllShop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:drawablePadding="4dp"
+                            android:padding="6dp"
+                            android:text="全部商品"
+                            android:textColor="@color/color_666666"
+                            android:textSize="14sp"
+                            app:drawableEndCompat="@drawable/ic_all_shop_enter"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:background="#f2f5f9" />
+                </com.google.android.material.appbar.AppBarLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.gxy.common.view.ToolbarLayout>
