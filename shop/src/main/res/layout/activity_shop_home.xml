@@ -40,6 +40,20 @@
                     tools:itemCount="5"
                     tools:listitem="@layout/item_goods" />
 
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clLoad"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <View
+                        android:id="@+id/viewLoad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/appBarLayout"
                     android:layout_width="match_parent"
@@ -62,11 +76,8 @@
                                 android:id="@+id/bannerHome"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                app:banner_indicator_normal_color="#99ffffff"
-                                app:banner_indicator_normal_width="6dp"
-                                app:banner_indicator_selected_color="#ffffff"
-                                app:banner_indicator_selected_width="6dp"
-                                app:banner_indicator_space="4dp"
+                                app:indicator_drawable_selected="@drawable/shape_banner_select"
+                                app:indicator_drawable_unselected="@drawable/shape_banner_unselect"
                                 app:layout_constraintDimensionRatio="375:144"
                                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -36,5 +36,5 @@ android {
 
 dependencies {
     api 'com.github.zyxcoder:ZkxhCommon:3.0.1'
-    implementation 'io.github.youth5201314:banner:2.2.3'
+    implementation 'com.youth.banner:banner:1.4.10'
 }

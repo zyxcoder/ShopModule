@@ -18,16 +18,9 @@ class GoodsItemAverageMarginDecoration : RecyclerView.ItemDecoration() {
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val spanIndex = (view.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
-        if (spanIndex % 2 == 0) {
-            view.updateLayoutParams<MarginLayoutParams> {
-                leftMargin = dpToPx(12f).toInt()
-                rightMargin = dpToPx(3.5f).toInt()
-            }
-        } else {
-            view.updateLayoutParams<MarginLayoutParams> {
-                leftMargin = dpToPx(3.5f).toInt()
-                rightMargin = dpToPx(12f).toInt()
-            }
+        view.updateLayoutParams<MarginLayoutParams> {
+            leftMargin = dpToPx(if (spanIndex % 2 == 0) 12f else 3.5f).toInt()
+            rightMargin = dpToPx(if (spanIndex % 2 == 0) 3.5f else 12f).toInt()
         }
     }
 }

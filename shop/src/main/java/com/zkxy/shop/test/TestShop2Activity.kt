@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.databinding.ActivityShopTest2Binding
-import com.zkxy.shop.mode_base_url
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 
 class TestShop2Activity : BaseViewBindActivity<TestShopActivityViewModel, ActivityShopTest2Binding>() {
@@ -31,7 +30,6 @@ class TestShop2Activity : BaseViewBindActivity<TestShopActivityViewModel, Activi
 
     override fun initView(savedInstanceState: Bundle?) {
         mViewBind.apply {
-            tvUrl.text = "模块地址:" + mode_base_url
             btJump.onContinuousClick {
                 finish()
             }

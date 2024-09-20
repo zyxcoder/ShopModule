@@ -2,20 +2,22 @@ package com.zkxy.shop.ui.home
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
+import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.gxy.common.base.BaseViewBindActivity
+import com.gxy.common.common.loadsir.LoadContentStatus
 import com.gxy.common.common.loadsir.getLoadSir
 import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
-import com.youth.banner.adapter.BannerImageAdapter
-import com.youth.banner.holder.BannerImageHolder
-import com.youth.banner.indicator.CircleIndicator
 import com.zkxy.shop.databinding.ActivityShopHomeBinding
-import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.isInit
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
+import com.zkxy.shop.utils.GlideImageLoader
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
-import com.zyxcoder.mvvmroot.utils.loadImage
+import com.zyxcoder.mvvmroot.ext.showToast
 
 /**
  * @author zhangyuxiang
@@ -26,30 +28,26 @@ import com.zyxcoder.mvvmroot.utils.loadImage
 class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHomeBinding>() {
 
     private lateinit var mLoadService: LoadService<Any>
-    private lateinit var topBannerAdapter: BannerImageAdapter<HomeShopBannerEntity>
+
     private lateinit var goodsAdapter: GoodsAdapter
 
     companion object {
         fun startActivity(context: Context) {
+            if (!isInit) {
+                context.showToast("请先调用shopInit方法以初始化插件")
+                return
+            }
             context.startActivity(Intent(context, ShopHomeActivity::class.java))
         }
     }
 
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
-            mLoadService = getLoadSir().register(refreshLayout) {
+            mLoadService = getLoadSir().register(viewLoad) {
                 startSearch(isFirst = true, isRefresh = false, start = 0)
             }
-            topBannerAdapter = object : BannerImageAdapter<HomeShopBannerEntity>(arrayListOf()) {
-                override fun onBindView(
-                    holder: BannerImageHolder, data: HomeShopBannerEntity, position: Int, size: Int
-                ) {
-                    holder.imageView.loadImage(data.imageUrl ?: "")
-                }
-            }.apply {
-                bannerHome.setAdapter(this)
-                bannerHome.setIndicator(CircleIndicator(this@ShopHomeActivity))
-                bannerHome.addBannerLifecycleObserver(this@ShopHomeActivity)
+            bannerHome.setImageLoader(GlideImageLoader()).setOnBannerListener {
+
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
@@ -88,12 +86,23 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
         mViewModel.getData(
             isFirst = isFirst, isRefresh = isRefresh, start = start
         )
+        //更新LoadService显示区域
+        mViewBind.clLoad.post {
+            val visibleHeight = Rect().apply {
+                mViewBind.clLoad.getGlobalVisibleRect(this)
+            }.height()
+            mViewBind.clLoad.updateLayoutParams {
+                height = visibleHeight
+            }
+        }
     }
 
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
             loadContentStatus.observe(this@ShopHomeActivity) {
+                mViewBind.clLoad.isVisible = it != LoadContentStatus.SUCCESS
+                mViewBind.rvGoods.isVisible = it == LoadContentStatus.SUCCESS
                 mLoadService.setLoadContentStatus(it)
             }
             isRefreshing.observe(this@ShopHomeActivity) {
@@ -113,7 +122,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
                 goodsAdapter.addData(it)
             }
             topBannerDatas.observe(this@ShopHomeActivity) {
-                topBannerAdapter.setDatas(it)
+                mViewBind.bannerHome.setImages(it).start()
             }
             dataHasMore.observe(this@ShopHomeActivity) {
                 mViewBind.refreshLayout.setNoMoreData(!it)

@@ -23,7 +23,7 @@
         android:id="@+id/clNoInventory"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#4d333333"
+        android:background="@drawable/shape_4d333333_top_6"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/ivGoods"
         app:layout_constraintLeft_toLeftOf="@+id/ivGoods"
