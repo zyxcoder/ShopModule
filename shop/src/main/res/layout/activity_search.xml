@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:title_content="搜索商品"
+    tools:ignore="ContentDescription,HardcodedText">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.zkxy.shop.view.ShopSearchView
+            android:id="@+id/shopSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:search_hint="请输入商品名称" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSearchHistory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#f2f5f9"
+            android:paddingTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shopSearchView">
+
+
+            <TextView
+                android:id="@+id/tvSearchHistoryDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="历史搜索"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSearchHistoryDesc"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvSearchHistoryDesc" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearchHistory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSearchHistoryDesc" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSearchResult"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#f2f5f9"
+            android:paddingLeft="12dp"
+            android:paddingTop="16dp"
+            android:paddingRight="12dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shopSearchView">
+
+
+            <TextView
+                android:id="@+id/tvResultCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="共 4 个结果"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.gxy.common.view.refresh.HFSmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvResultCount"
+                app:srlEnableRefresh="false">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvGoods"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:spanCount="2"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_goods" />
+
+
+            </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.gxy.common.view.ToolbarLayout>

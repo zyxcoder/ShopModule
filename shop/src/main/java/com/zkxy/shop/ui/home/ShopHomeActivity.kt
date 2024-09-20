@@ -15,6 +15,7 @@ import com.zkxy.shop.databinding.ActivityShopHomeBinding
 import com.zkxy.shop.isInit
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
+import com.zkxy.shop.ui.search.SearchActivity
 import com.zkxy.shop.utils.GlideImageLoader
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -73,7 +74,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
 
             }
             toobarLayout.onRightIconClickListener = {
-
+                SearchActivity.startActivity(context = this@ShopHomeActivity)
             }
         }
         startSearch(isFirst = true, isRefresh = false, start = 0)
