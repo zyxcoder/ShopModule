@@ -3,6 +3,7 @@ package com.zkxy.shopmodule
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.ShopHomeActivity
 
 class MainActivity : AppCompatActivity() {
@@ -11,6 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         findViewById<Button>(R.id.btJump).setOnClickListener {
             ShopHomeActivity.startActivity(this)
+        }
+        findViewById<Button>(R.id.btGoodsDetail).setOnClickListener {
+            GoodsDetailsActivity.startActivity(this)
         }
     }
 }

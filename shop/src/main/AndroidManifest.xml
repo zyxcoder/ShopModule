@@ -36,6 +36,12 @@
         <activity
             android:name=".ui.search.SearchActivity"
             android:theme="@style/Theme.ShopModule" />
+        <activity
+            android:name=".ui.goods.GoodsDetailsActivity"
+            android:theme="@style/Theme.ShopModule" />
+        <activity
+            android:name=".ui.goods.PlaceOrderActivity"
+            android:theme="@style/Theme.ShopModule" />
     </application>
 
 </manifest>
