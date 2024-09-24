@@ -13,6 +13,7 @@ import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityShopHomeBinding
 import com.zkxy.shop.isInit
+import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.SearchActivity
@@ -52,7 +53,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-
+                    GoodsDetailsActivity.startActivity(this@ShopHomeActivity)
                 }
                 rvGoods.adapter = this
             }

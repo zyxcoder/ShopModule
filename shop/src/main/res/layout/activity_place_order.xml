@@ -85,6 +85,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <TextView
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元"
@@ -106,8 +107,75 @@
                 app:layout_constraintStart_toStartOf="@+id/textView13"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
+            <ImageView
+                android:id="@+id/ivReceiveType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_kd"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_solid_white_8"
+            android:orientation="vertical">
+
+            <com.gxy.common.view.InputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:is_need_show_bottom_dialog="false"
+                app:is_requireds="true"
+                app:title="@string/specification" />
+
+            <com.gxy.common.view.InputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                app:is_input="true"
+                app:is_requireds="true"
+                app:title="@string/take_order_num" />
+
+            <com.gxy.common.view.InputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:is_input="true"
+                app:is_requireds="true"
+                app:title="@string/contact_person" />
+
+            <com.gxy.common.view.InputPhoneLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:input_phone_title="@string/contact_phone"
+                app:required="true" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <ViewStub
+            android:id="@+id/vsZt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_receive_zt" />
+
+        <ViewStub
+            android:id="@+id/vsKd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_receive_zt" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
     </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

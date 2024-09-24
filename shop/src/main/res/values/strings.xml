@@ -2,5 +2,14 @@
     <string name="app_name">shop</string>
     <string name="order_now">立即下单</string>
     <string name="goods_take_order">商品下单</string>
+    <string name="take_order_num">下单数量</string>
     <string name="total">合计</string>
+    <string name="specification">规格</string>
+    <string name="contact_person">联系人</string>
+    <string name="contact_phone">联系方式</string>
+    <string name="zt_point">自提点</string>
+    <string name="dialing">拨号</string>
+    <string name="navigation">导航</string>
+    <string name="delivery_address">收货地址</string>
+    <string name="address_book">地址薄</string>
 </resources>
