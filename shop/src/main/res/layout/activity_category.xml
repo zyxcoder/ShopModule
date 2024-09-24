@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toobarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:right_icon="@drawable/ic_shop_search"
+    app:right_icon_isvisible="true"
+    app:title_content="分类"
+    tools:ignore="ContentDescription,HardcodedText">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPrimary"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/gary_f2f5f9"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHorizontal_weight="100"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/rvSecondary"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_category_primary" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSecondary"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHorizontal_weight="275"
+            app:layout_constraintLeft_toRightOf="@+id/rvPrimary"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_category_secondary" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.gxy.common.view.ToolbarLayout>
