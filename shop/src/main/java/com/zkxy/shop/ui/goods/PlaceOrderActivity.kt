@@ -17,8 +17,11 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     private val ztPointAdapter by lazy { ZtPointAdapter() }
 
     companion object {
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, PlaceOrderActivity::class.java))
+        const val IS_PICK = "isPick"
+        fun startActivity(context: Context, isPick: Boolean = false) {
+            context.startActivity(Intent(context, PlaceOrderActivity::class.java).apply {
+                putExtra(IS_PICK, isPick)
+            })
         }
     }
 
@@ -28,9 +31,12 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 "https://gd-hbimg.huaban.com/4bd2502a1859e4bcc9d0afeda5b8851d98a267dd18c54-81OUAo_fw1200webp",
                 imageOptions = ImageOptions().apply { cornersRadius = dpToPx(4f).toInt() }
             )
-            vsZt.inflate().findViewById<RecyclerView>(R.id.rlvZt).adapter = ztPointAdapter
+            if (intent.getBooleanExtra(IS_PICK, false)) {
+                vsZt.inflate().findViewById<RecyclerView>(R.id.rlvZt).adapter = ztPointAdapter
+                ztPointAdapter.setList(mutableListOf("", "", "", "", "", ""))
+            } else {
+                vsKd.inflate()
+            }
         }
-
-        ztPointAdapter.setList(mutableListOf("", "", "", "", "", ""))
     }
 }
