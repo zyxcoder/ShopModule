@@ -3,22 +3,23 @@ package com.zkxy.shop.ui.search
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.common.dialog.CommonDialog
 import com.gxy.common.common.loadsir.LoadContentStatus
 import com.gxy.common.common.loadsir.getLoadSir
 import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
+import com.zkxy.shop.common.dialog.ShopCommonDialog
 import com.zkxy.shop.databinding.ActivitySearchBinding
+import com.zkxy.shop.databinding.ViewSearchWordBinding
+import com.zkxy.shop.entity.search.SearchWordHistoryEntity
 import com.zkxy.shop.room.database.ShopDatabase
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
+import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.adapter.SearchHistoryWordAdapter
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
+import com.zyxcoder.mvvmroot.ext.showSoftInput
 
 /**
  * @author zhangyuxiang
@@ -51,18 +52,13 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                         isFirst = true, start = 0, searchWord = it.searchWord
                     )
                 }
-                rvSearchHistory.adapter = this
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
 
                 }
+                rvGoods.addItemDecoration(GoodsItemAverageMarginDecoration())
                 rvGoods.adapter = this
-            }
-            rvSearchHistory.layoutManager = FlexboxLayoutManager(this@SearchActivity).apply {
-                flexWrap = FlexWrap.WRAP
-                flexDirection = FlexDirection.ROW
-                justifyContent = JustifyContent.FLEX_START
             }
             refreshLayout.setOnLoadMoreListener {
                 mViewModel.fetchSearchData(
@@ -71,8 +67,11 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                     searchWord = shopSearchView.getSearchContent()
                 )
             }
-            shopSearchView.requestFocus()
             shopSearchView.apply {
+                requestFocus()
+                postDelayed({
+                    showSoftInput()
+                }, 500)
                 onSearchClickListener = {
                     mViewModel.fetchSearchData(
                         isFirst = true, start = 0, searchWord = shopSearchView.getSearchContent()
@@ -85,7 +84,7 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
             }
             ivDelete.onContinuousClick {
                 //删除搜索词历史记录
-                CommonDialog(
+                ShopCommonDialog(
                     context = this@SearchActivity, message = "确认删除全部搜索历史"
                 ).apply {
                     onConfirmClickListener = {
@@ -96,14 +95,38 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
         }
     }
 
+    /**
+     * 生成搜索词标签View
+     */
+    private fun generateSearchWordView(searchWordHistoryEntity: SearchWordHistoryEntity): View {
+        return ViewSearchWordBinding.inflate(layoutInflater, mViewBind.flSearchHistory, false)
+            .apply {
+                tvWord.text = searchWordHistoryEntity.searchWord
+            }.root.apply {
+                onContinuousClick {
+                    mViewBind.shopSearchView.setSearchContent(searchWordHistoryEntity.searchWord)
+                    mViewModel.fetchSearchData(
+                        isFirst = true,
+                        start = 0,
+                        searchWord = searchWordHistoryEntity.searchWord
+                    )
+                }
+            }
+    }
+
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
             searchWords.observe(this@SearchActivity) { searchWordList ->
-                arrayOf(mViewBind.tvSearchHistoryDesc, mViewBind.ivDelete).forEach {
+                arrayOf(
+                    mViewBind.tvSearchHistoryDesc, mViewBind.ivDelete, mViewBind.scrollSearchHistory
+                ).forEach {
                     it.isVisible = searchWordList.isNotEmpty()
                 }
-                searchHistoryWordAdapter.setNewInstance(searchWordList.toMutableList())
+                mViewBind.flSearchHistory.removeAllViews()
+                repeat(searchWordList.size) {
+                    mViewBind.flSearchHistory.addView(generateSearchWordView(searchWordList[it]))
+                }
             }
             loadContentStatus.observe(this@SearchActivity) {
                 mLoadService.setLoadContentStatus(it)

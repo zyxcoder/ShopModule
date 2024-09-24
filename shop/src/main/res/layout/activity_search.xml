@@ -53,15 +53,23 @@
                 app:layout_constraintTop_toTopOf="@+id/tvSearchHistoryDesc" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSearchHistory"
+            <ScrollView
+                android:id="@+id/scrollSearchHistory"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="4dp"
+                android:scrollbars="none"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSearchHistoryDesc" />
+                app:layout_constraintTop_toBottomOf="@+id/tvSearchHistoryDesc">
+
+                <com.zkxy.shop.view.FlowLayout
+                    android:id="@+id/flSearchHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxLine="2" />
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -71,9 +79,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#f2f5f9"
-            android:paddingLeft="12dp"
-            android:paddingTop="16dp"
-            android:paddingRight="12dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shopSearchView">
@@ -83,6 +88,9 @@
                 android:id="@+id/tvResultCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
                 android:text="共 4 个结果"
                 android:textColor="#ff333333"
                 android:textSize="14sp"

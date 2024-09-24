@@ -59,6 +59,7 @@ class ShopSearchView(
 
     fun setSearchContent(content: String?) {
         mBinding.etSearch.setText(content)
+        mBinding.etSearch.setSelection(content?.length ?: 0)
     }
 
     fun setSearchHintContent(hintContent: String?) {

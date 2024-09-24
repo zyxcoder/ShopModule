@@ -3,4 +3,8 @@
     <declare-styleable name="ShopSearchView">
         <attr name="search_hint" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <attr name="maxLine" format="integer" />
+    </declare-styleable>
 </resources>
