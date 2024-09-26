@@ -3,7 +3,7 @@ package com.zkxy.shop.ui.goods.adapter
 import androidx.core.view.isVisible
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemGoodsPointSelectBinding
-import com.zkxy.shop.entity.category.GoodsPointEntity
+import com.zkxy.shop.entity.goods.GoodsPointEntity
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 import com.zyxcoder.mvvmroot.ext.onContinuousClick

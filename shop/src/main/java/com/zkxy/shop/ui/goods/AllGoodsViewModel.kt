@@ -6,6 +6,8 @@ import com.gxy.common.network.api.ApiResult
 import com.zkxy.shop.entity.category.CategoryEntity
 import com.zkxy.shop.entity.category.CategoryMinorEntity
 import com.zkxy.shop.entity.category.CategorySecondaryEntity
+import com.zkxy.shop.entity.goods.AllGoodsType
+import com.zkxy.shop.entity.goods.SortRule
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request

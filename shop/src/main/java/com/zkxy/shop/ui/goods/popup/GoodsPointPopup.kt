@@ -5,7 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.PopGoodsPointBinding
-import com.zkxy.shop.entity.category.GoodsPointEntity
+import com.zkxy.shop.entity.goods.GoodsPointEntity
 import com.zkxy.shop.ui.goods.adapter.GoodsPointPopAdapter
 import razerdp.basepopup.BasePopupWindow
 

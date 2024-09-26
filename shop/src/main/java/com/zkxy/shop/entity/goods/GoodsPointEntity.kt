@@ -1,7 +1,6 @@
-package com.zkxy.shop.entity.category
+package com.zkxy.shop.entity.goods
 
 import androidx.annotation.Keep
-import com.zkxy.shop.ui.goods.RuleType
 
 /**
  * @author zhangyuxiang
