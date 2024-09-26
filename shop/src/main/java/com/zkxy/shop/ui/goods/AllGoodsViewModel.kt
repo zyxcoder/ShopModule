@@ -38,13 +38,20 @@ class AllGoodsViewModel : BaseViewModel() {
      * 获取列表数据
      * @param isFirst 是否是第一次请求
      * @param isRefresh 是否是下拉刷新
-     * @param params 可变参数
+     * @param start 开始位置
+     * @param selectAllGoodsType 选择商品类型:积分商品，现金商品
+     * @param selectGoodsCategory 选择的商品分类
+     * @param selectSortRule 选择的排序规则
      */
     fun getGoodsData(
         isFirst: Boolean,
         isRefresh: Boolean,
-        start: Int
+        start: Int,
+        selectAllGoodsType: AllGoodsType,
+        selectGoodsCategory: CategoryEntity?,
+        selectSortRule: SortRule
     ) {
+
         request<Job>(block = {
             if (isFirst) {
                 loadGoodsContentStatus.value = LoadContentStatus.DEFAULT_LOADING
@@ -165,8 +172,6 @@ class AllGoodsViewModel : BaseViewModel() {
 
             if ((categoryDataList.value?.size ?: 0) > 0) {
                 loadCategoryContentStatus.value = LoadContentStatus.SUCCESS
-                //第一次请求完分类数据后，请求一次商品数据
-                getGoodsData(isFirst = true, isRefresh = false, start = 0)
             } else {
                 loadCategoryContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
             }

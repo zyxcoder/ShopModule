@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+    implementation 'io.github.razerdp:BasePopup:3.2.1'
 }

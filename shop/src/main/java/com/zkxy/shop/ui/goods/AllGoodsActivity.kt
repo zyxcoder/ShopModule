@@ -1,6 +1,5 @@
 package com.zkxy.shop.ui.goods
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,10 @@ import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ActivityAllGoodsBinding
 import com.zkxy.shop.databinding.ItemCategoryTabCenterTextBinding
+import com.zkxy.shop.entity.category.CategoryEntity
+import com.zkxy.shop.entity.category.GoodsPointEntity
 import com.zkxy.shop.ui.category.CategoryActivity
+import com.zkxy.shop.ui.goods.popup.GoodsPointPopup
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.SearchActivity
@@ -29,11 +31,32 @@ import com.zyxcoder.mvvmroot.utils.dpToPx
  * @date 2024/9/25
  */
 
-
-enum class AllGoodsType(val title: String) {
+/**
+ * kotlin 1.7用密封类包对象不行，需要升级1.9，为了兼容，这里只能用枚举
+ */
+enum class AllGoodsType(var title: String) {
     AllGoodsPoint("积分商品"), AllGoodsCash("现金商品")
 }
 
+enum class RuleType(val content: String? = null) {
+    DEFAULT_SORT("默认排序"),//默认排序
+    PRICE_UP_SORT("价格升序"),//价格升序
+    PRICE_DOWN_SORT("价格降序"),//价格降序
+    POINT_1_500_SORT("1-500积分"),//1-500积分
+    POINT_500_1000_SORT("500-1000积分"),//500-1000积分
+    POINT_1000_1500_SORT("1000-1500积分"),//1000-1500积分
+    POINT_1500_3000_SORT("1500-3000积分"),//1500-3000积分
+    POINT_3000_5000_SORT("3000-5000积分"), //3000-5000积分
+    POINT_5000_10000_SORT("5000-10000积分"), //5000-10000积分
+    POINT_10000_SORT("10000积分以上") //10000积分以上
+}
+
+enum class SortRule(var ruleType: RuleType? = null) {
+    NO_RULE,//无规则
+    DEFAULT_SORT(RuleType.DEFAULT_SORT), //默认排序
+    PRICE_SORT(RuleType.PRICE_DOWN_SORT), //价格排序
+    POINT_SORT(RuleType.POINT_1_500_SORT)//积分排序
+}
 
 class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGoodsBinding>() {
 
@@ -42,8 +65,39 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     private lateinit var goodsAdapter: GoodsAdapter
 
 
+    //选中的商品类型：积分商品，现金商品
     private var currentAllGoodsType = AllGoodsType.AllGoodsPoint
 
+    //选择的分类
+    private var currentGoodsCategory: CategoryEntity? = null
+
+    //默认选择无规则排序
+    private var currentSortRule = SortRule.NO_RULE
+
+
+    private val goodsPointList by lazy {
+        arrayListOf(
+            GoodsPointEntity(
+                name = RuleType.POINT_1_500_SORT.content, ruleType = RuleType.POINT_1_500_SORT
+            ), GoodsPointEntity(
+                name = RuleType.POINT_500_1000_SORT.content, ruleType = RuleType.POINT_500_1000_SORT
+            ), GoodsPointEntity(
+                name = RuleType.POINT_1000_1500_SORT.content,
+                ruleType = RuleType.POINT_1000_1500_SORT
+            ), GoodsPointEntity(
+                name = RuleType.POINT_1500_3000_SORT.content,
+                ruleType = RuleType.POINT_1500_3000_SORT
+            ), GoodsPointEntity(
+                name = RuleType.POINT_3000_5000_SORT.content,
+                ruleType = RuleType.POINT_3000_5000_SORT
+            ), GoodsPointEntity(
+                name = RuleType.POINT_5000_10000_SORT.content,
+                ruleType = RuleType.POINT_5000_10000_SORT
+            ), GoodsPointEntity(
+                name = RuleType.POINT_10000_SORT.content, ruleType = RuleType.POINT_10000_SORT
+            )
+        )
+    }
 
     companion object {
         fun startActivity(context: Context) {
@@ -57,7 +111,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 mViewModel.fetchCategory()
             }
             mGoodsLoadService = getLoadSir().register(refreshLayout) {
-                mViewModel.getGoodsData(isFirst = true, isRefresh = false, start = 0)
+                fetchGoodsData(isFirst = true, isRefresh = false)
             }
             toobarLayout.onRightIconClickListener = {
                 SearchActivity.startActivity(context = this@AllGoodsActivity)
@@ -71,12 +125,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             rvGoods.addItemDecoration(GoodsItemAverageMarginDecoration())
             refreshLayout.apply {
                 setOnRefreshListener {
-                    mViewModel.getGoodsData(isFirst = false, isRefresh = true, start = 0)
+                    fetchGoodsData(isFirst = false, isRefresh = true)
                 }
                 setOnLoadMoreListener {
-                    mViewModel.getGoodsData(
-                        isFirst = false, isRefresh = false, start = rvGoods.adapter?.itemCount ?: 0
-                    )
+                    fetchGoodsData(isFirst = false, isRefresh = false)
                 }
             }
             ivCategory.onContinuousClick {
@@ -86,7 +138,8 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                     override fun onTabSelected(tab: TabLayout.Tab?) {
                         currentAllGoodsType = AllGoodsType.values()[tab?.position ?: 0]
-                        refreshSortRuleUi()
+                        //重置分类数据
+                        tabLayoutCategory.selectTab(tabLayoutCategory.getTabAt(0))
                     }
 
                     override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -106,7 +159,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                     override fun onTabSelected(tab: TabLayout.Tab?) {
                         updateCategoryTabView(tab, true)
-                        mViewModel.getGoodsData(isFirst = true, isRefresh = false, start = 0)
+                        currentGoodsCategory =
+                            mViewModel.categoryDataList.value?.getOrNull(tab?.position ?: 0)
+                        currentSortRule = SortRule.NO_RULE
+                        refreshSortRuleAndFetchData()
                     }
 
                     override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -114,27 +170,79 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     }
 
                     override fun onTabReselected(tab: TabLayout.Tab?) {
+                        currentGoodsCategory =
+                            mViewModel.categoryDataList.value?.getOrNull(tab?.position ?: 0)
+                        currentSortRule = SortRule.NO_RULE
+                        refreshSortRuleAndFetchData()
                     }
                 })
+            }
+            tvDefaultSort.onContinuousClick {
+                currentSortRule = SortRule.DEFAULT_SORT
+                refreshSortRuleAndFetchData()
+            }
+            tvPriceSort.onContinuousClick {
+                if (currentSortRule != SortRule.PRICE_SORT) {
+                    currentSortRule = SortRule.PRICE_SORT.apply {
+                        ruleType = RuleType.PRICE_DOWN_SORT
+                    }
+                } else {
+                    if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT) {
+                        currentSortRule.ruleType = RuleType.PRICE_UP_SORT
+                    } else {
+                        currentSortRule.ruleType = RuleType.PRICE_DOWN_SORT
+                    }
+                }
+                refreshSortRuleAndFetchData()
+            }
+            tvPointSort.onContinuousClick {
+                GoodsPointPopup(context = this@AllGoodsActivity,
+                    goodsPointEntitys = goodsPointList.onEach {
+                        it.isSelect = it.ruleType == currentSortRule.ruleType
+                    }).apply {
+                    onPointSelectListener = {
+                        currentSortRule = SortRule.POINT_SORT.apply {
+                            ruleType = it.ruleType
+                        }
+                        refreshSortRuleAndFetchData()
+                    }
+                }.showPopupWindow(clSortRule)
             }
         }
         mViewModel.fetchCategory()
     }
 
-    @SuppressLint("ResourceAsColor")
+    /**
+     * 请求商品数据
+     */
+    private fun fetchGoodsData(isFirst: Boolean, isRefresh: Boolean) {
+        mViewModel.getGoodsData(
+            isFirst = isFirst,
+            isRefresh = isRefresh,
+            start = if (!isFirst && !isRefresh) mViewBind.rvGoods.adapter?.itemCount ?: 0 else 0,
+            selectGoodsCategory = currentGoodsCategory,
+            selectAllGoodsType = currentAllGoodsType,
+            selectSortRule = currentSortRule
+        )
+    }
+
     private fun updateCategoryTabView(tab: TabLayout.Tab?, isSelect: Boolean) {
         tab?.customView?.apply {
-            val tvTabText = findViewById<TextView>(R.id.tvTabText)
-            tvTabText.setTextColor(
-                ContextCompat.getColor(
-                    context, if (isSelect) R.color.clolor_566beb else R.color.clolor_666666
+            findViewById<TextView>(R.id.tvTabText).apply {
+                setTextColor(
+                    ContextCompat.getColor(
+                        context, if (isSelect) R.color.clolor_566beb else R.color.clolor_666666
+                    )
                 )
-            )
-            tvTabText.paint.isFakeBoldText = isSelect
+                paint.isFakeBoldText = isSelect
+            }
         }
     }
 
-    private fun refreshSortRuleUi() {
+    /**
+     * 刷新排序规则UI，并且请求商品接口
+     */
+    private fun refreshSortRuleAndFetchData() {
         mViewBind.apply {
             clSortRule.updatePadding(
                 left = if (currentAllGoodsType == AllGoodsType.AllGoodsPoint) dpToPx(
@@ -145,7 +253,73 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 ).toInt() else dpToPx(80f).toInt()
             )
             tvPointSort.isVisible = currentAllGoodsType == AllGoodsType.AllGoodsPoint
+            //先初始化所有排序规则的默认UI
+            arrayListOf(tvDefaultSort, tvPriceSort, tvPointSort).forEach {
+                it.setTextColor(
+                    ContextCompat.getColor(
+                        this@AllGoodsActivity, R.color.clolor_666666
+                    )
+                )
+            }
+            arrayListOf(tvPriceSort, tvPointSort).forEach {
+                it.setCompoundDrawablesWithIntrinsicBounds(
+                    null, null, ContextCompat.getDrawable(
+                        this@AllGoodsActivity, R.drawable.ic_sort_down_unselect
+                    ), null
+                )
+            }
+            tvPointSort.text = "积分区间"
+            when (currentSortRule) {
+                SortRule.DEFAULT_SORT -> {
+                    tvDefaultSort.setTextColor(
+                        ContextCompat.getColor(
+                            this@AllGoodsActivity, R.color.clolor_566beb
+                        )
+                    )
+                }
+
+                SortRule.PRICE_SORT -> {
+                    tvPriceSort.apply {
+                        setTextColor(
+                            ContextCompat.getColor(
+                                this@AllGoodsActivity, R.color.clolor_566beb
+                            )
+                        )
+                        setCompoundDrawablesWithIntrinsicBounds(
+                            null, null, ContextCompat.getDrawable(
+                                this@AllGoodsActivity,
+                                if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT) {
+                                    R.drawable.ic_sort_down_select
+                                } else {
+                                    R.drawable.ic_sort_up_select
+                                }
+                            ), null
+                        )
+                    }
+                }
+
+                SortRule.POINT_SORT -> {
+                    tvPointSort.apply {
+                        text = currentSortRule.ruleType?.content
+                        setTextColor(
+                            ContextCompat.getColor(
+                                this@AllGoodsActivity, R.color.clolor_566beb
+                            )
+                        )
+                        setCompoundDrawablesWithIntrinsicBounds(
+                            null, null, ContextCompat.getDrawable(
+                                this@AllGoodsActivity, R.drawable.ic_sort_down_select
+                            ), null
+                        )
+                    }
+                }
+
+                else -> {
+
+                }
+            }
         }
+        fetchGoodsData(isFirst = true, isRefresh = false)
     }
 
     override fun createObserver() {
