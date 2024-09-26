@@ -13,6 +13,7 @@ import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityShopHomeBinding
 import com.zkxy.shop.isInit
+import com.zkxy.shop.ui.goods.AllGoodsActivity
 import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
@@ -72,7 +73,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
 
             }
             tvAllShop.onContinuousClick {
-
+                AllGoodsActivity.startActivity(context = this@ShopHomeActivity)
             }
             toobarLayout.onRightIconClickListener = {
                 SearchActivity.startActivity(context = this@ShopHomeActivity)
