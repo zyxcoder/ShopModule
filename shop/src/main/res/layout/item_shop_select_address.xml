@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/tvRegion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="四川省 成都市 武侯区"
+        android:textColor="#ff333333"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="三道堰第一道堰梅姨斯天府一街美年广场附近抚琴西路25号院三道堰第一道堰梅姨斯天府一街美年广场"
+        android:textColor="#ff333333"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegion" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEditAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="4dp"
+        android:text="修改"
+        android:textColor="#ff566beb"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_shop_edit_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDeleteAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:drawablePadding="4dp"
+        android:text="删除"
+        android:textColor="#ff999999"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_shop_delete_address"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEditAddress"
+        app:layout_constraintEnd_toStartOf="@+id/tvEditAddress" />
+
+    <TextView
+        android:id="@+id/tvNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="设为默认"
+        android:drawablePadding="@dimen/dp_10"
+        android:textColor="#ff333333"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvDeleteAddress" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#E7E7E7"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormal" />
+</androidx.constraintlayout.widget.ConstraintLayout>

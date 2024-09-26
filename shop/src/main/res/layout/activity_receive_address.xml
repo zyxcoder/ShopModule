@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    app:title_content="添加地址"
+    app:toolbar_themecolor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/round_solid_white_8"
+        android:orientation="vertical">
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputSelectAddress"
+            app:is_need_show_bottom_dialog="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:is_requireds="true"
+            app:title="所在地区" />
+
+        <com.gxy.common.view.InputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:is_input="true"
+            app:is_requireds="true"
+            app:is_show_bottom_line="false"
+            app:title="详细地址" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSave"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/shape_566bbeb_7788ef_40"
+        android:gravity="center"
+        android:text="保 存"
+        android:textColor="#ffffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</com.gxy.common.view.ToolbarLayout>

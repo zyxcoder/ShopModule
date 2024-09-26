@@ -56,8 +56,10 @@
         android:background="#E7E7E7" />
 
     <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSelectAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:is_need_show_bottom_dialog="false"
         app:is_requireds="true"
         app:title="@string/local_area" />
 

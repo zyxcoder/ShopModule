@@ -40,10 +40,16 @@
             android:name=".ui.goods.GoodsDetailsActivity"
             android:theme="@style/Theme.ShopModule" />
         <activity
+            android:name=".ui.goods.ReceiveAddressActivity"
+            android:theme="@style/Theme.ShopModule" />
+        <activity
             android:name=".ui.goods.PlaceOrderActivity"
             android:theme="@style/Theme.ShopModule" />
         <activity
             android:name=".ui.category.CategoryActivity"
+            android:theme="@style/Theme.ShopModule" />
+        <activity
+            android:name=".ui.order.OrderDetailsActivity"
             android:theme="@style/Theme.ShopModule" />
         <activity
             android:name=".ui.goods.AllGoodsActivity"

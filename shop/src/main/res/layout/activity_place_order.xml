@@ -36,6 +36,7 @@
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="0dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:maxLines="2"
@@ -111,7 +112,6 @@
                 android:id="@+id/ivReceiveType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_kd"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -128,6 +128,7 @@
             android:orientation="vertical">
 
             <com.gxy.common.view.InputLayout
+                android:id="@+id/inputSpecification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:is_need_show_bottom_dialog="false"
@@ -165,13 +166,13 @@
             android:id="@+id/vsZt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/layout_receive_zt" />
+            android:layout="@layout/layout_shop_receive_zt" />
 
         <ViewStub
             android:id="@+id/vsKd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/layout_receive_kd" />
+            android:layout="@layout/layout_shop_receive_kd" />
 
         <Space
             android:layout_width="match_parent"

@@ -8,10 +8,10 @@ import androidx.viewpager.widget.ViewPager
 import com.gxy.common.base.BaseViewBindActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.zkxy.shop.R
+import com.zkxy.shop.common.dialog.GoodsDetailsImgDialog
 import com.zkxy.shop.databinding.ActivityGoodsDetailsBinding
 import com.zkxy.shop.databinding.ItemGoodsDetailsImageBinding
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
-import com.zkxy.shop.ui.goods.dialog.GoodsDetailsImgDialog
 import com.zkxy.shop.utils.GlideImageLoader
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
@@ -90,6 +90,12 @@ class GoodsDetailsActivity :
             }
 
             tvTakeOrder.onContinuousClick { PlaceOrderActivity.startActivity(this@GoodsDetailsActivity) }
+            tvTakeOrderKD.onContinuousClick {
+                PlaceOrderActivity.startActivity(
+                    this@GoodsDetailsActivity,
+                    isKd = true
+                )
+            }
         }
 
     }

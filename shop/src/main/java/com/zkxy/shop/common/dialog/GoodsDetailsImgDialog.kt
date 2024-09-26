@@ -1,4 +1,4 @@
-package com.zkxy.shop.ui.goods.dialog
+package com.zkxy.shop.common.dialog
 
 import android.content.Context
 import android.os.Bundle

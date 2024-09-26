@@ -11,8 +11,8 @@ import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job
 import org.json.JSONArray
 
-class PlaceOrderViewModel : BaseViewModel() {
 
+class ReceiveAddressViewModel : BaseViewModel() {
     val pickerData = MutableLiveData<PickerEntity>()
 
 
