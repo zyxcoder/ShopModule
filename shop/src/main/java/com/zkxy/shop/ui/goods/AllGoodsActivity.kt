@@ -17,9 +17,9 @@ import com.zkxy.shop.databinding.ActivityAllGoodsBinding
 import com.zkxy.shop.databinding.ItemCategoryTabCenterTextBinding
 import com.zkxy.shop.entity.category.CategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
-import com.zkxy.shop.entity.goods.GoodsPointEntity
 import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
+import com.zkxy.shop.entity.goods.goodsPointRuleList
 import com.zkxy.shop.ui.category.CategoryActivity
 import com.zkxy.shop.ui.goods.popup.GoodsPointPopup
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
@@ -48,32 +48,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     private var currentGoodsCategory: CategoryEntity? = null
 
     //默认选择无规则排序
-    private var currentSortRule = SortRule.NO_RULE
-
-
-    private val goodsPointList by lazy {
-        arrayListOf(
-            GoodsPointEntity(
-                name = RuleType.POINT_1_500_SORT.content, ruleType = RuleType.POINT_1_500_SORT
-            ), GoodsPointEntity(
-                name = RuleType.POINT_500_1000_SORT.content, ruleType = RuleType.POINT_500_1000_SORT
-            ), GoodsPointEntity(
-                name = RuleType.POINT_1000_1500_SORT.content,
-                ruleType = RuleType.POINT_1000_1500_SORT
-            ), GoodsPointEntity(
-                name = RuleType.POINT_1500_3000_SORT.content,
-                ruleType = RuleType.POINT_1500_3000_SORT
-            ), GoodsPointEntity(
-                name = RuleType.POINT_3000_5000_SORT.content,
-                ruleType = RuleType.POINT_3000_5000_SORT
-            ), GoodsPointEntity(
-                name = RuleType.POINT_5000_10000_SORT.content,
-                ruleType = RuleType.POINT_5000_10000_SORT
-            ), GoodsPointEntity(
-                name = RuleType.POINT_10000_SORT.content, ruleType = RuleType.POINT_10000_SORT
-            )
-        )
-    }
+    private var currentSortRule = SortRule.DEFAULT_SORT
 
     companion object {
         fun startActivity(context: Context) {
@@ -137,7 +112,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                         updateCategoryTabView(tab, true)
                         currentGoodsCategory =
                             mViewModel.categoryDataList.value?.getOrNull(tab?.position ?: 0)
-                        currentSortRule = SortRule.NO_RULE
+                        currentSortRule = SortRule.DEFAULT_SORT
                         refreshSortRuleAndFetchData()
                     }
 
@@ -148,7 +123,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     override fun onTabReselected(tab: TabLayout.Tab?) {
                         currentGoodsCategory =
                             mViewModel.categoryDataList.value?.getOrNull(tab?.position ?: 0)
-                        currentSortRule = SortRule.NO_RULE
+                        currentSortRule = SortRule.DEFAULT_SORT
                         refreshSortRuleAndFetchData()
                     }
                 })
@@ -172,9 +147,8 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 refreshSortRuleAndFetchData()
             }
             tvPointSort.onContinuousClick {
-                GoodsPointPopup(
-                    context = this@AllGoodsActivity,
-                    goodsPointEntitys = goodsPointList.onEach {
+                GoodsPointPopup(context = this@AllGoodsActivity,
+                    goodsPointEntitys = goodsPointRuleList.onEach {
                         it.isSelect = it.ruleType == currentSortRule.ruleType
                     }).apply {
                     onPointSelectListener = {
@@ -289,10 +263,6 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                             ), null
                         )
                     }
-                }
-
-                else -> {
-
                 }
             }
         }

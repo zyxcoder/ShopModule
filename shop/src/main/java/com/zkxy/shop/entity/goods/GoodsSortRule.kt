@@ -25,8 +25,30 @@ enum class RuleType(val content: String? = null) {
 }
 
 enum class SortRule(var ruleType: RuleType? = null) {
-    NO_RULE,//无规则
     DEFAULT_SORT(RuleType.DEFAULT_SORT), //默认排序
     PRICE_SORT(RuleType.PRICE_DOWN_SORT), //价格排序
     POINT_SORT(RuleType.POINT_1_500_SORT)//积分排序
 }
+
+
+/**
+ * 积分规则排序数组
+ */
+val goodsPointRuleList = arrayListOf(
+    GoodsPointEntity(
+        name = RuleType.POINT_1_500_SORT.content, ruleType = RuleType.POINT_1_500_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_500_1000_SORT.content, ruleType = RuleType.POINT_500_1000_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_1000_1500_SORT.content, ruleType = RuleType.POINT_1000_1500_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_1500_3000_SORT.content, ruleType = RuleType.POINT_1500_3000_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_3000_5000_SORT.content, ruleType = RuleType.POINT_3000_5000_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_5000_10000_SORT.content, ruleType = RuleType.POINT_5000_10000_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_10000_SORT.content, ruleType = RuleType.POINT_10000_SORT
+    )
+)
+
