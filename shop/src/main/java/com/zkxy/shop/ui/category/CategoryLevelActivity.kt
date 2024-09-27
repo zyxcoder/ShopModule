@@ -1,7 +1,8 @@
-package com.zkxy.shop.ui.goods
+package com.zkxy.shop.ui.category
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -13,14 +14,15 @@ import com.gxy.common.common.loadsir.getLoadSir
 import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
-import com.zkxy.shop.databinding.ActivityAllGoodsBinding
+import com.zkxy.shop.databinding.ActivityCategoryLevelBinding
 import com.zkxy.shop.databinding.ItemCategoryTabCenterTextBinding
-import com.zkxy.shop.entity.category.CategoryEntity
+import com.zkxy.shop.entity.category.CategoryMinorEntity
+import com.zkxy.shop.entity.category.CategorySecondaryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
 import com.zkxy.shop.entity.goods.goodsPointRuleList
-import com.zkxy.shop.ui.category.CategoryActivity
+import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.goods.popup.GoodsPointPopup
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
@@ -28,48 +30,79 @@ import com.zkxy.shop.ui.search.SearchActivity
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.utils.dpToPx
 
-
 /**
  * @author zhangyuxiang
- * @date 2024/9/25
+ * @date 2024/9/27
  */
+class CategoryLevelActivity :
+    BaseViewBindActivity<CategoryLevelViewModel, ActivityCategoryLevelBinding>() {
 
-class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGoodsBinding>() {
-
-    private lateinit var mPageLoadService: LoadService<Any>
-    private lateinit var mGoodsLoadService: LoadService<Any>
+    private lateinit var mLoadService: LoadService<Any>
     private lateinit var goodsAdapter: GoodsAdapter
 
+    //分类标签
+    private var categoryDataList: MutableList<CategoryMinorEntity>? = null
 
     //选中的商品类型：积分商品，现金商品
     private var currentAllGoodsType = AllGoodsType.AllGoodsPoint
 
     //选择的分类
-    private var currentGoodsCategory: CategoryEntity? = null
+    private var currentGoodsCategory: CategoryMinorEntity? = null
 
     //默认选择无规则排序
     private var currentSortRule = SortRule.DEFAULT_SORT
 
     companion object {
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, AllGoodsActivity::class.java))
+        private const val CATEGORY_SECONDARY_DATA = "category_secondary_data"//二级分类数据
+        private const val CATEGORY_MINOR_DATA = "category_minor_data"//三级分类数据
+        private const val ALL_GOODS_TYPE = "all_goods_type"//商品类型
+        fun startActivity(
+            context: Context,
+            categorySecondaryEntity: CategorySecondaryEntity?,
+            categoryMinorEntity: CategoryMinorEntity? = null,
+            allGoodsType: AllGoodsType
+        ) {
+            context.startActivity(Intent(context, CategoryLevelActivity::class.java).apply {
+                putExtra(CATEGORY_SECONDARY_DATA, categorySecondaryEntity)
+                putExtra(CATEGORY_MINOR_DATA, categoryMinorEntity)
+                putExtra(ALL_GOODS_TYPE, allGoodsType)
+            })
         }
     }
 
+
     override fun init(savedInstanceState: Bundle?) {
+        currentAllGoodsType = intent.getSerializableExtra(ALL_GOODS_TYPE, AllGoodsType::class.java)
+            ?: AllGoodsType.AllGoodsPoint
+        val categorySecondaryData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(
+                CATEGORY_SECONDARY_DATA, CategorySecondaryEntity::class.java
+            )
+        } else {
+            intent.getParcelableExtra(CATEGORY_SECONDARY_DATA)
+        }
+        categoryDataList = categorySecondaryData?.categoryMinorList
+        currentGoodsCategory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(
+                CATEGORY_MINOR_DATA, CategoryMinorEntity::class.java
+            )
+        } else {
+            intent.getParcelableExtra(CATEGORY_MINOR_DATA)
+        } ?: categoryDataList?.getOrNull(0)
+
         mViewBind.apply {
-            mPageLoadService = getLoadSir().register(clRoot) {
-                mViewModel.fetchCategory()
-            }
-            mGoodsLoadService = getLoadSir().register(refreshLayout) {
+            mLoadService = getLoadSir().register(refreshLayout) {
                 fetchGoodsData(isFirst = true, isRefresh = false)
             }
-            toobarLayout.onRightIconClickListener = {
-                SearchActivity.startActivity(context = this@AllGoodsActivity)
+            toobarLayout.apply {
+                setTitleContent(categorySecondaryData?.categoryName)
+                onRightIconClickListener = {
+                    SearchActivity.startActivity(context = this@CategoryLevelActivity)
+                }
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-                    GoodsDetailsActivity.startActivity(this@AllGoodsActivity)
+                    GoodsDetailsActivity.startActivity(this@CategoryLevelActivity)
                 }
                 rvGoods.adapter = this
             }
@@ -82,39 +115,11 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     fetchGoodsData(isFirst = false, isRefresh = false)
                 }
             }
-            ivCategory.onContinuousClick {
-                CategoryActivity.startActivity(
-                    context = this@AllGoodsActivity,
-                    allGoodsType = currentAllGoodsType
-                )
-            }
-            tabLayoutGoods.apply {
-                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                    override fun onTabSelected(tab: TabLayout.Tab?) {
-                        currentAllGoodsType = AllGoodsType.values()[tab?.position ?: 0]
-                        //重置分类数据
-                        tabLayoutCategory.selectTab(tabLayoutCategory.getTabAt(0))
-                    }
-
-                    override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                    }
-
-                    override fun onTabReselected(tab: TabLayout.Tab?) {
-                    }
-                })
-                repeat(AllGoodsType.values().size) {
-                    addTab(newTab().apply {
-                        text = AllGoodsType.values()[it].title
-                    })
-                }
-            }
             tabLayoutCategory.apply {
                 addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                     override fun onTabSelected(tab: TabLayout.Tab?) {
                         updateCategoryTabView(tab, true)
-                        currentGoodsCategory =
-                            mViewModel.categoryDataList.value?.getOrNull(tab?.position ?: 0)
+                        currentGoodsCategory = categoryDataList?.getOrNull(tab?.position ?: 0)
                         currentSortRule = SortRule.DEFAULT_SORT
                         refreshSortRuleAndFetchData()
                     }
@@ -124,8 +129,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     }
 
                     override fun onTabReselected(tab: TabLayout.Tab?) {
-                        currentGoodsCategory =
-                            mViewModel.categoryDataList.value?.getOrNull(tab?.position ?: 0)
+                        currentGoodsCategory = categoryDataList?.getOrNull(tab?.position ?: 0)
                         currentSortRule = SortRule.DEFAULT_SORT
                         refreshSortRuleAndFetchData()
                     }
@@ -150,7 +154,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 refreshSortRuleAndFetchData()
             }
             tvPointSort.onContinuousClick {
-                GoodsPointPopup(context = this@AllGoodsActivity,
+                GoodsPointPopup(context = this@CategoryLevelActivity,
                     goodsPointEntitys = goodsPointRuleList.onEach {
                         it.isSelect = it.ruleType == currentSortRule.ruleType
                     }).apply {
@@ -162,9 +166,21 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     }
                 }.showPopupWindow(clSortRule)
             }
+            //渲染Tab分类标签
+            categoryDataList?.forEach {
+                tabLayoutCategory.addTab(tabLayoutCategory.newTab().apply {
+                    customView = ItemCategoryTabCenterTextBinding.inflate(layoutInflater).apply {
+                        tvTabText.text = it.categoryName
+                    }.root
+                }, it == currentGoodsCategory)
+            }
+            //滑动到选中项
+            tabLayoutCategory.post {
+                tabLayoutCategory.setScrollPosition(tabLayoutCategory.selectedTabPosition, 0f, true)
+            }
         }
-        mViewModel.fetchCategory()
     }
+
 
     /**
      * 请求商品数据
@@ -211,14 +227,14 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             arrayListOf(tvDefaultSort, tvPriceSort, tvPointSort).forEach {
                 it.setTextColor(
                     ContextCompat.getColor(
-                        this@AllGoodsActivity, R.color.clolor_666666
+                        this@CategoryLevelActivity, R.color.clolor_666666
                     )
                 )
             }
             arrayListOf(tvPriceSort, tvPointSort).forEach {
                 it.setCompoundDrawablesWithIntrinsicBounds(
                     null, null, ContextCompat.getDrawable(
-                        this@AllGoodsActivity, R.drawable.ic_sort_down_unselect
+                        this@CategoryLevelActivity, R.drawable.ic_sort_down_unselect
                     ), null
                 )
             }
@@ -227,7 +243,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 SortRule.DEFAULT_SORT -> {
                     tvDefaultSort.setTextColor(
                         ContextCompat.getColor(
-                            this@AllGoodsActivity, R.color.clolor_566beb
+                            this@CategoryLevelActivity, R.color.clolor_566beb
                         )
                     )
                 }
@@ -236,12 +252,12 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     tvPriceSort.apply {
                         setTextColor(
                             ContextCompat.getColor(
-                                this@AllGoodsActivity, R.color.clolor_566beb
+                                this@CategoryLevelActivity, R.color.clolor_566beb
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(
                             null, null, ContextCompat.getDrawable(
-                                this@AllGoodsActivity,
+                                this@CategoryLevelActivity,
                                 if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT) {
                                     R.drawable.ic_sort_down_select
                                 } else {
@@ -257,12 +273,12 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                         text = currentSortRule.ruleType?.content
                         setTextColor(
                             ContextCompat.getColor(
-                                this@AllGoodsActivity, R.color.clolor_566beb
+                                this@CategoryLevelActivity, R.color.clolor_566beb
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(
                             null, null, ContextCompat.getDrawable(
-                                this@AllGoodsActivity, R.drawable.ic_sort_down_select
+                                this@CategoryLevelActivity, R.drawable.ic_sort_down_select
                             ), null
                         )
                     }
@@ -275,41 +291,26 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
-            loadCategoryContentStatus.observe(this@AllGoodsActivity) {
-                mPageLoadService.setLoadContentStatus(it)
+            loadContentStatus.observe(this@CategoryLevelActivity) {
+                mLoadService.setLoadContentStatus(it)
             }
-            loadGoodsContentStatus.observe(this@AllGoodsActivity) {
-                mGoodsLoadService.setLoadContentStatus(it)
-            }
-            categoryDataList.observe(this@AllGoodsActivity) {
-                it.forEach {
-                    mViewBind.tabLayoutCategory.apply {
-                        addTab(newTab().apply {
-                            customView =
-                                ItemCategoryTabCenterTextBinding.inflate(layoutInflater).apply {
-                                    tvTabText.text = it.categoryName
-                                }.root
-                        })
-                    }
-                }
-            }
-            isRefreshing.observe(this@AllGoodsActivity) {
+            isRefreshing.observe(this@CategoryLevelActivity) {
                 if (!it) {
                     mViewBind.refreshLayout.finishRefresh()
                 }
             }
-            isLoading.observe(this@AllGoodsActivity) {
+            isLoading.observe(this@CategoryLevelActivity) {
                 if (!it) {
                     mViewBind.refreshLayout.finishLoadMore()
                 }
             }
-            firstGoodsDatas.observe(this@AllGoodsActivity) {
+            firstGoodsDatas.observe(this@CategoryLevelActivity) {
                 goodsAdapter.setNewInstance(it)
             }
-            moreGoodsDatas.observe(this@AllGoodsActivity) {
+            moreGoodsDatas.observe(this@CategoryLevelActivity) {
                 goodsAdapter.addData(it)
             }
-            dataHasMore.observe(this@AllGoodsActivity) {
+            dataHasMore.observe(this@CategoryLevelActivity) {
                 mViewBind.refreshLayout.setNoMoreData(!it)
             }
         }

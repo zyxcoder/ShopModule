@@ -8,6 +8,7 @@ import com.gxy.common.common.loadsir.getLoadSir
 import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityCategoryBinding
+import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.ui.category.adapter.CategoryPrimaryAdapter
 import com.zkxy.shop.ui.category.adapter.CategorySecondaryAdapter
 import com.zkxy.shop.ui.search.SearchActivity
@@ -22,13 +23,22 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
     private lateinit var categoryPrimaryAdapter: CategoryPrimaryAdapter
     private lateinit var categorySecondaryAdapter: CategorySecondaryAdapter
 
+    //选中的商品类型：积分商品，现金商品
+    private var currentAllGoodsType = AllGoodsType.AllGoodsPoint
+
     companion object {
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, CategoryActivity::class.java))
+        private const val ALL_GOODS_TYPE = "all_goods_type"//商品类型
+        fun startActivity(context: Context, allGoodsType: AllGoodsType) {
+            context.startActivity(Intent(context, CategoryActivity::class.java).apply {
+                putExtra(ALL_GOODS_TYPE, allGoodsType)
+            })
         }
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        currentAllGoodsType = intent.getSerializableExtra(ALL_GOODS_TYPE, AllGoodsType::class.java)
+            ?: AllGoodsType.AllGoodsPoint
+
         mViewBind.apply {
             mLoadService = getLoadSir().register(clCategory) {
                 mViewModel.fetchCategory()
@@ -41,10 +51,19 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
             }
             categorySecondaryAdapter = CategorySecondaryAdapter().apply {
                 onCategorySecondaryClickListener = {
-
+                    CategoryLevelActivity.startActivity(
+                        context = this@CategoryActivity,
+                        categorySecondaryEntity = it,
+                        allGoodsType = currentAllGoodsType
+                    )
                 }
-                onCategoryMinorClickListener = {
-
+                onCategoryMinorClickListener = { categorySecondaryEntity, categoryMinorEntity ->
+                    CategoryLevelActivity.startActivity(
+                        context = this@CategoryActivity,
+                        categorySecondaryEntity = categorySecondaryEntity,
+                        categoryMinorEntity = categoryMinorEntity,
+                        allGoodsType = currentAllGoodsType
+                    )
                 }
                 rvSecondary.adapter = this
             }

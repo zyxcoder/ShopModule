@@ -11,17 +11,16 @@ import com.zyxcoder.mvvmroot.ext.onContinuousClick
  * @author zhangyuxiang
  * @date 2024/9/24
  */
-class CategoryMinorAdapter(
-    private val onCategoryMinorClickListener: ((categoryMinorEntity: CategoryMinorEntity) -> Unit)? = null
-) : BaseViewBindingAdapter<CategoryMinorEntity, ItemCategoryMinorBinding>(
+class CategoryMinorAdapter : BaseViewBindingAdapter<CategoryMinorEntity, ItemCategoryMinorBinding>(
     ItemCategoryMinorBinding::inflate, R.layout.item_category_minor
 ) {
+    var onCategoryClickListener: ((categoryMinorEntity: CategoryMinorEntity) -> Unit)? = null
     override fun convert(
         holder: BaseViewBindingHolder<ItemCategoryMinorBinding>, item: CategoryMinorEntity
     ) {
         holder.viewBind.apply {
             root.onContinuousClick {
-                onCategoryMinorClickListener?.invoke(item)
+                onCategoryClickListener?.invoke(item)
             }
             tvCategoryName.text = item.categoryName
         }

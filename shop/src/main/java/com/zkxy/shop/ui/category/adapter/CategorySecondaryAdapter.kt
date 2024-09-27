@@ -19,7 +19,8 @@ class CategorySecondaryAdapter :
     ) {
     var onCategorySecondaryClickListener: ((categorySecondaryEntity: CategorySecondaryEntity) -> Unit)? =
         null
-    var onCategoryMinorClickListener: ((categoryMinorEntity: CategoryMinorEntity) -> Unit)? = null
+    var onCategoryMinorClickListener: ((categorySecondaryEntity: CategorySecondaryEntity, categoryMinorEntity: CategoryMinorEntity) -> Unit)? =
+        null
 
     override fun convert(
         holder: BaseViewBindingHolder<ItemCategorySecondaryBinding>, item: CategorySecondaryEntity
@@ -29,7 +30,10 @@ class CategorySecondaryAdapter :
                 onCategorySecondaryClickListener?.invoke(item)
             }
             tvSecCateGoryName.text = item.categoryName
-            CategoryMinorAdapter(onCategoryMinorClickListener = onCategoryMinorClickListener).apply {
+            CategoryMinorAdapter().apply {
+                onCategoryClickListener = {
+                    onCategoryMinorClickListener?.invoke(item, it)
+                }
                 setList(item.categoryMinorList)
                 rvMinorCategory.adapter = this
                 rvMinorCategory.addItemDecoration(CategoryAverageMarginDecoration())

@@ -45,7 +45,7 @@ class CategoryViewModel : BaseViewModel() {
             repeat(10) {
                 categoryMinorList.add(
                     CategoryMinorEntity(
-                        categoryId = it, categoryName = "进口洗发水123" + it
+                        categoryId = it, categoryName = "进" + it
                     )
                 )
             }
@@ -53,7 +53,7 @@ class CategoryViewModel : BaseViewModel() {
                 categorySecondaryList.add(
                     CategorySecondaryEntity(
                         categoryId = it,
-                        categoryName = "日用品123456" + it,
+                        categoryName = "日用" + it,
                         categoryMinorList = categoryMinorList
                     )
                 )

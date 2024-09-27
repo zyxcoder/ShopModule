@@ -1,5 +1,7 @@
 package com.zkxy.shop.entity.goods
 
+import androidx.annotation.Keep
+
 /**
  * @author zhangyuxiang
  * @date 2024/9/26
@@ -7,10 +9,12 @@ package com.zkxy.shop.entity.goods
 /**
  * kotlin 1.7用密封类包对象不行，需要升级1.9，为了兼容，这里只能用枚举
  */
+@Keep
 enum class AllGoodsType(var title: String) {
     AllGoodsPoint("积分商品"), AllGoodsCash("现金商品")
 }
 
+@Keep
 enum class RuleType(val content: String? = null) {
     DEFAULT_SORT("默认排序"),//默认排序
     PRICE_UP_SORT("价格升序"),//价格升序
@@ -24,6 +28,7 @@ enum class RuleType(val content: String? = null) {
     POINT_10000_SORT("10000积分以上") //10000积分以上
 }
 
+@Keep
 enum class SortRule(var ruleType: RuleType? = null) {
     DEFAULT_SORT(RuleType.DEFAULT_SORT), //默认排序
     PRICE_SORT(RuleType.PRICE_DOWN_SORT), //价格排序
