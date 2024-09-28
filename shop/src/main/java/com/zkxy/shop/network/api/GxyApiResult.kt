@@ -40,6 +40,10 @@ data class GxyApiResult<T>(
             throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
         }
     }
+
+    fun apiOnlyData(): T? {
+        return data
+    }
 }
 
 @Keep

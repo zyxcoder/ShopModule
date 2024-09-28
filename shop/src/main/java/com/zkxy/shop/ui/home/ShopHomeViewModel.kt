@@ -49,39 +49,7 @@ class ShopHomeViewModel : BaseViewModel() {
                 loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
             }
 
-
-
-
-
-            val randomKey = RandomKey.generateRandomKey()
-
-            val jsonObject = JSONObject().apply {
-                put("platformId",2)
-                put("currentPage", 1)
-                put("pageSize", 10000)
-            }
-            val data = jsonObject.toString()
-
-
-            val content = AesUtils.encryptData(data,randomKey)
-
-
-            val aesKey = RSAUtil.encryptByPublicKey(randomKey)
-
-
-            val body = mutableMapOf<String, Any?>(
-                "aesKey" to aesKey,
-                "content" to content
-            )
-
-            val jsondata=apiService.getGoodsCategory(body).apiNoData()
-
-            Log.d("测试数据",
-                AesUtils.decryptData(jsondata,randomKey))
-
-
-
-
+            val jsondata=apiService.getGoodsCategory(platformId = 2, currentPage = 1L,pageSize = 10000).apiNoData()
 
             if (isRefresh || isFirst) {
                 isRefreshing.value = true

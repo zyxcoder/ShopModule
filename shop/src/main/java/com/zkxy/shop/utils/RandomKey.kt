@@ -1,5 +1,6 @@
 package com.zkxy.shop.utils
 
+import android.os.Build
 import java.util.Base64
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -19,7 +20,11 @@ object RandomKey {
     }
 
     // 将密钥转换为 Base64 编码的字符串
-    fun keyToBase64String(key: SecretKey): String {
-        return Base64.getEncoder().encodeToString(key.encoded)
+    private fun keyToBase64String(key: SecretKey): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Base64.getEncoder().encodeToString(key.encoded)
+        } else {
+            android.util.Base64.encodeToString(key.encoded, android.util.Base64.DEFAULT)
+        }
     }
 }

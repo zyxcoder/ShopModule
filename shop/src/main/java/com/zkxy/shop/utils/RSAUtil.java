@@ -31,7 +31,6 @@ public class RSAUtil {
             byte[] result = cipher.doFinal(text.getBytes());
             return new String(android.util.Base64.encode(result, android.util.Base64.NO_WRAP));
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -46,7 +45,6 @@ public class RSAUtil {
             byte[] result = cipher.doFinal(text.getBytes());
             return new String(android.util.Base64.encode(result, android.util.Base64.NO_WRAP));
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

@@ -12,6 +12,6 @@ class ShopApplication :Application() {
 
     override fun onCreate() {
         super.onCreate()
-        shopInit(this,"http://192.168.1.34:7777/")
+        shopInit(this,"http://39.103.61.134:9091/")
     }
 }

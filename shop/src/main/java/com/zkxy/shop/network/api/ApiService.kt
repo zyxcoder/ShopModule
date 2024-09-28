@@ -1,7 +1,10 @@
 package com.zkxy.shop.network.api
 
 import com.gxy.common.network.api.ApiResult
+import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface ApiService {
@@ -15,8 +18,11 @@ interface ApiService {
 
 
     @POST("app/mall/goods/goodsType")
+    @FormUrlEncoded
     suspend fun getGoodsCategory(
-        @Body body: MutableMap<String, Any?>
-    ): ApiResult<String>
+        @Field("platformId") platformId: Int?,
+        @Field("currentPage") currentPage:Long?,
+        @Field("pageSize") pageSize:Int?
+    ): ApiResult<Any>
 
 }
