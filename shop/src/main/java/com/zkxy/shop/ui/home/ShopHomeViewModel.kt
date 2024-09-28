@@ -1,14 +1,20 @@
 package com.zkxy.shop.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
 import com.gxy.common.network.api.ApiResult
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.network.request.apiService
+import com.zkxy.shop.utils.AesUtils
+import com.zkxy.shop.utils.RSAUtil
+import com.zkxy.shop.utils.RandomKey
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import org.json.JSONObject
 
 /**
  * @author zhangyuxiang
@@ -42,6 +48,41 @@ class ShopHomeViewModel : BaseViewModel() {
             if (isFirst) {
                 loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
             }
+
+
+
+
+
+            val randomKey = RandomKey.generateRandomKey()
+
+            val jsonObject = JSONObject().apply {
+                put("platformId",2)
+                put("currentPage", 1)
+                put("pageSize", 10000)
+            }
+            val data = jsonObject.toString()
+
+
+            val content = AesUtils.encryptData(data,randomKey)
+
+
+            val aesKey = RSAUtil.encryptByPublicKey(randomKey)
+
+
+            val body = mutableMapOf<String, Any?>(
+                "aesKey" to aesKey,
+                "content" to content
+            )
+
+            val jsondata=apiService.getGoodsCategory(body).apiNoData()
+
+            Log.d("测试数据",
+                AesUtils.decryptData(jsondata,randomKey))
+
+
+
+
+
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
                 //todo 获取刷新的其他非列表数据
