@@ -24,4 +24,12 @@
         app:layout_constraintStart_toEndOf="@+id/btJump"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btOrderList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="订单列表"
+        app:layout_constraintStart_toEndOf="@+id/btGoodsDetail"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

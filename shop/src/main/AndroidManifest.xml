@@ -52,6 +52,9 @@
             android:name=".ui.order.OrderDetailsActivity"
             android:theme="@style/Theme.ShopModule" />
         <activity
+            android:name=".ui.order.OrderListActivity"
+            android:theme="@style/Theme.ShopModule" />
+        <activity
             android:name=".ui.goods.AllGoodsActivity"
             android:theme="@style/Theme.ShopModule" />
         <activity
