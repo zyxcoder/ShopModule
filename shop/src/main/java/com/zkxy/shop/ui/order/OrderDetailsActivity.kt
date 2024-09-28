@@ -10,7 +10,7 @@ class OrderDetailsActivity :
     BaseViewBindActivity<OrderDetailsViewModel, ActivityOrderDetailsBinding>() {
 
     companion object {
-        fun start(context: Context?) {
+        fun startActivity(context: Context?) {
             context?.startActivity(Intent(context, OrderDetailsActivity::class.java))
         }
     }

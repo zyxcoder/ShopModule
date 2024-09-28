@@ -29,7 +29,7 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
         mViewBind.apply {
             rlv.adapter = selectAddressAdapter
             tvAddAddress.onContinuousClick {
-                ReceiveAddressActivity.start(context)
+                ReceiveAddressActivity.startActivity(context)
                 dismiss()
             }
         }
@@ -53,7 +53,7 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
                 }
 
                 R.id.tvEditAddress -> {
-                    ReceiveAddressActivity.start(context)
+                    ReceiveAddressActivity.startActivity(context)
                     dismiss()
                 }
             }
