@@ -1,20 +1,16 @@
 package com.zkxy.shop.ui.home
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
 import com.gxy.common.network.api.ApiResult
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.network.request.apiService
-import com.zkxy.shop.utils.AesUtils
-import com.zkxy.shop.utils.RSAUtil
-import com.zkxy.shop.utils.RandomKey
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
+import com.zyxcoder.mvvmroot.utils.loge
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import org.json.JSONObject
 
 /**
  * @author zhangyuxiang
@@ -49,8 +45,9 @@ class ShopHomeViewModel : BaseViewModel() {
                 loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
             }
 
-            val jsondata=apiService.getGoodsCategory(platformId = 2, currentPage = 1L,pageSize = 10000).apiNoData()
+            val jsondata=apiService.getGoodsCategory(platformId = 2, currentPage = 1L,pageSize = 10000).apiData()
 
+            jsondata.toString().loge()
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
                 //todo 获取刷新的其他非列表数据

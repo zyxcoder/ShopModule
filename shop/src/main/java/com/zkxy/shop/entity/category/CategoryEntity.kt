@@ -30,3 +30,18 @@ data class CategorySecondaryEntity(
 data class CategoryMinorEntity(
     val categoryId: Int?, val categoryName: String?, var isSelect: Boolean? = false
 ) : Parcelable
+
+
+@Keep
+data class GoodsCategoryEntity(
+    val children: List<GoodsCategoryEntity>?,
+    val createTime: String?,
+    val deleteFlag: Int?,
+    val levelType: Int?,
+    val name: String?,
+    val parentId: Int?,
+    val remark: String?,
+    val sortNumber: Int?,
+    val typeId: Int?,
+    val updateTime: String?
+)

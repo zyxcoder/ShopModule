@@ -20,10 +20,8 @@ data class GxyApiResult<T>(
     val hasMore: Boolean?,
     @SerializedName("data")
     private val data: T?,
-    @SerializedName("recordsTotal")
-    val listCount: Int?,
-    @SerializedName("recordsFiltered")
-    val recordsFiltered: Int?
+    @SerializedName("total")
+    val total: Int?
 ) {
     fun apiData(): T {
         if (data != null && statusCode == RESPONSE_CODE_SUCCESS) {

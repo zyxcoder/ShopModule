@@ -108,13 +108,13 @@ class NetworkApi : BaseNetworkApi() {
                 chain.proceed(requestWithTag)
             }
             //示例：添加公共heads 注意要设置在日志拦截器之前，不然Log中会不显示head信息
-            addInterceptor {
-                val originalRequest = it.request()
+            addInterceptor { chain ->
+                val originalRequest = chain.request()
                 // 从请求中获取 randomKey
                 val randomKey = originalRequest.tag(String::class.java)
                 originalRequest.toString().loge("REQUEST_BODY")
                 val startRequestTime = SystemClock.elapsedRealtime()
-                val response = it.proceed(originalRequest.newBuilder().build())
+                val response = chain.proceed(originalRequest.newBuilder().build())
                 var responseBody = response.body?.string()
                 response.body
                 val apiRequestAddress =
@@ -165,6 +165,9 @@ class NetworkApi : BaseNetworkApi() {
                             //这步相当于替换掉responseBody中的data
                             put("data", decryptJsonData)
                         }.toString()
+                    }
+                    responseBody = responseBody?.let {
+                        removeQuotesAndEscapeChars(it)
                     }
                 }
 
@@ -222,6 +225,26 @@ class NetworkApi : BaseNetworkApi() {
             connectTimeout(20, TimeUnit.SECONDS)
             readTimeout(20, TimeUnit.SECONDS)
             writeTimeout(20, TimeUnit.SECONDS)
+        }
+    }
+
+    /**
+     * 去掉转义和data后面的冒号，否则会出现无法解析
+     */
+    private fun removeQuotesAndEscapeChars(input: String): String {
+        // 先去掉转义字符
+        val cleanedInput = input.replace("\\\"", "\"").replace("\\", "")
+        // 使用正则表达式匹配 data 字段内容
+        val regex = """"data":"(\[.*?])"""".toRegex()
+        return regex.replace(cleanedInput) { matchResult ->
+            // 提取 data 部分
+            val dataContent = matchResult.groups[1]?.value
+            if (dataContent != null) {
+                // 替换成不带引号的 format
+                "\"data\":$dataContent"
+            } else {
+                matchResult.value
+            }
         }
     }
 
