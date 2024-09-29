@@ -232,19 +232,22 @@ class NetworkApi : BaseNetworkApi() {
      * 去掉转义和data后面的冒号，否则会出现无法解析
      */
     private fun removeQuotesAndEscapeChars(input: String): String {
-        // 先去掉转义字符
+        // 先去掉转义字符，例如将 \" 替换为 "，并去掉其他的转义字符
         val cleanedInput = input.replace("\\\"", "\"").replace("\\", "")
-        // 使用正则表达式匹配 data 字段内容
-        val regex = """"data":"(\[.*?])"""".toRegex()
-        return regex.replace(cleanedInput) { matchResult ->
-            // 提取 data 部分
-            val dataContent = matchResult.groups[1]?.value
-            if (dataContent != null) {
-                // 替换成不带引号的 format
-                "\"data\":$dataContent"
-            } else {
-                matchResult.value
-            }
+
+        // 使用正则表达式提取 data 字段，处理对象和数组
+        val regex = Regex("""("data"\s*:\s*")(\[.*?]|\{.*?\})(")""")
+
+        // 检查是否存在 data 字段
+        return if (regex.containsMatchIn(cleanedInput)) {
+            // 进行替换，去掉 data 字段中多余的引号
+            regex.replace(cleanedInput) { matchResult ->
+                // 提取 data 的内容，并直接用它构成新的 JSON
+                val dataContent = matchResult.groups[2]?.value ?: ""
+                "\"data\":$dataContent" // 不再加引号
+            }.replace("}\"", "}") // 尾部处理，去掉最后的引号
+        } else {
+            cleanedInput // 如果没有 data 字段，直接返回原始字符串
         }
     }
 
