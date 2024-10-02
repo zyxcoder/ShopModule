@@ -8,6 +8,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.gxy.common.BuildConfig
+import com.zkxy.shop.ext.isBoolean
 import com.zkxy.shop.ext.isDouble
 import com.zkxy.shop.ext.isInt
 import com.zkxy.shop.ext.isLong
@@ -41,6 +42,11 @@ import java.util.concurrent.TimeUnit
  * @author zhangyuxiang
  * @date 2024/2/27
  */
+
+/**
+ * 是否需要自己处理请求，若需要自己处理请求以及结果，请在请求参数里添加selfHandleRequest字段，框架会自动去掉
+ */
+const val selfHandleRequest = "selfHandleRequest"
 
 //双重校验锁式-单例 封装NetApiService 方便直接快速调用简单的接口
 val apiService: ApiService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
@@ -79,6 +85,7 @@ class NetworkApi : BaseNetworkApi() {
                     val formBody = requestWithTag.body as FormBody
                     val jsonMap = mutableMapOf<String, Any>()
                     // 转换 FormBody 数据为 JSON
+                    var needSelfHandle = false
                     for (i in 0 until formBody.size) {
                         val key = formBody.name(i)
                         val value = formBody.value(i)
@@ -86,23 +93,41 @@ class NetworkApi : BaseNetworkApi() {
                             value.isLong() -> value.toLong()
                             value.isInt() -> value.toInt()
                             value.isDouble() -> value.toDouble()
+                            value.isBoolean() -> value.toBoolean()
                             else -> value // 默认情况使用字符串
                         }
-                        jsonMap[key] = typedValue
+                        if (key == selfHandleRequest) {
+                            needSelfHandle = true
+                        } else {
+                            jsonMap[key] = typedValue
+                        }
                     }
-                    val aesKey = RSAUtil.encryptByPublicKey(randomKey)
-                    val content = AesUtils.encryptData(gsonParser.toJson(jsonMap), randomKey)
-                    val requestJson = mapOf("aesKey" to aesKey, "content" to content)
-                    // 创建新的 JSON 请求体
-                    val requestBody = gsonParser.toJson(requestJson)
-                        .toRequestBody("application/json".toMediaType())
-                    // 创建新的请求
-                    val newRequest =
-                        requestWithTag.newBuilder().method(requestWithTag.method, requestBody)
-                            .addHeader("Content-Type", "application/json") // 设置 Content-Type
-                            .build()
-                    // 继续执行请求
-                    return@addInterceptor chain.proceed(newRequest)
+                    if (needSelfHandle) {
+                        // 创建新的 JSON 请求体
+                        val requestBody = gsonParser.toJson(jsonMap)
+                            .toRequestBody("application/json".toMediaType())
+                        // 创建新的请求
+                        val newRequest =
+                            requestWithTag.newBuilder().method(requestWithTag.method, requestBody)
+                                .addHeader("Content-Type", "application/json") // 设置 Content-Type
+                                .build()
+                        // 继续执行请求
+                        return@addInterceptor chain.proceed(newRequest)
+                    } else {
+                        val aesKey = RSAUtil.encryptByPublicKey(randomKey)
+                        val content = AesUtils.encryptData(gsonParser.toJson(jsonMap), randomKey)
+                        val requestJson = mapOf("aesKey" to aesKey, "content" to content)
+                        // 创建新的 JSON 请求体
+                        val requestBody = gsonParser.toJson(requestJson)
+                            .toRequestBody("application/json".toMediaType())
+                        // 创建新的请求
+                        val newRequest =
+                            requestWithTag.newBuilder().method(requestWithTag.method, requestBody)
+                                .addHeader("Content-Type", "application/json") // 设置 Content-Type
+                                .build()
+                        // 继续执行请求
+                        return@addInterceptor chain.proceed(newRequest)
+                    }
                 }
                 // 如果不是需要转换的请求，直接进行
                 chain.proceed(requestWithTag)

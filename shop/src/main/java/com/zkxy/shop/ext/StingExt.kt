@@ -24,3 +24,10 @@ fun String.isDouble(): Boolean {
 fun String.isLong(): Boolean {
     return this.toLongOrNull() != null
 }
+
+/**
+ * 判断字符串是否为布尔类型
+ */
+fun String.isBoolean(): Boolean {
+    return this.toBooleanStrictOrNull() != null
+}
