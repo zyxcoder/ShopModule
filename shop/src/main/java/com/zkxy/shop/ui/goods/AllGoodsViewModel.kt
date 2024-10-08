@@ -67,31 +67,6 @@ class AllGoodsViewModel : BaseViewModel() {
             //todo 获取列表数据
             delay(1000)
             val goodsList = mutableListOf<GoodsEntity>()
-            repeat(10) {
-                if (it % 2 == 0) {
-                    goodsList.add(
-                        GoodsEntity(
-                            goodsName = "清风原木纯品金",
-                            goodsUrl = "https://gd-hbimg.huaban.com/310d6a3729d1e1199f4aa07e275425f92e694eedf4678-JtZ2Oq_fw1200webp",
-                            goodsInventory = 10,
-                            goodsId = 1,
-                            goodsPoint = 23.9,
-                            goodsPrice = 38.9
-                        )
-                    )
-                } else {
-                    goodsList.add(
-                        GoodsEntity(
-                            goodsName = "清风原木纯品金装清风原木纯品金装系列抽取式纸巾150抽x3层清风原木纯品金装系列抽取式纸巾150抽x3层清风原木纯品金装系列抽取式纸巾150抽x3层系列抽取式纸巾150抽x3层 12包",
-                            goodsUrl = "https://gd-hbimg.huaban.com/468d5c6d327b411c5041fdd4d9ddb7b6d9015bb2d6d9b-GBjrha_fw1200webp",
-                            goodsInventory = 0,
-                            goodsId = 1,
-                            goodsPoint = null,
-                            goodsPrice = 67.9
-                        )
-                    )
-                }
-            }
             val apiResult = ApiResult<MutableList<GoodsEntity>>(
                 statusDesc = "qwqwwq",
                 statusCode = "0",

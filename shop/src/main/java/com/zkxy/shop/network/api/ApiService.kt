@@ -1,6 +1,8 @@
 package com.zkxy.shop.network.api
 
+import com.zkxy.shop.appPlatformId
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
+import com.zkxy.shop.entity.home.GoodsEntity
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -19,8 +21,21 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun getGoodsCategory(
         @Field("platformId") platformId: Int?,
-        @Field("currentPage") currentPage:Long?,
-        @Field("pageSize") pageSize:Int?
+        @Field("currentPage") currentPage: Long?,
+        @Field("pageSize") pageSize: Int?
     ): GxyApiResult<List<GoodsCategoryEntity>>
+
+
+    /**
+     * 搜索商品
+     */
+    @POST("app/mall/goods/searchGoods")
+    @FormUrlEncoded
+    suspend fun searchGoods(
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("goodsName") goodsName: String?,
+        @Field("currentPage") currentPage: Int?,
+        @Field("pageSize") pageSize: Int?
+    ): GxyApiResult<MutableList<GoodsEntity>>
 
 }

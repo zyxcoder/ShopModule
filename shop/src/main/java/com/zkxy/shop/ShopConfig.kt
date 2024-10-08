@@ -20,13 +20,21 @@ var isInit = false
 var modeBaseUrl: String? = ""
 
 /**
- * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
+ * 平台id
  */
-fun shopInit(application: Application, shopHttpUrl: String?) {
+var appPlatformId = 2
+
+/**
+ * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
+ * @param application Application
+ * @param shopHttpUrl shop服务器地址
+ * @param formId 平台id
+ */
+fun shopInit(application: Application, shopHttpUrl: String?, formId: Int? = 2) {
     Fresco.initialize(application)
     LoadSir.beginBuilder().addCallback(DefaultLoadingCallback()).addCallback(EmptyCallback())
         .addCallback(ErrorCallback()).commit()
     modeBaseUrl = shopHttpUrl
-
+    appPlatformId = formId ?: 2
     isInit = true
 }

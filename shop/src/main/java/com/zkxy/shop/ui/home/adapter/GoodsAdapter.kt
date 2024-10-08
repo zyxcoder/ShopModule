@@ -25,7 +25,7 @@ class GoodsAdapter : BaseViewBindingAdapter<GoodsEntity, ItemGoodsBinding>(
             }
             ivGoods.loadImage(item.goodsUrl)
             tvGoodsName.text = item.goodsName
-            clNoInventory.isVisible = (item.goodsInventory ?: 0) == 0
+            clNoInventory.isVisible = (item.goodsCurrentStock ?: 0) == 0
             tvGoodsPrice.text = formatProductInfo(item.goodsPrice, item.goodsPoint)
         }
     }

@@ -1,5 +1,6 @@
 package com.zkxy.shop.ui.search
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -106,14 +107,13 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                 onContinuousClick {
                     mViewBind.shopSearchView.setSearchContent(searchWordHistoryEntity.searchWord)
                     mViewModel.fetchSearchData(
-                        isFirst = true,
-                        start = 0,
-                        searchWord = searchWordHistoryEntity.searchWord
+                        isFirst = true, start = 0, searchWord = searchWordHistoryEntity.searchWord
                     )
                 }
             }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
@@ -152,6 +152,9 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
             }
             dataHasMore.observe(this@SearchActivity) {
                 mViewBind.refreshLayout.setNoMoreData(!it)
+            }
+            resultCount.observe(this@SearchActivity) {
+                mViewBind.tvResultCount.text = "共 $it 个结果"
             }
         }
     }
