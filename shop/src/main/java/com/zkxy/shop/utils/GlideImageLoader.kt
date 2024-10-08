@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.youth.banner.loader.ImageLoader
-import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.entity.goods.PicDto
 import com.zyxcoder.mvvmroot.utils.loadImage
 
 /**
@@ -13,8 +13,8 @@ import com.zyxcoder.mvvmroot.utils.loadImage
  */
 class GlideImageLoader : ImageLoader() {
     override fun displayImage(context: Context, path: Any, imageView: ImageView) {
-        val homeShopBannerEntity = path as? HomeShopBannerEntity
-        imageView.loadImage(homeShopBannerEntity?.imageUrl ?: "")
+        val homeShopBannerEntity = path as? PicDto
+        imageView.loadImage(homeShopBannerEntity?.picUrl ?: "")
     }
 
     override fun createImageView(context: Context): ImageView {

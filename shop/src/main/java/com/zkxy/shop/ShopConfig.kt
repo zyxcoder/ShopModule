@@ -24,6 +24,10 @@ var modeBaseUrl: String? = ""
  */
 var appPlatformId = 2
 
+//当前经纬度
+var loadLon: String = ""
+var loadLat: String = ""
+
 /**
  * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
  * @param application Application

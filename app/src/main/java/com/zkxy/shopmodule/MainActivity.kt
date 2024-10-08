@@ -3,6 +3,8 @@ package com.zkxy.shopmodule
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.zkxy.shop.loadLat
+import com.zkxy.shop.loadLon
 import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.ShopHomeActivity
 import com.zkxy.shop.ui.order.OrderListActivity
@@ -20,5 +22,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btOrderList).setOnClickListener {
             OrderListActivity.startActivity(this)
         }
+//30.481401271903536, 103.55262001052857
+        loadLon = "30.481401271903536"
+        loadLat = "103.55262001052857"
     }
 }

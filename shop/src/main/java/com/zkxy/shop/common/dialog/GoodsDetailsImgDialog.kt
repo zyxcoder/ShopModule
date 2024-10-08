@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.WindowManager
 import com.gxy.common.common.dialog.CenterDialog
 import com.zkxy.shop.databinding.DialogGoodsDetailImgBinding
-import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.entity.goods.PicDto
 import com.zkxy.shop.ui.goods.adapter.ImageViewPagerAdapter
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 
 class GoodsDetailsImgDialog(
     context: Context,
-    private val imageUrl: MutableList<HomeShopBannerEntity>
+    private val imageUrl: MutableList<PicDto>?
 ) : CenterDialog(context = context) {
 
     private val mBinding by lazy { DialogGoodsDetailImgBinding.inflate(layoutInflater) }

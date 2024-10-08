@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.zkxy.shop.entity.goods.JsonBean
 import com.zkxy.shop.entity.goods.PickerEntity
+import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.ext.getJson
+import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job
@@ -14,7 +16,7 @@ import org.json.JSONArray
 class PlaceOrderViewModel : BaseViewModel() {
 
     val pickerData = MutableLiveData<PickerEntity>()
-
+    val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
 
     fun initJsonData(context: Context) {
         request<Job>(block = {
@@ -71,5 +73,15 @@ class PlaceOrderViewModel : BaseViewModel() {
         })
     }
 
-
+    fun goodsStockAddressSearch(goodsId: Int, deliveryMode: Int) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            placeOrderEntity.value =
+                apiService.goodsStockAddressSearch(goodsId = goodsId, deliveryMode = deliveryMode)
+                    .apiData()
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
 }

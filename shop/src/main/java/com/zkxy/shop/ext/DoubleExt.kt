@@ -51,6 +51,14 @@ fun Double.multiply(b: Int): String {
 }
 
 /**
+ * int，精确计算
+ */
+fun Int.multiply(b: Int): String {
+    return toBigDecimal().multiply(b.toBigDecimal()).toString()
+}
+
+
+/**
  * 两个double相除，保留两位小数
  */
 fun Double.divideWithPrecision(divisor: Double): Double {

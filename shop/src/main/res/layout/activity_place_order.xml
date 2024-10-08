@@ -34,23 +34,23 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/tvGoodsName"
                 android:layout_width="0dp"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:maxLines="2"
                 android:text="精品东北五常 臻品大米 皇家贡米之选 粒粒饱满 香飘万家 米香四溢 ..."
                 android:textColor="#ff333333"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView13"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvTopPoints"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivGoods"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/tvTopPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -58,9 +58,9 @@
                 android:textColor="#fffa5151"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintBottom_toTopOf="@+id/tvTopNum"
+                app:layout_constraintStart_toStartOf="@+id/tvGoodsName"
+                app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -69,12 +69,12 @@
                 android:text="积分+"
                 android:textColor="#fffa5151"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
-                app:layout_constraintTop_toTopOf="@+id/textView13" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvTopPoints"
+                app:layout_constraintStart_toEndOf="@+id/tvTopPoints"
+                app:layout_constraintTop_toTopOf="@+id/tvTopPoints" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/tvTopMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9.9"
@@ -92,12 +92,12 @@
                 android:text="元"
                 android:textColor="#fffa5151"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView15"
-                app:layout_constraintStart_toEndOf="@+id/textView15"
-                app:layout_constraintTop_toTopOf="@+id/textView15" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvTopMoney"
+                app:layout_constraintStart_toEndOf="@+id/tvTopMoney"
+                app:layout_constraintTop_toTopOf="@+id/tvTopMoney" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tvTopNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
@@ -105,8 +105,8 @@
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintStart_toStartOf="@+id/tvTopPoints"
+                app:layout_constraintTop_toBottomOf="@+id/tvTopPoints" />
 
             <ImageView
                 android:id="@+id/ivReceiveType"
@@ -136,6 +136,7 @@
                 app:title="@string/specification" />
 
             <com.gxy.common.view.InputLayout
+                android:id="@+id/inputNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -186,6 +187,13 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white">
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/gpPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="tvPoints,textView2,tvMoney,textView4" />
+
         <TextView
             android:id="@+id/tvTakeOrder"
             android:layout_width="120dp"
@@ -233,12 +241,12 @@
             android:text="积分+"
             android:textColor="#fffa5151"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintEnd_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
+            app:layout_constraintEnd_toStartOf="@+id/tvMoney"
+            app:layout_constraintTop_toTopOf="@+id/tvMoney" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"
@@ -246,7 +254,7 @@
             android:textColor="#fffa5151"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView11"
+            app:layout_constraintBottom_toTopOf="@+id/tvNum"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -259,9 +267,9 @@
             android:text="元"
             android:textColor="#fffa5151"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
             app:layout_constraintEnd_toStartOf="@+id/tvTakeOrder"
-            app:layout_constraintTop_toTopOf="@+id/textView3" />
+            app:layout_constraintTop_toTopOf="@+id/tvMoney" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -270,22 +278,22 @@
             android:text="共"
             android:textColor="#ff333333"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintEnd_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvNum"
+            app:layout_constraintEnd_toStartOf="@+id/tvNum"
+            app:layout_constraintTop_toTopOf="@+id/tvNum" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tvNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_4"
-            android:text="3"
+            android:text="0"
             android:textColor="#ff333333"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMoney" />
 
         <TextView
             android:id="@+id/textView10"
@@ -294,9 +302,9 @@
             android:text="件商品"
             android:textColor="#ff333333"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNum"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
+            app:layout_constraintTop_toTopOf="@+id/tvNum" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.gxy.common.view.ToolbarLayout>

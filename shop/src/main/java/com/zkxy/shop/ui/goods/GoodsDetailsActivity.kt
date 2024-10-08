@@ -11,11 +11,14 @@ import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.GoodsDetailsImgDialog
 import com.zkxy.shop.databinding.ActivityGoodsDetailsBinding
 import com.zkxy.shop.databinding.ItemGoodsDetailsImageBinding
-import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.entity.goods.GoodsDetailsEntity
+import com.zkxy.shop.entity.goods.PicDto
+import com.zkxy.shop.ext.doubleToTwoDecimalPlaceString
 import com.zkxy.shop.utils.GlideImageLoader
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
+import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.dpToPx
 import com.zyxcoder.mvvmroot.utils.loadImage
 
@@ -23,34 +26,31 @@ class GoodsDetailsActivity :
     BaseViewBindActivity<GoodsDetailsViewModel, ActivityGoodsDetailsBinding>() {
 
     companion object {
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, GoodsDetailsActivity::class.java))
+        const val GOODS_ID = "goodsId"
+        fun startActivity(context: Context, goodsId: Int? = null) {
+            context.startActivity(Intent(context, GoodsDetailsActivity::class.java).apply {
+                putExtra(GOODS_ID, goodsId)
+            })
         }
     }
 
-    private val images = mutableListOf(
-        HomeShopBannerEntity("https://gd-hbimg.huaban.com/4bd2502a1859e4bcc9d0afeda5b8851d98a267dd18c54-81OUAo_fw1200webp"),
-        HomeShopBannerEntity("https://gd-hbimg.huaban.com/efd67641fbefe040be67e09709ecc06f7721a1751338e-dUZfor_fw1200webp"),
-        HomeShopBannerEntity("https://gd-hbimg.huaban.com/bbbaf5b863d654a241df97b4f1135b3af770b5b95fe9f-p1uGUi_fw1200webp"),
-        HomeShopBannerEntity("https://gd-hbimg.huaban.com/8fab765e0b0e7403e95b5c9bc439157b10a322e1119b9-aWLIOx_fw1200webp")
-    )
+    private var goodsDetailsImgDialog: GoodsDetailsImgDialog? = null
 
     override fun initView(savedInstanceState: Bundle?) {
-
+        val goodsId = intent.getIntExtra(GOODS_ID, 15)
+        mViewModel.goodsDetail(goodsId)
         val height = dpToPx(150f).toInt()
-        val goodsDetailsImgDialog = GoodsDetailsImgDialog(context = this, imageUrl = images)
-
         mViewBind.apply {
             ImmersionBar.with(this@GoodsDetailsActivity).statusBarDarkFont(true)
                 .statusBarView(titleBar).init()
             ivBack.onContinuousClick { finish() }
-            tvIndicator.text = "1/${images.size}"
+
             banner.setImageLoader(GlideImageLoader())
                 .setOnBannerListener {
-                    goodsDetailsImgDialog.show()
-                    goodsDetailsImgDialog.setPosition(it)
+                    goodsDetailsImgDialog?.show()
+                    goodsDetailsImgDialog?.setPosition(it)
                 }
-                .setImages(images).start()
+
             banner.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrolled(
                     position: Int,
@@ -60,14 +60,14 @@ class GoodsDetailsActivity :
                 }
 
                 override fun onPageSelected(position: Int) {
-                    tvIndicator.text = "${position + 1}/${images.size}"
+                    tvIndicator.text = "${position + 1}/$bannerSize"
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
                 }
             })
 
-            imageRlv.adapter = ImageAdapter().apply { setList(images) }
+
             scrollerLayout.setOnVerticalScrollChangeListener { _, scrollY, _, _ ->
 
                 val scroll = if (scrollY > height) height else scrollY
@@ -89,29 +89,61 @@ class GoodsDetailsActivity :
                 clToolbar.setBackgroundColor(argb)
             }
 
-            tvTakeOrder.onContinuousClick { PlaceOrderActivity.startActivity(this@GoodsDetailsActivity) }
-            tvTakeOrderKD.onContinuousClick {
+            tvTakeOrder.onContinuousClick {
+                if (goodsDetailsEntity == null) {
+                    showToast("暂无数据")
+                    return@onContinuousClick
+                }
+
                 PlaceOrderActivity.startActivity(
                     this@GoodsDetailsActivity,
-                    isKd = true
+                    goodsId = goodsId,
+                    goodsDetailsEntity = goodsDetailsEntity!!
                 )
             }
         }
-
     }
 
     override fun init(savedInstanceState: Bundle?) {
+
     }
 
-    class ImageAdapter : BaseViewBindingAdapter<HomeShopBannerEntity, ItemGoodsDetailsImageBinding>(
+    class ImageAdapter : BaseViewBindingAdapter<PicDto, ItemGoodsDetailsImageBinding>(
         ItemGoodsDetailsImageBinding::inflate,
         R.layout.item_goods_details_image
     ) {
         override fun convert(
             holder: BaseViewBindingHolder<ItemGoodsDetailsImageBinding>,
-            item: HomeShopBannerEntity
+            item: PicDto
         ) {
-            holder.viewBind.ivDetails.loadImage(item.imageUrl)
+            holder.viewBind.ivDetails.loadImage(item.picUrl)
+        }
+    }
+
+    private var bannerSize = 0
+    private var goodsDetailsEntity: GoodsDetailsEntity? = null
+
+    override fun createObserver() {
+        mViewModel.goodsDetailsEntity.observe(this) {
+            it?.apply {
+                goodsDetailsEntity = it
+                bannerSize = bannerPicDtoList?.size ?: 0
+                mViewBind.tvIndicator.text = "1/${bannerPicDtoList?.size ?: ""}"
+                mViewBind.banner.setImages(bannerPicDtoList).start()
+                goodsDetailsImgDialog = GoodsDetailsImgDialog(
+                    context = this@GoodsDetailsActivity,
+                    imageUrl = goodsDetailPicDtoList
+                )
+                mViewBind.imageRlv.adapter =
+                    ImageAdapter().apply { setNewInstance(goodsDetailPicDtoList) }
+
+                mViewBind.tvGoodsName.text = goodsName
+                mViewBind.tvDes.text = goodsDetails
+                mViewBind.tvDeliveryMode.text = if (deliveryMode == 2) "自提" else "快递"
+                mViewBind.tvNum.text = if (buyEmption == -1) "不限" else "每人${buyEmption}件"
+                mViewBind.tvPoints.text = goodsScorePrice.toString()
+                mViewBind.tvMoney.text = goodsMoneyPrice.doubleToTwoDecimalPlaceString()
+            }
         }
     }
 }
