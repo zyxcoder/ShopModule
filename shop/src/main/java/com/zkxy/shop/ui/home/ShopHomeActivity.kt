@@ -54,7 +54,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-                    GoodsDetailsActivity.startActivity(this@ShopHomeActivity)
+                    GoodsDetailsActivity.startActivity(this@ShopHomeActivity, goodsId = it.goodsId)
                 }
                 rvGoods.adapter = this
             }
