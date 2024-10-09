@@ -8,5 +8,6 @@ import androidx.annotation.Keep
  */
 @Keep
 data class GoodsPointEntity(
-    val name: String?, val ruleType: RuleType, var isSelect: Boolean? = false
+    val name: String?, val ruleType: RuleType, var isSelect: Boolean? = false,
+    val goodsScorestart: Int? = null, val goodsScoreEnd: Int? = null
 )

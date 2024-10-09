@@ -15,7 +15,7 @@ import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ActivityAllGoodsBinding
 import com.zkxy.shop.databinding.ItemCategoryTabCenterTextBinding
-import com.zkxy.shop.entity.category.CategoryEntity
+import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
@@ -45,7 +45,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     private var currentAllGoodsType = AllGoodsType.AllGoodsPoint
 
     //选择的分类
-    private var currentGoodsCategory: CategoryEntity? = null
+    private var currentGoodsCategory: GoodsCategoryEntity? = null
 
     //默认选择无规则排序
     private var currentSortRule = SortRule.DEFAULT_SORT
@@ -287,7 +287,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                         addTab(newTab().apply {
                             customView =
                                 ItemCategoryTabCenterTextBinding.inflate(layoutInflater).apply {
-                                    tvTabText.text = it.categoryName
+                                    tvTabText.text = it.name
                                 }.root
                         })
                     }

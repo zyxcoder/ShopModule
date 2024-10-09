@@ -2,17 +2,16 @@ package com.zkxy.shop.ui.goods
 
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
-import com.gxy.common.network.api.ApiResult
-import com.zkxy.shop.entity.category.CategoryEntity
-import com.zkxy.shop.entity.category.CategoryMinorEntity
-import com.zkxy.shop.entity.category.CategorySecondaryEntity
+import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
+import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
+import com.zkxy.shop.entity.goods.goodsPointRuleList
 import com.zkxy.shop.entity.home.GoodsEntity
+import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 
 /**
  * @author zhangyuxiang
@@ -23,11 +22,11 @@ class AllGoodsViewModel : BaseViewModel() {
 
     val loadCategoryContentStatus = MutableLiveData<LoadContentStatus>()
 
-    val categoryDataList = MutableLiveData<MutableList<CategoryEntity>>()
+    val categoryDataList = MutableLiveData<MutableList<GoodsCategoryEntity>>()
 
 
     //页面每次请求的数据条数，可修改
-    var pageSize = 10
+    private var pageSize = 10
 
     val isRefreshing = MutableLiveData<Boolean>()
     val isLoading = MutableLiveData<Boolean>()
@@ -50,7 +49,7 @@ class AllGoodsViewModel : BaseViewModel() {
         isRefresh: Boolean,
         start: Int,
         selectAllGoodsType: AllGoodsType,
-        selectGoodsCategory: CategoryEntity?,
+        selectGoodsCategory: GoodsCategoryEntity?,
         selectSortRule: SortRule
     ) {
 
@@ -63,21 +62,36 @@ class AllGoodsViewModel : BaseViewModel() {
             } else {
                 isLoading.value = true
             }
+            val dataList = apiService.searchGoods(
+                currentPage = start / pageSize + 1,
+                pageSize = pageSize,
+                priceType = if (selectAllGoodsType == AllGoodsType.AllGoodsPoint) 1 else 2,
+                levelType = selectGoodsCategory?.levelType,
+                typeId = selectGoodsCategory?.typeId,
+                goodsScorestart = if (selectSortRule == SortRule.POINT_SORT) {
+                    goodsPointRuleList.findLast { selectSortRule.ruleType == it.ruleType }?.goodsScorestart
+                } else {
+                    null
+                },
+                goodsScoreEnd = if (selectSortRule == SortRule.POINT_SORT) {
+                    goodsPointRuleList.findLast { selectSortRule.ruleType == it.ruleType }?.goodsScoreEnd
+                } else {
+                    null
+                },
+                sort = when (selectSortRule.ruleType) {
+                    RuleType.PRICE_DOWN_SORT -> {
+                        2
+                    }
 
-            //todo 获取列表数据
-            delay(1000)
-            val goodsList = mutableListOf<GoodsEntity>()
-            val apiResult = ApiResult<MutableList<GoodsEntity>>(
-                statusDesc = "qwqwwq",
-                statusCode = "0",
-                listCount = 10,
-                hasMore = true,
-                data = goodsList
-            )
-            //todo 获取列表数据
+                    RuleType.PRICE_UP_SORT -> {
+                        1
+                    }
 
-
-            val dataList = apiResult.apiData()
+                    else -> {
+                        null
+                    }
+                }
+            ).apiData()
             //当有更多数据时，后端返回的data的大小是大于等于pageSize
             dataHasMore.value = dataList.size >= pageSize
             if (isFirst || isRefresh) {
@@ -111,43 +125,24 @@ class AllGoodsViewModel : BaseViewModel() {
     fun fetchCategory() {
         request<Job>(block = {
             loadCategoryContentStatus.value = LoadContentStatus.DEFAULT_LOADING
-
-
-            //todo 模拟网络请求
-            delay(1000)
-            val list = arrayListOf<CategoryEntity>()
-            val categoryMinorList = arrayListOf<CategoryMinorEntity>()
-            val categorySecondaryList = arrayListOf<CategorySecondaryEntity>()
-            repeat(10) {
-                categoryMinorList.add(
-                    CategoryMinorEntity(
-                        categoryId = it, categoryName = "进口洗发水123" + it
-                    )
+            val apiResult = apiService.getGoodsCategory().apiData()
+            //手动添加一个”全部“标签
+            apiResult.add(
+                0, GoodsCategoryEntity(
+                    children = null,
+                    createTime = null,
+                    deleteFlag = null,
+                    levelType = null,
+                    name = "全部",
+                    parentId = null,
+                    remark = null,
+                    sortNumber = null,
+                    typeId = null,
+                    updateTime = null
                 )
-            }
-            repeat(10) {
-                categorySecondaryList.add(
-                    CategorySecondaryEntity(
-                        categoryId = it,
-                        categoryName = "日用品123456" + it,
-                        categoryMinorList = categoryMinorList
-                    )
-                )
-            }
-
-            repeat(10) {
-                list.add(
-                    CategoryEntity(
-                        categoryId = it,
-                        categoryName = "个护清洁数据" + it,
-                        isSelect = it == 0,
-                        categorySecondaryList = categorySecondaryList
-                    )
-                )
-            }
-            categoryDataList.value = list
-
-            if ((categoryDataList.value?.size ?: 0) > 0) {
+            )
+            categoryDataList.value = apiResult
+            if (apiResult.isNotEmpty()) {
                 loadCategoryContentStatus.value = LoadContentStatus.SUCCESS
             } else {
                 loadCategoryContentStatus.value = LoadContentStatus.DEFAULT_EMPTY

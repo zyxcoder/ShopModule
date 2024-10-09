@@ -21,19 +21,21 @@ interface ApiService {
         val SPECIAL_API_SUCCESS_STATUS_CODE = mapOf<String, String>()
     }
 
+    /**
+     * 商品分类
+     */
     @POST("app/mall/goods/goodsType")
     @FormUrlEncoded
     suspend fun getGoodsCategory(
-        @Field("platformId") platformId: Int?,
-        @Field("currentPage") currentPage: Long?,
-        @Field("pageSize") pageSize: Int?
-    ): GxyApiResult<List<GoodsCategoryEntity>>
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("currentPage") currentPage: Int? = 1,
+        @Field("pageSize") pageSize: Int? = 10000
+    ): GxyApiResult<MutableList<GoodsCategoryEntity>>
 
     @POST("app/mall/goods/goodsDetail")
     @FormUrlEncoded
     suspend fun goodsDetail(
-        @Field("goodsId") goodsId: Int?,
-        @Field("platformId") platformId: Int = appPlatformId
+        @Field("goodsId") goodsId: Int?, @Field("platformId") platformId: Int = appPlatformId
     ): GxyApiResult<GoodsDetailsEntity>
 
     /**
@@ -46,7 +48,13 @@ interface ApiService {
         @Field("goodsName") goodsName: String? = null,
         @Field("goodsSuggest") goodsSuggest: Int? = null,
         @Field("currentPage") currentPage: Int?,
-        @Field("pageSize") pageSize: Int?
+        @Field("pageSize") pageSize: Int?,
+        @Field("priceType") priceType: Int? = null,
+        @Field("levelType") levelType: Int? = null,
+        @Field("typeId") typeId: Int? = null,
+        @Field("goodsScorestart") goodsScorestart: Int? = null,
+        @Field("goodsScoreEnd") goodsScoreEnd: Int? = null,
+        @Field("sort") sort: Int? = null
     ): GxyApiResult<MutableList<GoodsEntity>>
 
     //获取首页轮播

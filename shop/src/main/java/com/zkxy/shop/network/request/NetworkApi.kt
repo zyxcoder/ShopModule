@@ -102,6 +102,7 @@ class NetworkApi : BaseNetworkApi() {
                             jsonMap[key] = typedValue
                         }
                     }
+                    Log.d("请求的参数",jsonMap.toString())
                     if (needSelfHandle) {
                         // 创建新的 JSON 请求体
                         val requestBody = gsonParser.toJson(jsonMap)

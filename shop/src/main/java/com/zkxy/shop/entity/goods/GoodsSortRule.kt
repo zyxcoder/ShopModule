@@ -41,19 +41,40 @@ enum class SortRule(var ruleType: RuleType? = null) {
  */
 val goodsPointRuleList = arrayListOf(
     GoodsPointEntity(
-        name = RuleType.POINT_1_500_SORT.content, ruleType = RuleType.POINT_1_500_SORT
+        name = RuleType.POINT_1_500_SORT.content,
+        ruleType = RuleType.POINT_1_500_SORT,
+        goodsScorestart = 1,
+        goodsScoreEnd = 500
     ), GoodsPointEntity(
-        name = RuleType.POINT_500_1000_SORT.content, ruleType = RuleType.POINT_500_1000_SORT
+        name = RuleType.POINT_500_1000_SORT.content,
+        ruleType = RuleType.POINT_500_1000_SORT,
+        goodsScorestart = 500,
+        goodsScoreEnd = 1000
     ), GoodsPointEntity(
-        name = RuleType.POINT_1000_1500_SORT.content, ruleType = RuleType.POINT_1000_1500_SORT
+        name = RuleType.POINT_1000_1500_SORT.content,
+        ruleType = RuleType.POINT_1000_1500_SORT,
+        goodsScorestart = 1000,
+        goodsScoreEnd = 1500
     ), GoodsPointEntity(
-        name = RuleType.POINT_1500_3000_SORT.content, ruleType = RuleType.POINT_1500_3000_SORT
+        name = RuleType.POINT_1500_3000_SORT.content,
+        ruleType = RuleType.POINT_1500_3000_SORT,
+        goodsScorestart = 1500,
+        goodsScoreEnd = 3000
     ), GoodsPointEntity(
-        name = RuleType.POINT_3000_5000_SORT.content, ruleType = RuleType.POINT_3000_5000_SORT
+        name = RuleType.POINT_3000_5000_SORT.content,
+        ruleType = RuleType.POINT_3000_5000_SORT,
+        goodsScorestart = 3000,
+        goodsScoreEnd = 5000
     ), GoodsPointEntity(
-        name = RuleType.POINT_5000_10000_SORT.content, ruleType = RuleType.POINT_5000_10000_SORT
+        name = RuleType.POINT_5000_10000_SORT.content,
+        ruleType = RuleType.POINT_5000_10000_SORT,
+        goodsScorestart = 5000,
+        goodsScoreEnd = 10000
     ), GoodsPointEntity(
-        name = RuleType.POINT_10000_SORT.content, ruleType = RuleType.POINT_10000_SORT
+        name = RuleType.POINT_10000_SORT.content,
+        ruleType = RuleType.POINT_10000_SORT,
+        goodsScorestart = 10000,
+        goodsScoreEnd = Int.MAX_VALUE
     )
 )
 
