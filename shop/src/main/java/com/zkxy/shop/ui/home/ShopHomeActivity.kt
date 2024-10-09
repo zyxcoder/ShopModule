@@ -56,8 +56,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
                     when (clickBannerEntity.urlType) {
                         1 -> {
                             GoodsDetailsActivity.startActivity(
-                                context = this@ShopHomeActivity,
-                                goodsId = clickBannerEntity.goodsId
+                                context = this@ShopHomeActivity, goodsId = clickBannerEntity.goodsId
                             )
                         }
 
@@ -73,7 +72,9 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-                    GoodsDetailsActivity.startActivity(this@ShopHomeActivity, goodsId = it.goodsId)
+                    GoodsDetailsActivity.startActivity(
+                        context = this@ShopHomeActivity, goodsId = it.goodsId
+                    )
                 }
                 rvGoods.adapter = this
             }

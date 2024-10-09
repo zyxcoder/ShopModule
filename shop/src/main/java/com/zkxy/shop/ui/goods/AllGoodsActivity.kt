@@ -69,7 +69,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-                    GoodsDetailsActivity.startActivity(this@AllGoodsActivity)
+                    GoodsDetailsActivity.startActivity(
+                        context = this@AllGoodsActivity,
+                        goodsId = it.goodsId
+                    )
                 }
                 rvGoods.adapter = this
             }

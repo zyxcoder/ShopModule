@@ -123,7 +123,10 @@ class CategoryLevelActivity :
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-                    GoodsDetailsActivity.startActivity(this@CategoryLevelActivity)
+                    GoodsDetailsActivity.startActivity(
+                        context = this@CategoryLevelActivity,
+                        goodsId = it.goodsId
+                    )
                 }
                 rvGoods.adapter = this
             }

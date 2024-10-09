@@ -16,6 +16,7 @@ import com.zkxy.shop.databinding.ActivitySearchBinding
 import com.zkxy.shop.databinding.ViewSearchWordBinding
 import com.zkxy.shop.entity.search.SearchWordHistoryEntity
 import com.zkxy.shop.room.database.ShopDatabase
+import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.adapter.SearchHistoryWordAdapter
@@ -56,7 +57,10 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
-
+                    GoodsDetailsActivity.startActivity(
+                        context = this@SearchActivity,
+                        goodsId = it.goodsId
+                    )
                 }
                 rvGoods.addItemDecoration(GoodsItemAverageMarginDecoration())
                 rvGoods.adapter = this
