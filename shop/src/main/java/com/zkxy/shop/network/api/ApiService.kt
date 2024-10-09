@@ -5,6 +5,7 @@ import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
+import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.loadLat
 import com.zkxy.shop.loadLon
 import retrofit2.http.Field
@@ -42,10 +43,18 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun searchGoods(
         @Field("platformId") platformId: Int = appPlatformId,
-        @Field("goodsName") goodsName: String?,
+        @Field("goodsName") goodsName: String? = null,
+        @Field("goodsSuggest") goodsSuggest: Int? = null,
         @Field("currentPage") currentPage: Int?,
         @Field("pageSize") pageSize: Int?
     ): GxyApiResult<MutableList<GoodsEntity>>
+
+    //获取首页轮播
+    @POST("notice/noticeList")
+    @FormUrlEncoded
+    suspend fun getHomeBanner(
+        @Field("platformId") platformId: Int = appPlatformId
+    ): GxyApiResult<MutableList<HomeShopBannerEntity>>
 
     /**
      * 查询对应规格库存和自提点

@@ -60,6 +60,9 @@
         <activity
             android:name=".ui.category.CategoryLevelActivity"
             android:theme="@style/Theme.ShopModule" />
+        <activity
+            android:name=".web.ShopWebViewActivity"
+            android:theme="@style/Theme.ShopModule" />
     </application>
 
 </manifest>

@@ -2,15 +2,12 @@ package com.zkxy.shop.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
-import com.gxy.common.network.api.ApiResult
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
-import com.zyxcoder.mvvmroot.utils.loge
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 
 /**
  * @author zhangyuxiang
@@ -19,7 +16,7 @@ import kotlinx.coroutines.delay
 class ShopHomeViewModel : BaseViewModel() {
 
     //页面每次请求的数据条数，可修改
-    var pageSize = 10
+    private var pageSize = 10
 
     val isRefreshing = MutableLiveData<Boolean>()
     val isLoading = MutableLiveData<Boolean>()
@@ -33,7 +30,6 @@ class ShopHomeViewModel : BaseViewModel() {
      * 获取列表数据
      * @param isFirst 是否是第一次请求
      * @param isRefresh 是否是下拉刷新
-     * @param params 可变参数
      */
     fun getData(
         isFirst: Boolean,
@@ -44,38 +40,18 @@ class ShopHomeViewModel : BaseViewModel() {
             if (isFirst) {
                 loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
             }
-
-            val jsondata=apiService.getGoodsCategory(platformId = 2, currentPage = 1L,pageSize = 10000).apiData()
-
-            jsondata.toString().loge()
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
-                //todo 获取刷新的其他非列表数据
-                topBannerDatas.value = arrayListOf(
-                    HomeShopBannerEntity("https://gd-hbimg.huaban.com/4bd2502a1859e4bcc9d0afeda5b8851d98a267dd18c54-81OUAo_fw1200webp"),
-                    HomeShopBannerEntity("https://gd-hbimg.huaban.com/efd67641fbefe040be67e09709ecc06f7721a1751338e-dUZfor_fw1200webp"),
-                    HomeShopBannerEntity("https://gd-hbimg.huaban.com/bbbaf5b863d654a241df97b4f1135b3af770b5b95fe9f-p1uGUi_fw1200webp"),
-                    HomeShopBannerEntity("https://gd-hbimg.huaban.com/8fab765e0b0e7403e95b5c9bc439157b10a322e1119b9-aWLIOx_fw1200webp")
-                )
-                //todo 获取刷新的其他非列表数据
-
+                topBannerDatas.value = apiService.getHomeBanner().apiData()
             } else {
                 isLoading.value = true
             }
 
-            //todo 获取列表数据
-            delay(1000)
-            val goodsList = mutableListOf<GoodsEntity>()
-            val apiResult = ApiResult<MutableList<GoodsEntity>>(
-                statusDesc = "qwqwwq",
-                statusCode = "0",
-                listCount = 10,
-                hasMore = true,
-                data = goodsList
+            val apiResult = apiService.searchGoods(
+                goodsSuggest = 1,
+                currentPage = start / pageSize + 1,
+                pageSize = pageSize
             )
-            //todo 获取列表数据
-
-
             val dataList = apiResult.apiData()
             //当有更多数据时，后端返回的data的大小是大于等于pageSize
             dataHasMore.value = dataList.size >= pageSize

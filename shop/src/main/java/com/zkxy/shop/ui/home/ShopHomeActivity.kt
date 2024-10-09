@@ -18,7 +18,7 @@ import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.SearchActivity
-import com.zkxy.shop.utils.GlideImageLoader
+import com.zkxy.shop.utils.HomeBannerImageLoader
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 
@@ -49,7 +49,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             mLoadService = getLoadSir().register(viewLoad) {
                 startSearch(isFirst = true, isRefresh = false, start = 0)
             }
-            bannerHome.setImageLoader(GlideImageLoader()).setOnBannerListener {
+            bannerHome.setImageLoader(HomeBannerImageLoader()).setOnBannerListener {
 
             }
             goodsAdapter = GoodsAdapter().apply {
