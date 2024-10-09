@@ -12,11 +12,13 @@ data class HomeShopBannerEntity(
     val deleteFlag: Int?,
     val endTime: String?,
     val goodsId: Int?,
+    val imgUrl: String?,
     val noticeDesc: String?,
     val noticeId: Int?,
     val noticeName: String?,
     val noticeUrl: String?,
     val platformId: Int?,
     val sort: Int?,
-    val status: Int?
+    val status: Int?,
+    val urlType: Int?
 )

@@ -1,9 +1,9 @@
 package com.zkxy.shop.ui.category.adapter
 
+import androidx.recyclerview.widget.GridLayoutManager
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemCategorySecondaryBinding
-import com.zkxy.shop.entity.category.CategoryMinorEntity
-import com.zkxy.shop.entity.category.CategorySecondaryEntity
+import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.ui.home.decoration.CategoryAverageMarginDecoration
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
@@ -14,28 +14,29 @@ import com.zyxcoder.mvvmroot.ext.onContinuousClick
  * @date 2024/9/24
  */
 class CategorySecondaryAdapter :
-    BaseViewBindingAdapter<CategorySecondaryEntity, ItemCategorySecondaryBinding>(
+    BaseViewBindingAdapter<GoodsCategoryEntity, ItemCategorySecondaryBinding>(
         ItemCategorySecondaryBinding::inflate, R.layout.item_category_secondary
     ) {
-    var onCategorySecondaryClickListener: ((categorySecondaryEntity: CategorySecondaryEntity) -> Unit)? =
+    var onCategorySecondaryClickListener: ((categorySecondaryEntity: GoodsCategoryEntity) -> Unit)? =
         null
-    var onCategoryMinorClickListener: ((categorySecondaryEntity: CategorySecondaryEntity, categoryMinorEntity: CategoryMinorEntity) -> Unit)? =
+    var onCategoryMinorClickListener: ((categorySecondaryEntity: GoodsCategoryEntity, categoryMinorEntity: GoodsCategoryEntity) -> Unit)? =
         null
 
     override fun convert(
-        holder: BaseViewBindingHolder<ItemCategorySecondaryBinding>, item: CategorySecondaryEntity
+        holder: BaseViewBindingHolder<ItemCategorySecondaryBinding>, item: GoodsCategoryEntity
     ) {
         holder.viewBind.apply {
             tvSecCateGoryName.onContinuousClick {
                 onCategorySecondaryClickListener?.invoke(item)
             }
-            tvSecCateGoryName.text = item.categoryName
+            tvSecCateGoryName.text = item.name
             CategoryMinorAdapter().apply {
                 onCategoryClickListener = {
                     onCategoryMinorClickListener?.invoke(item, it)
                 }
-                setList(item.categoryMinorList)
+                setList(item.children)
                 rvMinorCategory.adapter = this
+                rvMinorCategory.layoutManager = GridLayoutManager(context, 3)
                 rvMinorCategory.addItemDecoration(CategoryAverageMarginDecoration())
             }
         }

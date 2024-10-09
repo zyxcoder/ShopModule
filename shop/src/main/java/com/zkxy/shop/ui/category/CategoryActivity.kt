@@ -2,6 +2,7 @@ package com.zkxy.shop.ui.category
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.loadsir.getLoadSir
@@ -36,8 +37,11 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        currentAllGoodsType = intent.getSerializableExtra(ALL_GOODS_TYPE, AllGoodsType::class.java)
-            ?: AllGoodsType.AllGoodsPoint
+        currentAllGoodsType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(ALL_GOODS_TYPE, AllGoodsType::class.java)
+        } else {
+            intent.getSerializableExtra(ALL_GOODS_TYPE) as? AllGoodsType
+        } ?: AllGoodsType.AllGoodsPoint
 
         mViewBind.apply {
             mLoadService = getLoadSir().register(clCategory) {
@@ -82,7 +86,7 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
             }
             categoryDataList.observe(this@CategoryActivity) { categoryEntities ->
                 categoryPrimaryAdapter.setList(categoryEntities)
-                categorySecondaryAdapter.setList(categoryEntities.find { it.isSelect == true }?.categorySecondaryList)
+                categorySecondaryAdapter.setList(categoryEntities.find { it.isSelect == true }?.children)
                 mViewBind.rvSecondary.scrollToPosition(0)
             }
         }

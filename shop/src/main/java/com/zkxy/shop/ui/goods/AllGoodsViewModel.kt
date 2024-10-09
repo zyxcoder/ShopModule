@@ -138,7 +138,8 @@ class AllGoodsViewModel : BaseViewModel() {
                     remark = null,
                     sortNumber = null,
                     typeId = null,
-                    updateTime = null
+                    updateTime = null,
+                    isSelect = false
                 )
             )
             categoryDataList.value = apiResult

@@ -16,8 +16,7 @@ import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ActivityCategoryLevelBinding
 import com.zkxy.shop.databinding.ItemCategoryTabCenterTextBinding
-import com.zkxy.shop.entity.category.CategoryMinorEntity
-import com.zkxy.shop.entity.category.CategorySecondaryEntity
+import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
@@ -41,13 +40,13 @@ class CategoryLevelActivity :
     private lateinit var goodsAdapter: GoodsAdapter
 
     //分类标签
-    private var categoryDataList: MutableList<CategoryMinorEntity>? = null
+    private var categoryDataList: MutableList<GoodsCategoryEntity>? = null
 
     //选中的商品类型：积分商品，现金商品
     private var currentAllGoodsType = AllGoodsType.AllGoodsPoint
 
     //选择的分类
-    private var currentGoodsCategory: CategoryMinorEntity? = null
+    private var currentGoodsCategory: GoodsCategoryEntity? = null
 
     //默认选择无规则排序
     private var currentSortRule = SortRule.DEFAULT_SORT
@@ -58,8 +57,8 @@ class CategoryLevelActivity :
         private const val ALL_GOODS_TYPE = "all_goods_type"//商品类型
         fun startActivity(
             context: Context,
-            categorySecondaryEntity: CategorySecondaryEntity?,
-            categoryMinorEntity: CategoryMinorEntity? = null,
+            categorySecondaryEntity: GoodsCategoryEntity?,
+            categoryMinorEntity: GoodsCategoryEntity? = null,
             allGoodsType: AllGoodsType
         ) {
             context.startActivity(Intent(context, CategoryLevelActivity::class.java).apply {
@@ -72,30 +71,52 @@ class CategoryLevelActivity :
 
 
     override fun init(savedInstanceState: Bundle?) {
-        currentAllGoodsType = intent.getSerializableExtra(ALL_GOODS_TYPE, AllGoodsType::class.java)
-            ?: AllGoodsType.AllGoodsPoint
+        currentAllGoodsType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(ALL_GOODS_TYPE, AllGoodsType::class.java)
+        } else {
+            intent.getSerializableExtra(ALL_GOODS_TYPE) as? AllGoodsType
+        } ?: AllGoodsType.AllGoodsPoint
         val categorySecondaryData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(
-                CATEGORY_SECONDARY_DATA, CategorySecondaryEntity::class.java
+                CATEGORY_SECONDARY_DATA, GoodsCategoryEntity::class.java
             )
         } else {
             intent.getParcelableExtra(CATEGORY_SECONDARY_DATA)
         }
-        categoryDataList = categorySecondaryData?.categoryMinorList
+        categoryDataList = categorySecondaryData?.children?.toMutableList() ?: arrayListOf()
+        //这里添加一个”全部“标签
+        //todo levelType 具体值待定
+        categoryDataList?.add(
+            0, GoodsCategoryEntity(
+                children = null,
+                createTime = null,
+                deleteFlag = null,
+                levelType = 2,
+                name = "全部",
+                parentId = null,
+                remark = null,
+                sortNumber = null,
+                typeId = null,
+                updateTime = null,
+                isSelect = null
+            )
+        )
         currentGoodsCategory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(
-                CATEGORY_MINOR_DATA, CategoryMinorEntity::class.java
+                CATEGORY_MINOR_DATA, GoodsCategoryEntity::class.java
             )
         } else {
             intent.getParcelableExtra(CATEGORY_MINOR_DATA)
-        } ?: categoryDataList?.getOrNull(0)
+        } ?: categoryDataList?.getOrNull(0)?.apply {
+            isSelect = true
+        }
 
         mViewBind.apply {
             mLoadService = getLoadSir().register(refreshLayout) {
                 fetchGoodsData(isFirst = true, isRefresh = false)
             }
             toobarLayout.apply {
-                setTitleContent(categorySecondaryData?.categoryName)
+                setTitleContent(categorySecondaryData?.name)
                 onRightIconClickListener = {
                     SearchActivity.startActivity(context = this@CategoryLevelActivity)
                 }
@@ -170,7 +191,7 @@ class CategoryLevelActivity :
             categoryDataList?.forEach {
                 tabLayoutCategory.addTab(tabLayoutCategory.newTab().apply {
                     customView = ItemCategoryTabCenterTextBinding.inflate(layoutInflater).apply {
-                        tvTabText.text = it.categoryName
+                        tvTabText.text = it.name
                     }.root
                 }, it == currentGoodsCategory)
             }

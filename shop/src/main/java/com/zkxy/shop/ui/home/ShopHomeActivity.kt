@@ -19,6 +19,7 @@ import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.SearchActivity
 import com.zkxy.shop.utils.HomeBannerImageLoader
+import com.zkxy.shop.web.ShopWebViewActivity
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 
@@ -50,7 +51,25 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
                 startSearch(isFirst = true, isRefresh = false, start = 0)
             }
             bannerHome.setImageLoader(HomeBannerImageLoader()).setOnBannerListener {
+                mViewModel.topBannerDatas.value?.getOrNull(it)?.let { clickBannerEntity ->
+                    //urlType 链接类型:1商品，2自定义内容，3无链接
+                    when (clickBannerEntity.urlType) {
+                        1 -> {
+                            GoodsDetailsActivity.startActivity(
+                                context = this@ShopHomeActivity,
+                                goodsId = clickBannerEntity.goodsId
+                            )
+                        }
 
+                        2 -> {
+                            ShopWebViewActivity.startActivity(
+                                context = this@ShopHomeActivity,
+                                title = clickBannerEntity.noticeName,
+                                loadUrl = clickBannerEntity.noticeUrl ?: ""
+                            )
+                        }
+                    }
+                }
             }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {

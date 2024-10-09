@@ -2,13 +2,11 @@ package com.zkxy.shop.ui.category
 
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
-import com.zkxy.shop.entity.category.CategoryEntity
-import com.zkxy.shop.entity.category.CategoryMinorEntity
-import com.zkxy.shop.entity.category.CategorySecondaryEntity
+import com.zkxy.shop.entity.category.GoodsCategoryEntity
+import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 
 /**
  * @author zhangyuxiang
@@ -18,63 +16,28 @@ class CategoryViewModel : BaseViewModel() {
 
     val loadContentStatus = MutableLiveData<LoadContentStatus>()
 
-    val categoryDataList = MutableLiveData<MutableList<CategoryEntity>>()
+    val categoryDataList = MutableLiveData<MutableList<GoodsCategoryEntity>>()
 
 
     /**
      * 重置分类选择
      */
-    fun resetCategorySelect(selectCategoryEntity: CategoryEntity) {
-        categoryDataList.value = categoryDataList.value?.apply {
-            forEach {
-                it.isSelect = it == selectCategoryEntity
-            }
+    fun resetCategorySelect(selectCategoryEntity: GoodsCategoryEntity) {
+        categoryDataList.value = categoryDataList.value?.onEach {
+            it.isSelect = it == selectCategoryEntity
         }
     }
 
     fun fetchCategory() {
         request<Job>(block = {
             loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
-
-
-            //todo 模拟网络请求
-            delay(1000)
-            val list = arrayListOf<CategoryEntity>()
-            val categoryMinorList = arrayListOf<CategoryMinorEntity>()
-            val categorySecondaryList = arrayListOf<CategorySecondaryEntity>()
-            repeat(10) {
-                categoryMinorList.add(
-                    CategoryMinorEntity(
-                        categoryId = it, categoryName = "进" + it
-                    )
-                )
-            }
-            repeat(10) {
-                categorySecondaryList.add(
-                    CategorySecondaryEntity(
-                        categoryId = it,
-                        categoryName = "日用" + it,
-                        categoryMinorList = categoryMinorList
-                    )
-                )
-            }
-
-            repeat(10) {
-                list.add(
-                    CategoryEntity(
-                        categoryId = it,
-                        categoryName = "个护清洁数据" + it,
-                        isSelect = it == 0,
-                        categorySecondaryList = categorySecondaryList
-                    )
-                )
-            }
-            categoryDataList.value = list
-
-
-
-
-            if ((categoryDataList.value?.size ?: 0) > 0) {
+            val apiResult = apiService.getGoodsCategory().apiData().filter {
+                it.children?.isNotEmpty() == true
+            }.toMutableList()
+            //默认选中第一个
+            apiResult.firstOrNull()?.isSelect = true
+            categoryDataList.value = apiResult
+            if (apiResult.isNotEmpty()) {
                 loadContentStatus.value = LoadContentStatus.SUCCESS
             } else {
                 loadContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
