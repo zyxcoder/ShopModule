@@ -64,12 +64,12 @@
                 android:id="@+id/tvPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2600"
                 android:textColor="#fffa5151"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2600" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -88,13 +88,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="9.9"
                 android:textColor="#fffa5151"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tvPoints"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/tvPoints" />
+                app:layout_constraintTop_toTopOf="@+id/tvPoints"
+                tools:text="9.9" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -115,13 +115,13 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="福临门中粮集团东北优质大米10kg出口品质好大米中粮集团荣誉出品国家免检产品 优质好..."
                 android:textColor="#ff333333"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPoints" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPoints"
+                tools:text="福临门中粮集团东北优质大米10kg出口品质好大米中粮集团荣誉出品国家免检产品 优质好..." />
 
             <TextView
                 android:id="@+id/textView5"
@@ -139,13 +139,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="不限/每人 5 件"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
+                app:layout_constraintTop_toTopOf="@+id/textView5"
+                tools:text="不限/每人 5 件" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -162,13 +162,13 @@
                 android:id="@+id/tvDeliveryMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="快递/自提"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
                 app:layout_constraintStart_toStartOf="@+id/tvNum"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
+                app:layout_constraintTop_toTopOf="@+id/textView6"
+                tools:text="快递/自提" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -185,13 +185,13 @@
                 android:id="@+id/tvDes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="商品描述文字最多100个字，显示多少行好些呢。有多少字显示多少字，要完全显示。都到详情页面了完全显示吧！"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvDeliveryMode"
-                app:layout_constraintTop_toTopOf="@+id/textView9" />
+                app:layout_constraintTop_toTopOf="@+id/textView9"
+                tools:text="商品描述文字最多100个字，显示多少行好些呢。有多少字显示多少字，要完全显示。都到详情页面了完全显示吧！" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

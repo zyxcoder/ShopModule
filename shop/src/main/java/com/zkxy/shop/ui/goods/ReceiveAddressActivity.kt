@@ -13,20 +13,40 @@ class ReceiveAddressActivity :
     private var selectAddressUtil: SelectAddressUtil? = null
 
     companion object {
-        fun startActivity(context: Context?) {
-            context?.startActivity(Intent(context, ReceiveAddressActivity::class.java))
+        const val IS_EDIT = "is_edit"
+        fun startActivity(context: Context?, isEdit: Boolean = false) {
+            context?.startActivity(Intent(context, ReceiveAddressActivity::class.java).apply {
+                putExtra(IS_EDIT, isEdit)
+            })
         }
     }
 
     override fun init(savedInstanceState: Bundle?) {
+
+        val isEdit = intent.getBooleanExtra(IS_EDIT, false)
+
         mViewModel.initJsonData(this)
         selectAddressUtil = SelectAddressUtil(this)
-        selectAddressUtil?.onSelectedAddressListener = {
-            mViewBind.inputSelectAddress.setSelectText(it)
+        mViewBind.apply {
+            selectAddressUtil?.onSelectedAddressListener = {
+                inputSelectAddress.setSelectText(it)
+            }
+            inputSelectAddress.onContinuousClick {
+                selectAddressUtil?.show()
+            }
+
+            tvSave.onContinuousClick {
+                if (!inputSelectAddress.contentIsEmptyAndShowToast() && !inputAddress.contentIsEmptyAndShowToast()) {
+                    mViewModel.addUserAddress(
+                        address = inputAddress.getContent(),
+                        administrativeRegion = inputSelectAddress.getContent()
+                    )
+                }
+
+            }
         }
-        mViewBind.inputSelectAddress.onContinuousClick {
-            selectAddressUtil?.show()
-        }
+
+
     }
 
     override fun createObserver() {

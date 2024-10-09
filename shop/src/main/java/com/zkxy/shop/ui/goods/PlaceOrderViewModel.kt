@@ -3,6 +3,7 @@ package com.zkxy.shop.ui.goods
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.entity.goods.JsonBean
 import com.zkxy.shop.entity.goods.PickerEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
@@ -17,6 +18,7 @@ class PlaceOrderViewModel : BaseViewModel() {
 
     val pickerData = MutableLiveData<PickerEntity>()
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
+    val deliveryAddressListEntity = MutableLiveData<MutableList<AddressBookEntity>>()
 
     fun initJsonData(context: Context) {
         request<Job>(block = {
@@ -82,6 +84,13 @@ class PlaceOrderViewModel : BaseViewModel() {
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true
+        })
+    }
+
+    fun getUserAddress() {
+        request<Job>(block = {
+            deliveryAddressListEntity.value = apiService.getUserAddress().apiData()
+        }, error = {
         })
     }
 }

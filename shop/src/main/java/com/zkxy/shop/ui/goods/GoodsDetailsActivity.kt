@@ -14,7 +14,7 @@ import com.zkxy.shop.databinding.ItemGoodsDetailsImageBinding
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.entity.goods.PicDto
 import com.zkxy.shop.ext.doubleToTwoDecimalPlaceString
-import com.zkxy.shop.utils.GlideImageLoader
+import com.zkxy.shop.utils.GoodsDetailsImageLoader
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
@@ -37,7 +37,7 @@ class GoodsDetailsActivity :
     private var goodsDetailsImgDialog: GoodsDetailsImgDialog? = null
 
     override fun initView(savedInstanceState: Bundle?) {
-        val goodsId = intent.getIntExtra(GOODS_ID, 15)
+        val goodsId = intent.getIntExtra(GOODS_ID, 14)
         mViewModel.goodsDetail(goodsId)
         val height = dpToPx(150f).toInt()
         mViewBind.apply {
@@ -45,7 +45,7 @@ class GoodsDetailsActivity :
                 .statusBarView(titleBar).init()
             ivBack.onContinuousClick { finish() }
 
-            banner.setImageLoader(GlideImageLoader())
+            banner.setImageLoader(GoodsDetailsImageLoader())
                 .setOnBannerListener {
                     goodsDetailsImgDialog?.show()
                     goodsDetailsImgDialog?.setPosition(it)
@@ -132,7 +132,7 @@ class GoodsDetailsActivity :
                 mViewBind.banner.setImages(bannerPicDtoList).start()
                 goodsDetailsImgDialog = GoodsDetailsImgDialog(
                     context = this@GoodsDetailsActivity,
-                    imageUrl = goodsDetailPicDtoList
+                    imageUrl = bannerPicDtoList
                 )
                 mViewBind.imageRlv.adapter =
                     ImageAdapter().apply { setNewInstance(goodsDetailPicDtoList) }

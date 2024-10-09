@@ -9,10 +9,11 @@ import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 
-class SelectAddressAdapter : BaseViewBindingAdapter<AddressBookEntity, ItemShopSelectAddressBinding>(
-    ItemShopSelectAddressBinding::inflate,
-    R.layout.item_shop_select_address
-) {
+class SelectAddressAdapter :
+    BaseViewBindingAdapter<AddressBookEntity, ItemShopSelectAddressBinding>(
+        ItemShopSelectAddressBinding::inflate,
+        R.layout.item_shop_select_address
+    ) {
 
     private var checkedDrawable: Drawable? = null
     private var normalDrawable: Drawable? = null
@@ -32,8 +33,10 @@ class SelectAddressAdapter : BaseViewBindingAdapter<AddressBookEntity, ItemShopS
         item: AddressBookEntity
     ) {
         holder.viewBind.apply {
-            val drawable = if (item.isCheck) checkedDrawable else normalDrawable
+            val drawable = if (item.acquiesce == 1) checkedDrawable else normalDrawable
             tvNormal.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            tvRegion.text = item.administrativeRegion
+            tvAddress.text = item.address
         }
     }
 
@@ -43,8 +46,13 @@ class SelectAddressAdapter : BaseViewBindingAdapter<AddressBookEntity, ItemShopS
         payloads: List<Any>
     ) {
         if (payloads[0].toString() == "check") {
-            val drawable = if (item.isCheck) checkedDrawable else normalDrawable
-            holder.viewBind.tvNormal.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            val drawable = if (item.acquiesce == 1) checkedDrawable else normalDrawable
+            holder.viewBind.tvNormal.setCompoundDrawablesWithIntrinsicBounds(
+                drawable,
+                null,
+                null,
+                null
+            )
         }
     }
 }

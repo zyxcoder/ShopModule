@@ -1,5 +1,6 @@
 package com.zkxy.shop.ui.goods.adapter
 
+import android.view.View
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemZtPointBinding
 import com.zkxy.shop.entity.goods.Address
@@ -19,7 +20,12 @@ class ZtPointAdapter : BaseViewBindingAdapter<Address, ItemZtPointBinding>(
         holder.viewBind.apply {
             tvTitle.text = item.pickName
             tvAddress.text = item.pickDetailAddress
-            tvDistance.text = "${item.distance}km"
+            if (item.distance.isNullOrEmpty()) {
+                tvDistance.visibility = View.INVISIBLE
+            } else {
+                tvDistance.text = "${item.distance}km"
+                tvDistance.visibility = View.VISIBLE
+            }
         }
     }
 }

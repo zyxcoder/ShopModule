@@ -12,6 +12,8 @@ data class Address(
     val pickDetailAddress: String?,
     val pickName: String?,
     val distance: String?,
+    val loadLat: String?,
+    val loadLon: String?,
     val supplierPickId: Int?,
     val updateTime: String?
 )

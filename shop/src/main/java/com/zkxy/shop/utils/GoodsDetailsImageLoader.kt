@@ -7,14 +7,10 @@ import com.youth.banner.loader.ImageLoader
 import com.zkxy.shop.entity.goods.PicDto
 import com.zyxcoder.mvvmroot.utils.loadImage
 
-/**
- * @author zhangyuxiang
- * @date 2024/9/19
- */
-class GlideImageLoader : ImageLoader() {
+class GoodsDetailsImageLoader : ImageLoader() {
     override fun displayImage(context: Context, path: Any, imageView: ImageView) {
-        val homeShopBannerEntity = path as? PicDto
-        imageView.loadImage(homeShopBannerEntity?.picUrl ?: "")
+        val picDto = path as? PicDto
+        imageView.loadImage(picDto?.picUrl ?: "")
     }
 
     override fun createImageView(context: Context): ImageView {

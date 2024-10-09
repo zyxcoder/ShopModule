@@ -18,14 +18,17 @@
             android:id="@+id/inputSelectAddress"
             app:is_need_show_bottom_dialog="false"
             android:layout_width="match_parent"
+            app:input_hint="请选择地区"
             android:layout_height="wrap_content"
             app:is_requireds="true"
             app:title="所在地区" />
 
         <com.gxy.common.view.InputLayout
+            android:id="@+id/inputAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:is_input="true"
+            app:input_hint="请输入详细地址"
             app:is_requireds="true"
             app:is_show_bottom_line="false"
             app:title="详细地址" />

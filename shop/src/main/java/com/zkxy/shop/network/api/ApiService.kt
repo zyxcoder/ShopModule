@@ -1,13 +1,15 @@
 package com.zkxy.shop.network.api
 
+import com.zkxy.shop.appLoadLat
+import com.zkxy.shop.appLoadLon
 import com.zkxy.shop.appPlatformId
+import com.zkxy.shop.appUserTel
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
+import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
-import com.zkxy.shop.loadLat
-import com.zkxy.shop.loadLon
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -72,9 +74,27 @@ interface ApiService {
     suspend fun goodsStockAddressSearch(
         @Field("goodsId") goodsId: Int?,
         @Field("deliveryMode") deliveryMode: Int?,
-        @Field("loadLon") upLoadLon: String? = loadLon,
-        @Field("loadLat") upLoadLat: String? = loadLat,
+        @Field("loadLon") upLoadLon: String? = appLoadLon,
+        @Field("loadLat") upLoadLat: String? = appLoadLat,
         @Field("platformId") platformId: Int = appPlatformId
     ): GxyApiResult<PlaceOrderEntity>
 
+    //获取用户常用地址
+    @POST("sys/getUserAddress")
+    @FormUrlEncoded
+    suspend fun getUserAddress(
+        @Field("tel") tel: String? = appUserTel,
+    ): GxyApiResult<MutableList<AddressBookEntity>>
+
+    //添加用户常用地址
+    @POST("sys/addUserAddress")
+    @FormUrlEncoded
+    suspend fun addUserAddress(
+        @Field("address") address: String?,
+        @Field("administrativeRegion") administrativeRegion: String?,
+        @Field("tel") tel: String? = appUserTel,
+        @Field("contactName") contactName: String? = "",
+        @Field("contactTel") contactTel: String? = appUserTel,
+        @Field("acquiesce") acquiesce: Int? = 0,
+    ): GxyApiResult<Any>
 }

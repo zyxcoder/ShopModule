@@ -25,8 +25,11 @@ var modeBaseUrl: String? = ""
 var appPlatformId = 2
 
 //当前经纬度
-var loadLon: String = ""
-var loadLat: String = ""
+var appLoadLon: String? = ""
+var appLoadLat: String? = ""
+
+//用户手机号(必传)
+var appUserTel: String? = ""
 
 /**
  * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
@@ -41,4 +44,16 @@ fun shopInit(application: Application, shopHttpUrl: String?, formId: Int? = 2) {
     modeBaseUrl = shopHttpUrl
     appPlatformId = formId ?: 2
     isInit = true
+}
+
+/**
+ * 登录后传递必要参数
+ * @param userTel 平台用户电话
+ * @param loadLon 经度
+ * @param loadLat 纬度
+ */
+fun shopInitArgument(userTel: String? = null, loadLon: String? = null, loadLat: String? = null) {
+    appUserTel = userTel
+    appLoadLon = loadLon
+    appLoadLat = loadLat
 }

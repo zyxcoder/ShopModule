@@ -13,18 +13,6 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
 
     private val selectAddressAdapter by lazy { SelectAddressAdapter() }
 
-    private val addressList = mutableListOf(
-        AddressBookEntity(isCheck = true),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false),
-        AddressBookEntity(isCheck = false)
-    )
-
     override fun initView() {
         mViewBind.apply {
             rlv.adapter = selectAddressAdapter
@@ -33,18 +21,17 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
                 dismiss()
             }
         }
-        selectAddressAdapter.setList(addressList)
         selectAddressAdapter.setOnItemChildClickListener { _, view, position ->
             when (view.id) {
                 R.id.tvNormal -> {
                     selectAddressAdapter.apply {
                         data[position].apply {
-                            if (isCheck) {
-                                isCheck = false
+                            if (acquiesce == 1) {
+                                acquiesce = 0
                                 notifyItemChanged(position, "check")
                             } else {
                                 data.forEachIndexed { index, addressBookEntity ->
-                                    addressBookEntity.isCheck = index == position
+                                    addressBookEntity.acquiesce = if (index == position) 1 else 0
                                     notifyDataSetChanged()
                                 }
                             }
@@ -53,7 +40,7 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
                 }
 
                 R.id.tvEditAddress -> {
-                    ReceiveAddressActivity.startActivity(context)
+                    ReceiveAddressActivity.startActivity(context, isEdit = true)
                     dismiss()
                 }
             }
@@ -61,6 +48,10 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
     }
 
     override fun resetDialogHeightPercent(): Float = 0.5f
+
+    fun setData(deliveryAddressEntities: MutableList<AddressBookEntity>) {
+        selectAddressAdapter.setNewInstance(deliveryAddressEntities)
+    }
 
     fun show(manager: FragmentManager) {
         super.show(manager, "AddressBookBottomDialog")
