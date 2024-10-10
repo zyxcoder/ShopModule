@@ -1,6 +1,7 @@
 package com.zkxy.shop.entity.goods
 
 import androidx.annotation.Keep
+import java.io.Serializable
 
 @Keep
 data class AddressBookEntity(
@@ -15,5 +16,4 @@ data class AddressBookEntity(
     val tel: String?,
     val updateTime: String?,
     var isCheck: Boolean
-
-)
+) : Serializable

@@ -15,6 +15,7 @@ import org.json.JSONArray
 
 class ReceiveAddressViewModel : BaseViewModel() {
     val pickerData = MutableLiveData<PickerEntity>()
+    val addAddressSuccess = MutableLiveData<Boolean>()
 
 
     fun initJsonData(context: Context) {
@@ -79,6 +80,26 @@ class ReceiveAddressViewModel : BaseViewModel() {
                 address = address,
                 administrativeRegion = administrativeRegion
             ).apiData()
+            addAddressSuccess.value = true
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
+
+    fun updateUserAddress(
+        address: String?,
+        addressId: Int?,
+        administrativeRegion: String?
+    ) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            apiService.updateAddress(
+                address = address,
+                addressId = addressId,
+                administrativeRegion = administrativeRegion,
+            )
+            addAddressSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
+    android:paddingBottom="8dp"
     android:layout_marginEnd="8dp"
     android:background="@drawable/round_solid_white_8"
     android:orientation="vertical">
@@ -59,18 +60,22 @@
         android:id="@+id/inputSelectAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:input_hint="请输入地区"
         app:is_need_show_bottom_dialog="false"
         app:is_requireds="true"
         app:title="@string/local_area" />
 
     <com.gxy.common.view.InputLayout
+        android:id="@+id/tvAddress"
         android:layout_width="match_parent"
+        app:input_hint="请输入详细地址"
         android:layout_height="wrap_content"
         app:is_input="true"
         app:is_requireds="true"
         app:title="@string/detailed_address" />
 
     <CheckBox
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

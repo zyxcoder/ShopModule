@@ -131,6 +131,7 @@
                 android:id="@+id/inputSpecification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:input_hint="请选择规格"
                 app:is_need_show_bottom_dialog="false"
                 app:is_requireds="true"
                 app:title="@string/specification" />
@@ -141,19 +142,24 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 app:is_input="true"
+                app:input_hint="请输入数量"
                 app:is_requireds="true"
                 app:title="@string/take_order_num" />
 
             <com.gxy.common.view.InputLayout
+                android:id="@+id/inputPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:is_input="true"
                 app:is_requireds="true"
+                app:input_hint="请输入联系人"
                 app:title="@string/contact_person" />
 
             <com.gxy.common.view.InputPhoneLayout
+                android:id="@+id/inputTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:input_phone_hint="请输入联系方式"
                 app:input_phone_title="@string/contact_phone"
                 app:required="true" />
 

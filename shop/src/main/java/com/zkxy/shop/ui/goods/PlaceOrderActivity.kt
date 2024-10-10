@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
@@ -31,6 +32,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     private val specificationBottomDialog by lazy { SpecificationBottomDialog() }
     private val addressBookBottomDialog by lazy { AddressBookBottomDialog() }
     private val selectNavigationDialog by lazy { SelectNavigationDialog() }
+    private val layoutShopReceiveKdBinding by lazy { LayoutShopReceiveKdBinding.bind(mViewBind.vsKd.inflate()) }
     private var guideAddress: Address? = null
 
     companion object {
@@ -64,7 +66,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             }
 
             specificationBottomDialog.onItemClickListener = {
-                inputSpecification.setSelectText(it.specName)
+                inputSpecification.setSelectText(it.specName, it.goodsSpecId)
             }
 
             ivGoods.loadImage(
@@ -78,7 +80,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 mViewModel.getUserAddress()
                 mViewModel.initJsonData(this@PlaceOrderActivity)
                 selectAddressUtil = SelectAddressUtil(this@PlaceOrderActivity)
-                LayoutShopReceiveKdBinding.bind(vsKd.inflate()).apply {
+                layoutShopReceiveKdBinding.apply {
                     selectAddressUtil?.onSelectedAddressListener = {
                         inputSelectAddress.setSelectText(it)
                     }
@@ -90,9 +92,30 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     inputSelectAddress.onContinuousClick {
                         selectAddressUtil?.show()
                     }
+
+                    addressBookBottomDialog.addressItemClickListener = {
+                        inputSelectAddress.setSelectText(it?.administrativeRegion)
+                        tvAddress.setSelectText(it?.address)
+                    }
                 }
                 ivReceiveType.setBackgroundResource(R.drawable.ic_kd)
 
+                addressBookBottomDialog.addressListener = { isEdit, addressBookEntity ->
+                    ReceiveAddressActivity.startActivityForResult(
+                        this@PlaceOrderActivity,
+                        isEdit = isEdit,
+                        launcher = resultRefreshLauncher,
+                        addressBookEntity = addressBookEntity
+                    )
+                }
+
+                addressBookBottomDialog.addressAcquiesceListener = { it, acquiesce ->
+                    mViewModel.acquiesceAddress(it, acquiesce)
+                }
+
+                addressBookBottomDialog.addressDeleteListener = {
+                    mViewModel.deleteAddress(it)
+                }
             } else {
                 LayoutShopReceiveZtBinding.bind(vsZt.inflate()).apply {
                     rlvZt.adapter = ztPointAdapter
@@ -144,6 +167,44 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     (goodsDetailsEntity.goodsScorePrice ?: 0).multiply(num)
                 tvMoney.text = (goodsDetailsEntity.goodsMoneyPrice ?: 0.0).multiply(num)
             }
+
+            //下单
+            tvTakeOrder.onContinuousClick {
+                var check = true
+                mutableListOf(inputSpecification, inputPerson).forEach {
+                    if (it.contentIsEmptyAndShowToast()) {
+                        check = false
+                        return@onContinuousClick
+                    }
+                }
+                if ((inputNum.getContent()?.toIntOrNull() ?: 0) < 1) {
+                    showToast("请输入数量")
+                }
+                if (inputTel.contentIsEmptyAndShowToast()) {
+                    check = false
+                }
+
+                val address = if (goodsDetailsEntity.deliveryMode == 1) {
+                    if (layoutShopReceiveKdBinding.inputSelectAddress.contentIsEmptyAndShowToast()) {
+                        check = false
+                    }
+                    if (layoutShopReceiveKdBinding.tvAddress.contentIsEmptyAndShowToast()) {
+                        check = false
+                    }
+                    layoutShopReceiveKdBinding.inputSelectAddress.getContent() + layoutShopReceiveKdBinding.tvAddress.getContent()
+                } else null
+                if (check) {
+                    mViewModel.createOrder(
+                        consignee = inputPerson.getContent(),
+                        consigneeTel = inputTel.getPhone(),
+                        goodsId = goodsId,
+                        goodsNum = inputNum.getContent()?.toIntOrNull() ?: 0,
+                        goodsSpecId = inputSpecification.getContentTag(),
+                        deliveryType  = goodsDetailsEntity.deliveryMode,
+                        deliveryAddress = address
+                    )
+                }
+            }
         }
     }
 
@@ -152,7 +213,6 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             pickerData.observe(this@PlaceOrderActivity) {
                 selectAddressUtil?.setPicker(it)
             }
-
             placeOrderEntity.observe(this@PlaceOrderActivity) {
                 specificationBottomDialog.setData(it.goodsSpecDtoList)
                 ztPointAdapter.setNewInstance(it.addressList)
@@ -161,6 +221,17 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             deliveryAddressListEntity.observe(this@PlaceOrderActivity) {
                 addressBookBottomDialog.setData(it)
             }
+            editAddress.observe(this@PlaceOrderActivity) {
+                mViewModel.getUserAddress()
+            }
         }
     }
+
+    private val resultRefreshLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                showToast("保存成功")
+                mViewModel.getUserAddress()
+            }
+        }
 }

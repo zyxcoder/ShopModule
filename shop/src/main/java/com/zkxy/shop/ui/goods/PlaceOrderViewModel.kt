@@ -19,6 +19,7 @@ class PlaceOrderViewModel : BaseViewModel() {
     val pickerData = MutableLiveData<PickerEntity>()
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
     val deliveryAddressListEntity = MutableLiveData<MutableList<AddressBookEntity>>()
+    val editAddress = MutableLiveData<Boolean>()
 
     fun initJsonData(context: Context) {
         request<Job>(block = {
@@ -93,4 +94,47 @@ class PlaceOrderViewModel : BaseViewModel() {
         }, error = {
         })
     }
+
+    fun acquiesceAddress(addressId: Int?, acquiesce: Int) {
+        request<Job>(block = {
+            apiService.acquiesceAddress(addressId = addressId, acquiesce = acquiesce)
+            editAddress.value = true
+        }, error = {
+        })
+    }
+
+    fun deleteAddress(addressId: Int?) {
+        request<Job>(block = {
+            apiService.deleteAddress(addressId = addressId)
+            editAddress.value = true
+        }, error = {
+        })
+    }
+
+    fun createOrder(
+        consignee: String?,
+        consigneeTel: String?,
+        goodsId: Int?,
+        goodsNum: Int?,
+        goodsSpecId: Int?,
+        deliveryType: Int?,
+        deliveryAddress: String? = null
+    ) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            apiService.createOrder(
+                deliveryAddress = deliveryAddress,
+                consignee = consignee,
+                consigneeTel = consigneeTel,
+                goodsId = goodsId,
+                goodsNum = goodsNum,
+                goodsSpecId = goodsSpecId,
+                deliveryType = deliveryType
+            ).apiData()
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
+
 }

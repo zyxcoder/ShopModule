@@ -31,6 +31,9 @@ var appLoadLat: String? = ""
 //用户手机号(必传)
 var appUserTel: String? = ""
 
+//用户登录名
+var appUserName: String? = ""
+
 /**
  * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
  * @param application Application
@@ -52,8 +55,14 @@ fun shopInit(application: Application, shopHttpUrl: String?, formId: Int? = 2) {
  * @param loadLon 经度
  * @param loadLat 纬度
  */
-fun shopInitArgument(userTel: String? = null, loadLon: String? = null, loadLat: String? = null) {
+fun shopInitArgument(
+    userTel: String? = null,
+    loadLon: String? = null,
+    loadLat: String? = null,
+    userName: String? = null
+) {
     appUserTel = userTel
     appLoadLon = loadLon
     appLoadLat = loadLat
+    appUserName = userName
 }

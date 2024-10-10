@@ -3,6 +3,7 @@ package com.zkxy.shop.network.api
 import com.zkxy.shop.appLoadLat
 import com.zkxy.shop.appLoadLon
 import com.zkxy.shop.appPlatformId
+import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AddressBookEntity
@@ -97,6 +98,51 @@ interface ApiService {
         @Field("contactName") contactName: String? = "",
         @Field("contactTel") contactTel: String? = appUserTel,
         @Field("acquiesce") acquiesce: Int? = 0,
+    ): GxyApiResult<Any>
+
+    //修改用户常用地址
+    @POST("sys/updateUserAddress")
+    @FormUrlEncoded
+    suspend fun updateAddress(
+        @Field("address") address: String?,
+        @Field("addressId") addressId: Int?,
+        @Field("administrativeRegion") administrativeRegion: String?,
+    ): GxyApiResult<Any>
+
+    //设置默认地址
+    @POST("sys/addressDefault")
+    @FormUrlEncoded
+    suspend fun acquiesceAddress(
+        @Field("addressId") addressId: Int?,
+        @Field("acquiesce") acquiesce: Int?,
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("tel") tel: String? = appUserTel
+    ): GxyApiResult<Any>
+
+    //删除地址
+    @POST("sys/deleteAddress")
+    @FormUrlEncoded
+    suspend fun deleteAddress(
+        @Field("addressId") addressId: Int?,
+        @Field("tel") tel: String? = appUserTel,
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("deleteFlag") deleteFlag: Int? = -1
+    ): GxyApiResult<Any>
+
+    //创建订单
+    @POST("order/create")
+    @FormUrlEncoded
+    suspend fun createOrder(
+        @Field("deliveryAddress") deliveryAddress: String?,
+        @Field("consignee") consignee: String?,
+        @Field("consigneeTel") consigneeTel: String?,
+        @Field("goodsId") goodsId: Int?,
+        @Field("goodsNum") goodsNum: Int?,
+        @Field("goodsSpecId") goodsSpecId: Int?,
+        @Field("deliveryType") deliveryType: Int?,
+        @Field("orderPlacer") orderPlacer: String? = appUserName,
+        @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
+        @Field("platformId") platformId: Int = appPlatformId
     ): GxyApiResult<Any>
 
     /**
