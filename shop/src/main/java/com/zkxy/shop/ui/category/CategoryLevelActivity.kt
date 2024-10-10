@@ -85,18 +85,17 @@ class CategoryLevelActivity :
         }
         categoryDataList = categorySecondaryData?.children?.toMutableList() ?: arrayListOf()
         //这里添加一个”全部“标签
-        //todo levelType 具体值待定
         categoryDataList?.add(
             0, GoodsCategoryEntity(
                 children = null,
                 createTime = null,
                 deleteFlag = null,
-                levelType = 2,
+                levelType = categorySecondaryData?.levelType,
                 name = "全部",
                 parentId = null,
                 remark = null,
                 sortNumber = null,
-                typeId = null,
+                typeId = categorySecondaryData?.typeId,
                 updateTime = null,
                 isSelect = null
             )

@@ -150,6 +150,9 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             dataHasMore.observe(this@ShopHomeActivity) {
                 mViewBind.refreshLayout.setNoMoreData(!it)
             }
+            userPointData.observe(this@ShopHomeActivity) {
+                mViewBind.tvPoint.text = "${it.scoreBalance ?: 0}"
+            }
         }
     }
 }

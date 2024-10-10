@@ -2,8 +2,10 @@ package com.zkxy.shop.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
+import com.zkxy.shop.appUserTel
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.entity.home.UserPointEntity
 import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
@@ -25,6 +27,7 @@ class ShopHomeViewModel : BaseViewModel() {
     val moreGoodsDatas = MutableLiveData<MutableList<GoodsEntity>>()
     val loadContentStatus = MutableLiveData<LoadContentStatus>()
     val dataHasMore = MutableLiveData<Boolean>()
+    val userPointData = MutableLiveData<UserPointEntity>()
 
     /**
      * 获取列表数据
@@ -43,6 +46,7 @@ class ShopHomeViewModel : BaseViewModel() {
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
                 topBannerDatas.value = apiService.getHomeBanner().apiData()
+                userPointData.value = apiService.getUserPoint(phoneNumber = appUserTel).apiData()
             } else {
                 isLoading.value = true
             }

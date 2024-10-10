@@ -10,6 +10,7 @@ import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
+import com.zkxy.shop.entity.home.UserPointEntity
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -97,4 +98,14 @@ interface ApiService {
         @Field("contactTel") contactTel: String? = appUserTel,
         @Field("acquiesce") acquiesce: Int? = 0,
     ): GxyApiResult<Any>
+
+    /**
+     * 获取用户积分
+     */
+    @POST("points/getPoints")
+    @FormUrlEncoded
+    suspend fun getUserPoint(
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("tel") phoneNumber: String?
+    ): GxyApiResult<UserPointEntity>
 }
