@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_solid_white_8"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="发货信息"
+        android:textColor="#ff333333"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <com.gxy.common.view.InputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_show_enter="false"
+        app:title="快递公司" />
+
+    <com.gxy.common.view.InputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_show_enter="false"
+        app:title="快递单号" />
+
+
+    <com.gxy.common.view.InputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_show_enter="false"
+        app:title="发货时间" />
+
+</LinearLayout>

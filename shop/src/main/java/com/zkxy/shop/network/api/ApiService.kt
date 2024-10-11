@@ -1,5 +1,6 @@
 package com.zkxy.shop.network.api
 
+import com.gxy.common.network.api.ApiResult
 import com.zkxy.shop.appLoadLat
 import com.zkxy.shop.appLoadLon
 import com.zkxy.shop.appPlatformId
@@ -12,6 +13,8 @@ import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.entity.home.UserPointEntity
+import com.zkxy.shop.entity.order.OrderDetailsEntity
+import com.zkxy.shop.entity.order.OrderListEntity
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -154,4 +157,32 @@ interface ApiService {
         @Field("platformId") platformId: Int = appPlatformId,
         @Field("tel") phoneNumber: String?
     ): GxyApiResult<UserPointEntity>
+
+    //订单列表
+    @POST("order/orderListAPP")
+    @FormUrlEncoded
+    suspend fun orderListAPP(
+        @Field("current") current: Int?,
+        @Field("key") key: String?,
+        @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("size") size: Int? = 20
+    ): ApiResult<MutableList<OrderListEntity>>
+
+    //订单详情
+    @POST("order/detailsApp")
+    @FormUrlEncoded
+    suspend fun orderDetails(
+        @Field("orderId") orderId: Int?,
+        @Field("platformId") platformId: Int = appPlatformId,
+    ): GxyApiResult<OrderDetailsEntity>
+
+    //订单详情
+    @POST("order/cancel")
+    @FormUrlEncoded
+    suspend fun orderCancel(
+        @Field("orderId") orderId: Int?,
+        @Field("orderDesc") orderDesc: String? = "",
+        @Field("platformId") platformId: Int = appPlatformId,
+    ): GxyApiResult<OrderDetailsEntity>
 }

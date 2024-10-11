@@ -20,6 +20,7 @@ class PlaceOrderViewModel : BaseViewModel() {
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
     val deliveryAddressListEntity = MutableLiveData<MutableList<AddressBookEntity>>()
     val editAddress = MutableLiveData<Boolean>()
+    val createOrderSuccess = MutableLiveData<Boolean>()
 
     fun initJsonData(context: Context) {
         request<Job>(block = {
@@ -131,6 +132,7 @@ class PlaceOrderViewModel : BaseViewModel() {
                 goodsSpecId = goodsSpecId,
                 deliveryType = deliveryType
             ).apiData()
+            createOrderSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true

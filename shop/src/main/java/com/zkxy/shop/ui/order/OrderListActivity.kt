@@ -2,6 +2,7 @@ package com.zkxy.shop.ui.order
 
 import android.content.Context
 import android.content.Intent
+import com.google.android.material.tabs.TabLayout.MODE_AUTO
 import com.gxy.common.common.activitylist.BaseCommonListActivity
 import com.gxy.common.common.activitylist.BaseCommonListFragment
 import com.gxy.common.common.activitylist.BaseCommonListFragmentViewModel
@@ -30,4 +31,11 @@ class OrderListActivity :
     override fun provideTitleContent(): String {
         return "我的订单"
     }
+
+    override var provideTabMode= MODE_AUTO
+
+    override fun provideSearchHintContent(): String? {
+        return "请输入订单号、商品名称"
+    }
+
 }

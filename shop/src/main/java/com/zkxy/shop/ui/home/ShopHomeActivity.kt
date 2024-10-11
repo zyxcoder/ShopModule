@@ -18,6 +18,7 @@ import com.zkxy.shop.ui.goods.AllGoodsActivity
 import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
+import com.zkxy.shop.ui.order.OrderListActivity
 import com.zkxy.shop.ui.search.SearchActivity
 import com.zkxy.shop.utils.HomeBannerImageLoader
 import com.zkxy.shop.web.ShopWebViewActivity
@@ -96,7 +97,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
                 }
             }
             tvMyOrder.onContinuousClick {
-
+                OrderListActivity.startActivity(context = this@ShopHomeActivity)
             }
             tvAllShop.onContinuousClick {
                 AllGoodsActivity.startActivity(context = this@ShopHomeActivity)

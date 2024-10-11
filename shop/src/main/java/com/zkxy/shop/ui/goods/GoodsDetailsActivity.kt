@@ -37,7 +37,7 @@ class GoodsDetailsActivity :
     private var goodsDetailsImgDialog: GoodsDetailsImgDialog? = null
 
     override fun initView(savedInstanceState: Bundle?) {
-        val goodsId = intent.getIntExtra(GOODS_ID, 14)
+        val goodsId = intent.getIntExtra(GOODS_ID, 15)
         mViewModel.goodsDetail(goodsId)
         val height = dpToPx(150f).toInt()
         mViewBind.apply {
