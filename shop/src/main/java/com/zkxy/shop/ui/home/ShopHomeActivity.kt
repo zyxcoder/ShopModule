@@ -6,6 +6,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.loadsir.LoadContentStatus
 import com.gxy.common.common.loadsir.getLoadSir
@@ -78,7 +79,12 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
                 }
                 rvGoods.adapter = this
             }
-            rvGoods.addItemDecoration(GoodsItemAverageMarginDecoration())
+            rvGoods.apply {
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
+                    it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                }
+                addItemDecoration(GoodsItemAverageMarginDecoration())
+            }
             refreshLayout.apply {
                 setOnRefreshListener {
                     startSearch(isFirst = false, isRefresh = true, start = 0)

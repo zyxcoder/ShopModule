@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.loadsir.getLoadSir
@@ -129,7 +130,12 @@ class CategoryLevelActivity :
                 }
                 rvGoods.adapter = this
             }
-            rvGoods.addItemDecoration(GoodsItemAverageMarginDecoration())
+            rvGoods.apply {
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
+                    it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                }
+                addItemDecoration(GoodsItemAverageMarginDecoration())
+            }
             refreshLayout.apply {
                 setOnRefreshListener {
                     fetchGoodsData(isFirst = false, isRefresh = true)
@@ -329,6 +335,7 @@ class CategoryLevelActivity :
             }
             firstGoodsDatas.observe(this@CategoryLevelActivity) {
                 goodsAdapter.setNewInstance(it)
+                mViewBind.rvGoods.scrollToPosition(0)
             }
             moreGoodsDatas.observe(this@CategoryLevelActivity) {
                 goodsAdapter.addData(it)

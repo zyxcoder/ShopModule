@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.loadsir.LoadContentStatus
 import com.gxy.common.common.loadsir.getLoadSir
@@ -62,8 +63,13 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                         goodsId = it.goodsId
                     )
                 }
-                rvGoods.addItemDecoration(GoodsItemAverageMarginDecoration())
                 rvGoods.adapter = this
+            }
+            rvGoods.apply {
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
+                    it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                }
+                addItemDecoration(GoodsItemAverageMarginDecoration())
             }
             refreshLayout.setOnLoadMoreListener {
                 mViewModel.fetchSearchData(
@@ -150,6 +156,7 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
             }
             firstGoodsDatas.observe(this@SearchActivity) {
                 goodsAdapter.setNewInstance(it)
+                mViewBind.rvGoods.scrollToPosition(0)
             }
             moreGoodsDatas.observe(this@SearchActivity) {
                 goodsAdapter.addData(it)
