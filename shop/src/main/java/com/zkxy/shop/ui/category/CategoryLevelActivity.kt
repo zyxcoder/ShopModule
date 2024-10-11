@@ -335,7 +335,9 @@ class CategoryLevelActivity :
             }
             firstGoodsDatas.observe(this@CategoryLevelActivity) {
                 goodsAdapter.setNewInstance(it)
-                mViewBind.rvGoods.scrollToPosition(0)
+                mViewBind.rvGoods.postDelayed({
+                    mViewBind.rvGoods.scrollToPosition(0)
+                }, 100)
             }
             moreGoodsDatas.observe(this@CategoryLevelActivity) {
                 goodsAdapter.addData(it)

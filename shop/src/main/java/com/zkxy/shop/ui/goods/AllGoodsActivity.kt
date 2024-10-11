@@ -78,9 +78,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 rvGoods.adapter = this
             }
             rvGoods.apply {
-                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
-                    it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-                }
+                layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
+                        it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                    }
                 addItemDecoration(GoodsItemAverageMarginDecoration())
             }
             refreshLayout.apply {
@@ -314,7 +315,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             }
             firstGoodsDatas.observe(this@AllGoodsActivity) {
                 goodsAdapter.setNewInstance(it)
-                mViewBind.rvGoods.scrollToPosition(0)
+                mViewBind.rvGoods.postDelayed({
+                    mViewBind.rvGoods.scrollToPosition(0)
+                }, 100)
+
             }
             moreGoodsDatas.observe(this@AllGoodsActivity) {
                 goodsAdapter.addData(it)

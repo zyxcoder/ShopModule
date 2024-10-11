@@ -66,9 +66,10 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                 rvGoods.adapter = this
             }
             rvGoods.apply {
-                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
-                    it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-                }
+                layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).also {
+                        it.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                    }
                 addItemDecoration(GoodsItemAverageMarginDecoration())
             }
             refreshLayout.setOnLoadMoreListener {
@@ -156,7 +157,9 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
             }
             firstGoodsDatas.observe(this@SearchActivity) {
                 goodsAdapter.setNewInstance(it)
-                mViewBind.rvGoods.scrollToPosition(0)
+                mViewBind.rvGoods.postDelayed({
+                    mViewBind.rvGoods.scrollToPosition(0)
+                }, 100)
             }
             moreGoodsDatas.observe(this@SearchActivity) {
                 goodsAdapter.addData(it)
