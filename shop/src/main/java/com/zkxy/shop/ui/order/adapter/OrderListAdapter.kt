@@ -63,6 +63,7 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                         tvKdName.text = item.deliveryCode
                         tvReceiveTitle.visibility = View.VISIBLE
                         tvKdName.visibility = View.VISIBLE
+                        tvZtTip.visibility = View.VISIBLE
                     }
                 }
 
@@ -78,7 +79,7 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     } else {//自提
                         tvReceiveTitle.text = "自提点："
                         tvKdName.text = "自提点"
-                        tvDeliverTime.text = "提货时间：${item.deliveryTime ?: ""}"
+                        tvDeliverTime.text = "提货时间：${item.shippingTime ?: ""}"
                     }
                 }
 
@@ -88,16 +89,16 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     tvCancel.visibility = View.INVISIBLE
                     tvReceiveTitle.visibility = View.VISIBLE
                     tvKdName.visibility = View.VISIBLE
-                    tvDeliverTime.visibility = View.VISIBLE
                     if (item.deliveryType == 1) {//快递
                         tvKdName.text = item.logisticsCompany
                         tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
-                        tvZtTip.text = ""
+                        tvDeliverTime.visibility = View.VISIBLE
                     } else {//自提
-                        tvReceiveTitle.text = "自提点："
-                        tvKdName.text = "自提点"
-                        tvDeliverTime.text = "提货时间：${item.deliveryTime ?: ""}"
-                        tvZtTip.text = "前往自提点前，请提前拨打联系电话！"
+                        tvReceiveTitle.text = "提货码："
+                        tvKdName.text = item.deliveryCode
+                        tvReceiveTitle.visibility = View.VISIBLE
+                        tvKdName.visibility = View.VISIBLE
+                        tvZtTip.visibility = View.VISIBLE
                     }
                 }
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_solid_white_8"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="提货信息"
+        android:textColor="#ff333333"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="19dp"
+        android:paddingEnd="19dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="自提点"
+            android:textColor="@color/color_333333" />
+
+        <TextView
+            android:id="@+id/tvZtPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退款进度"
+            android:textStyle="bold"
+            android:textColor="@color/color_333333" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="#33000000" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/tvZtTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_show_bottom_line="false"
+        app:is_show_enter="false"
+        app:title="自提时间" />
+
+</LinearLayout>

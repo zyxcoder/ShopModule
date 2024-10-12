@@ -127,39 +127,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvGoodsName"
                 tools:text="2600" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/textView14"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="积分+"-->
-<!--                android:textColor="#fffa5151"-->
-<!--                android:textSize="12sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/tvPoints"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tvPoints"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/tvPoints" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/textView14"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="积分+"-->
+            <!--                android:textColor="#fffa5151"-->
+            <!--                android:textSize="12sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/tvPoints"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/tvPoints"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/tvPoints" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvPrice"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="#fffa5151"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/textView14"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/textView14"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/textView14"-->
-<!--                tools:text="9.9" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/tvPrice"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="#fffa5151"-->
+            <!--                android:textSize="16sp"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/textView14"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/textView14"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/textView14"-->
+            <!--                tools:text="9.9" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/textView17"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="元"-->
-<!--                android:textColor="#fffa5151"-->
-<!--                android:textSize="12sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/tvPrice"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tvPrice"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/tvPrice" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/textView17"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="元"-->
+            <!--                android:textColor="#fffa5151"-->
+            <!--                android:textSize="12sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/tvPrice"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/tvPrice"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/tvPrice" />-->
 
 
             <ImageView
@@ -311,13 +311,40 @@
         </LinearLayout>
 
         <Space
+            android:id="@+id/spKd"
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
+<!--        //发货信息-->
         <ViewStub
+            android:id="@+id/vsKdInfo"
             android:layout_width="match_parent"
-            android:layout="@layout/layout_fh_info"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_fh_info" />
+
+        <ViewStub
+            android:id="@+id/vsZt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_shop_receive_zt" />
+
+        <ViewStub
+            android:id="@+id/vsZtInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_zt_info" />
+
+        <Space
+            android:id="@+id/spCancel"
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+<!--        退款信息-->
+        <ViewStub
+            android:id="@+id/vsCancelInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_cancel_info" />
     </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
 
 </com.gxy.common.view.ToolbarLayout>

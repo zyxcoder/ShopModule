@@ -22,6 +22,7 @@
         android:layout_height="1dp" />
 
     <com.gxy.common.view.InputLayout
+        android:id="@+id/tvLogisticsCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:is_input="false"
@@ -29,6 +30,7 @@
         app:title="快递公司" />
 
     <com.gxy.common.view.InputLayout
+        android:id="@+id/tvExpressNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:is_input="false"
@@ -37,6 +39,7 @@
 
 
     <com.gxy.common.view.InputLayout
+        android:id="@+id/tvShippingTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:is_input="false"

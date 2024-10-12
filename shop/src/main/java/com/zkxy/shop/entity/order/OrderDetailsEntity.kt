@@ -34,6 +34,7 @@ data class OrderDetailsEntity(
     val priceRatio: Double?,
     val refundProgress: Int?,
     val refundTime: String?,
+    val refundDesc: String?,
     val shipmentsAddress: String?,
     val shippingFee: Double?,
     val shippingTime: String?,

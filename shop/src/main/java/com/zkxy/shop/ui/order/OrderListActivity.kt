@@ -21,10 +21,10 @@ class OrderListActivity :
 
     override fun provideFragments(): ArrayList<BaseCommonListFragment<out BaseCommonListFragmentViewModel<*>, *, *, *>> {
         return arrayListOf(
-            OrderListFragment("全部"),
-            OrderListFragment("待发货/待提货"),
-            OrderListFragment("已发货/已提货"),
-            OrderListFragment("已取消"),
+            OrderListFragment("全部", 0),
+            OrderListFragment("待发货/待提货", 1),
+            OrderListFragment("已发货/已提货", 2),
+            OrderListFragment("已取消", 3),
         )
     }
 
@@ -32,7 +32,7 @@ class OrderListActivity :
         return "我的订单"
     }
 
-    override var provideTabMode= MODE_AUTO
+    override var provideTabMode = MODE_AUTO
 
     override fun provideSearchHintContent(): String? {
         return "请输入订单号、商品名称"

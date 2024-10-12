@@ -9,7 +9,7 @@ import com.zkxy.shop.ui.order.adapter.OrderListAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.ext.showToast
 
-class OrderListFragment(title: String) :
+class OrderListFragment(title: String, private val status: Int) :
     BaseCommonListFragment<OrderListFragmentViewModel, FragmentBaseCommonListBinding, ItemOrderListBinding, OrderListEntity>(
         title
     ) {
@@ -33,7 +33,7 @@ class OrderListFragment(title: String) :
     }
 
     override fun provideRequestParams(): Array<out Any> {
-        return arrayOf()
+        return arrayOf(status)
     }
 
     override fun createObserver() {

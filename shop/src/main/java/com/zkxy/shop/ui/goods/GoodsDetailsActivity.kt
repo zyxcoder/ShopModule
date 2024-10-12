@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.gxy.common.base.BaseViewBindActivity
 import com.gyf.immersionbar.ImmersionBar
@@ -142,7 +143,14 @@ class GoodsDetailsActivity :
                 mViewBind.tvDeliveryMode.text = if (deliveryMode == 2) "自提" else "快递"
                 mViewBind.tvNum.text = if (buyEmption == -1) "不限" else "每人${buyEmption}件"
                 mViewBind.tvPoints.text = goodsScorePrice.toString()
-                mViewBind.tvMoney.text = goodsMoneyPrice.doubleToTwoDecimalPlaceString()
+                if (goodsMoneyPrice == null || goodsMoneyPrice <= 0.0) {
+                    mViewBind.tvPoint.text = "积分"
+                    mViewBind.tvUnit.visibility = View.GONE
+                } else {
+                    mViewBind.tvUnit.visibility = View.VISIBLE
+                    mViewBind.tvPoint.text = "积分+"
+                    mViewBind.tvMoney.text = goodsMoneyPrice.doubleToTwoDecimalPlaceString()
+                }
             }
         }
     }

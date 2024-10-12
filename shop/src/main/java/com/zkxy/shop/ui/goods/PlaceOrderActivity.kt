@@ -180,7 +180,16 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 }
                 if ((inputNum.getContent()?.toIntOrNull() ?: 0) < 1) {
                     showToast("请输入数量")
+                    check = false
                 }
+
+                if ((inputNum.getContent()?.toIntOrNull()
+                        ?: 0) > (goodsDetailsEntity.buyEmption ?: 1)
+                ) {
+                    showToast("超过最大购买数量")
+                    check = false
+                }
+
                 if (inputTel.contentIsEmptyAndShowToast()) {
                     check = false
                 }
@@ -229,7 +238,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             createOrderSuccess.observe(this@PlaceOrderActivity) {
                 if (it) {
 //                    showToast("下单成功")
-                    Toast.makeText(this@PlaceOrderActivity,"下单成功",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PlaceOrderActivity, "下单成功", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }

@@ -16,6 +16,7 @@ import com.zkxy.shop.entity.home.UserPointEntity
 import com.zkxy.shop.entity.order.OrderDetailsEntity
 import com.zkxy.shop.entity.order.OrderListEntity
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
@@ -163,6 +164,7 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun orderListAPP(
         @Field("current") current: Int?,
+        @FieldMap statusIds: MutableMap<String,MutableList<Int>>?,
         @Field("key") key: String?,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId,
@@ -178,7 +180,7 @@ interface ApiService {
     ): GxyApiResult<OrderDetailsEntity>
 
     //订单详情
-    @POST("order/cancel")
+    @POST("order/APPCancel")
     @FormUrlEncoded
     suspend fun orderCancel(
         @Field("orderId") orderId: Int?,
