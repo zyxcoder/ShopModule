@@ -27,7 +27,7 @@ class SelectAddressUtil(val context: Context?) {
                 onSelectedAddressListener?.invoke("$pickerViewText$get$get1")
             }
 
-        }.setLayoutRes(R.layout.pickerview_custom_options) {
+        }.setLayoutRes(R.layout.pickerview_address_options) {
 
             it.findViewById<TextView>(R.id.tvConfirm).onContinuousClick {
                 optionsPickerBuilder?.returnData()
