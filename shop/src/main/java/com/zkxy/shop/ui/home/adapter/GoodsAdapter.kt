@@ -8,6 +8,8 @@ import com.zkxy.shop.utils.formatProductInfo
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
+import com.zyxcoder.mvvmroot.utils.ImageOptions
+import com.zyxcoder.mvvmroot.utils.dpToPx
 import com.zyxcoder.mvvmroot.utils.loadImage
 
 /**
@@ -23,7 +25,11 @@ class GoodsAdapter : BaseViewBindingAdapter<GoodsEntity, ItemGoodsBinding>(
             root.onContinuousClick {
                 onGoodsItemClickListener?.invoke(item)
             }
-            ivGoods.loadImage(item.goodsUrl)
+            ivGoods.loadImage(item.goodsUrl, ImageOptions().apply {
+                topLeftRadius = dpToPx(6f)
+                topRightRadius = dpToPx(6f)
+                centerCrop = false
+            })
             tvGoodsName.text = item.goodsName
             clNoInventory.isVisible = (item.goodsCurrentStock ?: 0) == 0
             tvGoodsPrice.text = formatProductInfo(item.goodsPrice, item.goodsPoint)
