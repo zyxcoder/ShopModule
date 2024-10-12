@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/transparent"
+    android:outlineSpotShadowColor="#0f151C29"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    tools:ignore="ContentDescription,UnusedAttribute">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivContractNumTag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_contract_num"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContractCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/contract_num"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toLeftOf="@+id/ivExamineState"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+        <ImageView
+            android:id="@+id/ivExamineState"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="3dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_examine_tag"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toLeftOf="@+id/tvContractStatus"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+        <TextView
+            android:id="@+id/tvContractStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/wait_examine"
+            android:textColor="@color/color_FD8515"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="#e3e9fc"
+            app:layout_constraintTop_toBottomOf="@+id/ivContractNumTag" />
+
+
+        <ImageView
+            android:id="@+id/ivContractPurchase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/ic_contract_purchase"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewLine" />
+
+        <TextView
+            android:id="@+id/tvContractPurchase"
+            style="@style/home_list_text_style"
+            android:text="@string/contract_purchase_company"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractPurchase"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivContractPurchase" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierContractPurchase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivContractPurchase,tvContractPurchase" />
+
+
+        <ImageView
+            android:id="@+id/ivContractSale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_contract_sale"
+            app:layout_constraintLeft_toLeftOf="@+id/ivContractPurchase"
+            app:layout_constraintTop_toBottomOf="@+id/barrierContractPurchase" />
+
+        <TextView
+            android:id="@+id/tvContractSale"
+            style="@style/home_list_text_style"
+            android:text="@string/contract_sale_company"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractPurchase"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivContractSale" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierContractSale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivContractSale,tvContractSale" />
+
+        <ImageView
+            android:id="@+id/ivContractMateriel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_contract_materiel"
+            app:layout_constraintLeft_toLeftOf="@+id/ivContractSale"
+            app:layout_constraintTop_toBottomOf="@+id/barrierContractSale" />
+
+        <TextView
+            android:id="@+id/tvContractMaterielDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:includeFontPadding="false"
+            android:text="@string/materiel_colon"
+            android:textColor="@color/color_414141"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractMateriel"
+            app:layout_constraintRight_toLeftOf="@+id/tvContractMateriel"
+            app:layout_constraintTop_toTopOf="@+id/ivContractMateriel" />
+
+        <TextView
+            android:id="@+id/tvContractMateriel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:includeFontPadding="false"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/materiel_type_and_count"
+            android:textColor="@color/color_414141"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvContractMaterielDesc"
+            app:layout_constraintLeft_toRightOf="@+id/tvContractMaterielDesc"
+            app:layout_constraintRight_toLeftOf="@+id/btExamine"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_goneMarginEnd="13dp" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierContractMateriel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivContractMateriel,tvContractMateriel,tvContractMaterielDesc" />
+
+
+        <ImageView
+            android:id="@+id/ivOutContractMateriel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_contract_materiel"
+            app:layout_constraintLeft_toLeftOf="@+id/ivContractMateriel"
+            app:layout_constraintTop_toBottomOf="@+id/barrierContractMateriel" />
+
+        <TextView
+            android:id="@+id/tvOutContractMateriel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:includeFontPadding="false"
+            android:text="@string/out_materiel"
+            android:textColor="@color/color_414141"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/ivOutContractMateriel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivOutContractMateriel" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupOutContractMateriel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="ivOutContractMateriel,tvOutContractMateriel" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierOutContractMateriel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivOutContractMateriel,tvOutContractMateriel" />
+
+        <ImageView
+            android:id="@+id/ivContractTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_contract_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/ivContractMateriel"
+            app:layout_constraintTop_toBottomOf="@+id/barrierOutContractMateriel" />
+
+        <TextView
+            android:id="@+id/tvContractTimeDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/record_time_desc"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractTime"
+            app:layout_constraintRight_toLeftOf="@+id/tvContractTime"
+            app:layout_constraintTop_toTopOf="@+id/ivContractTime" />
+
+        <TextView
+            android:id="@+id/tvContractTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvContractTimeDesc"
+            app:layout_constraintLeft_toRightOf="@+id/tvContractTimeDesc"
+            app:layout_constraintRight_toLeftOf="@+id/btExamine"
+            app:layout_goneMarginEnd="13dp"
+            tools:text="2024-01-3- 21:22:30" />
+
+
+        <Button
+            android:id="@+id/btExamine"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/shape_3662ec_6"
+            android:gravity="center"
+            android:text="@string/examine"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="64:32"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

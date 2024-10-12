@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/transparent"
+    android:outlineSpotShadowColor="#0f151C29"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    tools:ignore="ContentDescription,UnusedAttribute">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        app:layout_optimizationLevel="none">
+
+        <ImageView
+            android:id="@+id/ivContractNumTag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_contract_num"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWaybillCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/waybill_num"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toLeftOf="@+id/tvCarLicenseTag"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="#e3e9fc"
+            app:layout_constraintTop_toBottomOf="@+id/ivContractNumTag" />
+
+
+        <TextView
+            android:id="@+id/tvCarLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textColor="#3662ec"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag"
+            tools:text="KG1957" />
+
+        <TextView
+            android:id="@+id/tvCarLicenseTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/round_solid_3662ec_4"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCarLicense"
+            app:layout_constraintRight_toLeftOf="@+id/tvCarLicense"
+            app:layout_constraintTop_toTopOf="@+id/tvCarLicense"
+            tools:text="蒙" />
+
+        <TextView
+            android:id="@+id/tvCarrierDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/haulier"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewLine" />
+
+
+        <TextView
+            android:id="@+id/tvCarrier"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvCarrierDesc"
+            app:layout_constraintLeft_toRightOf="@+id/tvCarrierDesc"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="乌海市昌通物流乌海市昌乌海市昌通物流乌海市昌通物流有限责任公司乌海市昌通物流有限责任公司有限责任公司乌海市昌通物流有限责任公司通物流有限责任公司乌海市昌通物流有限责任公司有限责任公司乌海市昌通物流有限责任公司" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierCarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvCarrierDesc,tvCarrier" />
+
+        <TextView
+            android:id="@+id/tvLoadingPoint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/ivReach"
+            app:layout_constraintTop_toBottomOf="@+id/barrierCarrier"
+            tools:text="成成都成都成都成都成都成都成都都" />
+
+        <TextView
+            android:id="@+id/tvUnLoadingPoint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/ivReach"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrierCarrier"
+            tools:text="北北京北京北京北京北京京" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierLoadingTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="tvLoadingPoint,tvUnLoadingPoint" />
+
+        <ImageView
+            android:id="@+id/ivReach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="11dp"
+            android:src="@drawable/ic_reach"
+            app:layout_constraintLeft_toRightOf="@+id/tvLoadingPoint"
+            app:layout_constraintRight_toLeftOf="@+id/tvUnLoadingPoint"
+            app:layout_constraintTop_toTopOf="@+id/barrierLoadingTop"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/color_FD8515"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/ivReach"
+            app:layout_constraintRight_toRightOf="@+id/ivReach"
+            app:layout_constraintTop_toBottomOf="@+id/ivReach"
+            tools:text="待装货" />
+
+
+        <TextView
+            android:id="@+id/tvLoadingPointDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/loading_point"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvLoadingPoint"
+            app:layout_constraintRight_toRightOf="@+id/tvLoadingPoint"
+            app:layout_constraintTop_toBottomOf="@+id/tvLoadingPoint" />
+
+        <TextView
+            android:id="@+id/tvUnLoadingPointDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/unloading_point"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvUnLoadingPoint"
+            app:layout_constraintRight_toRightOf="@+id/tvUnLoadingPoint"
+            app:layout_constraintTop_toBottomOf="@+id/tvUnLoadingPoint" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierLoadingPointDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvLoadingPointDesc,tvUnLoadingPointDesc" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clWeightAndName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/round_solid_f7f7f8_8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrierLoadingPointDesc">
+
+
+            <TextView
+                android:id="@+id/tvMaterielName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="3"
+                android:maxLines="3"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@color/color_333333"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/viewVerticalLine"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="肥煤肥煤肥煤肥煤肥煤肥煤肥煤肥煤" />
+
+            <View
+                android:id="@+id/viewVerticalLine"
+                android:layout_width="0.6dp"
+                android:layout_height="0dp"
+                android:background="#1a000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tvMaterielName"
+                app:layout_constraintRight_toLeftOf="@+id/clweight"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clweight"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="7"
+                app:layout_constraintLeft_toRightOf="@+id/viewVerticalLine"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvSendOrderWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/color_333333"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvSendOrderWeightDesc"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/tvUnloadWeight"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="2424242242424" />
+
+                <TextView
+                    android:id="@+id/tvSendOrderWeightDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/send_order_weight"
+                    android:textColor="@color/color_666666"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/tvSendOrderWeight"
+                    app:layout_constraintRight_toRightOf="@+id/tvSendOrderWeight"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSendOrderWeight" />
+
+
+                <TextView
+                    android:id="@+id/tvUnloadWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/color_333333"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvUnloadWeightDesc"
+                    app:layout_constraintLeft_toRightOf="@+id/tvSendOrderWeight"
+                    app:layout_constraintRight_toLeftOf="@+id/tvLossGrowthWeight"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="2424242242424" />
+
+                <TextView
+                    android:id="@+id/tvUnloadWeightDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/unload_weight"
+                    android:textColor="@color/color_666666"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/tvUnloadWeight"
+                    app:layout_constraintRight_toRightOf="@+id/tvUnloadWeight"
+                    app:layout_constraintTop_toBottomOf="@+id/tvUnloadWeight" />
+
+
+                <TextView
+                    android:id="@+id/tvLossGrowthWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="9dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/color_dd3438"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvLossGrowthWeightDesc"
+                    app:layout_constraintLeft_toRightOf="@+id/tvUnloadWeight"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="2424242242424" />
+
+                <TextView
+                    android:id="@+id/tvLossGrowthWeightDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/loss_growth_weight"
+                    android:textColor="@color/color_666666"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/tvLossGrowthWeight"
+                    app:layout_constraintRight_toRightOf="@+id/tvLossGrowthWeight"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLossGrowthWeight" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/ivSendOrderTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_contract_time"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clWeightAndName" />
+
+        <TextView
+            android:id="@+id/tvSendOrderTimeDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/send_order_time_desc"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivSendOrderTime"
+            app:layout_constraintLeft_toRightOf="@+id/ivSendOrderTime"
+            app:layout_constraintTop_toTopOf="@+id/ivSendOrderTime" />
+
+        <TextView
+            android:id="@+id/tvContractTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvSendOrderTimeDesc"
+            app:layout_constraintLeft_toRightOf="@+id/tvSendOrderTimeDesc"
+            tools:text="2024-01-3- 21:22:30" />
+
+
+        <TextView
+            android:id="@+id/tvDispatcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/dispatcher"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvSendOrderTimeDesc"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/transparent"
+    android:outlineSpotShadowColor="#0f151C29"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    tools:ignore="ContentDescription,UnusedAttribute">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        app:layout_optimizationLevel="none">
+
+        <ImageView
+            android:id="@+id/ivContractNumTag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_contract_num"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWaybillCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/waybill_num"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintLeft_toRightOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toLeftOf="@+id/tvCarLicenseTag"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="#e3e9fc"
+            app:layout_constraintTop_toBottomOf="@+id/ivContractNumTag" />
+
+
+        <TextView
+            android:id="@+id/tvCarLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textColor="#3662ec"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivContractNumTag"
+            tools:text="KG1957" />
+
+        <TextView
+            android:id="@+id/tvCarLicenseTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/round_solid_3662ec_4"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCarLicense"
+            app:layout_constraintRight_toLeftOf="@+id/tvCarLicense"
+            app:layout_constraintTop_toTopOf="@+id/tvCarLicense"
+            tools:text="蒙" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/round_solid_f7f7f8_8"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewLine">
+
+            <ImageView
+                android:id="@+id/ivClientTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_client"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvClientDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@string/client"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivClientTag"
+                app:layout_constraintLeft_toRightOf="@+id/ivClientTag"
+                app:layout_constraintTop_toTopOf="@+id/ivClientTag" />
+
+            <TextView
+                android:id="@+id/tvClient"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="29dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toRightOf="@+id/tvClientDesc"
+                app:layout_constraintRight_toLeftOf="@+id/viewVerticalLine"
+                app:layout_constraintTop_toTopOf="@+id/tvClientDesc"
+                tools:text="内蒙古鄂尔多斯电力有限责任公司" />
+
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/color_FD8515"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="待装货" />
+
+            <View
+                android:id="@+id/viewVerticalLine"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="6dp"
+                android:background="#243662EC"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tvStatus"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/ivMateriel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_contract_materiel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clName" />
+
+        <TextView
+            android:id="@+id/tvMateriel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:includeFontPadding="false"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/materiel_name_and_weight"
+            android:textColor="@color/color_414141"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivMateriel"
+            app:layout_constraintLeft_toRightOf="@+id/ivMateriel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivMateriel" />
+
+
+        <ImageView
+            android:id="@+id/ivDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_driver"
+            app:layout_constraintLeft_toLeftOf="@+id/ivMateriel"
+            app:layout_constraintTop_toBottomOf="@+id/ivMateriel" />
+
+        <TextView
+            android:id="@+id/tvDriver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:includeFontPadding="false"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/driver_name_and_phone"
+            android:textColor="@color/color_414141"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDriver"
+            app:layout_constraintLeft_toRightOf="@+id/ivDriver"
+            app:layout_constraintRight_toLeftOf="@+id/btConfirm"
+            app:layout_constraintTop_toTopOf="@+id/ivDriver"
+            app:layout_goneMarginEnd="6dp" />
+
+
+        <ImageView
+            android:id="@+id/ivTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_contract_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/ivDriver"
+            app:layout_constraintTop_toBottomOf="@+id/ivDriver" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/factory_entry_time"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTime"
+            app:layout_constraintLeft_toRightOf="@+id/ivTime"
+            app:layout_constraintTop_toTopOf="@+id/ivTime" />
+
+        <Button
+            android:id="@+id/btConfirm"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/shape_3662ec_6"
+            android:gravity="center"
+            android:text="@string/verify"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="64:32"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:background="@drawable/ic_update_dialog_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:text="@string/modify_inventory"
+            android:textColor="@color/color_333333"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputContractNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_requireds="false"
+            app:is_show_enter="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:title="@string/contract_num_content" />
+
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputPlanNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_requireds="false"
+            app:is_show_enter="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputContractNum"
+            app:title="@string/plan_number" />
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputContractRemainingNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_requireds="false"
+            app:is_show_enter="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputPlanNum"
+            app:title="@string/contract_margin" />
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputPlanRemaining"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_requireds="false"
+            app:is_show_enter="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputContractRemainingNum"
+            app:title="@string/plan_remaining" />
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputModifyQuota"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="numberDecimal"
+            app:hase_unit="false"
+            app:input_hint="@string/please_input_quota"
+            app:is_input="true"
+            app:is_requireds="true"
+            app:is_show_enter="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputPlanRemaining"
+            app:title="@string/modify_quota" />
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputShippedTraffic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_requireds="false"
+            app:is_show_enter="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputModifyQuota"
+            app:title="@string/shipped_traffic" />
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_solid_e9e9e9_8"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="130:44"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btModify"
+            app:layout_constraintTop_toBottomOf="@+id/inputShippedTraffic" />
+
+        <Button
+            android:id="@+id/btModify"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/shape_3662ec_8"
+            android:gravity="center"
+            android:text="@string/modify"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btCancel"
+            app:layout_constraintDimensionRatio="130:44"
+            app:layout_constraintLeft_toRightOf="@+id/btCancel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btCancel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/round_solid_white_8"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTransport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <View
+            android:id="@+id/viewBuleLine"
+            android:layout_width="2dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_blue_line_4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:includeFontPadding="false"
+            android:text="@string/transport_message"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewBuleLine"
+            app:layout_constraintLeft_toRightOf="@+id/viewBuleLine"
+            app:layout_constraintTop_toTopOf="@+id/viewBuleLine" />
+
+        <TextView
+            android:id="@+id/tvAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="7dp"
+            android:text="@string/add"
+            android:textColor="#ffbcbcbd"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivAdd"
+            app:layout_constraintTop_toTopOf="@+id/ivAdd" />
+
+        <ImageView
+            android:id="@+id/ivAdd"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="23dp"
+            android:background="@drawable/ic_add_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputAccept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_transport_name"
+        app:is_input="false"
+        app:is_need_show_bottom_dialog="false"
+        app:is_requireds="true"
+        app:layout_constraintTop_toBottomOf="@+id/inputDistance"
+        app:show_search_box="false"
+        app:title="@string/transport_name" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/allotment_name" />
+
+        <EditText
+            android:id="@+id/inputShare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="@string/allotment_acquiesce"
+            android:inputType="numberDecimal"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_BCBCBD"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTitle" />
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33000000"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

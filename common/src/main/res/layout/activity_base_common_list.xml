@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toobarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_work_bg"
+    app:right_title_content="@string/new_contract"
+    app:right_title_isvisible="true"
+    app:title_content="@string/contract_title">
+
+    <include
+        android:id="@+id/viewSelectType"
+        layout="@layout/layout_select_type"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
+    <com.gxy.common.view.SearchLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:search_hint="@string/contract_search_hint" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTab"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabBackground="@null"
+                app:tabGravity="fill"
+                app:tabIndicator="@drawable/home_indicator"
+                app:tabIndicatorColor="@color/transparent"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
+                app:tabPaddingBottom="5dp"
+                app:tabPaddingEnd="0dp"
+                app:tabPaddingStart="0dp"
+                app:tabRippleColor="@null" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.gxy.common.view.TouchViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clTab" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.gxy.common.view.ToolbarLayout>

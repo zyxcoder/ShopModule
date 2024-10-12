@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.aitsuki.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/round_solid_white_8"
+    app:autoClose="true"
+    app:designer="@string/classic_designer"
+    app:preview="none"
+    tools:ignore="ContentDescription">
+
+
+    <TextView
+        android:id="@+id/tvDelete"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@drawable/round_solid_ff3636_right_8"
+        android:gravity="center"
+        android:text="@string/delete"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivMaterielNumTag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="9dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_contract_num"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/materiel_num"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivMaterielNumTag"
+            app:layout_constraintLeft_toRightOf="@+id/ivMaterielNumTag"
+            app:layout_constraintTop_toTopOf="@+id/ivMaterielNumTag" />
+
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="#243662EC"
+            app:layout_constraintTop_toBottomOf="@+id/ivMaterielNumTag" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/round_solid_f7f7f8_8"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewLine">
+
+            <ImageView
+                android:id="@+id/ivMaterielTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_contract_materiel"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMaterielName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvMaterielName" />
+
+            <TextView
+                android:id="@+id/tvMaterielName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="4dp"
+                android:text="@string/materiel_name"
+                android:textColor="@color/color_333333"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toRightOf="@+id/ivMaterielTag"
+                app:layout_constraintRight_toLeftOf="@+id/viewContentLine"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMaterielContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="@+id/tvMaterielName"
+                app:layout_constraintRight_toLeftOf="@+id/viewContentLine"
+                app:layout_constraintTop_toBottomOf="@+id/tvMaterielName"
+                tools:text="这是一段物流描述这是一段物流描述这是一段物流描述" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clModify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="27dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivModify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_materile_modify"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvModify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/modify_materiel"
+                    android:textColor="@color/color_333333"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/ivModify"
+                    app:layout_constraintRight_toRightOf="@+id/ivModify"
+                    app:layout_constraintTop_toBottomOf="@+id/ivModify" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/viewContentLine"
+                android:layout_width="1dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="26dp"
+                android:background="#243662EC"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/clModify"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/ivNfc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/ic_nfc_push"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clContent" />
+
+        <TextView
+            android:id="@+id/tvNfcPush"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/nfc_push"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivNfc"
+            app:layout_constraintLeft_toRightOf="@+id/ivNfc"
+            app:layout_constraintTop_toTopOf="@+id/ivNfc" />
+
+        <TextView
+            android:id="@+id/tvCreateDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/materiel_create_date"
+            android:textColor="@color/color_666666"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivNfc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivNfc" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.aitsuki.swipe.SwipeLayout>

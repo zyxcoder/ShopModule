@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_solid_white_8"
+    tools:ignore="ContentDescription"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
+
+
+    <ImageView
+        android:id="@+id/ivContractNumTag"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="9dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_contract_num"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contract_num"
+        android:textColor="@color/color_333333"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+        app:layout_constraintLeft_toRightOf="@+id/ivContractNumTag"
+        app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:src="@drawable/ic_examine_tag"
+        app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+        app:layout_constraintRight_toLeftOf="@+id/tvContractStatus"
+        app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+    <TextView
+        android:id="@+id/tvContractStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/wait_examine"
+        android:textColor="@color/color_FD8515"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivContractNumTag"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivContractNumTag" />
+
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#e3e9fc"
+        app:layout_constraintTop_toBottomOf="@+id/ivContractNumTag" />
+
+
+    <ImageView
+        android:id="@+id/ivContractPurchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/ic_contract_purchase"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLine" />
+
+    <TextView
+        android:id="@+id/tvContractPurchase"
+        android:text="@string/contract_purchase_company"
+        style="@style/home_list_text_style"
+        app:layout_constraintLeft_toRightOf="@+id/ivContractPurchase"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivContractPurchase" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierContractPurchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="ivContractPurchase,tvContractPurchase" />
+
+
+    <ImageView
+        android:id="@+id/ivContractSale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_contract_sale"
+        app:layout_constraintLeft_toLeftOf="@+id/ivContractPurchase"
+        app:layout_constraintTop_toBottomOf="@+id/barrierContractPurchase" />
+
+    <TextView
+        android:id="@+id/tvContractSale"
+        style="@style/home_list_text_style"
+        android:text="@string/contract_sale_company"
+        app:layout_constraintLeft_toRightOf="@+id/ivContractPurchase"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivContractSale" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierContractSale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="ivContractSale,tvContractSale" />
+
+    <ImageView
+        android:id="@+id/ivContractMateriel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_contract_materiel"
+        app:layout_constraintLeft_toLeftOf="@+id/ivContractSale"
+        app:layout_constraintTop_toBottomOf="@+id/barrierContractSale" />
+
+    <TextView
+        android:id="@+id/tvContractMateriel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:includeFontPadding="false"
+        android:text="物料：8#煤"
+        android:textColor="@color/color_414141"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/ivContractMateriel"
+        app:layout_constraintTop_toTopOf="@+id/ivContractMateriel" />
+
+    <View
+        android:id="@+id/viewLineContractMateriel"
+        android:layout_width="1dp"
+        android:layout_height="12dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/gray_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/tvContractMateriel"
+        app:layout_constraintLeft_toRightOf="@+id/tvContractMateriel"
+        app:layout_constraintTop_toTopOf="@+id/tvContractMateriel" />
+
+    <TextView
+        android:id="@+id/tvContractMaterielCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="13dp"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:singleLine="true"
+        android:text="数量：10,000.00 吨"
+        android:textColor="@color/color_414141"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/viewLineContractMateriel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivContractMateriel" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierContractMateriel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="ivContractMateriel,tvContractMateriel,viewLineContractMateriel,tvContractMaterielCount" />
+
+    <ImageView
+        android:id="@+id/ivContractTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:src="@drawable/ic_contract_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintLeft_toLeftOf="@+id/ivContractMateriel"
+        app:layout_constraintTop_toBottomOf="@+id/barrierContractMateriel" />
+
+    <TextView
+        android:id="@+id/tvContractTime"
+        style="@style/home_list_text_style"
+        android:text="@string/update_time"
+        android:textColor="@color/color_666666"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintRight_toLeftOf="@+id/btExamine"
+        app:layout_constraintLeft_toRightOf="@+id/ivContractTime"
+        app:layout_constraintTop_toTopOf="@+id/ivContractTime" />
+
+
+    <Button
+        android:id="@+id/btExamine"
+        android:layout_width="64dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_3662ec_6"
+        android:text="@string/examine"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintDimensionRatio="64:32"
+        android:textColor="@color/white"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

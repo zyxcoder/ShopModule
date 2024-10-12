@@ -1,22 +1,37 @@
 package com.zkxy.shop.common.dialog
 
-import androidx.fragment.app.FragmentManager
-import com.gxy.common.base.BaseBottomSheetDialogFragment
+import android.app.Dialog
+import android.content.Context
+import android.os.Bundle
+import android.view.Gravity
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.DialogShopAddressListBinding
 import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.ui.goods.adapter.SelectAddressAdapter
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
+import com.zyxcoder.mvvmroot.utils.dpToPx
 
-class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressListBinding>() {
-
+class AddressBookBottomDialog(context: Context) : Dialog(context, R.style.MyBottomDialogTheme) {
     private val selectAddressAdapter by lazy { SelectAddressAdapter() }
     var addressListener: ((isEdit: Boolean, address: AddressBookEntity?) -> Unit)? = null
     var addressItemClickListener: ((address: AddressBookEntity?) -> Unit)? = null
     var addressAcquiesceListener: ((addressId: Int?, acquiesce: Int) -> Unit)? = null
     var addressDeleteListener: ((addressId: Int?) -> Unit)? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val mViewBind = DialogShopAddressListBinding.inflate(layoutInflater)
+        setContentView(mViewBind.root)
+        window?.apply {
+            setGravity(Gravity.BOTTOM)
+            setWindowAnimations(R.style.shop_main_menu_animStyle);
+            attributes.apply {
+                height = dpToPx(450f).toInt()
+                width = MATCH_PARENT
+                attributes = this
+            }
+        }
 
-    override fun initView() {
         mViewBind.apply {
             rlv.adapter = selectAddressAdapter
             tvAddAddress.onContinuousClick {
@@ -74,13 +89,7 @@ class AddressBookBottomDialog : BaseBottomSheetDialogFragment<DialogShopAddressL
         }
     }
 
-    override fun resetDialogHeightPercent(): Float = 0.5f
-
     fun setData(deliveryAddressEntities: MutableList<AddressBookEntity>) {
         selectAddressAdapter.setNewInstance(deliveryAddressEntities)
-    }
-
-    fun show(manager: FragmentManager) {
-        super.show(manager, "AddressBookBottomDialog")
     }
 }

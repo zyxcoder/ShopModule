@@ -30,9 +30,9 @@ import com.zyxcoder.mvvmroot.utils.loadImage
 class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPlaceOrderBinding>() {
     private var selectAddressUtil: SelectAddressUtil? = null
     private val ztPointAdapter by lazy { ZtPointAdapter() }
-    private val specificationBottomDialog by lazy { SpecificationBottomDialog() }
-    private val addressBookBottomDialog by lazy { AddressBookBottomDialog() }
-    private val selectNavigationDialog by lazy { SelectNavigationDialog() }
+    private val specificationBottomDialog by lazy { SpecificationBottomDialog(this) }
+    private val addressBookBottomDialog by lazy { AddressBookBottomDialog(this) }
+    private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
     private val layoutShopReceiveKdBinding by lazy { LayoutShopReceiveKdBinding.bind(mViewBind.vsKd.inflate()) }
     private var guideAddress: Address? = null
 
@@ -57,13 +57,22 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
 
         mViewBind.apply {
             tvGoodsName.text = goodsDetailsEntity.goodsName
+
+            if (goodsDetailsEntity.goodsMoneyPrice == null ||goodsDetailsEntity. goodsMoneyPrice <= 0.0) {
+                tvPoint.text = "积分"
+                tvUnit.visibility = View.GONE
+            } else {
+               tvUnit.visibility = View.VISIBLE
+               tvPoint.text = "积分+"
+               tvMoney.text = goodsDetailsEntity.goodsMoneyPrice.doubleToTwoDecimalPlaceString()
+            }
+
             tvTopPoints.text = goodsDetailsEntity.goodsScorePrice.toString()
-            tvTopMoney.text = goodsDetailsEntity.goodsMoneyPrice.doubleToTwoDecimalPlaceString()
 
             mViewBind.tvTopNum.text =
                 if (goodsDetailsEntity.buyEmption == -1) "不限" else "每人限购${goodsDetailsEntity.buyEmption}件"
             inputSpecification.onContinuousClick {
-                specificationBottomDialog.show(supportFragmentManager)
+                specificationBottomDialog.show()
             }
 
             specificationBottomDialog.onItemClickListener = {
@@ -87,7 +96,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     }
 
                     llAddressBook.onContinuousClick {
-                        addressBookBottomDialog.show(supportFragmentManager)
+                        addressBookBottomDialog.show()
                     }
 
                     inputSelectAddress.onContinuousClick {
@@ -137,7 +146,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
 
                         R.id.tvNavigation -> {
                             guideAddress = ztPointAdapter.data[position]
-                            selectNavigationDialog.show(supportFragmentManager)
+                            selectNavigationDialog.show()
                         }
                     }
                 }

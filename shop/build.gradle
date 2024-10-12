@@ -35,7 +35,8 @@ android {
 }
 
 dependencies {
-    api 'com.github.zyxcoder:ZkxhCommon:3.0.1'
+//    api 'com.github.zyxcoder:ZkxhCommon:3.0.1'
+    api project(":common")
     implementation 'com.youth.banner:banner:1.4.10'
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"

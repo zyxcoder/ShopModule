@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_666666"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="合同总量" />
+
+    <com.gxy.common.view.MarqueeTextView
+        android:id="@+id/tvContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintLeft_toRightOf="@+id/tvTitle"
+        app:layout_constraintRight_toLeftOf="@+id/tvSubTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
+        app:marqueeGravity="left"
+        app:marqueeTextColor="@color/color_333333"
+        app:marqueeTextSize="12sp"
+        tools:marqueeText="10003333333333333330.00吨" />
+
+    <TextView
+        android:id="@+id/tvSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_666666"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/tvContent"
+        app:layout_constraintRight_toLeftOf="@+id/tvSubContent"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
+        tools:text="合同金额" />
+
+    <com.gxy.common.view.MarqueeTextView
+        android:id="@+id/tvSubContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSubTitle"
+        app:layout_constraintLeft_toRightOf="@+id/tvSubTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSubTitle"
+        app:marqueeGravity="right"
+        app:marqueeTextColor="@color/color_333333"
+        app:marqueeTextSize="12sp"
+        tools:marqueeText="791079100007910000000.00元" />
+</androidx.constraintlayout.widget.ConstraintLayout>

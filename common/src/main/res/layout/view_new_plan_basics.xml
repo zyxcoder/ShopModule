@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_solid_white_8"
+    android:paddingBottom="20dp">
+
+    <View
+        android:id="@+id/viewBuleLine"
+        android:layout_width="2dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_blue_line_4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvContractNumDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:includeFontPadding="false"
+        android:text="@string/basic_msg"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBuleLine"
+        app:layout_constraintLeft_toRightOf="@+id/viewBuleLine"
+        app:layout_constraintTop_toTopOf="@+id/viewBuleLine" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputRoute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_route"
+        app:is_input="false"
+        app:is_need_show_bottom_dialog="true"
+        app:is_requireds="true"
+        app:layout_constraintTop_toBottomOf="@+id/viewBuleLine"
+        app:show_search_box="true"
+        app:title="@string/route_name" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/round_solid_f6f6f6_6"
+        app:layout_constraintTop_toBottomOf="@+id/inputRoute">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="11dp"
+            android:src="@drawable/ic_plan_send"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSendAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="9dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#ff333333"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="重庆海鸥服饰有限公司" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clReceive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/round_solid_f6f6f6_6"
+        app:layout_constraintTop_toBottomOf="@+id/clSend">
+
+        <ImageView
+            android:id="@+id/imageViewReceive"
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="11dp"
+            android:src="@drawable/ic_plan_receive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvReceiveAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="9dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#ff333333"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewReceive"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="内蒙古广聚新材料有限责任公司内蒙古广 聚新材料有限责任公司" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_transportation_distance"
+        app:is_input="true"
+        app:is_need_show_bottom_dialog="false"
+        app:is_requireds="false"
+        app:layout_constraintTop_toBottomOf="@+id/clReceive"
+        app:show_search_box="false"
+        app:title="@string/transportation_distance" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSuperviseAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_supervisory_address"
+        app:is_input="false"
+        app:show_search_box="true"
+        app:is_need_show_bottom_dialog="true"
+        app:is_requireds="true"
+        app:layout_constraintTop_toBottomOf="@+id/inputDistance"
+        app:title="@string/supervisory_address" />
+</androidx.constraintlayout.widget.ConstraintLayout>

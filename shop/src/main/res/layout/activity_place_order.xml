@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:title_content="@string/goods_take_order">
 
     <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:maxLines="2"
-                android:text="精品东北五常 臻品大米 皇家贡米之选 粒粒饱满 香飘万家 米香四溢 ..."
+                tools:text="精品东北五常 臻品大米 皇家贡米之选 粒粒饱满 香飘万家 米香四溢 ..."
                 android:textColor="#ff333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -54,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="2600"
                 android:textColor="#fffa5151"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -63,10 +63,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/tvPoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="积分+"
                 android:textColor="#fffa5151"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTopPoints"
@@ -77,19 +76,19 @@
                 android:id="@+id/tvTopMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="9.9"
                 android:textColor="#fffa5151"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                app:layout_constraintStart_toEndOf="@+id/textView14"
-                app:layout_constraintTop_toTopOf="@+id/textView14" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvPoint"
+                app:layout_constraintStart_toEndOf="@+id/tvPoint"
+                app:layout_constraintTop_toTopOf="@+id/tvPoint" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/tvUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元"
+                android:visibility="gone"
                 android:textColor="#fffa5151"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTopMoney"
@@ -101,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
-                android:text="每人限购 5 件"
+                tools:text="每人限购 5 件"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

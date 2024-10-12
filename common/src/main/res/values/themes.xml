@@ -1,0 +1,7 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.GxyOwner" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 锁定布局在发生以下改变时，不重置状态 -->
+        <item name="android:configChanges">orientation|keyboardHidden|screenSize</item>
+    </style>
+</resources>

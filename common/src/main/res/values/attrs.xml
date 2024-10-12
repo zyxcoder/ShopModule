@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RefreshHeader">
+        <attr name="srlClassicsSpinnerStyle" />
+        <attr name="srlPrimaryColor" />
+        <attr name="srlAccentColor" />
+        <attr name="srlFinishDuration" />
+        <attr name="srlDrawableArrow" />
+        <attr name="srlDrawableProgress" />
+        <attr name="srlDrawableMarginRight" />
+        <attr name="srlDrawableSize" />
+        <attr name="srlDrawableArrowSize" />
+        <attr name="srlDrawableProgressSize" />
+        <attr name="srlTextSizeTitle" />
+        <attr name="srlTextSizeTime" />
+        <attr name="srlTextTimeMarginTop" format="dimension" />
+        <attr name="srlEnableLastTime" format="boolean" />
+
+        <attr name="srlTextPulling" />
+        <attr name="srlTextLoading" />
+        <attr name="srlTextRelease" />
+        <attr name="srlTextFinish" />
+        <attr name="srlTextFailed" />
+        <attr name="srlTextUpdate" />
+        <attr name="srlTextSecondary" />
+        <attr name="srlTextRefreshing" />
+
+    </declare-styleable>
+
+    <declare-styleable name="ClassicsFooter">
+        <attr name="srlClassicsSpinnerStyle" />
+        <attr name="srlPrimaryColor" />
+        <attr name="srlAccentColor" />
+        <attr name="srlFinishDuration" />
+        <attr name="srlTextSizeTitle" />
+        <attr name="srlDrawableArrow" />
+        <attr name="srlDrawableProgress" />
+        <attr name="srlDrawableMarginRight" />
+        <attr name="srlDrawableSize" />
+        <attr name="srlDrawableArrowSize" />
+        <attr name="srlDrawableProgressSize" />
+
+        <attr name="srlTextPulling" />
+        <attr name="srlTextRelease" />
+        <attr name="srlTextLoading" />
+        <attr name="srlTextRefreshing" />
+        <attr name="srlTextFinish" />
+        <attr name="srlTextFailed" />
+        <attr name="srlTextNothing" />
+
+    </declare-styleable>
+
+    <declare-styleable name="ToolbarLayout">
+        <attr name="toolbar_themecolor_isdark" format="boolean" />
+        <attr name="title_content" format="string" />
+        <attr name="right_title_content" format="string" />
+        <attr name="right_title_isvisible" format="boolean" />
+        <attr name="right_title_color" format="color" />
+        <attr name="need_self_handle_back" format="boolean" />
+        <attr name="toolbar_themecolor" format="color" />
+        <attr name="right_icon_isvisible" format="boolean" />
+        <attr name="right_icon" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="SearchLayout">
+        <attr name="search_hint" format="string" />
+    </declare-styleable>
+    <declare-styleable name="InputLayout">
+        <attr name="title" format="string" />
+        <attr name="is_requireds" format="boolean" />
+        <attr name="is_input" format="boolean" />
+        <attr name="is_need_show_bottom_dialog" format="boolean" />
+        <attr name="input_hint" format="string" />
+        <attr name="select_content" format="string" />
+        <attr name="hase_unit" format="boolean" />
+        <attr name="unit_content" format="string" />
+        <attr name="show_search_box" format="boolean" />
+        <attr name="editTextCanEdit" format="boolean" />
+        <attr name="is_show_enter" format="boolean" />
+        <attr name="is_show_bottom_line" format="boolean" />
+        <attr name="android:inputType" />
+    </declare-styleable>
+
+    <declare-styleable name="InputPhoneLayout">
+        <attr name="required" format="boolean" />
+        <attr name="is_edit" format="boolean" />
+        <attr name="input_phone_title" format="string" />
+        <attr name="input_phone_hint" format="string" />
+        />
+        />
+    </declare-styleable>
+
+    <declare-styleable name="HFSmartRefreshLayout">
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CanEnterLayout">
+        <attr name="can_enter_title_drawable" format="reference" />
+        <attr name="can_enter_title_content" format="string" />
+        <attr name="can_enter_needViewLine" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CheckLayout">
+        <attr name="is_show_requireds" format="boolean" />
+        <attr name="check_yes" format="boolean" />
+        <attr name="checklayout_title" format="string" />
+    </declare-styleable>
+    <declare-styleable name="MarqueeTextView">
+        <attr name="marqueeTextColor" format="color" />
+        <attr name="marqueeTextSize" format="dimension" />
+        <attr name="marqueeText" format="string" />
+        <attr name="marqueeStartTextCompleteDisplay" format="boolean" />
+        <attr name="marqueeGravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="OneRowTwoColumnLayout">
+        <attr name="oneRowTwoColumnTitle" format="string" />
+        <attr name="oneRowTwoColumnContent" format="string" />
+        <attr name="oneRowTwoColumnSubTitle" format="string" />
+        <attr name="oneRowTwoColumnSubContent" format="string" />
+        <attr name="oneRowTwoColumnTitleColor" format="color" />
+        <attr name="oneRowTwoColumnContentColor" format="color" />
+        <attr name="oneRowTwoColumnSubTitleColor" format="color" />
+        <attr name="oneRowTwoColumnSubContentColor" format="color" />
+        <attr name="oneRowTwoColumnTitleSize" format="dimension" />
+        <attr name="oneRowTwoColumnContentSize" format="dimension" />
+        <attr name="oneRowTwoColumnSubTitleSize" format="dimension" />
+        <attr name="oneRowTwoColumnSubContentSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="OneRowTwoColumnCanMarqueeLayout">
+        <attr name="oneRowTwoColumnCanMarqueeTitle" format="string" />
+        <attr name="oneRowTwoColumnCanMarqueeContent" format="string" />
+        <attr name="oneRowTwoColumnCanMarqueeSubTitle" format="string" />
+        <attr name="oneRowTwoColumnCanMarqueeSubContent" format="string" />
+        <attr name="oneRowTwoColumnCanMarqueeTitleColor" format="color" />
+        <attr name="oneRowTwoColumnCanMarqueeContentColor" format="color" />
+        <attr name="oneRowTwoColumnCanMarqueeSubTitleColor" format="color" />
+        <attr name="oneRowTwoColumnCanMarqueeSubContentColor" format="color" />
+        <attr name="oneRowTwoColumnCanMarqueeTitleSize" format="dimension" />
+        <attr name="oneRowTwoColumnCanMarqueeContentSize" format="dimension" />
+        <attr name="oneRowTwoColumnCanMarqueeSubTitleSize" format="dimension" />
+        <attr name="oneRowTwoColumnCanMarqueeSubContentSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomDialogTextView">
+        <attr name="bottomDialogTextViewTitle" format="string" />
+        <attr name="bottomDialogTextViewDialogTitle" format="string" />
+        <attr name="bottomDialogTextViewShowSearchBox" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="MoneyLayout">
+        <attr name="moneyLayoutTitle" format="string" />
+        <attr name="moneyLayoutContent" format="float" />
+        <attr name="moneyLayoutHint" format="string" />
+        <attr name="moneyLayoutIsRequireds" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SelectTimeLayout">
+        <attr name="selectTimeLayoutTitle" format="string" />
+        <attr name="selectTimeLayoutNeedViewLine" format="boolean" />
+        <attr name="selectTimeLayoutIsRequireds" format="boolean" />
+        <attr name="selectTimeLayoutSelectColor" format="reference|color" />
+    </declare-styleable>
+</resources>

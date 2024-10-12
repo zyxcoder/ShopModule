@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:background="@drawable/ic_update_dialog_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:text="@string/adjust_payment"
+            android:textColor="@color/color_333333"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputContractNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="4dp"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_input="true"
+            app:is_requireds="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:title="@string/contract_num_content" />
+
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_input="true"
+            app:is_requireds="false"
+            app:layout_constraintLeft_toLeftOf="@+id/inputContractNum"
+            app:layout_constraintRight_toRightOf="@+id/inputContractNum"
+            app:layout_constraintTop_toBottomOf="@+id/inputContractNum"
+            app:title="@string/single_price" />
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputContractAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_input="true"
+            app:is_requireds="false"
+            app:layout_constraintLeft_toLeftOf="@+id/inputPrice"
+            app:layout_constraintRight_toRightOf="@+id/inputPrice"
+            app:layout_constraintTop_toBottomOf="@+id/inputPrice"
+            app:title="@string/contract_gross_amount" />
+
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputMoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_input="true"
+            app:is_requireds="false"
+            app:layout_constraintLeft_toLeftOf="@+id/inputContractAmount"
+            app:layout_constraintRight_toRightOf="@+id/inputContractAmount"
+            app:layout_constraintTop_toBottomOf="@+id/inputContractAmount"
+            app:title="@string/contract_amount" />
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputBalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            app:editTextCanEdit="false"
+            app:hase_unit="false"
+            app:is_input="true"
+            app:is_requireds="false"
+            app:layout_constraintLeft_toLeftOf="@+id/inputMoney"
+            app:layout_constraintRight_toRightOf="@+id/inputMoney"
+            app:layout_constraintTop_toBottomOf="@+id/inputMoney"
+            app:title="@string/contract_balance" />
+
+
+        <com.gxy.common.view.InputLayout
+            android:id="@+id/inputModifyContractBalance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            app:hase_unit="false"
+            app:input_hint="@string/input_modify_contract_amount_hint"
+            app:is_input="true"
+            app:is_requireds="true"
+            app:layout_constraintLeft_toLeftOf="@+id/inputBalance"
+            app:layout_constraintRight_toRightOf="@+id/inputBalance"
+            app:layout_constraintTop_toBottomOf="@+id/inputBalance"
+            app:title="@string/modify_contract_payment" />
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_solid_e9e9e9_8"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="130:44"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btSubmit"
+            app:layout_constraintTop_toBottomOf="@+id/inputModifyContractBalance" />
+
+        <Button
+            android:id="@+id/btSubmit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/shape_3662ec_8"
+            android:gravity="center"
+            android:text="@string/modify"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btCancel"
+            app:layout_constraintDimensionRatio="130:44"
+            app:layout_constraintLeft_toRightOf="@+id/btCancel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btCancel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clToolbarRootView"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:background="@color/transparent"
+    tools:ignore="ContentDescription,HardcodedText">
+
+    <TextView
+        android:id="@+id/tvCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="乌海市广源洗煤有限责任公司"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_down"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCompany"
+        app:layout_constraintLeft_toRightOf="@+id/tvCompany"
+        app:layout_constraintTop_toTopOf="@+id/tvCompany"
+        app:tint="@color/color_333333" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

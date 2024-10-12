@@ -164,11 +164,11 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun orderListAPP(
         @Field("current") current: Int?,
-        @FieldMap statusIds: MutableMap<String,MutableList<Int>>?,
+        @FieldMap statusIds: MutableMap<String,MutableList<Int>?>?,
         @Field("key") key: String?,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId,
-        @Field("size") size: Int? = 20
+        @Field("size") size: Int?
     ): ApiResult<MutableList<OrderListEntity>>
 
     //订单详情

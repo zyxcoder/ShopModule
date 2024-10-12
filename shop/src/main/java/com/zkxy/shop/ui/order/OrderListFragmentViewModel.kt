@@ -11,6 +11,7 @@ import kotlinx.coroutines.Job
 class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEntity>() {
 
     val cancelOrderSuccess = MutableLiveData<Boolean>()
+    override var pageSize = 10
 
     //订单状态：1待发货; 2待提货; 3已发货; 4已提货; 5已取消
     override suspend fun getCommonList(
@@ -19,17 +20,18 @@ class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEnti
         vararg params: Any?
     ): ApiResult<MutableList<OrderListEntity>> {
         val statusIds = when (params[0] as? Int) {
-            0 -> mutableListOf(1, 2, 3, 4, 5)
+            0 -> mutableListOf()
             1 -> mutableListOf(1, 2)
             2 -> mutableListOf(3, 4)
             3 -> mutableListOf(5)
-            else -> mutableListOf(1, 2, 3, 4, 5)
+            else -> mutableListOf()
         }
 
         return apiService.orderListAPP(
             current = start,
             key = searchKey,
-            statusIds = mutableMapOf("statusIds" to statusIds)
+            statusIds = mutableMapOf("statusIds" to statusIds),
+            size = pageSize
         )
     }
 
@@ -43,4 +45,5 @@ class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEnti
             loadingChange.dismissDialog.value = true
         })
     }
+
 }

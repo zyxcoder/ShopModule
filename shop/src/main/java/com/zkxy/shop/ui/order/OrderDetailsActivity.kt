@@ -30,7 +30,7 @@ class OrderDetailsActivity :
     private var color999999 = Color.parseColor("#999999")
     private val ztPointAdapter by lazy { ZtPointAdapter() }
     private var guideAddress: Address? = null
-    private val selectNavigationDialog by lazy { SelectNavigationDialog() }
+    private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
 
     companion object {
         const val ORDER_ID = "order_ID"
@@ -161,7 +161,7 @@ class OrderDetailsActivity :
 
                         R.id.tvNavigation -> {
                             guideAddress = ztPointAdapter.data[position]
-                            selectNavigationDialog.show(supportFragmentManager)
+                            selectNavigationDialog.show()
                         }
                     }
                 }

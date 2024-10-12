@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_solid_white_8"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/viewBuleLine"
+            android:layout_width="2dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_blue_line_4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:includeFontPadding="false"
+            android:text="@string/contract_info"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewBuleLine"
+            app:layout_constraintLeft_toRightOf="@+id/viewBuleLine"
+            app:layout_constraintTop_toTopOf="@+id/viewBuleLine" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputContractNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/contract_num_desc" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputContractQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/contract_quantity" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputCargoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/cargo_name" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSettleType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_settle_type"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/select_settle_type" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSendType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_send_type"
+        app:is_input="false"
+        app:is_requireds="false"
+        app:title="@string/send_type" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSendPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/send_price" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputPricePerTon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/price_per_ton" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputIncreaseQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/increase_quantity" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputUnitPriceOfLostTon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/unit_price_of_lost_ton" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputLossQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:is_show_enter="false"
+        app:title="@string/loss_quantity" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSignatureType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/select_signature_type"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/signature_type" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputDeductType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/select_deduct_type"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/deduct_type" />
+
+    <com.gxy.common.view.CheckLayout
+        android:id="@+id/checkTax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:check_yes="true"
+        app:checklayout_title="@string/whether_tax_is_included" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputWeighingType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/select_weighing_type"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/weighing_type" />
+</LinearLayout>

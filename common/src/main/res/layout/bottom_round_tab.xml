@@ -1,0 +1,44 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints">
+
+    <ImageView
+        android:id="@+id/ivTab"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_work" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="@+id/ivTab"
+        app:layout_constraintRight_toRightOf="@+id/ivTab"
+        app:layout_constraintTop_toBottomOf="@+id/ivTab"
+        tools:text="工作台" />
+
+    <me.majiajie.pagerbottomtabstrip.internal.RoundMessageView
+        android:id="@+id/roundMessage"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintCircle="@id/ivTab"
+        app:layout_constraintCircleAngle="45"
+        app:layout_constraintCircleRadius="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="11dp">
+
+    <com.gxy.common.view.BottomDialogTextView
+        android:id="@+id/tvClient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="35dp"
+        app:bottomDialogTextViewDialogTitle="@string/please_select_client"
+        app:bottomDialogTextViewShowSearchBox="true"
+        app:bottomDialogTextViewTitle="@string/all_client"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvMateriel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.gxy.common.view.BottomDialogTextView
+        android:id="@+id/tvMateriel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        app:bottomDialogTextViewDialogTitle="@string/please_select_materiel"
+        app:bottomDialogTextViewShowSearchBox="true"
+        app:bottomDialogTextViewTitle="@string/all_materiel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tvClient"
+        app:layout_constraintRight_toLeftOf="@+id/tvFactory"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.gxy.common.view.BottomDialogTextView
+        android:id="@+id/tvFactory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:bottomDialogTextViewDialogTitle="@string/please_select_factory"
+        app:bottomDialogTextViewShowSearchBox="true"
+        app:bottomDialogTextViewTitle="@string/all_factory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tvMateriel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

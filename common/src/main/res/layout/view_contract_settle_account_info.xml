@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_solid_white_8"
+    android:paddingBottom="20dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTitle"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/viewBuleLine"
+            android:layout_width="2dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="11dp"
+            android:background="@drawable/shape_blue_line_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContractSettleAcountDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:includeFontPadding="false"
+            android:text="@string/settlement_information"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/viewBuleLine"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputPayType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_pay_type"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/pay_type" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputSettlementBasis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_settlement_basis"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/settlement_basis" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputTransportationLoss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_transportation_loss"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/transportation_loss" />
+
+    <com.gxy.common.view.CheckLayout
+        android:id="@+id/checkSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:check_yes="true"
+        app:checklayout_title="@string/sample_or_not" />
+
+    <com.gxy.common.view.CheckLayout
+        android:id="@+id/checkTax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:check_yes="true"
+        app:checklayout_title="@string/whether_tax_is_included" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputTaxRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_tax_rate"
+        app:is_input="true"
+        android:inputType="numberDecimal"
+        app:is_requireds="false"
+        app:title="@string/tax_rate" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputBillingInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_billing_information"
+        app:is_input="false"
+        app:is_requireds="false"
+        app:title="@string/billing_information" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputCarrier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_carrier"
+        app:is_input="false"
+        app:is_requireds="true"
+        app:title="@string/carrier" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputAssayScheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_assay_scheme"
+        app:is_input="false"
+        app:is_requireds="false"
+        app:title="@string/assay_scheme" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputDateOfSigning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_date_of_signing"
+        app:is_input="false"
+        app:is_need_show_bottom_dialog="false"
+        app:is_requireds="false"
+        app:title="@string/date_of_signing" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputEffectiveDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_effective_date"
+        app:is_input="false"
+        app:is_need_show_bottom_dialog="false"
+        app:is_requireds="false"
+        app:title="@string/effective_date" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputPricePerTon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_price_per_ton"
+        android:inputType="numberDecimal"
+        app:is_input="true"
+        app:is_requireds="false"
+        app:title="@string/price_per_ton" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputTonnageIncrease"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_tonnage_increase"
+        android:inputType="numberDecimal"
+        app:is_input="true"
+        app:is_requireds="false"
+        app:title="@string/tonnage_increase" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputUnitPriceOfLostTon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_unit_price_of_lost_ton"
+        app:is_input="true"
+        android:inputType="numberDecimal"
+        app:is_requireds="true"
+        app:title="@string/unit_price_of_lost_ton" />
+
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputLostTonnage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_input_lost_tonnage"
+        android:inputType="numberDecimal"
+        app:is_input="true"
+        app:is_requireds="false"
+        app:title="@string/lost_tonnage" />
+
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/inputMarketingPurpose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:input_hint="@string/please_select_marketing_purpose"
+        app:is_input="false"
+        app:is_requireds="false"
+        app:title="@string/marketing_purpose" />
+</com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>

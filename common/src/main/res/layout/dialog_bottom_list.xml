@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="260dp"
+    android:background="@drawable/dialog_topround_back"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_title_bottomlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_gravity="center_horizontal"
+        android:text="计划创建时间筛选"
+        android:textColor="#ff333333"
+        android:textSize="15sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_color_bg"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bottom_list_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title_bottomlist"/>
+</LinearLayout>
