@@ -29,6 +29,7 @@ class OrderDetailsActivity :
     private var colorFB7E2B = Color.parseColor("#FB7E2B")
     private var color00B578 = Color.parseColor("#00B578")
     private var color999999 = Color.parseColor("#999999")
+    private var colorFA5151 = Color.parseColor("#FA5151")
     private val ztPointAdapter by lazy { ZtPointAdapter() }
     private var guideAddress: Address? = null
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
@@ -95,8 +96,11 @@ class OrderDetailsActivity :
                     if (!it.deliveryCode.isNullOrEmpty()) {
                         tvPickupCode.text = it.deliveryCode
                     }
+                    clGoPay.visibility = View.GONE
                     when (it.statusId) {
                         0 -> {
+                            tvStatus.setBackgroundResource(R.drawable.shape_ffe8e8_2)
+                            tvStatus.setTextColor(colorFA5151)
                             clGoPay.visibility = View.VISIBLE
                         }
 
@@ -150,12 +154,6 @@ class OrderDetailsActivity :
                         }
                     }
 
-                    payOrderSuccess.observe(this@OrderDetailsActivity) {
-                        if (it) {
-                            showToast("支付成功")
-                            mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
-                        }
-                    }
                 }
             }
 
@@ -194,6 +192,13 @@ class OrderDetailsActivity :
                         }
                         startActivity(Intent(Intent.ACTION_VIEW, uri))
                     }
+                }
+            }
+
+            payOrderSuccess.observe(this@OrderDetailsActivity) {
+                if (it) {
+                    showToast("支付成功")
+                    mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
                 }
             }
         }

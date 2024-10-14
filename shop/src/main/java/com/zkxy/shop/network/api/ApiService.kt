@@ -194,5 +194,5 @@ interface ApiService {
     suspend fun payment(
         @Field("orderCode") orderCode: String?,
         @Field("platformId") platformId: Int = appPlatformId,
-    ): GxyApiResult<OrderDetailsEntity>
+    ): GxyApiResult<Any>
 }
