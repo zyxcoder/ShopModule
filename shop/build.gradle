@@ -43,8 +43,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     // 基础依赖包，必须要依赖
-    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+//    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
-    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
-    implementation 'io.github.razerdp:BasePopup:3.2.1'
+//    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+//    implementation 'io.github.razerdp:BasePopup:3.2.1'
 }
