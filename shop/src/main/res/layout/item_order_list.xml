@@ -175,6 +175,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tvGoPay"
+        android:visibility="gone"
+        android:layout_width="66dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:background="@drawable/shape_566beb_40"
+        android:gravity="center"
+        android:text="去支付"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCancel"
+        app:layout_constraintEnd_toStartOf="@+id/tvCancel"
+        app:layout_constraintTop_toTopOf="@+id/tvCancel" />
+
+    <TextView
         android:id="@+id/tvCancel"
         android:layout_width="60dp"
         android:layout_height="32dp"

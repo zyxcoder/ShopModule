@@ -16,6 +16,7 @@ import com.zkxy.shop.databinding.LayoutShopReceiveZtBinding
 import com.zkxy.shop.databinding.LayoutZtInfoBinding
 import com.zkxy.shop.entity.goods.Address
 import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
+import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.loadImage
 
@@ -32,6 +33,8 @@ class OrderDetailsActivity :
     private var guideAddress: Address? = null
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
 
+    private var orderCode: String? = null
+
     companion object {
         const val ORDER_ID = "order_ID"
         fun startActivity(context: Context?, orderId: Int?) {
@@ -44,16 +47,20 @@ class OrderDetailsActivity :
     override fun init(savedInstanceState: Bundle?) {
         val orderId = intent.getIntExtra(ORDER_ID, -1)
         mViewModel.orderDetails(orderId)
+        mViewBind.tvGoPay.onContinuousClick {
+            mViewModel.payment(orderCode)
+        }
     }
 
     override fun createObserver() {
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
+                orderCode = it.orderCode
                 mViewBind.apply {
                     ivGoods.loadImage(it.goodsImg)
                     tvOrderCode.text = "订单编号：${it.orderCode}"
                     tvGoodsName.text = it.goodsName
-                    tvPoints.text = it.platformPrice
+                    tvPoints.text = it.paymentAmount
 //                    tvPrice.text = it.pri.toString()
                     tvSpecName.setMessageText(it.goodsSpecName)
                     tvNum.setMessageText(it.goodsNum.toString())
@@ -89,6 +96,10 @@ class OrderDetailsActivity :
                         tvPickupCode.text = it.deliveryCode
                     }
                     when (it.statusId) {
+                        0 -> {
+                            clGoPay.visibility = View.VISIBLE
+                        }
+
                         1, 2 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe9db_2)
                             tvStatus.setTextColor(colorFB7E2B)
@@ -139,6 +150,12 @@ class OrderDetailsActivity :
                         }
                     }
 
+                    payOrderSuccess.observe(this@OrderDetailsActivity) {
+                        if (it) {
+                            showToast("支付成功")
+                            mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+                        }
+                    }
                 }
             }
 

@@ -13,6 +13,7 @@ data class OrderListEntity(
     val goodsName: String?,
     val goodsNum: Int?,
     val goodsSource: String?,
+    val paymentAmount: String?,
     val goodsSpecId: Int?,
     val orderCode: String?,
     val goodsImg: String?,

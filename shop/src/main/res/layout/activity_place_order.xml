@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     app:title_content="@string/goods_take_order">
 
     <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:maxLines="2"
-                tools:text="精品东北五常 臻品大米 皇家贡米之选 粒粒饱满 香飘万家 米香四溢 ..."
                 android:textColor="#ff333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -48,7 +47,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/ivGoods"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="精品东北五常 臻品大米 皇家贡米之选 粒粒饱满 香飘万家 米香四溢 ..." />
 
             <TextView
                 android:id="@+id/tvTopPoints"
@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
 
             <TextView
-                android:id="@+id/tvPoint"
+                android:id="@+id/tvTopPoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fffa5151"
@@ -79,18 +79,18 @@
                 android:textColor="#fffa5151"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPoint"
-                app:layout_constraintStart_toEndOf="@+id/tvPoint"
-                app:layout_constraintTop_toTopOf="@+id/tvPoint" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvTopPoint"
+                app:layout_constraintStart_toEndOf="@+id/tvTopPoint"
+                app:layout_constraintTop_toTopOf="@+id/tvTopPoint" />
 
             <TextView
-                android:id="@+id/tvUnit"
+                android:id="@+id/tvTopUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元"
-                android:visibility="gone"
                 android:textColor="#fffa5151"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTopMoney"
                 app:layout_constraintStart_toEndOf="@+id/tvTopMoney"
                 app:layout_constraintTop_toTopOf="@+id/tvTopMoney" />
@@ -100,12 +100,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_4"
-                tools:text="每人限购 5 件"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvTopPoints"
-                app:layout_constraintTop_toBottomOf="@+id/tvTopPoints" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTopPoints"
+                tools:text="每人限购 5 件" />
 
             <ImageView
                 android:id="@+id/ivReceiveType"
@@ -140,8 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                app:is_input="true"
                 app:input_hint="请输入数量"
+                app:is_input="true"
                 app:is_requireds="true"
                 app:title="@string/take_order_num" />
 
@@ -149,9 +149,9 @@
                 android:id="@+id/inputPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:input_hint="请输入联系人"
                 app:is_input="true"
                 app:is_requireds="true"
-                app:input_hint="请输入联系人"
                 app:title="@string/contact_person" />
 
             <com.gxy.common.view.InputPhoneLayout
@@ -197,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            app:constraint_referenced_ids="tvPoints,textView2,tvMoney,textView4" />
+            app:constraint_referenced_ids="tvPoints,tvPoint,tvMoney,tvBottomUnit" />
 
         <TextView
             android:id="@+id/tvTakeOrder"
@@ -226,55 +226,55 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvPoints"
+            android:id="@+id/tvBottomPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"
-            android:text="2600"
             android:textColor="#fffa5151"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvBottomPoint"
+            app:layout_constraintEnd_toStartOf="@+id/tvBottomPoint"
+            app:layout_constraintTop_toTopOf="@+id/tvBottomPoint"
+            tools:text="2600" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvBottomPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"
-            android:text="积分+"
             android:textColor="#fffa5151"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
-            app:layout_constraintEnd_toStartOf="@+id/tvMoney"
-            app:layout_constraintTop_toTopOf="@+id/tvMoney" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvBottomMoney"
+            app:layout_constraintEnd_toStartOf="@+id/tvBottomMoney"
+            app:layout_constraintTop_toTopOf="@+id/tvBottomMoney"
+            tools:text="积分+" />
 
         <TextView
-            android:id="@+id/tvMoney"
+            android:id="@+id/tvBottomMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"
-            android:text="9.9"
             android:textColor="#fffa5151"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvNum"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/tvBottomUnit"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="9.9" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvBottomUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:text="元"
             android:textColor="#fffa5151"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBottomMoney"
             app:layout_constraintEnd_toStartOf="@+id/tvTakeOrder"
-            app:layout_constraintTop_toTopOf="@+id/tvMoney" />
+            app:layout_constraintTop_toTopOf="@+id/tvBottomMoney" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -298,17 +298,18 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/tvMoney" />
+            app:layout_constraintTop_toBottomOf="@+id/tvBottomMoney" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
             android:text="件商品"
             android:textColor="#ff333333"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvNum"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/tvTakeOrder"
             app:layout_constraintTop_toTopOf="@+id/tvNum" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

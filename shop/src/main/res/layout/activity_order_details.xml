@@ -10,8 +10,9 @@
 
     <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:layout_weight="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -315,7 +316,7 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
-<!--        //发货信息-->
+        <!--        //发货信息-->
         <ViewStub
             android:id="@+id/vsKdInfo"
             android:layout_width="match_parent"
@@ -339,12 +340,36 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
-<!--        退款信息-->
+        <!--        退款信息-->
         <ViewStub
             android:id="@+id/vsCancelInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout="@layout/layout_cancel_info" />
     </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clGoPay"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/white"
+        android:elevation="8dp">
+
+        <TextView
+            android:id="@+id/tvGoPay"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_566beb_40"
+            android:gravity="center"
+            android:text="去支付"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.gxy.common.view.ToolbarLayout>

@@ -7,29 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <Button
         android:id="@+id/btJump"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="跳转"
+        android:text="商城首页"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btGoodsDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="商品详情"
-        app:layout_constraintStart_toEndOf="@+id/btJump"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/btGoodsDetail"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="商品详情"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btJump"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
-        android:id="@+id/btOrderList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="订单列表"
-        app:layout_constraintStart_toEndOf="@+id/btGoodsDetail"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/btOrderList"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="订单列表"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btGoodsDetail"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

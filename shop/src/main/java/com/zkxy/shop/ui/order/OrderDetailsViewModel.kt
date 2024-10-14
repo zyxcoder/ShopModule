@@ -9,7 +9,7 @@ import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job
 
 class OrderDetailsViewModel : BaseViewModel() {
-
+    val payOrderSuccess = MutableLiveData<Boolean>()
     val orderDetailsEntity = MutableLiveData<OrderDetailsEntity>()
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
     fun orderDetails(orderId: Int?) {
@@ -30,5 +30,17 @@ class OrderDetailsViewModel : BaseViewModel() {
             loadingChange.dismissDialog.value = true
         })
     }
+
+    fun payment(orderCode: String?) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            apiService.payment(orderCode = orderCode).apiNoData()
+            payOrderSuccess.value = true
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
+
 
 }

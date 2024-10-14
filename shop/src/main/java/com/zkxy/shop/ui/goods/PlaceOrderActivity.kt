@@ -58,13 +58,13 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
         mViewBind.apply {
             tvGoodsName.text = goodsDetailsEntity.goodsName
 
-            if (goodsDetailsEntity.goodsMoneyPrice == null ||goodsDetailsEntity. goodsMoneyPrice <= 0.0) {
-                tvPoint.text = "积分"
-                tvUnit.visibility = View.GONE
+            if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
+                tvTopPoint.text = "积分"
+                tvTopUnit.visibility = View.GONE
             } else {
-               tvUnit.visibility = View.VISIBLE
-               tvPoint.text = "积分+"
-               tvMoney.text = goodsDetailsEntity.goodsMoneyPrice.doubleToTwoDecimalPlaceString()
+                tvTopUnit.visibility = View.VISIBLE
+                tvTopPoint.text = "积分+"
+                tvTopMoney.text = goodsDetailsEntity.goodsMoneyPrice.doubleToTwoDecimalPlaceString()
             }
 
             tvTopPoints.text = goodsDetailsEntity.goodsScorePrice.toString()
@@ -173,9 +173,16 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 gpPrice.visibility = View.VISIBLE
                 val num = it?.toIntOrNull() ?: 0
                 tvNum.text = num.toString()
-                tvPoints.text =
+                tvBottomPoints.text =
                     (goodsDetailsEntity.goodsScorePrice ?: 0).multiply(num)
-                tvMoney.text = (goodsDetailsEntity.goodsMoneyPrice ?: 0.0).multiply(num)
+                if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
+                    tvBottomPoint.text = "积分"
+                    tvBottomUnit.visibility = View.GONE
+                } else {
+                    tvBottomUnit.visibility = View.VISIBLE
+                    tvBottomPoint.text = "积分+"
+                    tvBottomMoney.text = (goodsDetailsEntity.goodsMoneyPrice).multiply(num)
+                }
             }
 
             //下单

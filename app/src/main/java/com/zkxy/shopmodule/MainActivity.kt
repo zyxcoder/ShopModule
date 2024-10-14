@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.zkxy.shop.shopInitArgument
-import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.home.ShopHomeActivity
-import com.zkxy.shop.ui.order.OrderListActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,12 +13,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btJump).setOnClickListener {
             ShopHomeActivity.startActivity(this)
         }
-        findViewById<Button>(R.id.btGoodsDetail).setOnClickListener {
-            GoodsDetailsActivity.startActivity(this)
-        }
-        findViewById<Button>(R.id.btOrderList).setOnClickListener {
-            OrderListActivity.startActivity(this)
-        }
+//        findViewById<Button>(R.id.btGoodsDetail).setOnClickListener {
+//            GoodsDetailsActivity.startActivity(this)
+//        }
+//        findViewById<Button>(R.id.btOrderList).setOnClickListener {
+//            OrderListActivity.startActivity(this)
+//        }
 
         shopInitArgument(
             userTel = "19900000001",
@@ -28,5 +26,9 @@ class MainActivity : AppCompatActivity() {
             loadLon = "30.481401271903536",
             userName = "lh"
         )
+
+        ShopConfigDialog(this){
+            ShopHomeActivity.startActivity(this)
+        }.show()
     }
 }

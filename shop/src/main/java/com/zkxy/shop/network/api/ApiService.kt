@@ -164,7 +164,7 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun orderListAPP(
         @Field("current") current: Int?,
-        @FieldMap statusIds: MutableMap<String,MutableList<Int>?>?,
+        @FieldMap statusIds: MutableMap<String, MutableList<Int>?>?,
         @Field("key") key: String?,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId,
@@ -179,12 +179,20 @@ interface ApiService {
         @Field("platformId") platformId: Int = appPlatformId,
     ): GxyApiResult<OrderDetailsEntity>
 
-    //订单详情
+    //取消订单
     @POST("order/APPCancel")
     @FormUrlEncoded
     suspend fun orderCancel(
         @Field("orderId") orderId: Int?,
         @Field("orderDesc") orderDesc: String? = "",
+        @Field("platformId") platformId: Int = appPlatformId,
+    ): GxyApiResult<OrderDetailsEntity>
+
+    //支付订单
+    @POST("order/orderPayment")
+    @FormUrlEncoded
+    suspend fun payment(
+        @Field("orderCode") orderCode: String?,
         @Field("platformId") platformId: Int = appPlatformId,
     ): GxyApiResult<OrderDetailsEntity>
 }
