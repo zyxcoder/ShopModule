@@ -2,3 +2,4 @@ rootProject.name = "ShopModule"
 include ':app'
 include ':shop'
 include ':common'
+include ':MvvmRoot'

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MvvmRoot</string>
+    <string name="camera_permission_reject_permission_text">相机权限被拒绝,拍照功能无法使用</string>
+    <string name="gallery_permission_reject_permission_text">相册权限被拒绝,相册功能无法使用</string>
+</resources>
