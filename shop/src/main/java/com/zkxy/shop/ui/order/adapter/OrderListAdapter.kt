@@ -82,11 +82,12 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     tvKdName.visibility = View.VISIBLE
                     tvDeliverTime.visibility = View.VISIBLE
                     if (item.deliveryType == 1) {//快递
+                        tvReceiveTitle.text = "快递信息："
                         tvKdName.text = item.logisticsCompany
                         tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
                     } else {//自提
                         tvReceiveTitle.text = "自提点："
-                        tvKdName.text = "自提点"
+                        tvKdName.text = item.shipmentsAddress
                         tvDeliverTime.text = "提货时间：${item.shippingTime ?: ""}"
                     }
                 }
@@ -95,19 +96,12 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     tvStatus.setBackgroundResource(R.drawable.shape_ededed_2)
                     tvStatus.setTextColor(color999999)
                     tvCancel.visibility = View.INVISIBLE
+                    tvDeliverTime.visibility = View.VISIBLE
                     tvReceiveTitle.visibility = View.VISIBLE
                     tvKdName.visibility = View.VISIBLE
-                    if (item.deliveryType == 1) {//快递
-                        tvKdName.text = item.logisticsCompany
-                        tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
-                        tvDeliverTime.visibility = View.VISIBLE
-                    } else {//自提
-                        tvReceiveTitle.text = "提货码："
-                        tvKdName.text = item.deliveryCode
-                        tvReceiveTitle.visibility = View.VISIBLE
-                        tvKdName.visibility = View.VISIBLE
-                        tvZtTip.visibility = View.VISIBLE
-                    }
+                    tvKdName.text = item.orderDesc
+                    tvReceiveTitle.text = "取消原因："
+                    tvDeliverTime.text = "取消时间：${item.cancelTime ?: ""}"
                 }
 
                 else -> {

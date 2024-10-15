@@ -22,6 +22,7 @@ import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.ext.doubleToTwoDecimalPlaceString
 import com.zkxy.shop.ext.multiply
 import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
+import com.zkxy.shop.ui.order.OrderDetailsActivity
 import com.zkxy.shop.utils.SelectAddressUtil
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -257,9 +258,10 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             }
 
             createOrderSuccess.observe(this@PlaceOrderActivity) {
-                if (it) {
+                if (it != null && it > 0) {
 //                    showToast("下单成功")
                     Toast.makeText(this@PlaceOrderActivity, "下单成功", Toast.LENGTH_SHORT).show()
+                    OrderDetailsActivity.startActivity(this@PlaceOrderActivity, orderId = it)
                     finish()
                 }
             }

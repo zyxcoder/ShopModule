@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import com.gxy.common.base.BaseViewBindActivity
+import com.gxy.common.ext.copyText
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.databinding.ActivityOrderDetailsBinding
@@ -48,8 +49,14 @@ class OrderDetailsActivity :
     override fun init(savedInstanceState: Bundle?) {
         val orderId = intent.getIntExtra(ORDER_ID, -1)
         mViewModel.orderDetails(orderId)
-        mViewBind.tvGoPay.onContinuousClick {
-            mViewModel.payment(orderCode)
+        mViewBind.apply {
+            tvGoPay.onContinuousClick {
+                mViewModel.payment(orderCode)
+            }
+            tvOrderCode.onContinuousClick {
+                copyText(orderCode ?: "")
+                showToast("复制成功")
+            }
         }
     }
 
@@ -88,6 +95,7 @@ class OrderDetailsActivity :
                         if (!it.shippingTime.isNullOrEmpty()) {
                             LayoutZtInfoBinding.bind(vsZtInfo.inflate()).apply {
                                 tvZtTime.setMessageText(it.shippingTime)
+                                tvZtPoint.text = it.shipmentsAddress
                             }
                         } else {
                             mViewModel.goodsStockAddressSearch(goodsId = it.goodsId ?: 0, 2)

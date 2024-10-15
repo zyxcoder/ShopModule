@@ -147,7 +147,7 @@ interface ApiService {
         @Field("orderPlacer") orderPlacer: String? = appUserName,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId
-    ): GxyApiResult<Any>
+    ): GxyApiResult<Int?>
 
     /**
      * 获取用户积分
