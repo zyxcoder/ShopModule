@@ -9,6 +9,7 @@ import com.zkxy.shop.appUserTel
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
+import com.zkxy.shop.entity.goods.OrderEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
@@ -147,7 +148,7 @@ interface ApiService {
         @Field("orderPlacer") orderPlacer: String? = appUserName,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId
-    ): GxyApiResult<Int?>
+    ): GxyApiResult<OrderEntity>
 
     /**
      * 获取用户积分

@@ -258,10 +258,13 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             }
 
             createOrderSuccess.observe(this@PlaceOrderActivity) {
-                if (it != null && it > 0) {
+                if (it.orderId != null && it.orderId > 0) {
 //                    showToast("下单成功")
                     Toast.makeText(this@PlaceOrderActivity, "下单成功", Toast.LENGTH_SHORT).show()
-                    OrderDetailsActivity.startActivity(this@PlaceOrderActivity, orderId = it)
+                    OrderDetailsActivity.startActivity(
+                        this@PlaceOrderActivity,
+                        orderId = it.orderId
+                    )
                     finish()
                 }
             }

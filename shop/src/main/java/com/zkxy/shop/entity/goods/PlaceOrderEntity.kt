@@ -1,10 +1,13 @@
 package com.zkxy.shop.entity.goods
 
+import androidx.annotation.Keep
+
+@Keep
 data class PlaceOrderEntity(
     val addressList: MutableList<Address>?,
     val goodsSpecDtoList: MutableList<GoodsSpecDto>?
 )
-
+@Keep
 data class Address(
     val createTime: String?,
     val deleteFlag: Int?,
@@ -17,7 +20,7 @@ data class Address(
     val supplierPickId: Int?,
     val updateTime: String?
 )
-
+@Keep
 data class GoodsSpecDto(
     val createTime: String?,
     val currentStock: Int?,
@@ -29,4 +32,9 @@ data class GoodsSpecDto(
     val totalStock: Int?,
     val updateTime: String?,
     val useStock: Int?
+)
+
+@Keep
+data class OrderEntity(
+    val orderId: Int?
 )

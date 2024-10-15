@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.entity.goods.JsonBean
+import com.zkxy.shop.entity.goods.OrderEntity
 import com.zkxy.shop.entity.goods.PickerEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.ext.getJson
@@ -20,7 +21,7 @@ class PlaceOrderViewModel : BaseViewModel() {
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
     val deliveryAddressListEntity = MutableLiveData<MutableList<AddressBookEntity>>()
     val editAddress = MutableLiveData<Boolean>()
-    val createOrderSuccess = MutableLiveData<Int?>()
+    val createOrderSuccess = MutableLiveData<OrderEntity>()
 
     fun initJsonData(context: Context) {
         request<Job>(block = {
