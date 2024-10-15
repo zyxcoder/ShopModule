@@ -186,7 +186,7 @@ interface ApiService {
         @Field("orderId") orderId: Int?,
         @Field("orderDesc") orderDesc: String? = "",
         @Field("platformId") platformId: Int = appPlatformId,
-    ): GxyApiResult<OrderDetailsEntity>
+    ): GxyApiResult<Any>
 
     //支付订单
     @POST("order/orderPayment")

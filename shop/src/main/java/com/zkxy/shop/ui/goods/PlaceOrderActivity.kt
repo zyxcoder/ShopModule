@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.R
+import com.zkxy.shop.appUserName
+import com.zkxy.shop.appUserTel
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.common.dialog.SpecificationBottomDialog
@@ -57,6 +59,9 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
 
         mViewBind.apply {
             tvGoodsName.text = goodsDetailsEntity.goodsName
+
+            inputPerson.setSelectText(appUserName)
+            inputTel.setPhone(appUserTel)
 
             if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
                 tvTopPoint.text = "积分"
@@ -199,12 +204,12 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     check = false
                 }
 
-                if ((inputNum.getContent()?.toIntOrNull()
-                        ?: 0) > (goodsDetailsEntity.buyEmption ?: 1)
-                ) {
-                    showToast("超过最大购买数量")
-                    check = false
-                }
+//                if ((inputNum.getContent()?.toIntOrNull()
+//                        ?: 0) > (goodsDetailsEntity.buyEmption ?: 1)
+//                ) {
+//                    showToast("超过最大购买数量")
+//                    check = false
+//                }
 
                 if (inputTel.contentIsEmptyAndShowToast()) {
                     check = false
