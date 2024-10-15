@@ -14,7 +14,7 @@ import com.zyxcoder.mvvmroot.utils.loadImage
 class HomeBannerImageLoader : ImageLoader() {
     override fun displayImage(context: Context, path: Any, imageView: ImageView) {
         val homeShopBannerEntity = path as? HomeShopBannerEntity
-        imageView.loadImage(homeShopBannerEntity?.noticeUrl)
+        imageView.loadImage(homeShopBannerEntity?.imgUrl)
     }
 
     override fun createImageView(context: Context): ImageView {
