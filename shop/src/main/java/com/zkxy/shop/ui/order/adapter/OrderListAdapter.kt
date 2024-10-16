@@ -87,8 +87,8 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                         tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
                     } else {//自提
                         tvReceiveTitle.text = "自提点："
-                        tvKdName.text = item.shipmentsAddress
-                        tvDeliverTime.text = "提货时间：${item.shippingTime ?: ""}"
+                        tvKdName.text = item.dAddress
+                        tvDeliverTime.text = "提货时间：${item.dTime ?: ""}"
                     }
                 }
 
