@@ -86,4 +86,10 @@ class ShopHomeViewModel : BaseViewModel() {
         })
     }
 
+    fun refreshUserPoint() {
+        request<Job>(block = {
+            userPointData.value = apiService.getUserPoint(phoneNumber = appUserTel).apiData()
+        }, showErrorToast = false)
+    }
+
 }

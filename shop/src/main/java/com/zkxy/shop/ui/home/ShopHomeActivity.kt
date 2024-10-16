@@ -47,6 +47,12 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        //刷新积分
+        mViewModel.refreshUserPoint()
+    }
+
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
             mLoadService = getLoadSir().register(viewLoad) {
