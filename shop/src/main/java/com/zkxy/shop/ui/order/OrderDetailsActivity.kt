@@ -50,6 +50,7 @@ class OrderDetailsActivity :
         val orderId = intent.getIntExtra(ORDER_ID, -1)
         mViewModel.orderDetails(orderId)
         mViewBind.apply {
+            tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
                 mViewModel.payment(orderCode)
             }
@@ -59,6 +60,11 @@ class OrderDetailsActivity :
             }
         }
     }
+
+    private val vsKdInfoLayout by lazy { LayoutFhInfoBinding.bind(mViewBind.vsKdInfo.inflate()) }
+    private val vsZtInfoLayout by lazy { LayoutZtInfoBinding.bind(mViewBind.vsZtInfo.inflate()) }
+    private val vsCancelInfoLayout by lazy { LayoutCancelInfoBinding.bind(mViewBind.vsCancelInfo.inflate()) }
+    private val vsZtLayout by lazy { LayoutShopReceiveZtBinding.bind(mViewBind.vsZt.inflate()) }
 
     override fun createObserver() {
         mViewModel.apply {
@@ -80,7 +86,7 @@ class OrderDetailsActivity :
 
                     if (it.deliveryType == 1) {//快递
                         if (!it.logisticsCompany.isNullOrEmpty() && !it.expressNumber.isNullOrEmpty()) {
-                            LayoutFhInfoBinding.bind(vsKdInfo.inflate()).apply {
+                            vsKdInfoLayout.apply {
                                 tvLogisticsCompany.setMessageText(it.logisticsCompany)
                                 tvExpressNumber.setMessageText(it.expressNumber)
                                 tvShippingTime.setMessageText(it.shippingTime)
@@ -93,7 +99,7 @@ class OrderDetailsActivity :
                         llDeliveryCode.visibility = View.VISIBLE
                         tvPickupCode.text = it.deliveryCode
                         if (!it.shippingTime.isNullOrEmpty()) {
-                            LayoutZtInfoBinding.bind(vsZtInfo.inflate()).apply {
+                            vsZtInfoLayout.apply {
                                 tvZtTime.setMessageText(it.shippingTime)
                                 tvZtPoint.text = it.shipmentsAddress
                             }
@@ -125,7 +131,7 @@ class OrderDetailsActivity :
                         5 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_ededed_2)
                             tvStatus.setTextColor(color999999)
-                            LayoutCancelInfoBinding.bind(vsCancelInfo.inflate()).apply {
+                            vsCancelInfoLayout.apply {
                                 val color: Int
                                 //退款进度：1处理中，2已退款，3已拒绝
                                 tvRefundProgress.text = when (it.refundProgress) {
@@ -166,7 +172,7 @@ class OrderDetailsActivity :
             }
 
             placeOrderEntity.observe(this@OrderDetailsActivity) {
-                LayoutShopReceiveZtBinding.bind(mViewBind.vsZt.inflate()).apply {
+                vsZtLayout.apply {
                     rlvZt.adapter = ztPointAdapter
                 }
                 ztPointAdapter.setNewInstance(it.addressList)

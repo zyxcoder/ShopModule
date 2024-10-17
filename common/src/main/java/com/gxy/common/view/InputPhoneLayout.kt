@@ -55,4 +55,8 @@ class InputPhoneLayout(
         }
         return false
     }
+
+    fun setIsInput(isInput: Boolean) {
+        mBinding.etPhone.isEnabled = isInput
+    }
 }
