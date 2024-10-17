@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.R
 import com.zkxy.shop.appUserName
@@ -174,9 +175,8 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 deliveryMode = goodsDetailsEntity.deliveryMode ?: 1
             )
 
-            inputNum.onInputChangeListener = {
-                gpPrice.visibility = View.VISIBLE
-                val num = it?.toIntOrNull() ?: 0
+            etNum.doAfterTextChanged {
+                val num = it?.toString()?.toIntOrNull() ?: 0
                 tvNum.text = num.toString()
                 tvBottomPoints.text =
                     (goodsDetailsEntity.goodsScorePrice ?: 0).multiply(num)
@@ -199,7 +199,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                         return@onContinuousClick
                     }
                 }
-                if ((inputNum.getContent()?.toIntOrNull() ?: 0) < 1) {
+                if ((etNum.text.toString().toIntOrNull() ?: 0) < 1) {
                     showToast("请输入数量")
                     check = false
                 }
@@ -229,7 +229,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                         consignee = inputPerson.getContent(),
                         consigneeTel = inputTel.getPhone(),
                         goodsId = goodsId,
-                        goodsNum = inputNum.getContent()?.toIntOrNull() ?: 0,
+                        goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
                         goodsSpecId = inputSpecification.getContentTag(),
                         deliveryType = goodsDetailsEntity.deliveryMode,
                         deliveryAddress = address

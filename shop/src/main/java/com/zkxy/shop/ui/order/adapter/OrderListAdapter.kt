@@ -74,8 +74,9 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     tvGoPay.visibility = View.VISIBLE
                     llRemainder.visibility = View.VISIBLE
                     val remainder = try {
-                        (df.parse(item.createTime ?: "0")?.time
+                        val remainderTime = (df.parse(item.createTime ?: "0")?.time
                             ?: 0) + time - System.currentTimeMillis()
+                        if (remainderTime > time) time else remainderTime
                     } catch (e: Exception) {
                         0
                     }
@@ -91,7 +92,7 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                         )
                         cdu.start()
                         timeMap[item.orderId] = cdu
-                    }else{
+                    } else {
                         llRemainder.visibility = View.GONE
                     }
                 }
