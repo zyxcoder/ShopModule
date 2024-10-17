@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.R
@@ -260,7 +259,6 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             createOrderSuccess.observe(this@PlaceOrderActivity) {
                 if (it.orderId != null && it.orderId > 0) {
 //                    showToast("下单成功")
-                    Toast.makeText(this@PlaceOrderActivity, "下单成功", Toast.LENGTH_SHORT).show()
                     OrderDetailsActivity.startActivity(
                         this@PlaceOrderActivity,
                         orderId = it.orderId

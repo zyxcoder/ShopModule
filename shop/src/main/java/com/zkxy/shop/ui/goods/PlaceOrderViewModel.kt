@@ -132,7 +132,7 @@ class PlaceOrderViewModel : BaseViewModel() {
                 goodsNum = goodsNum,
                 goodsSpecId = goodsSpecId,
                 deliveryType = deliveryType
-            ).apiData()
+            ).apiOrderData()
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true

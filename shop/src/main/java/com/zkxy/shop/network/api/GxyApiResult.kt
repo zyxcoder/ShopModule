@@ -39,6 +39,14 @@ data class GxyApiResult<T>(
         }
     }
 
+    fun apiOrderData(): T? {
+        if (statusCode == RESPONSE_CODE_SUCCESS || statusCode == "-2") {
+            return data
+        } else {
+            throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
+        }
+    }
+
     fun apiOnlyData(): T? {
         return data
     }
