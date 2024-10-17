@@ -176,7 +176,6 @@
 
     <TextView
         android:id="@+id/tvGoPay"
-        android:visibility="gone"
         android:layout_width="66dp"
         android:layout_height="32dp"
         android:layout_marginEnd="@dimen/dp_10"
@@ -185,6 +184,7 @@
         android:text="去支付"
         android:textColor="#ffffffff"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/tvCancel"
         app:layout_constraintEnd_toStartOf="@+id/tvCancel"
         app:layout_constraintTop_toTopOf="@+id/tvCancel" />
@@ -220,10 +220,10 @@
     <TextView
         android:id="@+id/tvKdName"
         android:layout_width="0dp"
-        android:layout_marginEnd="@dimen/dp_10"
-        android:maxLines="1"
-        android:ellipsize="end"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="圆通快递"
         android:textColor="#ff333333"
         android:textSize="12sp"
@@ -259,5 +259,56 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/tvZtTip"
         app:layout_constraintTop_toTopOf="@+id/tvZtTip" />
+
+    <LinearLayout
+        android:id="@+id/llRemainder"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvCancel"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <TextView
+            android:id="@+id/tvCreateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff333333"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tvZtTip"
+            app:layout_constraintTop_toTopOf="@+id/tvZtTip" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="还剩"
+                android:textColor="#ff333333"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvRemainder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fffa5151"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单自动取消"
+                android:textColor="#ff333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

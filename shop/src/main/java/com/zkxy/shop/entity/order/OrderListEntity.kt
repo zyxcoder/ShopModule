@@ -35,7 +35,7 @@ data class OrderListEntity(
     val points: Int?,
     val price: Double?,
     val priceRatio: Double?,
-    val statusId: Int?,
+    var statusId: Int?,
     val statusName: String?,
     val totalPoints: Int?,
     val totalPrice: Double?,

@@ -14,17 +14,18 @@ class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEnti
     val cancelOrderSuccess = MutableLiveData<Boolean>()
     override var pageSize = 10
 
-    //订单状态：1待发货; 2待提货; 3已发货; 4已提货; 5已取消
+    //订单状态：1待发货; 2待提货; 3已发货; 4已提货; 5已取消,0 6 待支付
     override suspend fun getCommonList(
         start: Int,
         searchKey: String?,
         vararg params: Any?
     ): ApiResult<MutableList<OrderListEntity>> {
         val statusIds = when (params[0] as? Int) {
-            0 -> mutableListOf()
-            1 -> mutableListOf(1, 2)
-            2 -> mutableListOf(3, 4)
-            3 -> mutableListOf(5)
+            0 -> mutableListOf()//全部
+            1 -> mutableListOf(1, 2)//待发货,待提货
+            2 -> mutableListOf(3, 4)//已发货,已提货
+            3 -> mutableListOf(5)//已取消
+            4 -> mutableListOf(0, 6)//待支付
             else -> mutableListOf()
         }
 
@@ -57,8 +58,6 @@ class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEnti
             loadingChange.dismissDialog.value = true
         })
     }
-
-
 
 
 }

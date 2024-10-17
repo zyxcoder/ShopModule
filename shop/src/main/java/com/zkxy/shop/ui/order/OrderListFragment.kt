@@ -14,8 +14,11 @@ class OrderListFragment(title: String, private val status: Int) :
     BaseCommonListFragment<OrderListFragmentViewModel, FragmentBaseCommonListBinding, ItemOrderListBinding, OrderListEntity>(
         title
     ) {
+
+    private val orderListAdapter by lazy { OrderListAdapter() }
+
     override fun provideAdapter(): BaseViewBindingAdapter<OrderListEntity, ItemOrderListBinding> {
-        return OrderListAdapter().apply {
+        return orderListAdapter.apply {
 
             setOnItemChildClickListener { _, view, position ->
                 val orderListEntity = data[position]
@@ -60,5 +63,10 @@ class OrderListFragment(title: String, private val status: Int) :
                 startSearch()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        orderListAdapter.cancelAllTimers()
     }
 }

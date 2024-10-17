@@ -31,18 +31,20 @@ class ShopConfigDialog(
                 textView.text = "http://${etHost.text}:${etPort.text}"
             }
 
+            var isTest = true
             radioGroup.setOnCheckedChangeListener { _, i ->
-                modeBaseUrl = if (i == R.id.rbTest) {
-                    "http://39.103.61.134:9091/api/"
-                } else {
-                    "http://${etHost.text}:${etPort.text}"
-                }
+                isTest = i == R.id.rbTest
             }
 
             btConfirm.onContinuousClick {
                 if (llPhone.contentIsEmptyAndShowToast()) {
                     context.showToast("请输入完整手机号")
                     return@onContinuousClick
+                }
+                modeBaseUrl = if (isTest) {
+                    "http://39.103.61.134:9091/api/"
+                } else {
+                    "http://${etHost.text}:${etPort.text}"
                 }
                 appUserTel = llPhone.getPhone()
                 onConfirmClickListener?.invoke()

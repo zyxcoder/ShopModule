@@ -22,6 +22,7 @@ class OrderListActivity :
     override fun provideFragments(): ArrayList<BaseCommonListFragment<out BaseCommonListFragmentViewModel<*>, *, *, *>> {
         return arrayListOf(
             OrderListFragment("全部", 0),
+            OrderListFragment("待支付", 4),
             OrderListFragment("待发货/待提货", 1),
             OrderListFragment("已发货/已提货", 2),
             OrderListFragment("已取消", 3),

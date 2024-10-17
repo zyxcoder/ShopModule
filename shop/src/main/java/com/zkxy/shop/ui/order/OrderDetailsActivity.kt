@@ -106,7 +106,7 @@ class OrderDetailsActivity :
                     }
                     clGoPay.visibility = View.GONE
                     when (it.statusId) {
-                        0 -> {
+                        0, 6 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe8e8_2)
                             tvStatus.setTextColor(colorFA5151)
                             clGoPay.visibility = View.VISIBLE
@@ -146,7 +146,7 @@ class OrderDetailsActivity :
 
                                     else -> {
                                         color = Color.parseColor("#566BEB")
-                                        "处理中"
+                                        "--"
                                     }
                                 }
                                 tvRefundProgress.setTextColor(color)
