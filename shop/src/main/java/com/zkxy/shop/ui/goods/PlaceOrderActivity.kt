@@ -4,7 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
@@ -257,8 +261,21 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             }
 
             createOrderSuccess.observe(this@PlaceOrderActivity) {
+                if (!it.desc.isNullOrEmpty()) {
+                    val currentToast = Toast.makeText(this@PlaceOrderActivity, "", Toast.LENGTH_SHORT)
+                    currentToast.setGravity(Gravity.CENTER, 0, 0)
+                    val toastLayout =
+                        (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+                            .inflate(R.layout.shop_toast, null)
+                    toastLayout.apply {
+                        findViewById<TextView>(R.id.tvToastContent).text = it.desc
+                    }
+                    currentToast.view = toastLayout
+                    currentToast.show()
+                    application.showToast(it.desc)
+//                    ToastUtils.showToast(this@PlaceOrderActivity,it.desc)
+                }
                 if (it.orderId != null && it.orderId > 0) {
-//                    showToast("下单成功")
                     OrderDetailsActivity.startActivity(
                         this@PlaceOrderActivity,
                         orderId = it.orderId

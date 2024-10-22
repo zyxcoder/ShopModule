@@ -308,6 +308,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:text="元"
+            android:visibility="gone"
             android:textColor="#fffa5151"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvBottomMoney"

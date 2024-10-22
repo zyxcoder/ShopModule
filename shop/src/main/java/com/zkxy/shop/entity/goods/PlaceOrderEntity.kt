@@ -7,6 +7,7 @@ data class PlaceOrderEntity(
     val addressList: MutableList<Address>?,
     val goodsSpecDtoList: MutableList<GoodsSpecDto>?
 )
+
 @Keep
 data class Address(
     val createTime: String?,
@@ -20,6 +21,7 @@ data class Address(
     val supplierPickId: Int?,
     val updateTime: String?
 )
+
 @Keep
 data class GoodsSpecDto(
     val createTime: String?,
@@ -36,5 +38,6 @@ data class GoodsSpecDto(
 
 @Keep
 data class OrderEntity(
-    val orderId: Int?
+    val orderId: Int?,
+    val desc: String?
 )

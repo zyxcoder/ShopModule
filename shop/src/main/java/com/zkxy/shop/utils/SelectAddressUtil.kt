@@ -41,7 +41,7 @@ class SelectAddressUtil(val context: Context?) {
             .setSelectOptions(0, 0, 0)
             .setDividerColor(Color.TRANSPARENT)
             .setBgColor(Color.TRANSPARENT)
-            .setOutSideCancelable(false).build()
+            .setOutSideCancelable(true).build()
 
 //        optionsPickerBuilder?.setPicker(
 //            pickerEntity.options1Items,
