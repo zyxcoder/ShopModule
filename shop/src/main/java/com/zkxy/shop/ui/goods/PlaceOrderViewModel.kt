@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.zkxy.shop.entity.goods.AddressBookEntity
+import com.zkxy.shop.entity.goods.GoodsPayType
 import com.zkxy.shop.entity.goods.JsonBean
 import com.zkxy.shop.entity.goods.OrderEntity
 import com.zkxy.shop.entity.goods.PickerEntity
@@ -20,6 +21,7 @@ class PlaceOrderViewModel : BaseViewModel() {
     val pickerData = MutableLiveData<PickerEntity>()
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
     val deliveryAddressListEntity = MutableLiveData<MutableList<AddressBookEntity>>()
+    val goodsPayTypeListEntity = MutableLiveData<MutableList<GoodsPayType>>()
     val editAddress = MutableLiveData<Boolean>()
     val createOrderSuccess = MutableLiveData<OrderEntity>()
 
@@ -113,6 +115,12 @@ class PlaceOrderViewModel : BaseViewModel() {
         })
     }
 
+    fun goodsPayType() {
+        request<Job>(block = {
+            goodsPayTypeListEntity.value = apiService.goodsPayType().apiData()
+        })
+    }
+
     fun createOrder(
         consignee: String?,
         consigneeTel: String?,
@@ -120,6 +128,8 @@ class PlaceOrderViewModel : BaseViewModel() {
         goodsNum: Int?,
         goodsSpecId: Int?,
         deliveryType: Int?,
+        priceType: Int?,
+        goodsPayType: Int?,
         deliveryAddress: String? = null
     ) {
         request<Job>(block = {
@@ -131,6 +141,8 @@ class PlaceOrderViewModel : BaseViewModel() {
                 goodsId = goodsId,
                 goodsNum = goodsNum,
                 goodsSpecId = goodsSpecId,
+                priceType = priceType,
+                goodsPayType = goodsPayType,
                 deliveryType = deliveryType
             ).apiOrderData()
             loadingChange.dismissDialog.value = true

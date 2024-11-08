@@ -8,6 +8,7 @@ data class GoodsDetailsEntity(
     val bannerPicDtoList: MutableList<PicDto>?,
     val buyEmption: Int?,
     val deliveryMode: Int?,
+    val priceType: Int?,//1 积分  2现金+积分 3现金
     val goodsDetailPicDtoList: MutableList<PicDto>?,
     val goodsDetails: String?,
     val goodsMoneyPrice: Double?,

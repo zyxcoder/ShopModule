@@ -1,14 +1,21 @@
 package com.zkxy.shop.ui.order
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.ext.copyText
 import com.zkxy.shop.R
+import com.zkxy.shop.common.dialog.CashQrCodeDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.databinding.ActivityOrderDetailsBinding
 import com.zkxy.shop.databinding.LayoutCancelInfoBinding
@@ -16,10 +23,12 @@ import com.zkxy.shop.databinding.LayoutFhInfoBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveZtBinding
 import com.zkxy.shop.databinding.LayoutZtInfoBinding
 import com.zkxy.shop.entity.goods.Address
+import com.zkxy.shop.ext.save
 import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.loadImage
+
 
 /**
  * statusId 订单状态：：1待发货; 2待提货; 3已发货; 4已提货; 5已取消
@@ -36,6 +45,8 @@ class OrderDetailsActivity :
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
 
     private var orderCode: String? = null
+    private var orderId: Int = -1
+    private var cashQrCodeDialog: CashQrCodeDialog? = null
 
     companion object {
         const val ORDER_ID = "order_ID"
@@ -47,18 +58,26 @@ class OrderDetailsActivity :
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        val orderId = intent.getIntExtra(ORDER_ID, -1)
-        mViewModel.orderDetails(orderId)
+        orderId = intent.getIntExtra(ORDER_ID, -1)
         mViewBind.apply {
             tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
-                mViewModel.payment(orderCode)
+                if (cashQrCodeDialog == null) {
+                    mViewModel.payment(orderCode)
+                } else {
+                    cashQrCodeDialog!!.show()
+                }
             }
             tvOrderCode.onContinuousClick {
                 copyText(orderCode ?: "")
                 showToast("复制成功")
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mViewModel.orderDetails(orderId)
     }
 
     private val vsKdInfoLayout by lazy { LayoutFhInfoBinding.bind(mViewBind.vsKdInfo.inflate()) }
@@ -116,6 +135,34 @@ class OrderDetailsActivity :
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe8e8_2)
                             tvStatus.setTextColor(colorFA5151)
                             clGoPay.visibility = View.VISIBLE
+                            if (it.priceType != 1 && !it.wxPayCodeUrl.isNullOrEmpty()) {
+                                if (cashQrCodeDialog == null) {
+                                    cashQrCodeDialog =
+                                        CashQrCodeDialog(
+                                            context = this@OrderDetailsActivity,
+                                            wxPayCodeUrl = it.wxPayCodeUrl,
+                                            wxOrderAmount = it.wxOrderAmount
+                                        )
+                                }
+                                cashQrCodeDialog?.onSaveImgClickListener = {
+                                    qrCode = it
+                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ContextCompat.checkSelfPermission(
+                                            this@OrderDetailsActivity,
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                        ) != PackageManager.PERMISSION_GRANTED
+                                    ) {
+                                        ActivityCompat.requestPermissions(
+                                            this@OrderDetailsActivity,
+                                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                                            0
+                                        );
+                                    } else {
+                                        //保存图片到相册
+                                        saveImg()
+                                    }
+                                }
+                                cashQrCodeDialog?.show()
+                            }
                         }
 
                         1, 2 -> {
@@ -214,6 +261,29 @@ class OrderDetailsActivity :
                     showToast("支付成功")
                     mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
                 }
+            }
+        }
+    }
+
+    private var qrCode: Bitmap? = null
+    private fun saveImg() {
+        if (qrCode == null) return
+        Thread { save(qrCode!!) }.start()
+    }
+
+    //请求权限后的结果回调
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //保存图片到相册
+                saveImg()
+            } else {
+                showToast("你拒绝了该权限，无法保存图片！")
             }
         }
     }

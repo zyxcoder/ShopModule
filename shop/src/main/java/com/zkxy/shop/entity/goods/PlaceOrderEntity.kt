@@ -41,3 +41,9 @@ data class OrderEntity(
     val orderId: Int?,
     val desc: String?
 )
+
+@Keep
+data class GoodsPayType(
+    val label: String,
+    val value: Int
+)

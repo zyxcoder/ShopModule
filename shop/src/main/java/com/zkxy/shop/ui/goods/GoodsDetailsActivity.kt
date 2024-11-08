@@ -142,7 +142,13 @@ class GoodsDetailsActivity :
                 mViewBind.tvDes.text = goodsDetails
                 mViewBind.tvDeliveryMode.text = if (deliveryMode == 2) "自提" else "快递"
                 mViewBind.tvNum.text = if (buyEmption == -1) "不限" else "每人${buyEmption}件"
-                mViewBind.tvPoints.text = goodsScorePrice.toString()
+
+                if ((goodsScorePrice ?: 0) <= 0) {
+                    mViewBind.tvPoint.visibility = View.GONE
+                } else {
+                    mViewBind.tvPoints.text = goodsScorePrice.toString()
+                }
+
                 if (goodsMoneyPrice == null || goodsMoneyPrice <= 0.0) {
                     mViewBind.tvPoint.text = "积分"
                     mViewBind.tvUnit.visibility = View.GONE

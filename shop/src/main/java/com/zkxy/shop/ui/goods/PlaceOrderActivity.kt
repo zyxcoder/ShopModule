@@ -4,11 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
@@ -62,12 +58,26 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     override fun init(savedInstanceState: Bundle?) {
         val goodsDetailsEntity =
             intent.getSerializableExtra(GOODS_ENTITY) as? GoodsDetailsEntity ?: return
+        mViewModel.goodsPayType()
+        when (goodsDetailsEntity.priceType) {
+            2, 3 -> {
+                mViewBind.llWxPay.visibility = View.VISIBLE
+            }
+        }
 
         mViewBind.apply {
             tvGoodsName.text = goodsDetailsEntity.goodsName
 
             inputPerson.setSelectText(appUserName)
             inputTel.setPhone(appUserTel)
+
+            (goodsDetailsEntity.goodsScorePrice ?: 0).apply {
+                if (this <= 0) {
+                    tvTopPoint.visibility = View.GONE
+                } else {
+                    tvTopPoints.text = this.toString()
+                }
+            }
 
             if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
                 tvTopPoint.text = "积分"
@@ -78,7 +88,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 tvTopMoney.text = goodsDetailsEntity.goodsMoneyPrice.doubleToTwoDecimalPlaceString()
             }
 
-            tvTopPoints.text = goodsDetailsEntity.goodsScorePrice.toString()
+
 
             mViewBind.tvTopNum.text =
                 if (goodsDetailsEntity.buyEmption == -1) "不限" else "每人限购${goodsDetailsEntity.buyEmption}件"
@@ -183,8 +193,15 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             etNum.doAfterTextChanged {
                 val num = it?.toString()?.toIntOrNull() ?: 0
                 tvNum.text = num.toString()
-                tvBottomPoints.text =
-                    (goodsDetailsEntity.goodsScorePrice ?: 0).multiply(num)
+
+                (goodsDetailsEntity.goodsScorePrice ?: 0).apply {
+                    if (this <= 0) {
+                        tvBottomPoint.visibility = View.GONE
+                    } else {
+                        tvBottomPoints.text = this.multiply(num)
+                    }
+                }
+
                 if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
                     tvBottomPoint.text = "积分"
                     tvBottomUnit.visibility = View.GONE
@@ -229,6 +246,17 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     }
                     layoutShopReceiveKdBinding.inputSelectAddress.getContent() + layoutShopReceiveKdBinding.tvAddress.getContent()
                 } else null
+
+
+// [{"label":"积分支付","value":1},{"label":"微信支付","value":2},{"label":"支付宝支付","value":3},{"label":"积分+微信支付","value":4},{"label":"积分+支付宝支付","value":5},{"label":"对公转账","value":6}]
+// priceType: 1 积分  2现金+积分 3现金
+                val goodsPayType = when (goodsDetailsEntity.priceType) {
+                    1 -> 1
+                    2 -> 4
+                    3 -> 2
+                    else -> 1
+                }
+
                 if (check) {
                     mViewModel.createOrder(
                         consignee = inputPerson.getContent(),
@@ -237,6 +265,8 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                         goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
                         goodsSpecId = inputSpecification.getContentTag(),
                         deliveryType = goodsDetailsEntity.deliveryMode,
+                        priceType = goodsDetailsEntity.priceType,
+                        goodsPayType = goodsPayType,
                         deliveryAddress = address
                     )
                 }
@@ -271,12 +301,14 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                         ActivityManger.currentActivity?.showToast(it.desc)
                     }
                     finish()
-                }else{
+                } else {
                     if (!it.desc.isNullOrEmpty()) {
                         ActivityManger.currentActivity?.showToast(it.desc)
                     }
                 }
             }
+//            goodsPayTypeListEntity.observe(this@PlaceOrderActivity) {
+//            }
         }
     }
 

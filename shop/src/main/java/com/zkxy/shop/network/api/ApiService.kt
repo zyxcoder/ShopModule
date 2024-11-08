@@ -9,6 +9,7 @@ import com.zkxy.shop.appUserTel
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
+import com.zkxy.shop.entity.goods.GoodsPayType
 import com.zkxy.shop.entity.goods.OrderEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
@@ -145,6 +146,8 @@ interface ApiService {
         @Field("goodsNum") goodsNum: Int?,
         @Field("goodsSpecId") goodsSpecId: Int?,
         @Field("deliveryType") deliveryType: Int?,
+        @Field("priceType") priceType: Int?,
+        @Field("goodsPayType") goodsPayType: Int?,
         @Field("orderPlacer") orderPlacer: String? = appUserName,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId
@@ -196,4 +199,11 @@ interface ApiService {
         @Field("orderCode") orderCode: String?,
         @Field("platformId") platformId: Int = appPlatformId,
     ): GxyApiResult<Any>
+
+    //支付方式列表
+    @POST("app/mall/goods/goodsPayType")
+    @FormUrlEncoded
+    suspend fun goodsPayType(
+        @Field("platformId") platformId: Int = appPlatformId,
+    ): GxyApiResult<MutableList<GoodsPayType>>
 }

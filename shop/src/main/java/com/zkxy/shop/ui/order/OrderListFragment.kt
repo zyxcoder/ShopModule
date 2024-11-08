@@ -4,8 +4,10 @@ import com.gxy.common.common.activitylist.BaseCommonListFragment
 import com.gxy.common.databinding.FragmentBaseCommonListBinding
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.CancelOrderDialog
+import com.zkxy.shop.common.dialog.CashQrCodeDialog
 import com.zkxy.shop.databinding.ItemOrderListBinding
 import com.zkxy.shop.entity.order.OrderListEntity
+import com.zkxy.shop.ext.save
 import com.zkxy.shop.ui.order.adapter.OrderListAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -28,11 +30,28 @@ class OrderListFragment(title: String, private val status: Int) :
                             mViewModel.orderCancel(orderListEntity.orderId)
                         }).show()
                     } else {
-                        //重新支付
-                        CancelOrderDialog(this, onConfirmClickListener = {
-                            mViewModel.payment(orderListEntity.orderCode)
-                        }, isPay = true).show()
+                        when (orderListEntity.priceType) {
+                            1 -> {
+                                //重新支付
+                                CancelOrderDialog(this, onConfirmClickListener = {
+                                    mViewModel.payment(orderListEntity.orderCode)
+                                }, isPay = true).show()
+                            }
 
+                            2, 3 -> {
+                                if (!orderListEntity.wxPayCodeUrl.isNullOrEmpty()) {
+                                    val cashQrCodeDialog = CashQrCodeDialog(
+                                        context = context,
+                                        wxPayCodeUrl = orderListEntity.wxPayCodeUrl,
+                                        wxOrderAmount = orderListEntity.wxOrderAmount
+                                    )
+                                    cashQrCodeDialog.onSaveImgClickListener = {
+                                        Thread { context.save(it) }.start()
+                                    }
+                                    cashQrCodeDialog.show()
+                                }
+                            }
+                        }
                     }
                 }
             }
