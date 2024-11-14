@@ -97,7 +97,7 @@ class OrderDetailsActivity :
                     } else {//自提
                         tvDeliveryAddress.visibility = View.GONE
                         llDeliveryCode.visibility = View.VISIBLE
-                        tvPickupCode.text = it.deliveryCode
+                        tvPickupCode.text = "--"
                         if (!it.shippingTime.isNullOrEmpty()) {
                             vsZtInfoLayout.apply {
                                 tvZtTime.setMessageText(it.shippingTime)
@@ -107,9 +107,7 @@ class OrderDetailsActivity :
                             mViewModel.goodsStockAddressSearch(goodsId = it.goodsId ?: 0, 2)
                         }
                     }
-                    if (!it.deliveryCode.isNullOrEmpty()) {
-                        tvPickupCode.text = it.deliveryCode
-                    }
+
                     clGoPay.visibility = View.GONE
                     when (it.statusId) {
                         0, 6 -> {
@@ -121,6 +119,9 @@ class OrderDetailsActivity :
                         1, 2 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe9db_2)
                             tvStatus.setTextColor(colorFB7E2B)
+                            if (!it.deliveryCode.isNullOrEmpty()) {
+                                tvPickupCode.text = it.deliveryCode
+                            }
                         }
 
                         3, 4 -> {
