@@ -135,8 +135,14 @@ class GoodsDetailsActivity :
                     context = this@GoodsDetailsActivity,
                     imageUrl = bannerPicDtoList
                 )
-                mViewBind.imageRlv.adapter =
-                    ImageAdapter().apply { setNewInstance(goodsDetailPicDtoList) }
+//                mViewBind.imageRlv.adapter =
+//                    ImageAdapter().apply { setNewInstance(goodsDetailPicDtoList) }
+//                mViewBind.llGoodsDetailImg.addView()
+                repeat(goodsDetailPicDtoList?.size?:0){
+                    val viewBind = ItemGoodsDetailsImageBinding.inflate(layoutInflater,mViewBind.llGoodsDetailImg,false)
+                    viewBind.ivDetails.loadImage(goodsDetailPicDtoList?.get(it)?.picUrl)
+                    mViewBind.llGoodsDetailImg.addView(viewBind.root)
+                }
 
                 mViewBind.tvGoodsName.text = goodsName
                 mViewBind.tvDes.text = goodsDetails

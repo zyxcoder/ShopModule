@@ -214,12 +214,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/imageRlv"
+        <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
+            android:id="@+id/llGoodsDetailImg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_goods_details_image" />
+            android:orientation="vertical"/>
     </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
