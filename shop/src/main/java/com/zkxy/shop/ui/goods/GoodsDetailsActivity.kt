@@ -8,16 +8,12 @@ import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.gxy.common.base.BaseViewBindActivity
 import com.gyf.immersionbar.ImmersionBar
-import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.GoodsDetailsImgDialog
 import com.zkxy.shop.databinding.ActivityGoodsDetailsBinding
 import com.zkxy.shop.databinding.ItemGoodsDetailsImageBinding
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
-import com.zkxy.shop.entity.goods.PicDto
 import com.zkxy.shop.ext.doubleToTwoDecimalPlaceString
 import com.zkxy.shop.utils.GoodsDetailsImageLoader
-import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
-import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.dpToPx
@@ -46,17 +42,14 @@ class GoodsDetailsActivity :
                 .statusBarView(titleBar).init()
             ivBack.onContinuousClick { finish() }
 
-            banner.setImageLoader(GoodsDetailsImageLoader())
-                .setOnBannerListener {
-                    goodsDetailsImgDialog?.show()
-                    goodsDetailsImgDialog?.setPosition(it)
-                }
+            banner.setImageLoader(GoodsDetailsImageLoader()).setOnBannerListener {
+                goodsDetailsImgDialog?.show()
+                goodsDetailsImgDialog?.setPosition(it)
+            }
 
             banner.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
+                    position: Int, positionOffset: Float, positionOffsetPixels: Int
                 ) {
                 }
 
@@ -73,17 +66,11 @@ class GoodsDetailsActivity :
 
                 val scroll = if (scrollY > height) height else scrollY
                 val argb = Color.argb(
-                    Math.round(scroll * 255f / height),
-                    255,
-                    255,
-                    255
+                    Math.round(scroll * 255f / height), 255, 255, 255
                 )
                 tvTitle.setTextColor(
                     Color.argb(
-                        Math.round(scroll * 255f / height),
-                        51,
-                        51,
-                        51
+                        Math.round(scroll * 255f / height), 51, 51, 51
                     )
                 )
                 titleBar.setBackgroundColor(argb)
@@ -109,18 +96,6 @@ class GoodsDetailsActivity :
 
     }
 
-    class ImageAdapter : BaseViewBindingAdapter<PicDto, ItemGoodsDetailsImageBinding>(
-        ItemGoodsDetailsImageBinding::inflate,
-        R.layout.item_goods_details_image
-    ) {
-        override fun convert(
-            holder: BaseViewBindingHolder<ItemGoodsDetailsImageBinding>,
-            item: PicDto
-        ) {
-            holder.viewBind.ivDetails.loadImage(item.picUrl)
-        }
-    }
-
     private var bannerSize = 0
     private var goodsDetailsEntity: GoodsDetailsEntity? = null
 
@@ -132,16 +107,18 @@ class GoodsDetailsActivity :
                 mViewBind.tvIndicator.text = "1/${bannerPicDtoList?.size ?: ""}"
                 mViewBind.banner.setImages(bannerPicDtoList).start()
                 goodsDetailsImgDialog = GoodsDetailsImgDialog(
-                    context = this@GoodsDetailsActivity,
-                    imageUrl = bannerPicDtoList
+                    context = this@GoodsDetailsActivity, imageUrl = bannerPicDtoList
                 )
-//                mViewBind.imageRlv.adapter =
-//                    ImageAdapter().apply { setNewInstance(goodsDetailPicDtoList) }
-//                mViewBind.llGoodsDetailImg.addView()
-                repeat(goodsDetailPicDtoList?.size?:0){
-                    val viewBind = ItemGoodsDetailsImageBinding.inflate(layoutInflater,mViewBind.llGoodsDetailImg,false)
-                    viewBind.ivDetails.loadImage(goodsDetailPicDtoList?.get(it)?.picUrl)
-                    mViewBind.llGoodsDetailImg.addView(viewBind.root)
+                repeat(goodsDetailPicDtoList?.size ?: 0) {
+                    val goodsDetailImageViewBinding = ItemGoodsDetailsImageBinding.inflate(
+                        layoutInflater, mViewBind.llGoodsDetailImg, false
+                    )
+                    goodsDetailImageViewBinding.ivDetails.loadImage(
+                        goodsDetailPicDtoList?.getOrNull(
+                            it
+                        )?.picUrl
+                    )
+                    mViewBind.llGoodsDetailImg.addView(goodsDetailImageViewBinding.root)
                 }
 
                 mViewBind.tvGoodsName.text = goodsName
