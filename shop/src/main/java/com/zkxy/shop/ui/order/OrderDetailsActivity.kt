@@ -127,6 +127,9 @@ class OrderDetailsActivity :
                         3, 4 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_e7f4f0_2)
                             tvStatus.setTextColor(color00B578)
+                            if (!it.deliveryCode.isNullOrEmpty()) {
+                                tvPickupCode.text = it.deliveryCode
+                            }
                         }
 
                         5 -> {
