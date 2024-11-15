@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         shopInitArgument(
-            userTel = "19900000001",
+            userTel = "13472905630",
             loadLat = "103.55262001052857",
             loadLon = "30.481401271903536",
             userName = "lh"
