@@ -26,7 +26,7 @@ class ShopConfigDialog(
         setContentView(mBinding.root)
         setCanceledOnTouchOutside(false)
         mBinding.apply {
-            llPhone.setPhone("19900000001")
+            llPhone.setPhone("13472905630")
             etHost.doAfterTextChanged {
                 textView.text = "http://${etHost.text}:${etPort.text}"
             }
