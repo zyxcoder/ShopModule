@@ -4,10 +4,8 @@ import com.gxy.common.common.activitylist.BaseCommonListFragment
 import com.gxy.common.databinding.FragmentBaseCommonListBinding
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.CancelOrderDialog
-import com.zkxy.shop.common.dialog.CashQrCodeDialog
 import com.zkxy.shop.databinding.ItemOrderListBinding
 import com.zkxy.shop.entity.order.OrderListEntity
-import com.zkxy.shop.ext.save
 import com.zkxy.shop.ui.order.adapter.OrderListAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -39,17 +37,18 @@ class OrderListFragment(title: String, private val status: Int) :
                             }
 
                             2, 3 -> {
-                                if (!orderListEntity.wxPayCodeUrl.isNullOrEmpty()) {
-                                    val cashQrCodeDialog = CashQrCodeDialog(
-                                        context = context,
-                                        wxPayCodeUrl = orderListEntity.wxPayCodeUrl,
-                                        wxOrderAmount = orderListEntity.wxOrderAmount
-                                    )
-                                    cashQrCodeDialog.onSaveImgClickListener = {
-                                        Thread { context.save(it) }.start()
-                                    }
-                                    cashQrCodeDialog.show()
-                                }
+//                                if (!orderListEntity.wxPayCodeUrl.isNullOrEmpty()) {
+//                                    val cashQrCodeDialog = CashQrCodeDialog(
+//                                        context = context,
+//                                        wxPayCodeUrl = orderListEntity.wxPayCodeUrl,
+//                                        wxOrderAmount = orderListEntity.wxOrderAmount
+//                                    )
+//                                    cashQrCodeDialog.onSaveImgClickListener = {
+//                                        Thread { context.save(it) }.start()
+//                                    }
+//                                    cashQrCodeDialog.show()
+//                                }
+                                OrderDetailsActivity.startActivity(activity, orderId = orderListEntity.orderId)
                             }
                         }
                     }

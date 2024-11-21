@@ -1,17 +1,13 @@
 package com.zkxy.shop.ui.order
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.ext.copyText
 import com.zkxy.shop.R
@@ -128,6 +124,12 @@ class OrderDetailsActivity :
                     }
 
                     clGoPay.visibility = View.GONE
+                    if (it.accessPlatformFailDesc.isNullOrEmpty()) {
+                        llFailDesc.visibility = View.GONE
+                    }else{
+                        llFailDesc.visibility = View.VISIBLE
+                        tvFailDesc.text = it.accessPlatformFailDesc
+                    }
                     when (it.statusId) {
                         0, 6 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe8e8_2)
@@ -142,23 +144,23 @@ class OrderDetailsActivity :
                                             wxOrderAmount = it.wxOrderAmount
                                         )
                                 }
-                                cashQrCodeDialog?.onSaveImgClickListener = {
-                                    qrCode = it
-                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ContextCompat.checkSelfPermission(
-                                            this@OrderDetailsActivity,
-                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                        ) != PackageManager.PERMISSION_GRANTED
-                                    ) {
-                                        ActivityCompat.requestPermissions(
-                                            this@OrderDetailsActivity,
-                                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                                            0
-                                        );
-                                    } else {
-                                        //保存图片到相册
-                                        saveImg()
-                                    }
-                                }
+//                                cashQrCodeDialog?.onSaveImgClickListener = {
+//                                    qrCode = it
+//                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ContextCompat.checkSelfPermission(
+//                                            this@OrderDetailsActivity,
+//                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+//                                        ) != PackageManager.PERMISSION_GRANTED
+//                                    ) {
+//                                        ActivityCompat.requestPermissions(
+//                                            this@OrderDetailsActivity,
+//                                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+//                                            0
+//                                        );
+//                                    } else {
+//                                        //保存图片到相册
+//                                        saveImg()
+//                                    }
+//                                }
                                 cashQrCodeDialog?.show()
                             }
                         }

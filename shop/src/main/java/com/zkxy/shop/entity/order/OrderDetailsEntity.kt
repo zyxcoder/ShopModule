@@ -43,5 +43,6 @@ data class OrderDetailsEntity(
     val shippingTime: String?,
     val statusId: Int?,
     val statusName: String?,
+    val accessPlatformFailDesc: String?,
     val totalPoints: Int?
 )

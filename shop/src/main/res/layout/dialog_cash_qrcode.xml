@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="335dp"
-        android:layout_height="446dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/round_solid_white_8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
             android:id="@+id/textView2"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:text="请保存下面二维码，并在微信中“扫一扫”一“相册”功能中选取图片并讲行支付。"
             android:textColor="#ff666666"
@@ -41,7 +41,7 @@
             android:id="@+id/view3"
             android:layout_width="178dp"
             android:layout_height="178dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/shape_cccccc_4_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="10dp"
             android:text="支付金额："
             android:textColor="#ff333333"
             android:textSize="14sp"
@@ -68,7 +68,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            app:layout_constraintTop_toBottomOf="@+id/llWxPay" />
 
         <TextView
             android:id="@+id/tvAmount"
@@ -84,39 +84,56 @@
             app:layout_constraintTop_toTopOf="@+id/textView4"
             tools:text="￥25.32" />
 
-        <TextView
-            android:id="@+id/textView11"
+        <LinearLayout
+            android:id="@+id/llWxPay"
             android:layout_width="210dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             android:background="@drawable/sahpe_f1f1f1_8"
-            android:drawableStart="@drawable/ic_wx"
-            android:gravity="center"
-            android:paddingStart="13dp"
-            android:paddingEnd="13dp"
-            android:text="打开微信扫描上方二维码支付"
-            android:textColor="#ff333333"
-            android:textSize="12sp"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAmount" />
+            app:layout_constraintTop_toBottomOf="@+id/view3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付链接："
+                android:textColor="#ff333333"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvPayUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/clolor_666666"
+                android:textIsSelectable="true"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvSaveImg"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/shape_566beb_24"
             android:gravity="center"
-            android:text="保存到手机"
+            android:text="复制链接"
             android:textColor="#fff0f8ff"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAmount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
