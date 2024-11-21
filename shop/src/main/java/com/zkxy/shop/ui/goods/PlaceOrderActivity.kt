@@ -12,6 +12,7 @@ import com.zkxy.shop.R
 import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
+import com.zkxy.shop.common.dialog.CreateOrderDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.common.dialog.SpecificationBottomDialog
 import com.zkxy.shop.databinding.ActivityPlaceOrderBinding
@@ -258,17 +259,19 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 }
 
                 if (check) {
-                    mViewModel.createOrder(
-                        consignee = inputPerson.getContent(),
-                        consigneeTel = inputTel.getPhone(),
-                        goodsId = goodsId,
-                        goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
-                        goodsSpecId = inputSpecification.getContentTag(),
-                        deliveryType = goodsDetailsEntity.deliveryMode,
-                        priceType = goodsDetailsEntity.priceType,
-                        goodsPayType = goodsPayType,
-                        deliveryAddress = address
-                    )
+                    CreateOrderDialog(this@PlaceOrderActivity) {
+                        mViewModel.createOrder(
+                            consignee = inputPerson.getContent(),
+                            consigneeTel = inputTel.getPhone(),
+                            goodsId = goodsId,
+                            goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
+                            goodsSpecId = inputSpecification.getContentTag(),
+                            deliveryType = goodsDetailsEntity.deliveryMode,
+                            priceType = goodsDetailsEntity.priceType,
+                            goodsPayType = goodsPayType,
+                            deliveryAddress = address
+                        )
+                    }.show()
                 }
             }
         }
