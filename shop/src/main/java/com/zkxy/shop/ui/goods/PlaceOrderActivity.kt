@@ -4,11 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
@@ -16,6 +12,7 @@ import com.zkxy.shop.R
 import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
+import com.zkxy.shop.common.dialog.CreateOrderDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.common.dialog.SpecificationBottomDialog
 import com.zkxy.shop.databinding.ActivityPlaceOrderBinding
@@ -230,15 +227,17 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     layoutShopReceiveKdBinding.inputSelectAddress.getContent() + layoutShopReceiveKdBinding.tvAddress.getContent()
                 } else null
                 if (check) {
-                    mViewModel.createOrder(
-                        consignee = inputPerson.getContent(),
-                        consigneeTel = inputTel.getPhone(),
-                        goodsId = goodsId,
-                        goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
-                        goodsSpecId = inputSpecification.getContentTag(),
-                        deliveryType = goodsDetailsEntity.deliveryMode,
-                        deliveryAddress = address
-                    )
+                    CreateOrderDialog(this@PlaceOrderActivity) {
+                        mViewModel.createOrder(
+                            consignee = inputPerson.getContent(),
+                            consigneeTel = inputTel.getPhone(),
+                            goodsId = goodsId,
+                            goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
+                            goodsSpecId = inputSpecification.getContentTag(),
+                            deliveryType = goodsDetailsEntity.deliveryMode,
+                            deliveryAddress = address
+                        )
+                    }.show()
                 }
             }
         }
@@ -271,7 +270,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                         ActivityManger.currentActivity?.showToast(it.desc)
                     }
                     finish()
-                }else{
+                } else {
                     if (!it.desc.isNullOrEmpty()) {
                         ActivityManger.currentActivity?.showToast(it.desc)
                     }
