@@ -14,6 +14,7 @@ import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.entity.home.UserPointEntity
+import com.zkxy.shop.entity.order.ConfirmAddressEntity
 import com.zkxy.shop.entity.order.OrderDetailsEntity
 import com.zkxy.shop.entity.order.OrderListEntity
 import retrofit2.http.Field
@@ -196,4 +197,23 @@ interface ApiService {
         @Field("orderCode") orderCode: String?,
         @Field("platformId") platformId: Int = appPlatformId,
     ): GxyApiResult<Any>
+
+    //自提点选择
+    @POST("order/getAPPAddress")
+    @FormUrlEncoded
+    suspend fun getAPPAddress(
+        @Field("goodsId") goodsId: Int?,
+        @Field("deliveryType") deliveryType: Int = 2,
+    ): GxyApiResult<MutableList<ConfirmAddressEntity>?>
+
+    //自提点选择
+    @POST("order/shipmentsApp")
+    @FormUrlEncoded
+    suspend fun shipmentsApp(
+        @Field("orderId") orderId: Int?,
+        @Field("deliveryCode") deliveryCode: String?,
+        @Field("shipmentsAddress") shipmentsAddress: String?,
+        @Field("driveTel") driveTel: String? = appUserTel,
+        @Field("driveName") driveName: String? = appUserName
+    ): GxyApiResult<String?>
 }

@@ -350,11 +350,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clGoPay"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/white"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tvGoPay"
@@ -363,6 +363,30 @@
             android:background="@drawable/shape_566beb_40"
             android:gravity="center"
             android:text="去支付"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvConfirm"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_566beb_40"
+            android:gravity="center"
+            android:text="确认提货"
             android:textColor="#ffffffff"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

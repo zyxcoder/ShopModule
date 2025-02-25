@@ -6,9 +6,11 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.ext.copyText
 import com.zkxy.shop.R
+import com.zkxy.shop.common.dialog.ConfirmAddressDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.databinding.ActivityOrderDetailsBinding
 import com.zkxy.shop.databinding.LayoutCancelInfoBinding
@@ -34,8 +36,10 @@ class OrderDetailsActivity :
     private val ztPointAdapter by lazy { ZtPointAdapter() }
     private var guideAddress: Address? = null
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
+    private val confirmAddressDialog by lazy { ConfirmAddressDialog(this) }
 
     private var orderCode: String? = null
+    private var orderId: Int? = null
 
     companion object {
         const val ORDER_ID = "order_ID"
@@ -70,6 +74,7 @@ class OrderDetailsActivity :
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
                 orderCode = it.orderCode
+                orderId = it.orderId
                 mViewBind.apply {
                     ivGoods.loadImage(it.goodsImg)
                     tvOrderCode.text = "订单编号：${it.orderCode}"
@@ -83,7 +88,6 @@ class OrderDetailsActivity :
                     tvDeliveryAddress.setMessageText(it.deliveryAddress)
                     tvPaymentAmount.text = it.paymentAmount
                     tvStatus.text = it.statusName
-
                     if (it.deliveryType == 1) {//快递
                         if (!it.logisticsCompany.isNullOrEmpty() && !it.expressNumber.isNullOrEmpty()) {
                             vsKdInfoLayout.apply {
@@ -109,6 +113,7 @@ class OrderDetailsActivity :
                     }
 
                     clGoPay.visibility = View.GONE
+                    clConfirm.visibility = View.GONE
                     when (it.statusId) {
                         0, 6 -> {
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe8e8_2)
@@ -120,6 +125,7 @@ class OrderDetailsActivity :
                             tvStatus.setBackgroundResource(R.drawable.shape_ffe9db_2)
                             tvStatus.setTextColor(colorFB7E2B)
                             if (!it.deliveryCode.isNullOrEmpty()) {
+                                clConfirm.visibility = View.VISIBLE
                                 tvPickupCode.text = it.deliveryCode
                             }
                         }
@@ -212,11 +218,33 @@ class OrderDetailsActivity :
                     }
                 }
             }
-
             payOrderSuccess.observe(this@OrderDetailsActivity) {
                 if (it) {
                     showToast("支付成功")
                     mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+                }
+            }
+            confirmAddressSuccess.observe(this@OrderDetailsActivity) {
+                if (it) {
+                    showToast("提交成功")
+                    mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+                    vsZtLayout.layoutZtList.isVisible = false
+                }
+            }
+            confirmAddressEntity.observe(this@OrderDetailsActivity) { addressList ->
+                val deliveryCode = mViewBind.tvPickupCode.text.toString().trim()
+                if (!addressList.isNullOrEmpty()) {
+                    confirmAddressDialog.onConfirmAddressClickListener = {
+                        mViewModel.shipmentsApp(
+                            orderId = orderId,
+                            deliveryCode = deliveryCode,
+                            shipmentsAddress = it.label
+                        )
+                    }
+                    mViewBind.tvConfirm.onContinuousClick {
+                        confirmAddressDialog.show()
+                        confirmAddressDialog.setData(addressList, deliveryCode)
+                    }
                 }
             }
         }
