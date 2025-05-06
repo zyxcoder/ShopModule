@@ -120,6 +120,8 @@ class PlaceOrderViewModel : BaseViewModel() {
         goodsNum: Int?,
         goodsSpecId: Int?,
         deliveryType: Int?,
+        payWay: Int?,
+        priceType: Int?,
         deliveryAddress: String? = null
     ) {
         request<Job>(block = {
@@ -131,6 +133,8 @@ class PlaceOrderViewModel : BaseViewModel() {
                 goodsId = goodsId,
                 goodsNum = goodsNum,
                 goodsSpecId = goodsSpecId,
+                payWay = payWay,
+                priceType = priceType,
                 deliveryType = deliveryType
             ).apiOrderData()
             loadingChange.dismissDialog.value = true

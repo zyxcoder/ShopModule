@@ -235,6 +235,8 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                             goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
                             goodsSpecId = inputSpecification.getContentTag(),
                             deliveryType = goodsDetailsEntity.deliveryMode,
+                            payWay = goodsDetailsEntity.payWay,
+                            priceType = goodsDetailsEntity.priceType,
                             deliveryAddress = address
                         )
                     }.show()
