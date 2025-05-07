@@ -1,5 +1,6 @@
 package com.zkxy.shop.ui.goods
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.gxy.common.common.loadsir.LoadContentStatus
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
@@ -53,6 +54,8 @@ class AllGoodsViewModel : BaseViewModel() {
         selectSortRule: SortRule
     ) {
 
+//        Log.d("排序规则",selectSortRule.ruleType?.content?:"")
+        //todo 修改排序规则逻辑
         request<Job>(block = {
             if (isFirst) {
                 loadGoodsContentStatus.value = LoadContentStatus.DEFAULT_LOADING

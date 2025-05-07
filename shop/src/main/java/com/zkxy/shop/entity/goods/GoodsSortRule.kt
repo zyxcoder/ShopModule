@@ -17,8 +17,10 @@ enum class AllGoodsType(var title: String) {
 @Keep
 enum class RuleType(val content: String? = null) {
     DEFAULT_SORT("默认排序"),//默认排序
-    PRICE_UP_SORT("价格升序"),//价格升序
-    PRICE_DOWN_SORT("价格降序"),//价格降序
+    PRICE_UP_SORT("价格从低到高"),//价格升序
+    PRICE_DOWN_SORT("价格从高到低"),//价格降序
+    POINT_UP_SORT("积分从低到高"),//积分升序
+    POINT_DOWN_SORT("积分从高到低"),//积分降序
     POINT_1_500_SORT("1-500积分"),//1-500积分
     POINT_500_1000_SORT("500-1000积分"),//500-1000积分
     POINT_1000_1500_SORT("1000-1500积分"),//1000-1500积分
@@ -31,8 +33,8 @@ enum class RuleType(val content: String? = null) {
 @Keep
 enum class SortRule(var ruleType: RuleType? = null) {
     DEFAULT_SORT(RuleType.DEFAULT_SORT), //默认排序
-    PRICE_SORT(RuleType.PRICE_DOWN_SORT), //价格排序
-    POINT_SORT(RuleType.POINT_1_500_SORT)//积分排序
+    PRICE_OR_POINT_SORT(RuleType.PRICE_DOWN_SORT), //排序
+    POINT_SORT(RuleType.POINT_1_500_SORT)//积分区间
 }
 
 
@@ -78,3 +80,17 @@ val goodsPointRuleList = arrayListOf(
     )
 )
 
+/**
+ * 积分和价格排序数组
+ */
+val sortRuleList = arrayListOf(
+    GoodsPointEntity(
+        name = RuleType.PRICE_DOWN_SORT.content, ruleType = RuleType.PRICE_DOWN_SORT
+    ), GoodsPointEntity(
+        name = RuleType.PRICE_UP_SORT.content, ruleType = RuleType.PRICE_UP_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_DOWN_SORT.content, ruleType = RuleType.POINT_DOWN_SORT
+    ), GoodsPointEntity(
+        name = RuleType.POINT_UP_SORT.content, ruleType = RuleType.POINT_UP_SORT
+    )
+)

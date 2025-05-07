@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.loadsir.getLoadSir
 import com.gxy.common.common.loadsir.setLoadContentStatus
+import com.gxy.common.utils.getScreenWidth
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ActivityAllGoodsBinding
@@ -21,8 +22,10 @@ import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
 import com.zkxy.shop.entity.goods.goodsPointRuleList
+import com.zkxy.shop.entity.goods.sortRuleList
 import com.zkxy.shop.ui.category.CategoryActivity
 import com.zkxy.shop.ui.goods.popup.GoodsPointPopup
+import com.zkxy.shop.ui.goods.popup.SortRulePopup
 import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.search.SearchActivity
@@ -60,7 +63,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
             //1.0版本先隐藏现金商品，只展示积分商品
-            tabLayoutGoods.isVisible=false
+            tabLayoutGoods.isVisible = false
             mPageLoadService = getLoadSir().register(clRoot) {
                 mViewModel.fetchCategory()
             }
@@ -147,19 +150,23 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 currentSortRule = SortRule.DEFAULT_SORT
                 refreshSortRuleAndFetchData()
             }
-            tvPriceSort.onContinuousClick {
-                if (currentSortRule != SortRule.PRICE_SORT) {
-                    currentSortRule = SortRule.PRICE_SORT.apply {
-                        ruleType = RuleType.PRICE_DOWN_SORT
+            tvPriceOrPointSort.onContinuousClick {
+                val location = intArrayOf(0, 0)
+                tvPriceOrPointSort.getLocationOnScreen(location)
+                SortRulePopup(context = this@AllGoodsActivity,
+                    sortRuleEntitys = sortRuleList.onEach {
+                        it.isSelect = it.ruleType == currentSortRule.ruleType
+                    }).apply {
+                    onPointSelectListener = {
+                        currentSortRule = SortRule.PRICE_OR_POINT_SORT.apply {
+                            ruleType = it.ruleType
+                        }
+                        refreshSortRuleAndFetchData()
                     }
-                } else {
-                    if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT) {
-                        currentSortRule.ruleType = RuleType.PRICE_UP_SORT
-                    } else {
-                        currentSortRule.ruleType = RuleType.PRICE_DOWN_SORT
-                    }
-                }
-                refreshSortRuleAndFetchData()
+                }.showPopupWindow(
+                    (getScreenWidth() / 2 - dpToPx(155F) / 2).toInt(),
+                    location[1] + tvPriceOrPointSort.height + dpToPx(4F).toInt()
+                )
             }
             tvPointSort.onContinuousClick {
                 GoodsPointPopup(context = this@AllGoodsActivity,
@@ -220,14 +227,14 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             )
             tvPointSort.isVisible = currentAllGoodsType == AllGoodsType.AllGoodsPoint
             //先初始化所有排序规则的默认UI
-            arrayListOf(tvDefaultSort, tvPriceSort, tvPointSort).forEach {
+            arrayListOf(tvDefaultSort, tvPriceOrPointSort, tvPointSort).forEach {
                 it.setTextColor(
                     ContextCompat.getColor(
                         this@AllGoodsActivity, R.color.clolor_666666
                     )
                 )
             }
-            arrayListOf(tvPriceSort, tvPointSort).forEach {
+            arrayListOf(tvPriceOrPointSort, tvPointSort).forEach {
                 it.setCompoundDrawablesWithIntrinsicBounds(
                     null, null, ContextCompat.getDrawable(
                         this@AllGoodsActivity, R.drawable.ic_sort_down_unselect
@@ -244,8 +251,8 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     )
                 }
 
-                SortRule.PRICE_SORT -> {
-                    tvPriceSort.apply {
+                SortRule.PRICE_OR_POINT_SORT -> {
+                    tvPriceOrPointSort.apply {
                         setTextColor(
                             ContextCompat.getColor(
                                 this@AllGoodsActivity, R.color.clolor_566beb

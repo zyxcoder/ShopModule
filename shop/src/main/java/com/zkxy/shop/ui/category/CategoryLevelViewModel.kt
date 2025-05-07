@@ -47,6 +47,8 @@ class CategoryLevelViewModel : BaseViewModel() {
         selectGoodsCategory: GoodsCategoryEntity?,
         selectSortRule: SortRule
     ) {
+        //        Log.d("排序规则",selectSortRule.ruleType?.content?:"")
+        //todo 修改排序规则逻辑
         request<Job>(block = {
             if (isFirst) {
                 loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
