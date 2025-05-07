@@ -55,45 +55,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="123123"
                 android:textColor="#fffa5151"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tvTopNum"
                 app:layout_constraintStart_toStartOf="@+id/tvGoodsName"
                 app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
-
-            <TextView
-                android:id="@+id/tvTopPoint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#fffa5151"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTopPoints"
-                app:layout_constraintStart_toEndOf="@+id/tvTopPoints"
-                app:layout_constraintTop_toTopOf="@+id/tvTopPoints" />
-
-            <TextView
-                android:id="@+id/tvTopMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#fffa5151"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTopPoint"
-                app:layout_constraintStart_toEndOf="@+id/tvTopPoint"
-                app:layout_constraintTop_toTopOf="@+id/tvTopPoint" />
-
-            <TextView
-                android:id="@+id/tvTopUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="元"
-                android:textColor="#fffa5151"
-                android:textSize="12sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTopMoney"
-                app:layout_constraintStart_toEndOf="@+id/tvTopMoney"
-                app:layout_constraintTop_toTopOf="@+id/tvTopMoney" />
 
             <TextView
                 android:id="@+id/tvTopNum"
@@ -161,22 +128,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@null"
                     android:gravity="right"
+                    android:hint="请输入数量"
                     android:inputType="number"
-                    android:maxLines="1"
                     android:maxLength="7"
+                    android:maxLines="1"
                     android:textColor="@color/color_333333"
                     android:textColorHint="@color/color_BCBCBD"
                     android:textSize="14sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/tvStar"
                     app:layout_constraintRight_toLeftOf="@+id/tvUnit"
-                    android:hint="请输入数量" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </LinearLayout>
 
@@ -224,6 +191,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout="@layout/layout_shop_receive_kd" />
+
+        <RadioGroup
+            android:id="@+id/rgPayWay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbWechat"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/shape_ffffff_8"
+                android:button="@null"
+                android:drawableStart="@drawable/ic_wx_pay"
+                android:drawableEnd="@drawable/selector_save_address_book"
+                android:drawablePadding="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="微信支付" />
+
+            <RadioButton
+                android:id="@+id/rbFreight"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dp_4"
+                android:background="@drawable/shape_ffffff_8"
+                android:button="@null"
+                android:drawableStart="@drawable/ic_yf_pay"
+                android:drawableEnd="@drawable/selector_save_address_book"
+                android:drawablePadding="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="运费支付" />
+
+            <RadioButton
+                android:id="@+id/rbOil"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dp_4"
+                android:background="@drawable/shape_ffffff_8"
+                android:button="@null"
+                android:drawableStart="@drawable/ic_yk_pay"
+                android:drawableEnd="@drawable/selector_save_address_book"
+                android:drawablePadding="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="油卡支付" />
+        </RadioGroup>
 
         <Space
             android:layout_width="match_parent"
@@ -308,9 +323,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:text="元"
-            android:visibility="gone"
             android:textColor="#fffa5151"
             android:textSize="14sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tvBottomMoney"
             app:layout_constraintEnd_toStartOf="@+id/tvTakeOrder"
             app:layout_constraintTop_toTopOf="@+id/tvBottomMoney" />

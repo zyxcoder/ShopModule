@@ -149,7 +149,6 @@ interface ApiService {
         @Field("orderPlacer") orderPlacer: String? = appUserName,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("payWay") payWay: Int? = 0,
-        @Field("priceType") priceType: Int? = 0,
         @Field("platformId") platformId: Int = appPlatformId
     ): GxyApiResult<OrderEntity>
 
@@ -218,4 +217,5 @@ interface ApiService {
         @Field("driveTel") driveTel: String? = appUserTel,
         @Field("driveName") driveName: String? = appUserName
     ): GxyApiResult<String?>
+
 }

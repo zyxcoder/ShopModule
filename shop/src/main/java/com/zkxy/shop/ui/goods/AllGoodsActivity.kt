@@ -60,7 +60,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
             //1.0版本先隐藏现金商品，只展示积分商品
-            tabLayoutGoods.isVisible=false
+            tabLayoutGoods.isVisible=true
             mPageLoadService = getLoadSir().register(clRoot) {
                 mViewModel.fetchCategory()
             }

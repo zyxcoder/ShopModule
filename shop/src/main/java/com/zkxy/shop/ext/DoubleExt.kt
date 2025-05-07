@@ -39,7 +39,7 @@ fun Double.addAndRound(value: Double): Double {
 /**
  * double相乘，精确计算
  */
-fun Double.multiply(b: Double): Double {
+fun Double.multiply2D(b: Double): Double {
     return toBigDecimal().multiply(b.toBigDecimal()).toDouble()
 }
 
@@ -48,6 +48,10 @@ fun Double.multiply(b: Double): Double {
  */
 fun Double.multiply(b: Int): String {
     return toBigDecimal().multiply(b.toBigDecimal()).toDouble().doubleToTwoDecimalPlace().toString()
+}
+
+fun Double.multiplyFormat(b: Int): String {
+    return toBigDecimal().multiply(b.toBigDecimal()).toDouble().doubleToTwoDecimalPlace().normalFormat()
 }
 
 /**
