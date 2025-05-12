@@ -199,12 +199,12 @@ interface ApiService {
         @Field("platformId") platformId: Int = appPlatformId,
     ): GxyApiResult<Any>
 
-    //自提点选择
+    //获取自提点
     @POST("order/getAPPAddress")
     @FormUrlEncoded
     suspend fun getAPPAddress(
         @Field("goodsId") goodsId: Int?,
-        @Field("deliveryType") deliveryType: Int = 2,
+        @Field("deliveryType") deliveryType: Int = 2
     ): GxyApiResult<MutableList<ConfirmAddressEntity>?>
 
     //自提点选择
@@ -214,6 +214,7 @@ interface ApiService {
         @Field("orderId") orderId: Int?,
         @Field("deliveryCode") deliveryCode: String?,
         @Field("shipmentsAddress") shipmentsAddress: String?,
+        @Field("shipmentsAddressId") shipmentsAddressId: Int?,
         @Field("driveTel") driveTel: String? = appUserTel,
         @Field("driveName") driveName: String? = appUserName
     ): GxyApiResult<String?>
