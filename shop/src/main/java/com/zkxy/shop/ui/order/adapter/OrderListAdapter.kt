@@ -117,12 +117,12 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     tvReceiveTitle.visibility = View.VISIBLE
                     tvKdName.visibility = View.VISIBLE
                     tvDeliverTime.visibility = View.VISIBLE
+                    tvCancel.visibility = View.INVISIBLE
                     if (item.deliveryType == 1) {//快递
                         tvReceiveTitle.text = "快递信息："
                         tvKdName.text = "${item.logisticsCompany} ${item.expressNumber}"
                         tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
                     } else {//自提
-                        tvCancel.visibility = View.INVISIBLE
                         tvReceiveTitle.text = "自提点："
                         tvKdName.text = item.dAddress
                         tvDeliverTime.text = "提货时间：${item.dTime ?: ""}"
