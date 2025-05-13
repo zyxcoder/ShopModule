@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
+import com.tencent.mm.opensdk.modelpay.PayReq
 import com.zkxy.shop.R
 import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel
@@ -27,6 +28,7 @@ import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
 import com.zkxy.shop.ui.order.OrderDetailsActivity
 import com.zkxy.shop.utils.SelectAddressUtil
 import com.zkxy.shop.utils.formatProductInfo
+import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.callback.lifecycle.ActivityManger
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -280,14 +282,34 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
 
             createOrderSuccess.observe(this@PlaceOrderActivity) {
                 if (it.orderId != null && it.orderId > 0) {
-                    OrderDetailsActivity.startActivity(
-                        this@PlaceOrderActivity,
-                        orderId = it.orderId
-                    )
-                    if (!it.desc.isNullOrEmpty()) {
-                        ActivityManger.currentActivity?.showToast(it.desc)
+                    if (payWay == 1) {
+                        if (wxApi != null) {
+                            if (wxApi!!.isWXAppInstalled) {
+                                val request = PayReq()
+                                request.appId = it.appId
+                                request.partnerId = it.partnerId
+                                request.prepayId = it.prepayId
+                                request.packageValue = it.packageValue
+                                request.nonceStr = it.nonceStr
+                                request.timeStamp = it.timeStamp
+                                request.sign = it.sign
+                                //拉起微信支付
+                                wxApi!!.sendReq(request)
+                            } else {
+                                showToast("您的设备未安装微信客户端")
+                            }
+                        } else {
+                            OrderDetailsActivity.startActivity(
+                                this@PlaceOrderActivity,
+                                orderId = it.orderId
+                            )
+                            if (!it.desc.isNullOrEmpty()) {
+                                ActivityManger.currentActivity?.showToast(it.desc)
+                            }
+                            finish()
+                        }
                     }
-                    finish()
+
                 } else {
                     if (!it.desc.isNullOrEmpty()) {
                         ActivityManger.currentActivity?.showToast(it.desc)

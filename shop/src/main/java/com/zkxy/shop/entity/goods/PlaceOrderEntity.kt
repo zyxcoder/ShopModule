@@ -39,5 +39,12 @@ data class GoodsSpecDto(
 @Keep
 data class OrderEntity(
     val orderId: Int?,
-    val desc: String?
+    val desc: String?,
+    val appId: String?,
+    val nonceStr: String?,
+    val packageValue: String?,
+    val partnerId: String?,
+    val prepayId: String?,
+    val sign: String?,
+    val timeStamp: String?
 )
