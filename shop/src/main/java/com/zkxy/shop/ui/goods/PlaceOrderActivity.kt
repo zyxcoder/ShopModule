@@ -30,6 +30,7 @@ import com.zkxy.shop.utils.SelectAddressUtil
 import com.zkxy.shop.utils.formatProductInfo
 import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.callback.lifecycle.ActivityManger
+import com.zyxcoder.mvvmroot.common.bus.Bus
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.ImageOptions
@@ -48,6 +49,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     companion object {
         const val GOODS_ID = "goodsId"
         const val GOODS_ENTITY = "goods_entity"
+        const val CLOSE_PLACE_ORDER_PAGE = "close_place_order_page"
         fun startActivity(
             context: Context,
             goodsId: Int,
@@ -261,6 +263,10 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 }
             }
         }
+
+        Bus.observe<String>(CLOSE_PLACE_ORDER_PAGE, this) {
+            closePage()
+        }
     }
 
     override fun createObserver() {
@@ -299,14 +305,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                                 showToast("您的设备未安装微信客户端")
                             }
                         } else {
-                            OrderDetailsActivity.startActivity(
-                                this@PlaceOrderActivity,
-                                orderId = it.orderId
-                            )
-                            if (!it.desc.isNullOrEmpty()) {
-                                ActivityManger.currentActivity?.showToast(it.desc)
-                            }
-                            finish()
+                            closePage()
                         }
                     }
 
@@ -319,6 +318,19 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
         }
     }
 
+    private fun closePage() {
+        mViewModel.createOrderSuccess.value?.let {
+            OrderDetailsActivity.startActivity(
+                this@PlaceOrderActivity,
+                orderId = it.orderId
+            )
+            if (!it.desc.isNullOrEmpty()) {
+                ActivityManger.currentActivity?.showToast(it.desc)
+            }
+            finish()
+        }
+    }
+
     private val resultRefreshLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
@@ -327,36 +339,3 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             }
         }
 }
-
-/**
- * [
- *     {
- *       "payWayName": "纯积分支付",
- *       "payWay": 1
- *     },
- *     {
- *       "payWayName": "纯微信支付",
- *       "payWay": 2
- *     },
- *     {
- *       "payWayName": "积分+微信支付",
- *       "payWay": 3
- *     },
- *     {
- *       "payWayName": "油卡支付",
- *       "payWay": 4
- *     },
- *     {
- *       "payWayName": "积分+油卡支付",
- *       "payWay": 5
- *     },
- *     {
- *       "payWayName": "未来提现的运费支付",
- *       "payWay": 6
- *     },
- *     {
- *       "payWayName": "积分+未提现的运费支付",
- *       "payWay": 7
- *     }
- *   ]
- */

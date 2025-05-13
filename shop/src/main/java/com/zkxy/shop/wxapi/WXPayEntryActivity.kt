@@ -7,9 +7,11 @@ import android.view.WindowManager
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
+import com.zkxy.shop.ui.goods.PlaceOrderActivity.Companion.CLOSE_PLACE_ORDER_PAGE
 import com.zkxy.shop.wxApi
+import com.zyxcoder.mvvmroot.common.bus.Bus
 
-class WXPayEntryActivity:Activity(), IWXAPIEventHandler {
+class WXPayEntryActivity : Activity(), IWXAPIEventHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class WXPayEntryActivity:Activity(), IWXAPIEventHandler {
     }
 
     override fun onResp(p0: BaseResp?) {
+        Bus.post(CLOSE_PLACE_ORDER_PAGE, "")
         finish()
     }
 }
