@@ -289,7 +289,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                                 request.appId = it.appId
                                 request.partnerId = it.partnerId
                                 request.prepayId = it.prepayId
-                                request.packageValue = it.packageValue
+                                request.packageValue = "Sign=WXPay"
                                 request.nonceStr = it.nonceStr
                                 request.timeStamp = it.timeStamp
                                 request.sign = it.sign
