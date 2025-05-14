@@ -1,12 +1,13 @@
 package com.zkxy.shop.ui.goods.popup
 
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.PopSortRuleBinding
 import com.zkxy.shop.entity.goods.GoodsPointEntity
-import com.zkxy.shop.ui.goods.adapter.GoodsPointPopAdapter
+import com.zkxy.shop.ui.goods.adapter.GoodsSortPopAdapter
 import razerdp.basepopup.BasePopupWindow
 
 /**
@@ -17,10 +18,10 @@ class SortRulePopup(context: Context, private val sortRuleEntitys: List<GoodsPoi
     BasePopupWindow(context) {
 
     var onPointSelectListener: ((item: GoodsPointEntity) -> Unit)? = null
-    private lateinit var adapter: GoodsPointPopAdapter
+    private lateinit var adapter: GoodsSortPopAdapter
 
     init {
-        setAlignBackground(true)
+        setBackground(Color.TRANSPARENT)
         setContentView(R.layout.pop_sort_rule)
         showAnimation =
             AnimationUtils.loadAnimation(context, com.gxy.common.R.anim.anim_scale_top_in)
@@ -30,7 +31,7 @@ class SortRulePopup(context: Context, private val sortRuleEntitys: List<GoodsPoi
 
     override fun onViewCreated(contentView: View) {
         PopSortRuleBinding.bind(contentView).apply {
-            adapter = GoodsPointPopAdapter().apply {
+            adapter = GoodsSortPopAdapter().apply {
                 rvPoint.adapter = this
                 setNewInstance(sortRuleEntitys?.toMutableList())
                 onGoodsPointSelectListener = {

@@ -62,8 +62,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
 
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
-            //1.0版本先隐藏现金商品，只展示积分商品
-            tabLayoutGoods.isVisible = false
+            tabLayoutGoods.isVisible = true
             mPageLoadService = getLoadSir().register(clRoot) {
                 mViewModel.fetchCategory()
             }
@@ -261,7 +260,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                         setCompoundDrawablesWithIntrinsicBounds(
                             null, null, ContextCompat.getDrawable(
                                 this@AllGoodsActivity,
-                                if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT) {
+                                if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT || currentSortRule.ruleType == RuleType.POINT_DOWN_SORT) {
                                     R.drawable.ic_sort_down_select
                                 } else {
                                     R.drawable.ic_sort_up_select

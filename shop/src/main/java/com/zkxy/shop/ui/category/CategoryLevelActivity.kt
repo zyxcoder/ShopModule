@@ -295,7 +295,7 @@ class CategoryLevelActivity :
                         setCompoundDrawablesWithIntrinsicBounds(
                             null, null, ContextCompat.getDrawable(
                                 this@CategoryLevelActivity,
-                                if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT) {
+                                if (currentSortRule.ruleType == RuleType.PRICE_DOWN_SORT || currentSortRule.ruleType == RuleType.POINT_DOWN_SORT) {
                                     R.drawable.ic_sort_down_select
                                 } else {
                                     R.drawable.ic_sort_up_select
