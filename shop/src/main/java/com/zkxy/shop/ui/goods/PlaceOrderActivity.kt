@@ -30,7 +30,6 @@ import com.zkxy.shop.utils.SelectAddressUtil
 import com.zkxy.shop.utils.formatProductInfo
 import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.callback.lifecycle.ActivityManger
-import com.zyxcoder.mvvmroot.common.bus.Bus
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.ImageOptions
@@ -263,10 +262,6 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 }
             }
         }
-
-        Bus.observe<String>(CLOSE_PLACE_ORDER_PAGE, this) {
-            closePage()
-        }
     }
 
     override fun createObserver() {
@@ -301,20 +296,30 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                                 request.sign = it.sign
                                 //拉起微信支付
                                 wxApi!!.sendReq(request)
+                                isOpenWx = true
                             } else {
                                 showToast("您的设备未安装微信客户端")
                             }
-                        } else {
-                            closePage()
                         }
+                    } else {
+                        closePage()
                     }
-
                 } else {
                     if (!it.desc.isNullOrEmpty()) {
                         ActivityManger.currentActivity?.showToast(it.desc)
                     }
                 }
             }
+        }
+    }
+
+    private var isOpenWx = false
+
+    override fun onResume() {
+        super.onResume()
+        if (payWay == 1 && isOpenWx) {
+            closePage()
+            isOpenWx = false
         }
     }
 
