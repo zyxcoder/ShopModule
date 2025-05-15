@@ -1,5 +1,8 @@
 package com.zkxy.shop.entity.order
 
+import androidx.annotation.Keep
+
+@Keep
 data class OrderListEntity(
     val title: String?,
     val consignee: String?,
@@ -39,6 +42,19 @@ data class OrderListEntity(
     var statusId: Int?,
     val statusName: String?,
     val totalPoints: Int?,
+    val payWay: Int?,
     val totalPrice: Double?,
-    val updateTime: String?
+    val updateTime: String?,
+    val prepayParams: PrepayParams?
+)
+
+@Keep
+data class PrepayParams(
+    val appId: String?,
+    val nonceStr: String?,
+    val packageValue: String?,
+    val partnerId: String?,
+    val prepayId: String?,
+    val sign: String?,
+    val timeStamp: String?
 )

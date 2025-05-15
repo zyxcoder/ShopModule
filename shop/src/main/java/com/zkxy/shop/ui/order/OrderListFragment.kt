@@ -6,7 +6,9 @@ import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.CancelOrderDialog
 import com.zkxy.shop.databinding.ItemOrderListBinding
 import com.zkxy.shop.entity.order.OrderListEntity
+import com.zkxy.shop.ext.pay
 import com.zkxy.shop.ui.order.adapter.OrderListAdapter
+import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.ext.showToast
 
@@ -30,7 +32,20 @@ class OrderListFragment(title: String, private val status: Int) :
                     } else {
                         //重新支付
                         CancelOrderDialog(this, onConfirmClickListener = {
-                            mViewModel.payment(orderListEntity.orderCode)
+                            if (orderListEntity.payWay == 1 && orderListEntity.prepayParams != null) {
+                                wxApi.pay(
+                                    context = getContext(),
+                                    appId = orderListEntity.prepayParams.appId,
+                                    partnerId = orderListEntity.prepayParams.partnerId,
+                                    prepayId = orderListEntity.prepayParams.prepayId,
+                                    nonceStr = orderListEntity.prepayParams.nonceStr,
+                                    timeStamp = orderListEntity.prepayParams.timeStamp,
+                                    sign = orderListEntity.prepayParams.sign,
+                                )
+                                isOpenWx = true
+                            } else {
+                                mViewModel.payment(orderListEntity.orderCode)
+                            }
                         }, isPay = true).show()
 
                     }
@@ -62,6 +77,16 @@ class OrderListFragment(title: String, private val status: Int) :
                 activity?.showToast("支付成功")
                 startSearch()
             }
+        }
+    }
+
+    private var isOpenWx = false
+
+    override fun onResume() {
+        super.onResume()
+        if (isOpenWx) {
+            startSearch()
+            isOpenWx = false
         }
     }
 
