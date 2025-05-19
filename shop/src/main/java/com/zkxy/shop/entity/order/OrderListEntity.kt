@@ -43,6 +43,7 @@ data class OrderListEntity(
     val statusName: String?,
     val totalPoints: Int?,
     val payWay: Int?,
+    val scorePayFlag: Int?,
     val totalPrice: Double?,
     val updateTime: String?,
     val prepayParams: PrepayParams?

@@ -60,7 +60,7 @@ class OrderDetailsActivity :
             tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
                 detailsEntity?.apply {
-                    if (payWay == 1 && prepayParams != null) {
+                    if (scorePayFlag != 1&&payWay == 1 && prepayParams != null) {
                         wxApi.pay(
                             context = this@OrderDetailsActivity,
                             appId = prepayParams.appId,
@@ -173,12 +173,12 @@ class OrderDetailsActivity :
                                 tvRefundProgress.text = when (it.refundProgress) {
                                     1 -> {
                                         color = Color.parseColor("#566BEB")
-                                        "处理中"
+                                        "退款处理中"
                                     }
 
                                     2 -> {
                                         color = Color.parseColor("#00B578")
-                                        "已完成"
+                                        "退款成功"
                                     }
 
                                     3 -> {
@@ -188,7 +188,7 @@ class OrderDetailsActivity :
 
                                     else -> {
                                         color = Color.parseColor("#566BEB")
-                                        "--"
+                                        "商户审核中"
                                     }
                                 }
                                 tvRefundProgress.setTextColor(color)

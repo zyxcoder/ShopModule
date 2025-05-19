@@ -32,7 +32,7 @@ class OrderListFragment(title: String, private val status: Int) :
                     } else {
                         //重新支付
                         CancelOrderDialog(this, onConfirmClickListener = {
-                            if (orderListEntity.payWay == 1 && orderListEntity.prepayParams != null) {
+                            if (orderListEntity.scorePayFlag != 1 && orderListEntity.payWay == 1 && orderListEntity.prepayParams != null) {
                                 wxApi.pay(
                                     context = getContext(),
                                     appId = orderListEntity.prepayParams.appId,
