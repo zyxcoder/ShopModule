@@ -14,8 +14,21 @@ import com.zkxy.shop.ext.normalFormat
 fun formatProductInfo(price: Double?, points: Double?): SpannableStringBuilder {
     val spannableString = SpannableStringBuilder()
 
+
+    val tempPrice = if (price != null && price > 0) {
+        price
+    } else {
+        null
+    }
+    val tempPoints = if (points != null && points > 0) {
+        points
+    } else {
+        null
+    }
+
+
     // 处理积分部分
-    points?.let {
+    tempPoints?.let {
         // 添加积分值
         val pointsText = it.normalFormat()
         spannableString.append(pointsText)
@@ -41,14 +54,14 @@ fun formatProductInfo(price: Double?, points: Double?): SpannableStringBuilder {
     }
 
     // 添加空格表示2dp间隔，如果两者都有值
-    if (points != null && price != null) {
+    if (tempPoints != null && tempPrice != null) {
         spannableString.append("\u00A0") // 在积分部分和价格之间添加2个空格
     }
 
     // 处理价格部分
-    price?.let {
+    tempPrice?.let {
         // 添加“+”
-        if (points != null) {
+        if (tempPoints != null) {
             spannableString.append("+")
             spannableString.setSpan(
                 AbsoluteSizeSpan(14, true), // “+”文本大小为14sp

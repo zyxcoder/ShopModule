@@ -23,7 +23,8 @@ import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
 import com.zkxy.shop.entity.goods.SortRule
 import com.zkxy.shop.entity.goods.goodsPointRuleList
-import com.zkxy.shop.entity.goods.sortRuleList
+import com.zkxy.shop.entity.goods.sortPointRuleList
+import com.zkxy.shop.entity.goods.sortPriceRuleList
 import com.zkxy.shop.ui.goods.GoodsDetailsActivity
 import com.zkxy.shop.ui.goods.popup.GoodsPointPopup
 import com.zkxy.shop.ui.goods.popup.SortRulePopup
@@ -176,7 +177,7 @@ class CategoryLevelActivity :
                 tvPriceOrPointSort.getLocationOnScreen(location)
                 SortRulePopup(
                     context = this@CategoryLevelActivity,
-                    sortRuleEntitys = sortRuleList.onEach {
+                    sortRuleEntitys = (if (currentAllGoodsType == AllGoodsType.AllGoodsPoint) sortPointRuleList else sortPriceRuleList).onEach {
                         it.isSelect = it.ruleType == currentSortRule.ruleType
                     }).apply {
                     onPointSelectListener = {
@@ -186,7 +187,7 @@ class CategoryLevelActivity :
                         refreshSortRuleAndFetchData()
                     }
                 }.showPopupWindow(
-                    (getScreenWidth() / 2 - dpToPx(155F) / 2).toInt(),
+                    getSortRulePopupLeft(),
                     location[1] + tvPriceOrPointSort.height + dpToPx(4F).toInt()
                 )
             }
@@ -214,6 +215,18 @@ class CategoryLevelActivity :
             //滑动到选中项
             tabLayoutCategory.post {
                 tabLayoutCategory.setScrollPosition(tabLayoutCategory.selectedTabPosition, 0f, true)
+            }
+        }
+    }
+
+    private fun getSortRulePopupLeft(): Int {
+        return when (currentAllGoodsType) {
+            AllGoodsType.AllGoodsPoint -> {
+                (getScreenWidth() / 2 - dpToPx(155F) / 2).toInt()
+            }
+
+            AllGoodsType.AllGoodsCash -> {
+                ((getScreenWidth() / 4) * 3 - dpToPx(155F) / 2 - dpToPx(10F).toInt()).toInt()
             }
         }
     }

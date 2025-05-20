@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_sort_down_unselect"
                     android:drawablePadding="4dp"
-                    android:text="价格"
+                    android:text="排序"
                     android:textColor="@color/color_666666"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"

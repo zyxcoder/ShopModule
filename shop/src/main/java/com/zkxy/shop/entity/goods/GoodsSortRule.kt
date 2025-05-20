@@ -83,7 +83,7 @@ val goodsPointRuleList = arrayListOf(
 /**
  * 积分和价格排序数组
  */
-val sortRuleList = arrayListOf(
+val sortPointRuleList = arrayListOf(
     GoodsPointEntity(
         name = RuleType.PRICE_DOWN_SORT.content, ruleType = RuleType.PRICE_DOWN_SORT
     ), GoodsPointEntity(
@@ -94,3 +94,15 @@ val sortRuleList = arrayListOf(
         name = RuleType.POINT_UP_SORT.content, ruleType = RuleType.POINT_UP_SORT
     )
 )
+
+/**
+ * 价格排序数组
+ */
+val sortPriceRuleList = arrayListOf(
+    GoodsPointEntity(
+        name = RuleType.PRICE_DOWN_SORT.content, ruleType = RuleType.PRICE_DOWN_SORT
+    ), GoodsPointEntity(
+        name = RuleType.PRICE_UP_SORT.content, ruleType = RuleType.PRICE_UP_SORT
+    )
+)
+
