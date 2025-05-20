@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
 import com.zkxy.shop.R
@@ -20,11 +21,14 @@ import com.zkxy.shop.databinding.LayoutShopReceiveKdBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveZtBinding
 import com.zkxy.shop.entity.goods.Address
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
-import com.zkxy.shop.ext.doubleToTwoDecimalPlaceString
 import com.zkxy.shop.ext.multiply
+import com.zkxy.shop.ext.multiplyFormat
+import com.zkxy.shop.ext.pay
 import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
 import com.zkxy.shop.ui.order.OrderDetailsActivity
 import com.zkxy.shop.utils.SelectAddressUtil
+import com.zkxy.shop.utils.formatProductInfo
+import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.callback.lifecycle.ActivityManger
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -44,6 +48,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     companion object {
         const val GOODS_ID = "goodsId"
         const val GOODS_ENTITY = "goods_entity"
+        const val CLOSE_PLACE_ORDER_PAGE = "close_place_order_page"
         fun startActivity(
             context: Context,
             goodsId: Int,
@@ -56,27 +61,36 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
         }
     }
 
+    private var payWay = 0
+
     override fun init(savedInstanceState: Bundle?) {
         val goodsDetailsEntity =
             intent.getSerializableExtra(GOODS_ENTITY) as? GoodsDetailsEntity ?: return
 
         mViewBind.apply {
-            tvGoodsName.text = goodsDetailsEntity.goodsName
 
-            inputPerson.setSelectText(appUserName)
-            inputTel.setPhone(appUserTel)
+            rgPayWay.isVisible =
+                goodsDetailsEntity.goodsMoneyPrice != null && goodsDetailsEntity.goodsMoneyPrice > 0.0
 
-            if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
-                tvTopPoint.text = "积分"
-                tvTopUnit.visibility = View.GONE
-            } else {
-                tvTopUnit.visibility = View.VISIBLE
-                tvTopPoint.text = "积分+"
-                tvTopMoney.text = goodsDetailsEntity.goodsMoneyPrice.doubleToTwoDecimalPlaceString()
+            rgPayWay.setOnCheckedChangeListener { _, id ->
+                payWay = when (id) {
+                    R.id.rbWechat -> 1
+                    R.id.rbFreight -> 2
+                    R.id.rbOil -> 3
+                    else -> 0
+                }
+            }
+            if (rgPayWay.isVisible) {
+                rbWechat.isChecked = true
             }
 
-            tvTopPoints.text = goodsDetailsEntity.goodsScorePrice.toString()
-
+            tvGoodsName.text = goodsDetailsEntity.goodsName
+            inputPerson.setSelectText(appUserName)
+            inputTel.setPhone(appUserTel)
+            tvTopPoints.text = formatProductInfo(
+                goodsDetailsEntity.goodsMoneyPrice,
+                goodsDetailsEntity.goodsScorePrice
+            )
             mViewBind.tvTopNum.text =
                 if (goodsDetailsEntity.buyEmption == -1) "不限" else "每人限购${goodsDetailsEntity.buyEmption}件"
             inputSpecification.onContinuousClick {
@@ -180,8 +194,14 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             etNum.doAfterTextChanged {
                 val num = it?.toString()?.toIntOrNull() ?: 0
                 tvNum.text = num.toString()
-                tvBottomPoints.text =
-                    (goodsDetailsEntity.goodsScorePrice ?: 0).multiply(num)
+                if ((goodsDetailsEntity.goodsScorePrice ?: 0.0) > 0.0) {
+                    tvBottomPoints.text =
+                        (goodsDetailsEntity.goodsScorePrice ?: 0.0).multiplyFormat(num)
+                    tvBottomPoint.visibility = View.VISIBLE
+                } else {
+                    tvBottomPoint.visibility = View.GONE
+                }
+
                 if (goodsDetailsEntity.goodsMoneyPrice == null || goodsDetailsEntity.goodsMoneyPrice <= 0.0) {
                     tvBottomPoint.text = "积分"
                     tvBottomUnit.visibility = View.GONE
@@ -235,6 +255,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                             goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
                             goodsSpecId = inputSpecification.getContentTag(),
                             deliveryType = goodsDetailsEntity.deliveryMode,
+                            payWay = payWay,
                             deliveryAddress = address
                         )
                     }.show()
@@ -262,20 +283,49 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
 
             createOrderSuccess.observe(this@PlaceOrderActivity) {
                 if (it.orderId != null && it.orderId > 0) {
-                    OrderDetailsActivity.startActivity(
-                        this@PlaceOrderActivity,
-                        orderId = it.orderId
-                    )
-                    if (!it.desc.isNullOrEmpty()) {
-                        ActivityManger.currentActivity?.showToast(it.desc)
+                    if (payWay == 1) {
+                        wxApi.pay(
+                            context = this@PlaceOrderActivity,
+                            appId = it.appId,
+                            partnerId = it.partnerId,
+                            prepayId = it.prepayId,
+                            nonceStr = it.nonceStr,
+                            timeStamp = it.timeStamp,
+                            sign = it.sign,
+                        )
+                        isOpenWx = true
+                    } else {
+                        closePage()
                     }
-                    finish()
                 } else {
                     if (!it.desc.isNullOrEmpty()) {
                         ActivityManger.currentActivity?.showToast(it.desc)
                     }
                 }
             }
+        }
+    }
+
+    private var isOpenWx = false
+
+    override fun onResume() {
+        super.onResume()
+        if (payWay == 1 && isOpenWx) {
+            closePage()
+            isOpenWx = false
+        }
+    }
+
+    private fun closePage() {
+        mViewModel.createOrderSuccess.value?.let {
+            OrderDetailsActivity.startActivity(
+                this@PlaceOrderActivity,
+                orderId = it.orderId
+            )
+            if (!it.desc.isNullOrEmpty()) {
+                ActivityManger.currentActivity?.showToast(it.desc)
+            }
+            finish()
         }
     }
 

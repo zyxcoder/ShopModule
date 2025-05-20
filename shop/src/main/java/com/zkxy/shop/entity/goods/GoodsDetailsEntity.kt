@@ -12,7 +12,7 @@ data class GoodsDetailsEntity(
     val goodsDetails: String?,
     val goodsMoneyPrice: Double?,
     val goodsName: String?,
-    val goodsScorePrice: Int?
+    val goodsScorePrice: Double?,
 ) : Serializable
 
 @Keep

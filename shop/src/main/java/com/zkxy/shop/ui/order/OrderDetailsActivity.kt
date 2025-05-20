@@ -18,7 +18,10 @@ import com.zkxy.shop.databinding.LayoutFhInfoBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveZtBinding
 import com.zkxy.shop.databinding.LayoutZtInfoBinding
 import com.zkxy.shop.entity.goods.Address
+import com.zkxy.shop.entity.order.OrderDetailsEntity
+import com.zkxy.shop.ext.pay
 import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
+import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.loadImage
@@ -37,9 +40,7 @@ class OrderDetailsActivity :
     private var guideAddress: Address? = null
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
     private val confirmAddressDialog by lazy { ConfirmAddressDialog(this) }
-
-    private var orderCode: String? = null
-    private var orderId: Int? = null
+    private var detailsEntity: OrderDetailsEntity? = null
 
     companion object {
         const val ORDER_ID = "order_ID"
@@ -50,18 +51,43 @@ class OrderDetailsActivity :
         }
     }
 
+    private var isOpenWx = false
+
     override fun init(savedInstanceState: Bundle?) {
         val orderId = intent.getIntExtra(ORDER_ID, -1)
         mViewModel.orderDetails(orderId)
         mViewBind.apply {
             tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
-                mViewModel.payment(orderCode)
+                detailsEntity?.apply {
+                    if (scorePayFlag != 1&&payWay == 1 && prepayParams != null) {
+                        wxApi.pay(
+                            context = this@OrderDetailsActivity,
+                            appId = prepayParams.appId,
+                            partnerId = prepayParams.partnerId,
+                            prepayId = prepayParams.prepayId,
+                            nonceStr = prepayParams.nonceStr,
+                            timeStamp = prepayParams.timeStamp,
+                            sign = prepayParams.sign,
+                        )
+                        isOpenWx = true
+                    } else {
+                        mViewModel.payment(detailsEntity?.orderCode)
+                    }
+                }
             }
             tvOrderCode.onContinuousClick {
-                copyText(orderCode ?: "")
+                copyText(detailsEntity?.orderCode ?: "")
                 showToast("复制成功")
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isOpenWx) {
+            mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+            isOpenWx = false
         }
     }
 
@@ -70,11 +96,11 @@ class OrderDetailsActivity :
     private val vsCancelInfoLayout by lazy { LayoutCancelInfoBinding.bind(mViewBind.vsCancelInfo.inflate()) }
     private val vsZtLayout by lazy { LayoutShopReceiveZtBinding.bind(mViewBind.vsZt.inflate()) }
 
+
     override fun createObserver() {
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
-                orderCode = it.orderCode
-                orderId = it.orderId
+                detailsEntity = it
                 mViewBind.apply {
                     ivGoods.loadImage(it.goodsImg)
                     tvOrderCode.text = "订单编号：${it.orderCode}"
@@ -147,12 +173,12 @@ class OrderDetailsActivity :
                                 tvRefundProgress.text = when (it.refundProgress) {
                                     1 -> {
                                         color = Color.parseColor("#566BEB")
-                                        "处理中"
+                                        "退款处理中"
                                     }
 
                                     2 -> {
                                         color = Color.parseColor("#00B578")
-                                        "已完成"
+                                        "退款成功"
                                     }
 
                                     3 -> {
@@ -162,7 +188,7 @@ class OrderDetailsActivity :
 
                                     else -> {
                                         color = Color.parseColor("#566BEB")
-                                        "--"
+                                        "商户审核中"
                                     }
                                 }
                                 tvRefundProgress.setTextColor(color)
@@ -236,9 +262,10 @@ class OrderDetailsActivity :
                 if (!addressList.isNullOrEmpty()) {
                     confirmAddressDialog.onConfirmAddressClickListener = {
                         mViewModel.shipmentsApp(
-                            orderId = orderId,
+                            orderId = detailsEntity?.orderId,
                             deliveryCode = deliveryCode,
-                            shipmentsAddress = it.label
+                            shipmentsAddress = it.label,
+                            shipmentsAddressId = it.value
                         )
                     }
                     mViewBind.tvConfirm.onContinuousClick {

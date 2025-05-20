@@ -50,6 +50,10 @@ fun Double.multiply(b: Int): String {
     return toBigDecimal().multiply(b.toBigDecimal()).toDouble().doubleToTwoDecimalPlace().toString()
 }
 
+fun Double.multiplyFormat(b: Int): String {
+    return toBigDecimal().multiply(b.toBigDecimal()).toDouble().doubleToTwoDecimalPlace().normalFormat()
+}
+
 /**
  * int，精确计算
  */

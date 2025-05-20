@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.gxy.common.base.BaseViewBindActivity
 import com.gyf.immersionbar.ImmersionBar
@@ -12,8 +11,8 @@ import com.zkxy.shop.common.dialog.GoodsDetailsImgDialog
 import com.zkxy.shop.databinding.ActivityGoodsDetailsBinding
 import com.zkxy.shop.databinding.ItemGoodsDetailsImageBinding
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
-import com.zkxy.shop.ext.doubleToTwoDecimalPlaceString
 import com.zkxy.shop.utils.GoodsDetailsImageLoader
+import com.zkxy.shop.utils.formatProductInfo
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.dpToPx
@@ -125,15 +124,8 @@ class GoodsDetailsActivity :
                 mViewBind.tvDes.text = goodsDetails
                 mViewBind.tvDeliveryMode.text = if (deliveryMode == 2) "自提" else "快递"
                 mViewBind.tvNum.text = if (buyEmption == -1) "不限" else "每人${buyEmption}件"
-                mViewBind.tvPoints.text = goodsScorePrice.toString()
-                if (goodsMoneyPrice == null || goodsMoneyPrice <= 0.0) {
-                    mViewBind.tvPoint.text = "积分"
-                    mViewBind.tvUnit.visibility = View.GONE
-                } else {
-                    mViewBind.tvUnit.visibility = View.VISIBLE
-                    mViewBind.tvPoint.text = "积分+"
-                    mViewBind.tvMoney.text = goodsMoneyPrice.doubleToTwoDecimalPlaceString()
-                }
+                mViewBind.tvPoints.text =
+                    formatProductInfo(goodsMoneyPrice, goodsScorePrice, mainTextSize = 24)
             }
         }
     }

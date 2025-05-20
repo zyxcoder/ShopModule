@@ -51,13 +51,19 @@ class OrderDetailsViewModel : BaseViewModel() {
         })
     }
 
-    fun shipmentsApp(orderId: Int?, deliveryCode: String?, shipmentsAddress: String?) {
+    fun shipmentsApp(
+        orderId: Int?,
+        deliveryCode: String?,
+        shipmentsAddress: String?,
+        shipmentsAddressId: Int?
+    ) {
         request<Job>(block = {
             loadingChange.showDialog.value = ""
             apiService.shipmentsApp(
                 orderId = orderId,
                 deliveryCode = deliveryCode,
-                shipmentsAddress = shipmentsAddress
+                shipmentsAddress = shipmentsAddress,
+                shipmentsAddressId = shipmentsAddressId
             ).apiNoData()
             confirmAddressSuccess.value = true
             loadingChange.dismissDialog.value = true

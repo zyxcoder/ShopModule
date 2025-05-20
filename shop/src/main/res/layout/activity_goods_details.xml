@@ -72,43 +72,6 @@
                 tools:text="2600" />
 
             <TextView
-                android:id="@+id/tvPoint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:textColor="#fffa5151"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPoints"
-                app:layout_constraintStart_toEndOf="@+id/tvPoints"
-                app:layout_constraintTop_toTopOf="@+id/tvPoints" />
-
-            <TextView
-                android:id="@+id/tvMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:textColor="#fffa5151"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPoints"
-                app:layout_constraintStart_toEndOf="@+id/tvPoint"
-                app:layout_constraintTop_toTopOf="@+id/tvPoints"
-                tools:text="9.9" />
-
-            <TextView
-                android:id="@+id/tvUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:text="元"
-                android:visibility="gone"
-                android:textColor="#fffa5151"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
-                app:layout_constraintStart_toEndOf="@+id/tvMoney"
-                app:layout_constraintTop_toTopOf="@+id/tvMoney" />
-
-            <TextView
                 android:id="@+id/tvGoodsName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
