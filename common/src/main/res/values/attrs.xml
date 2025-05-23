@@ -63,6 +63,8 @@
     </declare-styleable>
     <declare-styleable name="SearchLayout">
         <attr name="search_hint" format="string" />
+        <attr name="is_need_show_delete_button" format="boolean" />
+        <attr name="is_need_show_search_button" format="boolean" />
     </declare-styleable>
     <declare-styleable name="InputLayout">
         <attr name="title" format="string" />
