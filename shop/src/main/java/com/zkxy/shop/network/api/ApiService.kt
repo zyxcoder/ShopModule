@@ -11,6 +11,7 @@ import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.entity.goods.OrderEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
+import com.zkxy.shop.entity.goods.RateEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.entity.home.UserPointEntity
@@ -146,6 +147,7 @@ interface ApiService {
         @Field("goodsNum") goodsNum: Int?,
         @Field("goodsSpecId") goodsSpecId: Int?,
         @Field("deliveryType") deliveryType: Int?,
+        @Field("taxRate") taxRate: Int? = null,
         @Field("orderPlacer") orderPlacer: String? = appUserName,
         @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
         @Field("payWay") payWay: Int? = 0,
@@ -224,5 +226,5 @@ interface ApiService {
     suspend fun getShippingFeeOrOilBlance(
         @Field("tel") tel: String? = appUserTel,
         @Field("platformId") platformId: Int = appPlatformId
-    ): GxyApiResult<Any>
+    ): GxyApiResult<RateEntity>
 }

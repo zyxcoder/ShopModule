@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.gxy.common.base.BaseViewBindActivity
@@ -15,12 +16,15 @@ import com.zkxy.shop.appUserTel
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
 import com.zkxy.shop.common.dialog.CreateOrderDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
+import com.zkxy.shop.common.dialog.SelectTaxDialog
 import com.zkxy.shop.common.dialog.SpecificationBottomDialog
 import com.zkxy.shop.databinding.ActivityPlaceOrderBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveKdBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveZtBinding
 import com.zkxy.shop.entity.goods.Address
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
+import com.zkxy.shop.entity.goods.RateEntity
+import com.zkxy.shop.ext.formatAmount
 import com.zkxy.shop.ext.multiply
 import com.zkxy.shop.ext.multiplyFormat
 import com.zkxy.shop.ext.pay
@@ -39,6 +43,7 @@ import com.zyxcoder.mvvmroot.utils.loadImage
 class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPlaceOrderBinding>() {
     private var selectAddressUtil: SelectAddressUtil? = null
     private val ztPointAdapter by lazy { ZtPointAdapter() }
+    private val selectTaxDialog by lazy { SelectTaxDialog(this) }
     private val specificationBottomDialog by lazy { SpecificationBottomDialog(this) }
     private val addressBookBottomDialog by lazy { AddressBookBottomDialog(this) }
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
@@ -214,6 +219,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
 
             //下单
             tvTakeOrder.onContinuousClick {
+
                 var check = true
                 mutableListOf(inputSpecification, inputPerson).forEach {
                     if (it.contentIsEmptyAndShowToast()) {
@@ -247,25 +253,58 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     layoutShopReceiveKdBinding.inputSelectAddress.getContent() + layoutShopReceiveKdBinding.tvAddress.getContent()
                 } else null
                 if (check) {
-                    CreateOrderDialog(this@PlaceOrderActivity) {
-                        mViewModel.createOrder(
-                            consignee = inputPerson.getContent(),
-                            consigneeTel = inputTel.getPhone(),
-                            goodsId = goodsId,
-                            goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
-                            goodsSpecId = inputSpecification.getContentTag(),
-                            deliveryType = goodsDetailsEntity.deliveryMode,
-                            payWay = payWay,
-                            deliveryAddress = address
-                        )
-                    }.show()
+                    if (payWay == 2 || payWay == 3) {
+                        rate?.apply {
+                            selectTaxDialog.show()
+                            selectTaxDialog.setData(if (payWay == 2) shippingFee else oil)
+                            selectTaxDialog.onConfirmClickListener = {
+                                mViewModel.createOrder(
+                                    consignee = inputPerson.getContent(),
+                                    consigneeTel = inputTel.getPhone(),
+                                    goodsId = goodsId,
+                                    goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
+                                    goodsSpecId = inputSpecification.getContentTag(),
+                                    deliveryType = goodsDetailsEntity.deliveryMode,
+                                    payWay = payWay,
+                                    taxRate = it?.taxRate,
+                                    deliveryAddress = address
+                                )
+                            }
+                        }
+                    } else {
+                        CreateOrderDialog(this@PlaceOrderActivity) {
+                            mViewModel.createOrder(
+                                consignee = inputPerson.getContent(),
+                                consigneeTel = inputTel.getPhone(),
+                                goodsId = goodsId,
+                                goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
+                                goodsSpecId = inputSpecification.getContentTag(),
+                                deliveryType = goodsDetailsEntity.deliveryMode,
+                                payWay = payWay,
+                                deliveryAddress = address
+                            )
+                        }.show()
+                    }
                 }
             }
         }
     }
 
+    private var rate: RateEntity? = null
+
     override fun createObserver() {
         mViewModel.apply {
+            rateEntity.observe(this@PlaceOrderActivity) {
+                rate = it
+                val oilBanance = it.oil?.sumOf { it.balance ?: 0.0 }.formatAmount()
+                val shippingBanance = it.shippingFee?.sumOf { it.balance ?: 0.0 }.formatAmount()
+
+                mViewBind.rbFreight.text =
+                    "运费支付 <font color='#565D73'>(余额：$shippingBanance)</font>".parseAsHtml()
+                mViewBind.rbOil.text =
+                    "油卡支付 <font color='#565D73'>(余额：$oilBanance)</font>".parseAsHtml()
+            }
+
             pickerData.observe(this@PlaceOrderActivity) {
                 selectAddressUtil?.setPicker(it)
             }

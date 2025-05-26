@@ -8,6 +8,7 @@ import com.zkxy.shop.entity.goods.JsonBean
 import com.zkxy.shop.entity.goods.OrderEntity
 import com.zkxy.shop.entity.goods.PickerEntity
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
+import com.zkxy.shop.entity.goods.RateEntity
 import com.zkxy.shop.ext.getJson
 import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
@@ -22,6 +23,7 @@ class PlaceOrderViewModel : BaseViewModel() {
     val deliveryAddressListEntity = MutableLiveData<MutableList<AddressBookEntity>>()
     val editAddress = MutableLiveData<Boolean>()
     val createOrderSuccess = MutableLiveData<OrderEntity>()
+    val rateEntity = MutableLiveData<RateEntity>()
 
     fun initJsonData(context: Context) {
         request<Job>(block = {
@@ -84,7 +86,7 @@ class PlaceOrderViewModel : BaseViewModel() {
             placeOrderEntity.value =
                 apiService.goodsStockAddressSearch(goodsId = goodsId, deliveryMode = deliveryMode)
                     .apiData()
-            apiService.getShippingFeeOrOilBlance().apiData()
+            rateEntity.value = apiService.getShippingFeeOrOilBlance().apiData()
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true
@@ -122,6 +124,7 @@ class PlaceOrderViewModel : BaseViewModel() {
         goodsSpecId: Int?,
         deliveryType: Int?,
         payWay: Int?,
+        taxRate: Int? = null,
         deliveryAddress: String? = null
     ) {
         request<Job>(block = {
@@ -134,6 +137,7 @@ class PlaceOrderViewModel : BaseViewModel() {
                 goodsNum = goodsNum,
                 goodsSpecId = goodsSpecId,
                 payWay = payWay,
+                taxRate = taxRate,
                 deliveryType = deliveryType
             ).apiOrderData()
             loadingChange.dismissDialog.value = true
