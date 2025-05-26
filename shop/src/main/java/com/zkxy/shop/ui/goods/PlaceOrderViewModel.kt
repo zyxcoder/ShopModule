@@ -84,6 +84,7 @@ class PlaceOrderViewModel : BaseViewModel() {
             placeOrderEntity.value =
                 apiService.goodsStockAddressSearch(goodsId = goodsId, deliveryMode = deliveryMode)
                     .apiData()
+            apiService.getShippingFeeOrOilBlance().apiData()
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true

@@ -219,4 +219,10 @@ interface ApiService {
         @Field("driveName") driveName: String? = appUserName
     ): GxyApiResult<String?>
 
+    @POST("order/getShippingFeeOrOilBlance")
+    @FormUrlEncoded
+    suspend fun getShippingFeeOrOilBlance(
+        @Field("tel") tel: String? = appUserTel,
+        @Field("platformId") platformId: Int = appPlatformId
+    ): GxyApiResult<Any>
 }
