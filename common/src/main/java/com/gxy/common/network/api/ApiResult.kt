@@ -19,7 +19,9 @@ data class ApiResult<T>(
     @SerializedName("data")
     private val data: T?,
     @SerializedName("recordsTotal")
-    val listCount: Int?
+    val listCount: Int?,
+    @SerializedName("recordsFiltered")
+    val recordsFiltered: Int?
 ) {
     fun apiData(): T {
         if (data != null && statusCode == CommonApiService.RESPONSE_CODE_SUCCESS) {
