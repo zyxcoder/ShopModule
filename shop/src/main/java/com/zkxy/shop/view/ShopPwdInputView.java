@@ -7,14 +7,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.zkxy.shop.R;
 
 
-public class PwdInputView extends AppCompatEditText {
+public class ShopPwdInputView extends AppCompatEditText {
 	private String TAG = "PasswordInputView";
 	private Context mContext;
 	private int passwordSize = 6;//密码的个数这里是默认值，也可以通过自定义属性来设置其他数值
@@ -47,7 +46,7 @@ public class PwdInputView extends AppCompatEditText {
 	}
 
 	//注意 ：只能复写这个构造函数，切只能在这里初始化，不然你会发现EditText的特性就没有来
-	public PwdInputView(Context context, AttributeSet attrs) {
+	public ShopPwdInputView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context, attrs);
 	}
@@ -65,8 +64,6 @@ public class PwdInputView extends AppCompatEditText {
 		borderColor = typedArray.getColor(R.styleable.PwdInputView_borderColor, borderColor);
 		passwordWidth = typedArray.getDimensionPixelSize(R.styleable.PwdInputView_passwordWidth, passwordWidth);
 		passwordColor = typedArray.getColor(R.styleable.PwdInputView_passwordColor, passwordColor);
-		Log.d(TAG,"borderRadius:"+borderRadius);
-		Log.d(TAG,"passwordSize:"+passwordSize);
 		typedArray.recycle();
 
 		//初始化边框画笔
@@ -87,7 +84,6 @@ public class PwdInputView extends AppCompatEditText {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		Log.d(TAG, "onSizeChanged");
 		allPasswordWidth = w;
 		allPasswordHight = h;
 	}
@@ -95,11 +91,8 @@ public class PwdInputView extends AppCompatEditText {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		Log.d(TAG, "onDraw");
 
 
-		Log.d(TAG, "allPasswordWidth:" + allPasswordWidth);
-		Log.d(TAG, "borderRadius:" + borderRadius);
 		//画一个矩形遮住显示的文字
 //		mPaint.setColor(borderColor);
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -139,7 +132,6 @@ public class PwdInputView extends AppCompatEditText {
 	protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
 		super.onTextChanged(text, start, lengthBefore, lengthAfter);
 		//监听文字变化大于密码设定长度不记录
-		Log.d(TAG,"onTextChanged:"+passwordSize);
 		if (text.length() <= passwordSize){
 			passwordTextSize = text.length();
 			password = text.toString();

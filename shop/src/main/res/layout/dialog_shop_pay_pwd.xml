@@ -27,7 +27,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.zkxy.shop.view.PwdInputView
+        <com.zkxy.shop.view.ShopPwdInputView
             android:id="@+id/setting_pwv_ag"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -84,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:background="@drawable/shape_blue_bt"
+            android:background="@drawable/shape_blue_bt_shop"
             android:gravity="center"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"

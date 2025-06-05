@@ -15,9 +15,9 @@ import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
 import com.zkxy.shop.common.dialog.CreateOrderDialog
-import com.zkxy.shop.common.dialog.PayPwdDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.common.dialog.SelectTaxDialog
+import com.zkxy.shop.common.dialog.ShopPayPwdDialog
 import com.zkxy.shop.common.dialog.SpecificationBottomDialog
 import com.zkxy.shop.databinding.ActivityPlaceOrderBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveKdBinding
@@ -50,7 +50,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
     private val layoutShopReceiveKdBinding by lazy { LayoutShopReceiveKdBinding.bind(mViewBind.vsKd.inflate()) }
     private var guideAddress: Address? = null
-    private val pwdDialog by lazy { PayPwdDialog(this@PlaceOrderActivity) }
+    private val pwdDialog by lazy { ShopPayPwdDialog(this@PlaceOrderActivity) }
 
     companion object {
         const val GOODS_ID = "goodsId"
