@@ -173,7 +173,7 @@ interface ApiService {
         @Field("platformId") platformId: Int = appPlatformId,
         @Field("tel") phoneNumber: String? = appUserTel,
         @Field("password") password: String?
-    ): GxyApiResult<UserPointEntity>
+    ): GxyApiResult<String>
 
     //订单列表
     @POST("order/orderListAPP")

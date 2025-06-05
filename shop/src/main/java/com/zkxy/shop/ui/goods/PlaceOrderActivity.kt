@@ -260,29 +260,21 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                             selectTaxDialog.show()
                             selectTaxDialog.setData(if (payWay == 2) shippingFee else oil)
                             selectTaxDialog.onConfirmClickListener = {
-//                                mViewModel.createOrder(
-//                                    consignee = mViewBind.inputPerson.getContent(),
-//                                    consigneeTel = mViewBind.inputTel.getPhone(),
-//                                    goodsId = goodsId,
-//                                    goodsNum = mViewBind.etNum.text.toString().toIntOrNull() ?: 0,
-//                                    goodsSpecId = mViewBind.inputSpecification.getContentTag(),
-//                                    deliveryType = goodsDetailsEntity.deliveryMode,
-//                                    payWay = payWay,
-//                                    taxRate = it?.taxRate,
-//                                    deliveryAddress = address
-//                                )
                                 pwdDialog.show()
-                                pwdDialog.onConfirmClickListener = {pwd->
-                                    mViewModel.checkPwdCreateOrder(pwd = pwd,
+                                pwdDialog.onConfirmClickListener = { pwd ->
+                                    mViewModel.checkPwdCreateOrder(
+                                        pwd = pwd,
                                         consignee = mViewBind.inputPerson.getContent(),
                                         consigneeTel = mViewBind.inputTel.getPhone(),
                                         goodsId = goodsId,
-                                        goodsNum = mViewBind.etNum.text.toString().toIntOrNull() ?: 0,
+                                        goodsNum = mViewBind.etNum.text.toString().toIntOrNull()
+                                            ?: 0,
                                         goodsSpecId = mViewBind.inputSpecification.getContentTag(),
                                         deliveryType = goodsDetailsEntity.deliveryMode,
                                         payWay = payWay,
                                         taxRate = it?.taxRate,
-                                        deliveryAddress = address)
+                                        deliveryAddress = address
+                                    )
                                 }
                             }
                         }
@@ -336,6 +328,9 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
             }
 
             createOrderSuccess.observe(this@PlaceOrderActivity) {
+                if (pwdDialog.isShowing) {
+                    pwdDialog.dismiss()
+                }
                 if (it.orderId != null && it.orderId > 0) {
                     if (payWay == 1) {
                         wxApi.pay(

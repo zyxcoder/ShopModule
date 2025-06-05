@@ -7,16 +7,14 @@ import com.zkxy.shop.R
 import com.zkxy.shop.databinding.DialogPayPwdBinding
 import com.zyxcoder.mvvmroot.ext.showToast
 
-class PayPwdDialog(
-    context: Context,
-
-) : Dialog(context, R.style.dialog) {
+class PayPwdDialog(context: Context) : Dialog(context, R.style.dialog) {
     var onConfirmClickListener: ((payPwd: String) -> Unit)? = null
+    private var pwdBinding: DialogPayPwdBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pwdBinding = DialogPayPwdBinding.inflate(layoutInflater)
-        setContentView(pwdBinding.root)
-        pwdBinding.apply {
+        pwdBinding = DialogPayPwdBinding.inflate(layoutInflater)
+        pwdBinding?.apply {
+            setContentView(root)
             tvCancel.setOnClickListener { dismiss() }
             tvConfirm.setOnClickListener {
                 val payPwd = settingPwvAg.text.toString().trim()
@@ -28,5 +26,10 @@ class PayPwdDialog(
             }
         }
 
+    }
+
+    override fun show() {
+        super.show()
+        pwdBinding?.settingPwvAg?.setText("")
     }
 }
