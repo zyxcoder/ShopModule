@@ -116,6 +116,37 @@ class PlaceOrderViewModel : BaseViewModel() {
         })
     }
 
+    fun checkPwdCreateOrder(
+        pwd: String, consignee: String?,
+        consigneeTel: String?,
+        goodsId: Int?,
+        goodsNum: Int?,
+        goodsSpecId: Int?,
+        deliveryType: Int?,
+        payWay: Int?,
+        taxRate: Int? = null,
+        deliveryAddress: String? = null
+    ) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            apiService.checkUserPassWord(password = pwd).apiNoData()
+            createOrderSuccess.value = apiService.createOrder(
+                deliveryAddress = deliveryAddress,
+                consignee = consignee,
+                consigneeTel = consigneeTel,
+                goodsId = goodsId,
+                goodsNum = goodsNum,
+                goodsSpecId = goodsSpecId,
+                payWay = payWay,
+                taxRate = taxRate,
+                deliveryType = deliveryType
+            ).apiOrderData()
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
+
     fun createOrder(
         consignee: String?,
         consigneeTel: String?,

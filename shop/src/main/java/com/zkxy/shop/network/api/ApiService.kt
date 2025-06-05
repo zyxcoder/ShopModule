@@ -164,6 +164,17 @@ interface ApiService {
         @Field("tel") phoneNumber: String?
     ): GxyApiResult<UserPointEntity>
 
+    /**
+     * 支付密码
+     */
+    @POST("order/checkUserPassWord")
+    @FormUrlEncoded
+    suspend fun checkUserPassWord(
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("tel") phoneNumber: String? = appUserTel,
+        @Field("password") password: String?
+    ): GxyApiResult<UserPointEntity>
+
     //订单列表
     @POST("order/orderListAPP")
     @FormUrlEncoded

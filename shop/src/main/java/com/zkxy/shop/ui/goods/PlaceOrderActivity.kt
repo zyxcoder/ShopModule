@@ -15,6 +15,7 @@ import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel
 import com.zkxy.shop.common.dialog.AddressBookBottomDialog
 import com.zkxy.shop.common.dialog.CreateOrderDialog
+import com.zkxy.shop.common.dialog.PayPwdDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.common.dialog.SelectTaxDialog
 import com.zkxy.shop.common.dialog.SpecificationBottomDialog
@@ -49,6 +50,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
     private val layoutShopReceiveKdBinding by lazy { LayoutShopReceiveKdBinding.bind(mViewBind.vsKd.inflate()) }
     private var guideAddress: Address? = null
+    private val pwdDialog by lazy { PayPwdDialog(this@PlaceOrderActivity) }
 
     companion object {
         const val GOODS_ID = "goodsId"
@@ -258,17 +260,30 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                             selectTaxDialog.show()
                             selectTaxDialog.setData(if (payWay == 2) shippingFee else oil)
                             selectTaxDialog.onConfirmClickListener = {
-                                mViewModel.createOrder(
-                                    consignee = inputPerson.getContent(),
-                                    consigneeTel = inputTel.getPhone(),
-                                    goodsId = goodsId,
-                                    goodsNum = etNum.text.toString().toIntOrNull() ?: 0,
-                                    goodsSpecId = inputSpecification.getContentTag(),
-                                    deliveryType = goodsDetailsEntity.deliveryMode,
-                                    payWay = payWay,
-                                    taxRate = it?.taxRate,
-                                    deliveryAddress = address
-                                )
+//                                mViewModel.createOrder(
+//                                    consignee = mViewBind.inputPerson.getContent(),
+//                                    consigneeTel = mViewBind.inputTel.getPhone(),
+//                                    goodsId = goodsId,
+//                                    goodsNum = mViewBind.etNum.text.toString().toIntOrNull() ?: 0,
+//                                    goodsSpecId = mViewBind.inputSpecification.getContentTag(),
+//                                    deliveryType = goodsDetailsEntity.deliveryMode,
+//                                    payWay = payWay,
+//                                    taxRate = it?.taxRate,
+//                                    deliveryAddress = address
+//                                )
+                                pwdDialog.show()
+                                pwdDialog.onConfirmClickListener = {pwd->
+                                    mViewModel.checkPwdCreateOrder(pwd = pwd,
+                                        consignee = mViewBind.inputPerson.getContent(),
+                                        consigneeTel = mViewBind.inputTel.getPhone(),
+                                        goodsId = goodsId,
+                                        goodsNum = mViewBind.etNum.text.toString().toIntOrNull() ?: 0,
+                                        goodsSpecId = mViewBind.inputSpecification.getContentTag(),
+                                        deliveryType = goodsDetailsEntity.deliveryMode,
+                                        payWay = payWay,
+                                        taxRate = it?.taxRate,
+                                        deliveryAddress = address)
+                                }
                             }
                         }
                     } else {
