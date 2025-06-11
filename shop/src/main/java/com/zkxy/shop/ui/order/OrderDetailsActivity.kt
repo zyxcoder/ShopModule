@@ -188,7 +188,7 @@ class OrderDetailsActivity :
 
                                     else -> {
                                         color = Color.parseColor("#566BEB")
-                                        "商户审核中"
+                                        "退款处理中"
                                     }
                                 }
                                 tvRefundProgress.setTextColor(color)
