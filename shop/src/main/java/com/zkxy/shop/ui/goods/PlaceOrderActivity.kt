@@ -262,6 +262,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                             selectTaxDialog.onConfirmClickListener = {
                                 pwdDialog.show()
                                 pwdDialog.onConfirmClickListener = { pwd ->
+                                    pwdDialog.dismiss()
                                     mViewModel.checkPwdCreateOrder(
                                         pwd = pwd,
                                         consignee = mViewBind.inputPerson.getContent(),
