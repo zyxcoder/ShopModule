@@ -287,6 +287,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.gxy.common.view.InputLayout
+                android:id="@+id/tvPayType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:is_input="false"
+                app:is_show_enter="false"
+                app:title="支付方式" />
+
+            <com.gxy.common.view.InputLayout
                 android:id="@+id/tvConsignee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

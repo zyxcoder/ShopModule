@@ -96,7 +96,6 @@ class OrderDetailsActivity :
     private val vsCancelInfoLayout by lazy { LayoutCancelInfoBinding.bind(mViewBind.vsCancelInfo.inflate()) }
     private val vsZtLayout by lazy { LayoutShopReceiveZtBinding.bind(mViewBind.vsZt.inflate()) }
 
-
     override fun createObserver() {
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
@@ -106,7 +105,7 @@ class OrderDetailsActivity :
                     tvOrderCode.text = "订单编号：${it.orderCode}"
                     tvGoodsName.text = it.goodsName
                     tvPoints.text = it.paymentAmount
-//                    tvPrice.text = it.pri.toString()
+                    tvPayType.setMessageText(it.payWayName)
                     tvSpecName.setMessageText(it.goodsSpecName)
                     tvNum.setMessageText(it.goodsNum.toString())
                     tvConsignee.setMessageText(it.consignee)

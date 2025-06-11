@@ -23,6 +23,7 @@ import com.zkxy.shop.databinding.ActivityPlaceOrderBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveKdBinding
 import com.zkxy.shop.databinding.LayoutShopReceiveZtBinding
 import com.zkxy.shop.entity.goods.Address
+import com.zkxy.shop.entity.goods.Balance
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
 import com.zkxy.shop.entity.goods.RateEntity
 import com.zkxy.shop.ext.formatAmount
@@ -257,26 +258,37 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                 if (check) {
                     if (payWay == 2 || payWay == 3) {
                         rate?.apply {
-                            selectTaxDialog.show()
+                            if (payWay == 2) {
+                                if (shippingFee?.size == 1) {
+                                    showPwdDialog(
+                                        goodsId = goodsId,
+                                        goodsDetailsEntity = goodsDetailsEntity,
+                                        balance = shippingFee.firstOrNull(),
+                                        address = address
+                                    )
+                                } else {
+                                    selectTaxDialog.show()
+                                }
+                            } else {
+                                if (oil?.size == 1) {
+                                    showPwdDialog(
+                                        goodsId = goodsId,
+                                        goodsDetailsEntity = goodsDetailsEntity,
+                                        balance = oil.firstOrNull(),
+                                        address = address
+                                    )
+                                } else {
+                                    selectTaxDialog.show()
+                                }
+                            }
                             selectTaxDialog.setData(if (payWay == 2) shippingFee else oil)
                             selectTaxDialog.onConfirmClickListener = {
-                                pwdDialog.show()
-                                pwdDialog.onConfirmClickListener = { pwd ->
-                                    pwdDialog.dismiss()
-                                    mViewModel.checkPwdCreateOrder(
-                                        pwd = pwd,
-                                        consignee = mViewBind.inputPerson.getContent(),
-                                        consigneeTel = mViewBind.inputTel.getPhone(),
-                                        goodsId = goodsId,
-                                        goodsNum = mViewBind.etNum.text.toString().toIntOrNull()
-                                            ?: 0,
-                                        goodsSpecId = mViewBind.inputSpecification.getContentTag(),
-                                        deliveryType = goodsDetailsEntity.deliveryMode,
-                                        payWay = payWay,
-                                        taxRate = it?.taxRate,
-                                        deliveryAddress = address
-                                    )
-                                }
+                                showPwdDialog(
+                                    goodsId = goodsId,
+                                    goodsDetailsEntity = goodsDetailsEntity,
+                                    balance = it,
+                                    address = address
+                                )
                             }
                         }
                     } else {
@@ -295,6 +307,31 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     }
                 }
             }
+        }
+    }
+
+    private fun showPwdDialog(
+        goodsId: Int,
+        goodsDetailsEntity: GoodsDetailsEntity,
+        balance: Balance?,
+        address: String?
+    ) {
+        pwdDialog.show()
+        pwdDialog.onConfirmClickListener = { pwd ->
+            pwdDialog.dismiss()
+            mViewModel.checkPwdCreateOrder(
+                pwd = pwd,
+                consignee = mViewBind.inputPerson.getContent(),
+                consigneeTel = mViewBind.inputTel.getPhone(),
+                goodsId = goodsId,
+                goodsNum = mViewBind.etNum.text.toString().toIntOrNull()
+                    ?: 0,
+                goodsSpecId = mViewBind.inputSpecification.getContentTag(),
+                deliveryType = goodsDetailsEntity.deliveryMode,
+                payWay = payWay,
+                taxRate = balance?.taxRate,
+                deliveryAddress = address
+            )
         }
     }
 
