@@ -259,25 +259,25 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                     if (payWay == 2 || payWay == 3) {
                         rate?.apply {
                             if (payWay == 2) {
-                                if (shippingFee?.size == 1) {
+                                if ((shippingFee?.size ?: 0) <= 1) {
                                     showPwdDialog(
                                         goodsId = goodsId,
                                         goodsDetailsEntity = goodsDetailsEntity,
-                                        balance = shippingFee.firstOrNull(),
+                                        balance = shippingFee?.firstOrNull(),
                                         address = address
                                     )
-                                } else if ((shippingFee?.size ?: 0) >= 2) {
+                                } else {
                                     selectTaxDialog.show()
                                 }
                             } else {
-                                if (oil?.size == 1) {
+                                if ((oil?.size ?: 0) <= 1) {
                                     showPwdDialog(
                                         goodsId = goodsId,
                                         goodsDetailsEntity = goodsDetailsEntity,
-                                        balance = oil.firstOrNull(),
+                                        balance = oil?.firstOrNull(),
                                         address = address
                                     )
-                                } else if ((oil?.size ?: 0) >= 2) {
+                                } else {
                                     selectTaxDialog.show()
                                 }
                             }
