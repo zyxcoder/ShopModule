@@ -266,7 +266,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                                         balance = shippingFee.firstOrNull(),
                                         address = address
                                     )
-                                } else {
+                                } else if ((shippingFee?.size ?: 0) >= 2) {
                                     selectTaxDialog.show()
                                 }
                             } else {
@@ -277,7 +277,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                                         balance = oil.firstOrNull(),
                                         address = address
                                     )
-                                } else {
+                                } else if ((oil?.size ?: 0) >= 2) {
                                     selectTaxDialog.show()
                                 }
                             }
