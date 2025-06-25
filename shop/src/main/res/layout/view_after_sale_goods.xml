@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clGoods"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="12dp">
+
+
+    <ImageView
+        android:id="@+id/ivGoods"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ps_ic_placeholder"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvGoodsName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="精品东北五常 臻品大米 皇家贡米之选 粒粒饱满 香飘万家 米香四溢 ..."
+        android:textColor="#04091A"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPriceAndPoint"
+        app:layout_constraintLeft_toRightOf="@+id/ivGoods"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvPriceAndPoint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="900积分+0.99元"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvCount"
+        app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
+
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="申请数量：3"
+        android:textColor="#565D73"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivGoods"
+        app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPriceAndPoint" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_f7f8fa_4"
+        android:paddingLeft="12dp"
+        android:paddingTop="6dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivGoods">
+
+
+        <TextView
+            android:id="@+id/tvOrderCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单编号：82346762378462362463"
+            android:textColor="#565D73"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivCopyOrderCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:src="@drawable/ic_copy_code"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOrderCode"
+            app:layout_constraintLeft_toRightOf="@+id/tvOrderCode"
+            app:layout_constraintTop_toTopOf="@+id/tvOrderCode" />
+
+
+        <TextView
+            android:id="@+id/tvAfterSaleCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="售后编号：82346762378462362463"
+            android:textColor="#565D73"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderCode" />
+
+        <ImageView
+            android:id="@+id/ivCopyAfterSaleCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:src="@drawable/ic_copy_code"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAfterSaleCode"
+            app:layout_constraintLeft_toRightOf="@+id/tvAfterSaleCode"
+            app:layout_constraintTop_toTopOf="@+id/tvAfterSaleCode" />
+
+
+        <TextView
+            android:id="@+id/tvRefundMoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="退款金额：1000积分+88.88元"
+            android:textColor="#565D73"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAfterSaleCode" />
+
+
+        <TextView
+            android:id="@+id/tvRefundType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="售后类型：退款"
+            android:textColor="#565D73"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRefundMoney" />
+
+        <TextView
+            android:id="@+id/tvCancelReason"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="取消原因：用户取消订单"
+            android:textColor="#565D73"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRefundType" />
+
+
+        <TextView
+            android:id="@+id/tvApplyTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="申请时间：2025-08-28 12:12:12"
+            android:textColor="#565D73"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCancelReason" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
