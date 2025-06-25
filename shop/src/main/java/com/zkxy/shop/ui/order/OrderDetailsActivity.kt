@@ -5,7 +5,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
+import android.widget.TextView
+import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.ext.copyText
@@ -25,6 +28,7 @@ import com.zkxy.shop.wxApi
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.loadImage
+import java.text.SimpleDateFormat
 
 /**
  * statusId 订单状态：：1待发货; 2待提货; 3已发货; 4已提货; 5已取消
@@ -32,10 +36,12 @@ import com.zyxcoder.mvvmroot.utils.loadImage
 class OrderDetailsActivity :
     BaseViewBindActivity<OrderDetailsViewModel, ActivityOrderDetailsBinding>() {
 
-    private var colorFB7E2B = Color.parseColor("#FB7E2B")
-    private var color00B578 = Color.parseColor("#00B578")
-    private var color999999 = Color.parseColor("#999999")
-    private var colorFA5151 = Color.parseColor("#FA5151")
+    private val time = (30 * 60 * 1000).toLong() //30分钟
+    private val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private var colorFB7E2B = "#FB7E2B".toColorInt()
+    private var color00B578 = "#00B578".toColorInt()
+    private var color999999 = "#999999".toColorInt()
+    private var colorFA5151 = "#FA5151".toColorInt()
     private val ztPointAdapter by lazy { ZtPointAdapter() }
     private var guideAddress: Address? = null
     private val selectNavigationDialog by lazy { SelectNavigationDialog(this) }
@@ -60,7 +66,7 @@ class OrderDetailsActivity :
             tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
                 detailsEntity?.apply {
-                    if (scorePayFlag != 1&&payWay == 1 && prepayParams != null) {
+                    if (scorePayFlag != 1 && payWay == 1 && prepayParams != null) {
                         wxApi.pay(
                             context = this@OrderDetailsActivity,
                             appId = prepayParams.appId,
@@ -96,11 +102,34 @@ class OrderDetailsActivity :
     private val vsCancelInfoLayout by lazy { LayoutCancelInfoBinding.bind(mViewBind.vsCancelInfo.inflate()) }
     private val vsZtLayout by lazy { LayoutShopReceiveZtBinding.bind(mViewBind.vsZt.inflate()) }
 
+    private var timer: MyCountDownTimer? = null
+
     override fun createObserver() {
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
                 detailsEntity = it
                 mViewBind.apply {
+                    if (it.statusId == 0 || it.statusId == 6) {
+                        val remainder = try {
+                            val remainderTime = (df.parse(it.createTime ?: "0")?.time
+                                ?: 0) + time - System.currentTimeMillis()
+                            if (remainderTime > time) time else remainderTime
+                        } catch (e: Exception) {
+                            0
+                        }
+                        if (remainder > 0) {
+                            timer?.cancel()
+                            tvRemainder.visibility = View.VISIBLE
+                            timer = MyCountDownTimer(
+                                remainder,
+                                1000,
+                                tvRemainder,
+                            )
+                            timer?.start()
+                        } else {
+                            tvRemainder.visibility = View.GONE
+                        }
+                    }
                     ivGoods.loadImage(it.goodsImg)
                     tvOrderCode.text = "订单编号：${it.orderCode}"
                     tvGoodsName.text = it.goodsName
@@ -276,4 +305,29 @@ class OrderDetailsActivity :
         }
     }
 
+    private inner class MyCountDownTimer(
+        millisInFuture: Long,
+        var countDownInterval: Long,
+        var tv: TextView,
+    ) : CountDownTimer(millisInFuture, countDownInterval) {
+        override fun onTick(millisUntilFinished: Long) {
+            //设置时间格式
+            val m = millisUntilFinished / countDownInterval
+            val minute = (m / 60) % 60
+            val s = m % 60
+            tv.text = "还剩${minute}:${s}订单自动取消"
+        }
+
+        override fun onFinish() {
+            tv.visibility = View.GONE
+            mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel()
+    }
+
 }
+

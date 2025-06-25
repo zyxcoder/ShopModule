@@ -1,10 +1,11 @@
 package com.zkxy.shop.ui.order.adapter
 
-import android.graphics.Color
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.graphics.toColorInt
+import androidx.core.text.parseAsHtml
 import com.gxy.common.ext.copyText
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemOrderListBinding
@@ -24,10 +25,10 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
     R.layout.item_order_list
 ) {
     private val timeMap = HashMap<Int?, MyCountDownTimer?>()
-    private var colorFB7E2B = Color.parseColor("#FB7E2B")
-    private var color00B578 = Color.parseColor("#00B578")
-    private var color999999 = Color.parseColor("#999999")
-    private var colorFA5151 = Color.parseColor("#FA5151")
+    private val colorFB7E2B = "#FB7E2B".toColorInt()
+    private val color00B578 = "#00B578".toColorInt()
+    private val color999999 = "#999999".toColorInt()
+    private val colorFA5151 = "#FA5151".toColorInt()
     private val df: SimpleDateFormat
     private val time: Long
 
@@ -56,23 +57,23 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
             tvStatus.text = item.statusName
             tvCancel.visibility = View.VISIBLE
 
-            tvDeliverTime.visibility = View.INVISIBLE
-            tvReceiveTitle.visibility = View.INVISIBLE
+            tvDeliverTime.visibility = View.GONE
             tvKdName.visibility = View.INVISIBLE
-            tvZtTip.visibility = View.INVISIBLE
+            tvZtTip.visibility = View.GONE
             tvGoPay.visibility = View.GONE
-            llRemainder.visibility = View.GONE
+            tvRemainder.visibility = View.GONE
+            llKd.visibility = View.VISIBLE
             var timer = timeMap[item.orderId]
             timer?.cancel()
             timer = null
             when (item.statusId) {
                 //下单时间 + 30 - 当前时间
                 0, 6 -> {
-                    tvCreateTime.text = "下单时间 ${item.createTime}"
                     tvStatus.setBackgroundResource(R.drawable.shape_ffe8e8_2)
                     tvStatus.setTextColor(colorFA5151)
                     tvGoPay.visibility = View.VISIBLE
-                    llRemainder.visibility = View.VISIBLE
+                    tvRemainder.visibility = View.VISIBLE
+                    llKd.visibility = View.GONE
                     val remainder = try {
                         val remainderTime = (df.parse(item.createTime ?: "0")?.time
                             ?: 0) + time - System.currentTimeMillis()
@@ -81,19 +82,21 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                         0
                     }
                     if (remainder > 0) {
-                        llRemainder.visibility = View.VISIBLE
+                        tvRemainder.visibility = View.VISIBLE
+                        llKd.visibility = View.GONE
                         val cdu = MyCountDownTimer(
                             remainder,
                             1000,
                             tvRemainder,
-                            llRemainder,
+                            llKd,
                             item,
                             holder.layoutPosition
                         )
                         cdu.start()
                         timeMap[item.orderId] = cdu
                     } else {
-                        llRemainder.visibility = View.GONE
+                        tvRemainder.visibility = View.GONE
+                        llKd.visibility = View.VISIBLE
                     }
                 }
 
@@ -101,11 +104,9 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                     tvStatus.setBackgroundResource(R.drawable.shape_ffe9db_2)
                     tvStatus.setTextColor(colorFB7E2B)
                     if (item.deliveryType == 1) {//快递
-
+                        llKd.visibility = View.GONE
                     } else {//自提
-                        tvReceiveTitle.text = "提货码："
-                        tvKdName.text = item.deliveryCode
-                        tvReceiveTitle.visibility = View.VISIBLE
+                        tvKdName.text = "提货码：<b>${item.deliveryCode}</b>".parseAsHtml()
                         tvKdName.visibility = View.VISIBLE
                         tvZtTip.visibility = View.VISIBLE
                     }
@@ -114,17 +115,14 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                 3, 4 -> {
                     tvStatus.setBackgroundResource(R.drawable.shape_e7f4f0_2)
                     tvStatus.setTextColor(color00B578)
-                    tvReceiveTitle.visibility = View.VISIBLE
                     tvKdName.visibility = View.VISIBLE
                     tvDeliverTime.visibility = View.VISIBLE
-                    tvCancel.visibility = View.INVISIBLE
+                    tvCancel.visibility = View.GONE
                     if (item.deliveryType == 1) {//快递
-                        tvReceiveTitle.text = "快递信息："
-                        tvKdName.text = "${item.logisticsCompany} ${item.expressNumber}"
+                        tvKdName.text = "快递信息：${item.logisticsCompany}\n快递单号：${item.expressNumber}"
                         tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
                     } else {//自提
-                        tvReceiveTitle.text = "自提点："
-                        tvKdName.text = item.dAddress
+                        tvKdName.text = "自提点：<b>${item.dAddress}</b>".parseAsHtml()
                         tvDeliverTime.text = "提货时间：${item.dTime ?: ""}"
                     }
                 }
@@ -132,12 +130,10 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
                 5 -> {
                     tvStatus.setBackgroundResource(R.drawable.shape_ededed_2)
                     tvStatus.setTextColor(color999999)
-                    tvCancel.visibility = View.INVISIBLE
+                    tvCancel.visibility = View.GONE
                     tvDeliverTime.visibility = View.VISIBLE
-                    tvReceiveTitle.visibility = View.VISIBLE
                     tvKdName.visibility = View.VISIBLE
-                    tvKdName.text = item.orderDesc
-                    tvReceiveTitle.text = "取消原因："
+                    tvKdName.text = "取消原因：${item.orderDesc}"
                     tvDeliverTime.text = "取消时间：${item.cancelTime ?: ""}"
                 }
 
@@ -160,7 +156,7 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
         millisInFuture: Long,
         var countDownInterval: Long,
         var tv: TextView,
-        var llRemainder: LinearLayout,
+        val llKd: LinearLayout,
         var item: OrderListEntity,
         var position: Int
     ) : CountDownTimer(millisInFuture, countDownInterval) {
@@ -170,12 +166,14 @@ class OrderListAdapter : BaseViewBindingAdapter<OrderListEntity, ItemOrderListBi
             val m = millisUntilFinished / countDownInterval
             val minute = (m / 60) % 60
             val s = m % 60
-            tv.text = "${minute}分${s}秒"
+            tv.text = "还剩${minute}:${s}订单自动取消"
         }
 
         override fun onFinish() {
-            llRemainder.visibility = View.GONE
+            tv.visibility = View.GONE
+            llKd.visibility = View.VISIBLE
             item.statusId = 5
+            item.orderDesc = "订单自动取消"
             notifyItemChanged(position)
         }
     }

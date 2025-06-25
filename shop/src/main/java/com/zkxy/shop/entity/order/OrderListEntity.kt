@@ -30,7 +30,7 @@ data class OrderListEntity(
     val logisticsCompany: String?,
     val expressNumber: String?,
     val shippingTime: String?,
-    val orderDesc: String?,
+    var orderDesc: String?,
     val cancelTime: String?,
     val shipmentsAddress: String?,
     val dTime: String?,

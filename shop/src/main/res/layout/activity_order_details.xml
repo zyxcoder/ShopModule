@@ -8,6 +8,25 @@
     app:title_content="订单详情"
     app:toolbar_themecolor="@color/white">
 
+    <TextView
+        android:id="@+id/tvRemainder"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/shape_ffefe8_8"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="#F53F3F"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llKd"
+        tools:visibility="visible" />
+
     <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
