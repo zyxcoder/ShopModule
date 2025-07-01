@@ -337,7 +337,7 @@ class GxyNetworkApi : BaseNetworkApi() {
                 }
                 //token过期或者登录被挤
                 if (responseCode == -99) {
-                    Bus.post("TokenEventBus", -999)
+                    Bus.postAcrossProcess("TokenEventBus",-999)
                     val errorResponse = response.newBuilder().body(
                         try {
                             gsonParser.toJson(
