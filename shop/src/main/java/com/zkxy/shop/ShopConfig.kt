@@ -37,6 +37,8 @@ var appUserName: String? = ""
 
 var wxApi: IWXAPI? = null
 
+var appUserToken: String? = ""
+
 /**
  * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
  * @param application Application
@@ -47,6 +49,7 @@ fun shopInit(
     application: Application,
     shopHttpUrl: String?,
     formId: Int? = 2,
+    userToken:String?,
     api: IWXAPI? = null
 ) {
     Fresco.initialize(application)
@@ -55,6 +58,7 @@ fun shopInit(
     modeBaseUrl = shopHttpUrl
     appPlatformId = formId ?: 2
     isInit = true
+    appUserToken=userToken
     wxApi = api
 }
 
