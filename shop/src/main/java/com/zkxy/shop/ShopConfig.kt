@@ -37,6 +37,8 @@ var appUserName: String? = ""
 
 var wxApi: IWXAPI? = null
 
+var appUserToken: String? = ""
+
 /**
  * 使用此插件请调用初始化方法，否则会报异常,在Application中调用
  * @param application Application
@@ -54,8 +56,8 @@ fun shopInit(
         .addCallback(ErrorCallback()).commit()
     modeBaseUrl = shopHttpUrl
     appPlatformId = formId ?: 2
-    isInit = true
     wxApi = api
+    isInit = true
 }
 
 /**
@@ -68,10 +70,12 @@ fun shopInitArgument(
     userTel: String? = null,
     loadLon: String? = null,
     loadLat: String? = null,
-    userName: String? = null
+    userName: String? = null,
+    userToken: String?
 ) {
     appUserTel = userTel
     appLoadLon = loadLon
     appLoadLat = loadLat
     appUserName = userName
+    appUserToken = userToken
 }

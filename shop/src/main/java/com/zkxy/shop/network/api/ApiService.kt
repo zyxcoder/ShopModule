@@ -21,7 +21,9 @@ import com.zkxy.shop.entity.order.OrderListEntity
 import retrofit2.http.Field
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -69,10 +71,9 @@ interface ApiService {
     ): GxyApiResult<MutableList<GoodsEntity>>
 
     //获取首页轮播
-    @POST("notice/noticeList")
-    @FormUrlEncoded
+    @GET("v1/app/sysAd/getMallAd")
     suspend fun getHomeBanner(
-        @Field("platformId") platformId: Int = appPlatformId
+        @Query("sysId") sysId: Int = 6
     ): GxyApiResult<MutableList<HomeShopBannerEntity>>
 
     /**

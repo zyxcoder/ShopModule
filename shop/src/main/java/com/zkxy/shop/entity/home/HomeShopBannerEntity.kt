@@ -8,17 +8,18 @@ import androidx.annotation.Keep
  */
 @Keep
 data class HomeShopBannerEntity(
+    val advertisingUrl: String?,
+    val createBy: String?,
     val createTime: String?,
-    val deleteFlag: Int?,
-    val endTime: String?,
-    val goodsId: Int?,
-    val imgUrl: String?,
-    val noticeDesc: String?,
-    val noticeId: Int?,
-    val noticeName: String?,
-    val noticeUrl: String?,
-    val platformId: Int?,
-    val sort: Int?,
+    val id: Int?,
+    val imageTitle: String?,
+    val imageUrl: String?,
+    val length: Int?,
+    val license: String?,
+    val module: String?,
+    val sortOrder: Int?,
+    val start: Int?,
     val status: Int?,
-    val urlType: Int?
+    val sysId: Int?,
+    val type: Int
 )

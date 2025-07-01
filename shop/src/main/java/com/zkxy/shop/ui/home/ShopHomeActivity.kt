@@ -61,21 +61,21 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             bannerHome.setImageLoader(HomeBannerImageLoader()).setOnBannerListener {
                 mViewModel.topBannerDatas.value?.getOrNull(it)?.let { clickBannerEntity ->
                     //urlType 链接类型:1商品，2自定义内容，3无链接
-                    when (clickBannerEntity.urlType) {
-                        1 -> {
-                            GoodsDetailsActivity.startActivity(
-                                context = this@ShopHomeActivity, goodsId = clickBannerEntity.goodsId
-                            )
-                        }
-
-                        2 -> {
-                            ShopWebViewActivity.startActivity(
-                                context = this@ShopHomeActivity,
-                                title = clickBannerEntity.noticeName,
-                                loadUrl = clickBannerEntity.noticeUrl ?: ""
-                            )
-                        }
-                    }
+//                    when (clickBannerEntity.urlType) {
+//                        1 -> {
+//                            GoodsDetailsActivity.startActivity(
+//                                context = this@ShopHomeActivity, goodsId = clickBannerEntity.goodsId
+//                            )
+//                        }
+//
+//                        2 -> {
+//                            ShopWebViewActivity.startActivity(
+//                                context = this@ShopHomeActivity,
+//                                title = clickBannerEntity.noticeName,
+//                                loadUrl = clickBannerEntity.noticeUrl ?: ""
+//                            )
+//                        }
+//                    }
                 }
             }
             goodsAdapter = GoodsAdapter().apply {

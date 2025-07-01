@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api ('com.github.zyxcoder:MvvmBuild:2.0.2'){
+    api ('com.github.zyxcoder:MvvmBuild:2.0.3'){
         exclude group : 'com.github.CymChad'
     }
     api 'me.majiajie:pager-bottom-tab-strip:2.4.0'

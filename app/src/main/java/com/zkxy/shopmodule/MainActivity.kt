@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
             userTel = "13472905630",
             loadLat = "103.55262001052857",
             loadLon = "30.481401271903536",
-            userName = "lh"
+            userName = "lh",
+            userToken = ""
         )
 
         ShopConfigDialog(this){
