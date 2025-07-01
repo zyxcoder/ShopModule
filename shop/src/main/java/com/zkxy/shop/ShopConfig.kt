@@ -49,7 +49,6 @@ fun shopInit(
     application: Application,
     shopHttpUrl: String?,
     formId: Int? = 2,
-    userToken:String?,
     api: IWXAPI? = null
 ) {
     Fresco.initialize(application)
@@ -57,9 +56,8 @@ fun shopInit(
         .addCallback(ErrorCallback()).commit()
     modeBaseUrl = shopHttpUrl
     appPlatformId = formId ?: 2
-    isInit = true
-    appUserToken=userToken
     wxApi = api
+    isInit = true
 }
 
 /**
@@ -72,10 +70,12 @@ fun shopInitArgument(
     userTel: String? = null,
     loadLon: String? = null,
     loadLat: String? = null,
-    userName: String? = null
+    userName: String? = null,
+    userToken: String?
 ) {
     appUserTel = userTel
     appLoadLon = loadLon
     appLoadLat = loadLat
     appUserName = userName
+    appUserToken = userToken
 }
