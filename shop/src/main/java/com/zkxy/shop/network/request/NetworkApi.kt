@@ -26,6 +26,7 @@ import com.zkxy.shop.network.deserializer.StringDeserializer
 import com.zkxy.shop.utils.AesUtils
 import com.zkxy.shop.utils.RSAUtil
 import com.zkxy.shop.utils.RandomKey
+import com.zkxy.shop.utils.loginOut
 import com.zyxcoder.mvvmroot.base.appContext
 import com.zyxcoder.mvvmroot.common.bus.Bus
 import com.zyxcoder.mvvmroot.network.BaseNetworkApi
@@ -337,6 +338,7 @@ class GxyNetworkApi : BaseNetworkApi() {
                 //token过期或者登录被挤
                 if (responseCode == -99) {
                     Bus.post("TokenEventBus", -999)
+                    loginOut()
                     val errorResponse = response.newBuilder().body(
                         try {
                             gsonParser.toJson(
