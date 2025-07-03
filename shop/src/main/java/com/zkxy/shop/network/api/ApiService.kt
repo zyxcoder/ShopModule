@@ -71,9 +71,9 @@ interface ApiService {
     ): GxyApiResult<MutableList<GoodsEntity>>
 
     //获取首页轮播
-    @GET("v1/app/sysAd/getMallAd")
+    @GET("v1/app/sysAd/getAd")
     suspend fun getHomeBanner(
-        @Query("sysId") sysId: Int = 6
+        @Query("location") location: Int = 2
     ): GxyApiResult<MutableList<HomeShopBannerEntity>>
 
     /**
