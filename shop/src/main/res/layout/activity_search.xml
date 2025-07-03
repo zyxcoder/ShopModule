@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zk.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.gxy.common.view.refresh.HFSmartRefreshLayout
+            <com.zk.common.view.refresh.HFSmartRefreshLayout
                 android:id="@+id/refreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -118,10 +118,10 @@
                     tools:listitem="@layout/item_goods" />
 
 
-            </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+            </com.zk.common.view.refresh.HFSmartRefreshLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.gxy.common.view.ToolbarLayout>
+</com.zk.common.view.ToolbarLayout>

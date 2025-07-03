@@ -2,7 +2,7 @@ package com.zkxy.shop.network.api
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.gxy.common.network.api.CommonApiService
+import com.zk.common.network.api.CommonApiService
 import com.zkxy.shop.network.api.ApiService.Companion.RESPONSE_CODE_SUCCESS
 import com.zyxcoder.mvvmroot.network.ApiException
 

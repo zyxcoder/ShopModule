@@ -39,7 +39,7 @@
             tools:ignore="ContentDescription" />
 
 
-        <com.gxy.common.view.InputLayout
+        <com.zk.common.view.InputLayout
             android:id="@+id/inputContractNum"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             app:title="@string/contract_num_content" />
 
 
-        <com.gxy.common.view.InputLayout
+        <com.zk.common.view.InputLayout
             android:id="@+id/inputMaterielName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/inputContractNum"
             app:title="@string/materiel_designation" />
 
-        <com.gxy.common.view.InputLayout
+        <com.zk.common.view.InputLayout
             android:id="@+id/inputExecutionUnitPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/inputMaterielName"
             app:title="@string/execution_unit_price" />
 
-        <com.gxy.common.view.InputLayout
+        <com.zk.common.view.InputLayout
             android:id="@+id/inputModifySinglePrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             app:title="@string/modify_single_price" />
 
 
-        <com.gxy.common.view.InputLayout
+        <com.zk.common.view.InputLayout
             android:id="@+id/inputEffectiveTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

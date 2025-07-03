@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="合同总量" />
 
-    <com.gxy.common.view.MarqueeTextView
+    <com.zk.common.view.MarqueeTextView
         android:id="@+id/tvContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvTitle"
         tools:text="合同金额" />
 
-    <com.gxy.common.view.MarqueeTextView
+    <com.zk.common.view.MarqueeTextView
         android:id="@+id/tvSubContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

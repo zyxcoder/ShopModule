@@ -22,7 +22,7 @@
         layout="@layout/view_home_toolbar" />
 
 
-    <com.gxy.common.view.refresh.HFSmartRefreshLayout
+    <com.zk.common.view.refresh.HFSmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -131,6 +131,6 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+    </com.zk.common.view.refresh.HFSmartRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

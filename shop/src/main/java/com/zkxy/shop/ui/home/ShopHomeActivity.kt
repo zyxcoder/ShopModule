@@ -7,10 +7,10 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.common.loadsir.LoadContentStatus
-import com.gxy.common.common.loadsir.getLoadSir
-import com.gxy.common.common.loadsir.setLoadContentStatus
+import com.zk.common.base.BaseViewBindActivity
+import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.getLoadSir
+import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityShopHomeBinding
 import com.zkxy.shop.isInit
@@ -20,8 +20,6 @@ import com.zkxy.shop.ui.home.adapter.GoodsAdapter
 import com.zkxy.shop.ui.home.decoration.GoodsItemAverageMarginDecoration
 import com.zkxy.shop.ui.order.OrderListActivity
 import com.zkxy.shop.ui.search.SearchActivity
-import com.zkxy.shop.utils.HomeBannerImageLoader
-import com.zkxy.shop.web.ShopWebViewActivity
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 
@@ -58,26 +56,26 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             mLoadService = getLoadSir().register(viewLoad) {
                 startSearch(isFirst = true, isRefresh = false, start = 0)
             }
-            bannerHome.setImageLoader(HomeBannerImageLoader()).setOnBannerListener {
-                mViewModel.topBannerDatas.value?.getOrNull(it)?.let { clickBannerEntity ->
-                    //urlType 链接类型:1商品，2自定义内容，3无链接
-                    when (clickBannerEntity.urlType) {
-                        1 -> {
-                            GoodsDetailsActivity.startActivity(
-                                context = this@ShopHomeActivity, goodsId = clickBannerEntity.goodsId
-                            )
-                        }
-
-                        2 -> {
-                            ShopWebViewActivity.startActivity(
-                                context = this@ShopHomeActivity,
-                                title = clickBannerEntity.noticeName,
-                                loadUrl = clickBannerEntity.noticeUrl ?: ""
-                            )
-                        }
-                    }
-                }
-            }
+//            bannerHome.setImageLoader(HomeBannerImageLoader()).setOnBannerListener {
+//                mViewModel.topBannerDatas.value?.getOrNull(it)?.let { clickBannerEntity ->
+//                    //urlType 链接类型:1商品，2自定义内容，3无链接
+//                    when (clickBannerEntity.urlType) {
+//                        1 -> {
+//                            GoodsDetailsActivity.startActivity(
+//                                context = this@ShopHomeActivity, goodsId = clickBannerEntity.goodsId
+//                            )
+//                        }
+//
+//                        2 -> {
+//                            ShopWebViewActivity.startActivity(
+//                                context = this@ShopHomeActivity,
+//                                title = clickBannerEntity.noticeName,
+//                                loadUrl = clickBannerEntity.noticeUrl ?: ""
+//                            )
+//                        }
+//                    }
+//                }
+//            }
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
                     GoodsDetailsActivity.startActivity(
@@ -158,7 +156,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
                 goodsAdapter.addData(it)
             }
             topBannerDatas.observe(this@ShopHomeActivity) {
-                mViewBind.bannerHome.setImages(it).start()
+//                mViewBind.bannerHome.setImages(it).start()
             }
             dataHasMore.observe(this@ShopHomeActivity) {
                 mViewBind.refreshLayout.setNoMoreData(!it)

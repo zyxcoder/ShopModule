@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zk.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
             android:background="@drawable/round_solid_white_8"
             android:orientation="vertical">
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/inputSpecification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
 
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/inputPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                 app:is_requireds="true"
                 app:title="@string/contact_person" />
 
-            <com.gxy.common.view.InputPhoneLayout
+            <com.zk.common.view.InputPhoneLayout
                 android:id="@+id/inputTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -367,4 +367,4 @@
             app:layout_constraintTop_toTopOf="@+id/tvNum" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.gxy.common.view.ToolbarLayout>
+</com.zk.common.view.ToolbarLayout>

@@ -3,7 +3,7 @@ package com.zkxy.shop.common.dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
-import com.gxy.common.common.dialog.CenterDialog
+import com.zk.common.common.dialog.CenterDialog
 import com.zkxy.shop.databinding.DialogGoodsDetailImgBinding
 import com.zkxy.shop.entity.goods.PicDto
 import com.zkxy.shop.ui.goods.adapter.ImageViewPagerAdapter

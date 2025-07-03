@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.search
 
 import androidx.lifecycle.MutableLiveData
-import com.gxy.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadContentStatus
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.search.SearchWordHistoryEntity
 import com.zkxy.shop.network.request.apiService

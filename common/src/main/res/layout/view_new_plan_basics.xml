@@ -30,7 +30,7 @@
         app:layout_constraintLeft_toRightOf="@+id/viewBuleLine"
         app:layout_constraintTop_toTopOf="@+id/viewBuleLine" />
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputRoute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputDistance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
         app:show_search_box="false"
         app:title="@string/transportation_distance" />
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputSuperviseAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

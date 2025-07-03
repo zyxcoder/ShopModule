@@ -7,8 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.ext.copyText
+import com.zk.common.base.BaseViewBindActivity
+import com.zk.common.ext.copyText
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.ConfirmAddressDialog
 import com.zkxy.shop.common.dialog.SelectNavigationDialog

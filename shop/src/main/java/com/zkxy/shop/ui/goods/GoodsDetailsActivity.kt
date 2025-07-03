@@ -4,14 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
-import com.gxy.common.base.BaseViewBindActivity
+import com.zk.common.base.BaseViewBindActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.zkxy.shop.common.dialog.GoodsDetailsImgDialog
 import com.zkxy.shop.databinding.ActivityGoodsDetailsBinding
 import com.zkxy.shop.databinding.ItemGoodsDetailsImageBinding
 import com.zkxy.shop.entity.goods.GoodsDetailsEntity
-import com.zkxy.shop.utils.GoodsDetailsImageLoader
 import com.zkxy.shop.utils.formatProductInfo
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
@@ -41,24 +39,24 @@ class GoodsDetailsActivity :
                 .statusBarView(titleBar).init()
             ivBack.onContinuousClick { finish() }
 
-            banner.setImageLoader(GoodsDetailsImageLoader()).setOnBannerListener {
-                goodsDetailsImgDialog?.show()
-                goodsDetailsImgDialog?.setPosition(it)
-            }
-
-            banner.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrolled(
-                    position: Int, positionOffset: Float, positionOffsetPixels: Int
-                ) {
-                }
-
-                override fun onPageSelected(position: Int) {
-                    tvIndicator.text = "${position + 1}/$bannerSize"
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {
-                }
-            })
+//            banner.setImageLoader(GoodsDetailsImageLoader()).setOnBannerListener {
+//                goodsDetailsImgDialog?.show()
+//                goodsDetailsImgDialog?.setPosition(it)
+//            }
+//
+//            banner.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//                override fun onPageScrolled(
+//                    position: Int, positionOffset: Float, positionOffsetPixels: Int
+//                ) {
+//                }
+//
+//                override fun onPageSelected(position: Int) {
+//                    tvIndicator.text = "${position + 1}/$bannerSize"
+//                }
+//
+//                override fun onPageScrollStateChanged(state: Int) {
+//                }
+//            })
 
 
             scrollerLayout.setOnVerticalScrollChangeListener { _, scrollY, _, _ ->
@@ -104,7 +102,7 @@ class GoodsDetailsActivity :
                 goodsDetailsEntity = it
                 bannerSize = bannerPicDtoList?.size ?: 0
                 mViewBind.tvIndicator.text = "1/${bannerPicDtoList?.size ?: ""}"
-                mViewBind.banner.setImages(bannerPicDtoList).start()
+//                mViewBind.banner.setImages(bannerPicDtoList).start()
                 goodsDetailsImgDialog = GoodsDetailsImgDialog(
                     context = this@GoodsDetailsActivity, imageUrl = bannerPicDtoList
                 )

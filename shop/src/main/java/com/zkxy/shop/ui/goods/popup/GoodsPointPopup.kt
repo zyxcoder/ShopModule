@@ -23,9 +23,9 @@ class GoodsPointPopup(context: Context, private val goodsPointEntitys: List<Good
         setAlignBackground(true)
         setContentView(R.layout.pop_goods_point)
         showAnimation =
-            AnimationUtils.loadAnimation(context, com.gxy.common.R.anim.anim_scale_top_in)
+            AnimationUtils.loadAnimation(context, com.zk.common.R.anim.anim_scale_top_in)
         dismissAnimation =
-            AnimationUtils.loadAnimation(context, com.gxy.common.R.anim.anim_scale_top_out)
+            AnimationUtils.loadAnimation(context, com.zk.common.R.anim.anim_scale_top_out)
     }
 
     override fun onViewCreated(contentView: View) {

@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.addCallback
-import com.gxy.common.base.BaseViewBindActivity
+import com.zk.common.base.BaseViewBindActivity
 import com.zkxy.shop.databinding.ActivityShopWebBinding
 
 /**

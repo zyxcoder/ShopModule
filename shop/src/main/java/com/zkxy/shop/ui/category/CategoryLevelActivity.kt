@@ -10,10 +10,10 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.common.loadsir.getLoadSir
-import com.gxy.common.common.loadsir.setLoadContentStatus
-import com.gxy.common.utils.getScreenWidth
+import com.zk.common.base.BaseViewBindActivity
+import com.zk.common.common.loadsir.getLoadSir
+import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.utils.getScreenWidth
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ActivityCategoryLevelBinding

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.gxy.common.view.refresh.HFSmartRefreshLayout
+    <com.zk.common.view.refresh.HFSmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,6 +26,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
             tools:listitem="@layout/item_contract" />
-    </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+    </com.zk.common.view.refresh.HFSmartRefreshLayout>
 
 </LinearLayout>

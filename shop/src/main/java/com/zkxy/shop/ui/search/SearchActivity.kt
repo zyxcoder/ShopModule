@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.common.loadsir.LoadContentStatus
-import com.gxy.common.common.loadsir.getLoadSir
-import com.gxy.common.common.loadsir.setLoadContentStatus
+import com.zk.common.base.BaseViewBindActivity
+import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.getLoadSir
+import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.common.dialog.ShopCommonDialog
 import com.zkxy.shop.databinding.ActivitySearchBinding

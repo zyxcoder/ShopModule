@@ -3,10 +3,10 @@ package com.zkxy.shop.ui.order
 import android.content.Context
 import android.content.Intent
 import com.google.android.material.tabs.TabLayout.MODE_AUTO
-import com.gxy.common.common.activitylist.BaseCommonListActivity
-import com.gxy.common.common.activitylist.BaseCommonListFragment
-import com.gxy.common.common.activitylist.BaseCommonListFragmentViewModel
-import com.gxy.common.databinding.ActivityBaseCommonListBinding
+import com.zk.common.common.activitylist.BaseCommonListActivity
+import com.zk.common.common.activitylist.BaseCommonListFragment
+import com.zk.common.common.activitylist.BaseCommonListFragmentViewModel
+import com.zk.common.databinding.ActivityBaseCommonListBinding
 import com.zkxy.shop.databinding.ItemOrderListBinding
 import com.zkxy.shop.entity.order.OrderListEntity
 

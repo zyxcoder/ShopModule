@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zk.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toobarLayout"
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="#f2f5f9">
 
-        <com.gxy.common.view.refresh.HFSmartRefreshLayout
+        <com.zk.common.view.refresh.HFSmartRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,8 +76,10 @@
                                 android:id="@+id/bannerHome"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                app:indicator_drawable_selected="@drawable/shape_banner_select"
-                                app:indicator_drawable_unselected="@drawable/shape_banner_unselect"
+                                app:banner_indicator_normal_color="#99ffffff"
+                                app:banner_indicator_normal_width="6dp"
+                                app:banner_indicator_selected_color="@color/white"
+                                app:banner_indicator_selected_width="6dp"
                                 app:layout_constraintDimensionRatio="375:144"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -168,6 +170,6 @@
                 </com.google.android.material.appbar.AppBarLayout>
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+        </com.zk.common.view.refresh.HFSmartRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.gxy.common.view.ToolbarLayout>
+</com.zk.common.view.ToolbarLayout>

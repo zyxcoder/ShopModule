@@ -2,9 +2,9 @@ package com.zkxy.shop
 
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.gxy.common.common.loadsir.DefaultLoadingCallback
-import com.gxy.common.common.loadsir.EmptyCallback
-import com.gxy.common.common.loadsir.ErrorCallback
+import com.zk.common.common.loadsir.DefaultLoadingCallback
+import com.zk.common.common.loadsir.EmptyCallback
+import com.zk.common.common.loadsir.ErrorCallback
 import com.kingja.loadsir.core.LoadSir
 import com.tencent.mm.opensdk.openapi.IWXAPI
 
