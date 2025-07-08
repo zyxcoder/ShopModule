@@ -8,8 +8,6 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.gxy.common.BuildConfig
-import com.gxy.common.network.api.ApiErrotResult
-import com.gxy.common.network.api.ApiResult
 import com.zkxy.shop.appUserToken
 import com.zkxy.shop.ext.isBoolean
 import com.zkxy.shop.ext.isDouble
@@ -375,7 +373,7 @@ class GxyNetworkApi : BaseNetworkApi() {
                         try {
                             gsonParser.toJson(
                                 gsonParser.fromJson(
-                                    responseBody, ApiErrotResult::class.java
+                                    responseBody, GxyApiErrotResult::class.java
                                 )
                             )
                         } catch (e: Exception) {
@@ -394,7 +392,7 @@ class GxyNetworkApi : BaseNetworkApi() {
                         try {
                             gsonParser.toJson(
                                 gsonParser.fromJson(
-                                    responseBody, ApiErrotResult::class.java
+                                    responseBody, GxyApiErrotResult::class.java
                                 )
                             )
                         } catch (e: Exception) {
@@ -403,9 +401,9 @@ class GxyNetworkApi : BaseNetworkApi() {
                     ).build()
                     return@addInterceptor errorResponse
                 }
-                val apiResult: ApiResult<*>?
+                val apiResult: GxyApiResult<*>?
                 try {
-                    apiResult = gsonParser.fromJson(responseBody, ApiResult::class.java)
+                    apiResult = gsonParser.fromJson(responseBody, GxyApiResult::class.java)
                         ?: throw IllegalArgumentException()
                 } catch (e: Exception) {
                     //响应体非标准json格式
@@ -413,7 +411,7 @@ class GxyNetworkApi : BaseNetworkApi() {
                         try {
                             gsonParser.toJson(
                                 gsonParser.fromJson(
-                                    responseBody, ApiErrotResult::class.java
+                                    responseBody, GxyApiErrotResult::class.java
                                 )
                             )
                         } catch (e: Exception) {
