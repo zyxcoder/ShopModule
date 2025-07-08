@@ -37,7 +37,7 @@ interface ApiService {
     /**
      * 商品分类
      */
-    @POST("app/mall/goods/goodsType")
+    @POST("v1/app/shopMallGoods/goodsType")
     @FormUrlEncoded
     suspend fun getGoodsCategory(
         @Field("platformId") platformId: Int = appPlatformId,
@@ -54,14 +54,14 @@ interface ApiService {
     /**
      * 搜索商品
      */
-    @POST("app/mall/goods/searchGoods")
+    @POST("v1/app/shopMallGoods/searchGoods")
     @FormUrlEncoded
     suspend fun searchGoods(
         @Field("platformId") platformId: Int = appPlatformId,
         @Field("goodsName") goodsName: String? = null,
         @Field("goodsSuggest") goodsSuggest: Int? = null,
         @Field("currentPage") currentPage: Int?,
-        @Field("pageSize") pageSize: Int?,
+        @Field("currentPageSize") pageSize: Int?,
         @Field("priceType") priceType: Int? = null,
         @Field("levelType") levelType: Int? = null,
         @Field("typeId") typeId: Int? = null,
@@ -158,11 +158,10 @@ interface ApiService {
     /**
      * 获取用户积分
      */
-    @POST("points/getPoints")
-    @FormUrlEncoded
+    @GET("v1/app/shopMallGoods/pointBalance")
     suspend fun getUserPoint(
-        @Field("platformId") platformId: Int = appPlatformId,
-        @Field("tel") phoneNumber: String?
+        @Query("platformId") platformId: Int = appPlatformId,
+        @Query("driverTel") phoneNumber: String?
     ): GxyApiResult<UserPointEntity>
 
     /**

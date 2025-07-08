@@ -26,7 +26,6 @@ import com.zkxy.shop.network.deserializer.StringDeserializer
 import com.zkxy.shop.utils.AesUtils
 import com.zkxy.shop.utils.RSAUtil
 import com.zkxy.shop.utils.RandomKey
-import com.zkxy.shop.utils.loginOut
 import com.zyxcoder.mvvmroot.base.appContext
 import com.zyxcoder.mvvmroot.common.bus.Bus
 import com.zyxcoder.mvvmroot.network.BaseNetworkApi
@@ -309,6 +308,40 @@ class GxyNetworkApi : BaseNetworkApi() {
     override fun setHttpClientBuilder(builder: OkHttpClient.Builder): OkHttpClient.Builder {
         return builder.apply {
             cookieJar(cookieJar)
+            addInterceptor { chain ->
+                val originalRequest = chain.request()
+                // 检查是否是POST请求以及请求体是否是FormBody
+                if (originalRequest.method == "POST" && originalRequest.body is FormBody) {
+                    val formBody = originalRequest.body as FormBody
+                    val jsonMap = mutableMapOf<String, Any>()
+                    // 转换 FormBody 数据为 JSON
+                    for (i in 0 until formBody.size) {
+                        val key = formBody.name(i)
+                        val value = formBody.value(i)
+                        val typedValue = when {
+                            value.isLong() -> value.toLong()
+                            value.isInt() -> value.toInt()
+                            value.isDouble() -> value.toDouble()
+                            value.isBoolean() -> value.toBoolean()
+                            else -> value // 默认情况使用字符串
+                        }
+                        jsonMap[key] = typedValue
+                    }
+                    Log.d("请求的参数", jsonMap.toString())
+                    // 创建新的 JSON 请求体
+                    val requestBody = gsonParser.toJson(jsonMap)
+                        .toRequestBody("application/json".toMediaType())
+                    // 创建新的请求
+                    val newRequest =
+                        originalRequest.newBuilder().method(originalRequest.method, requestBody)
+                            .addHeader("Content-Type", "application/json") // 设置 Content-Type
+                            .build()
+                    // 继续执行请求
+                    return@addInterceptor chain.proceed(newRequest)
+                }
+                // 如果不是需要转换的请求，直接进行
+                chain.proceed(originalRequest)
+            }
             //示例：添加公共heads 注意要设置在日志拦截器之前，不然Log中会不显示head信息
             addInterceptor {
                 it.request().toString().loge("REQUEST_BODY")
@@ -337,7 +370,7 @@ class GxyNetworkApi : BaseNetworkApi() {
                 }
                 //token过期或者登录被挤
                 if (responseCode == -99) {
-                    Bus.postAcrossProcess("TokenEventBus",-999)
+                    Bus.postAcrossProcess("TokenEventBus", -999)
                     val errorResponse = response.newBuilder().body(
                         try {
                             gsonParser.toJson(
