@@ -107,8 +107,10 @@ class OrderDetailsActivity :
     override fun createObserver() {
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
+
                 detailsEntity = it
                 mViewBind.apply {
+                    tvRemainder.visibility = View.GONE
                     if (it.statusId == 0 || it.statusId == 6) {
                         val remainder = try {
                             val remainderTime = (df.parse(it.createTime ?: "0")?.time
@@ -223,6 +225,14 @@ class OrderDetailsActivity :
                                 tvRefundDesc.text = it.refundDesc
                                 tvRefundTime.setMessageText(it.refundTime)
                                 tvRefundAmount.setMessageText(it.paymentAmount)
+                            }
+                        }
+
+                        7 -> {
+                            clServe.visibility = View.VISIBLE
+                            if (it.afterSaleState == 4) {
+                                tvRemainder.visibility = View.VISIBLE
+                                tvRemainder.text = "请在7日内退回商品，退货成功后完成退款"
                             }
                         }
 

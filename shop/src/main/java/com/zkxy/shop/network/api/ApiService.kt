@@ -45,7 +45,7 @@ interface ApiService {
         @Field("pageSize") pageSize: Int? = 10000
     ): GxyApiResult<MutableList<GoodsCategoryEntity>>
 
-    @POST("app/mall/goods/goodsDetail")
+    @POST("v1/app/shopMallGoods/goodsDetail")
     @FormUrlEncoded
     suspend fun goodsDetail(
         @Field("goodsId") goodsId: Int?, @Field("platformId") platformId: Int = appPlatformId
@@ -79,7 +79,7 @@ interface ApiService {
     /**
      * 查询对应规格库存和自提点
      */
-    @POST("app/mall/goods/goodsStockAddressSearch")
+    @POST("v1/app/shopMallGoods/goodsStockAddressSearch")
     @FormUrlEncoded
     suspend fun goodsStockAddressSearch(
         @Field("goodsId") goodsId: Int?,
@@ -90,14 +90,14 @@ interface ApiService {
     ): GxyApiResult<PlaceOrderEntity>
 
     //获取用户常用地址
-    @POST("sys/getUserAddress")
+    @POST("v1/app/shopMallGoods/getUserAddress")
     @FormUrlEncoded
     suspend fun getUserAddress(
         @Field("tel") tel: String? = appUserTel,
     ): GxyApiResult<MutableList<AddressBookEntity>>
 
     //添加用户常用地址
-    @POST("sys/addUserAddress")
+    @POST("v1/app/shopMallGoods/addUserAddress")
     @FormUrlEncoded
     suspend fun addUserAddress(
         @Field("address") address: String?,
@@ -109,7 +109,7 @@ interface ApiService {
     ): GxyApiResult<Any>
 
     //修改用户常用地址
-    @POST("sys/updateUserAddress")
+    @POST("v1/app/shopMallGoods/updateUserAddress")
     @FormUrlEncoded
     suspend fun updateAddress(
         @Field("address") address: String?,
@@ -118,7 +118,7 @@ interface ApiService {
     ): GxyApiResult<Any>
 
     //设置默认地址
-    @POST("sys/addressDefault")
+    @POST("v1/app/shopMallGoods/addressDefault")
     @FormUrlEncoded
     suspend fun acquiesceAddress(
         @Field("addressId") addressId: Int?,
@@ -128,7 +128,7 @@ interface ApiService {
     ): GxyApiResult<Any>
 
     //删除地址
-    @POST("sys/deleteAddress")
+    @POST("v1/app/shopMallGoods/deleteAddress")
     @FormUrlEncoded
     suspend fun deleteAddress(
         @Field("addressId") addressId: Int?,
@@ -138,7 +138,7 @@ interface ApiService {
     ): GxyApiResult<Any>
 
     //创建订单
-    @POST("order/create")
+    @POST("v1/app/shopMallGoods/create")
     @FormUrlEncoded
     suspend fun createOrder(
         @Field("deliveryAddress") deliveryAddress: String?,
@@ -176,7 +176,7 @@ interface ApiService {
     ): GxyApiResult<String>
 
     //订单列表
-    @POST("order/orderListAPP")
+    @POST("v1/app/shopMallGoods/orderListAPP")
     @FormUrlEncoded
     suspend fun orderListAPP(
         @Field("current") current: Int?,
@@ -187,8 +187,37 @@ interface ApiService {
         @Field("size") size: Int?
     ): ApiResult<MutableList<OrderListEntity>>
 
+    //售后列表
+    @POST("v1/app/shopMallGoods/orderAfterSalesList")
+    @FormUrlEncoded
+    suspend fun orderAfterSalesList(
+        @Field("current") current: Int?,
+        @Field("key") key: String?,
+        @Field("orderPlacerTel") orderPlacerTel: String? = appUserTel,
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("size") size: Int?
+    ): ApiResult<MutableList<OrderListEntity>>
+
+    //售后撤销
+    @POST("v1/app/shopMallGoods/orderAfterSalesRevoke")
+    @FormUrlEncoded
+    suspend fun orderAfterSalesRevoke(
+        @Field("saleId") saleId: Int?,
+        @Field("platformId") platformId: Int = appPlatformId,
+        @Field("orderId") orderId: Int?
+    ): ApiResult<Any>
+
+    //申请售后
+    @POST("v1/app/shopMallGoods/orderAfterSales")
+    @FormUrlEncoded
+    suspend fun orderAfterSales(
+        @Field("cancelReason") cancelReason: String?,
+        @Field("orderId") orderId: Int?,
+        @Field("platformId") platformId: Int = appPlatformId
+    ): ApiResult<Any>
+
     //订单详情
-    @POST("order/detailsApp")
+    @POST("v1/app/shopMallGoods/detailsApp")
     @FormUrlEncoded
     suspend fun orderDetails(
         @Field("orderId") orderId: Int?,
@@ -196,7 +225,7 @@ interface ApiService {
     ): GxyApiResult<OrderDetailsEntity>
 
     //取消订单
-    @POST("order/APPCancel")
+    @POST("v1/app/shopMallGoods/APPCancel")
     @FormUrlEncoded
     suspend fun orderCancel(
         @Field("orderId") orderId: Int?,
@@ -205,7 +234,7 @@ interface ApiService {
     ): GxyApiResult<Any>
 
     //支付订单
-    @POST("order/orderPayment")
+    @POST("v1/app/shopMallGoods/orderPayment")
     @FormUrlEncoded
     suspend fun payment(
         @Field("orderCode") orderCode: String?,
@@ -213,7 +242,7 @@ interface ApiService {
     ): GxyApiResult<Any>
 
     //获取自提点
-    @POST("order/getAPPAddress")
+    @POST("v1/app/shopMallGoods/getAPPAddress")
     @FormUrlEncoded
     suspend fun getAPPAddress(
         @Field("goodsId") goodsId: Int?,
@@ -221,7 +250,7 @@ interface ApiService {
     ): GxyApiResult<MutableList<ConfirmAddressEntity>?>
 
     //自提点选择
-    @POST("order/shipmentsApp")
+    @POST("v1/app/shopMallGoods/shipmentsApp")
     @FormUrlEncoded
     suspend fun shipmentsApp(
         @Field("orderId") orderId: Int?,
@@ -232,10 +261,9 @@ interface ApiService {
         @Field("driveName") driveName: String? = appUserName
     ): GxyApiResult<String?>
 
-    @POST("order/getShippingFeeOrOilBlance")
-    @FormUrlEncoded
+    @GET("v1/app/shopMallGoods/getShippingFeeOrOilBalance")
     suspend fun getShippingFeeOrOilBlance(
-        @Field("tel") tel: String? = appUserTel,
-        @Field("platformId") platformId: Int = appPlatformId
+        @Query("tel") tel: String? = appUserTel,
+        @Query("platformId") platformId: Int = appPlatformId
     ): GxyApiResult<RateEntity>
 }

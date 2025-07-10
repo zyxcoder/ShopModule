@@ -11,6 +11,7 @@ import kotlinx.coroutines.Job
 class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEntity>() {
 
     val payOrderSuccess = MutableLiveData<Boolean>()
+    val orderAfterSalesSuccessSuccess = MutableLiveData<Boolean>()
     val cancelOrderSuccess = MutableLiveData<Boolean>()
     override var pageSize = 10
 
@@ -53,6 +54,17 @@ class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEnti
             loadingChange.showDialog.value = ""
             apiService.payment(orderCode = orderCode).apiNoData()
             payOrderSuccess.value = true
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
+
+    fun orderAfterSales(cancelReason: String?, orderId: Int?) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            apiService.orderAfterSales(cancelReason = cancelReason, orderId = orderId).apiNoData()
+            orderAfterSalesSuccessSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {
             loadingChange.dismissDialog.value = true

@@ -429,7 +429,8 @@
         android:layout_height="64dp"
         android:background="@color/white"
         android:elevation="8dp"
-        android:visibility="visible">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tvServe"

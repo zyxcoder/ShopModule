@@ -2,28 +2,30 @@ package com.zkxy.shop.common.dialog
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import com.gxy.common.common.dialog.CenterDialog
-import com.zkxy.shop.databinding.DialogCancelOrderBinding
+import com.zkxy.shop.databinding.DialogCancelBinding
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 
-class CreateOrderDialog(
+class CancelDialog(
     context: Context,
     var onConfirmClickListener: (() -> Unit)? = null,
-    private val message: String = "确定下单该商品？"
+    var onCancelClickListener: (() -> Unit)? = null,
+    private val message: String? = "确定取消此订单？"
 ) : CenterDialog(context) {
 
-    private lateinit var mBinding: DialogCancelOrderBinding
+    private lateinit var mBinding: DialogCancelBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DialogCancelOrderBinding.inflate(layoutInflater)
+        mBinding = DialogCancelBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setCanceledOnTouchOutside(true)
 
         mBinding.apply {
-            tvSubMessage.visibility = View.GONE
             tvMessage.text = message
-            tvCancel.onContinuousClick { dismiss() }
+            tvCancel.onContinuousClick {
+                onCancelClickListener?.invoke()
+                dismiss()
+            }
             tvConfirm.onContinuousClick {
                 onConfirmClickListener?.invoke()
                 dismiss()

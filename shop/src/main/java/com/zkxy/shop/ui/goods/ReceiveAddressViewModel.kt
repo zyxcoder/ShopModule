@@ -79,7 +79,7 @@ class ReceiveAddressViewModel : BaseViewModel() {
             apiService.addUserAddress(
                 address = address,
                 administrativeRegion = administrativeRegion
-            ).apiData()
+            ).apiNoData()
             addAddressSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {

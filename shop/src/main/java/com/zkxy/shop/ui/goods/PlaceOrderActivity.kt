@@ -292,7 +292,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                             }
                         }
                     } else {
-                        CreateOrderDialog(this@PlaceOrderActivity) {
+                        CreateOrderDialog(this@PlaceOrderActivity, onConfirmClickListener = {
                             mViewModel.createOrder(
                                 consignee = inputPerson.getContent(),
                                 consigneeTel = inputTel.getPhone(),
@@ -303,7 +303,7 @@ class PlaceOrderActivity : BaseViewBindActivity<PlaceOrderViewModel, ActivityPla
                                 payWay = payWay,
                                 deliveryAddress = address
                             )
-                        }.show()
+                        }).show()
                     }
                 }
             }
