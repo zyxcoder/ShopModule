@@ -230,9 +230,42 @@ class OrderDetailsActivity :
 
                         7 -> {
                             clServe.visibility = View.VISIBLE
-                            if (it.afterSaleState == 4) {
+                            if (it.afterSaleState == 4 && it.afterSaleType == 1) {
                                 tvRemainder.visibility = View.VISIBLE
                                 tvRemainder.text = "请在7日内退回商品，退货成功后完成退款"
+                            }
+
+                            vsCancelInfoLayout.apply {
+                                val color: Int
+                                //退款进度：1处理中，2已退款，3已拒绝
+                                tvRefundProgress.text = when (it.refundProgress) {
+                                    1 -> {
+                                        color = Color.parseColor("#566BEB")
+                                        "退款处理中"
+                                    }
+
+                                    2 -> {
+                                        color = Color.parseColor("#00B578")
+                                        "退款成功"
+                                    }
+
+                                    3 -> {
+                                        color = Color.parseColor("#FA5151")
+                                        "已拒绝"
+                                    }
+
+                                    else -> {
+                                        color = Color.parseColor("#566BEB")
+                                        "退款处理中"
+                                    }
+                                }
+                                tvRefundProgress.setTextColor(color)
+                                if (it.refundDesc.isNullOrEmpty()) {
+                                    clDes.isVisible = false
+                                }
+                                tvRefundDesc.text = it.refundDesc
+                                tvRefundTime.setMessageText(it.refundTime)
+                                tvRefundAmount.setMessageText(it.paymentAmount)
                             }
                         }
 

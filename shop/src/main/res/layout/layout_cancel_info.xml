@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/dp_10"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
     android:background="@drawable/round_solid_white_8"
     android:orientation="vertical">
 
@@ -60,6 +60,7 @@
         app:title="退款金额" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDes"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"
@@ -90,14 +91,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33000000"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:background="#33000000" />
 
     <com.gxy.common.view.InputLayout
         android:id="@+id/tvRefundTime"

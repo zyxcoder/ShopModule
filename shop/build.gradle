@@ -47,5 +47,5 @@ dependencies {
     // kotlin扩展（可选）
 //    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
 //    implementation 'io.github.razerdp:BasePopup:3.2.1'
-    api 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
 }

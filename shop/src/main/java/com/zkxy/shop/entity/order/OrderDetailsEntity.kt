@@ -15,6 +15,7 @@ data class OrderDetailsEntity(
     val expressNumber: String?,
     val goodsId: Int?,
     val afterSaleState: Int?,
+    val afterSaleType: Int?,
     val goodsName: String?,
     val goodsNum: Int?,
     val goodsSource: String?,

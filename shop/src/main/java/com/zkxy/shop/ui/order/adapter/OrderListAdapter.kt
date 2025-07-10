@@ -165,8 +165,10 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                             }
 
                             4 -> {
-                                tvRemainder.visibility = View.VISIBLE
-                                tvRemainder.text = "请在7日内退回商品，退货成功后完成退款"
+                                if (item.afterSaleType == 1) {
+                                    tvRemainder.visibility = View.VISIBLE
+                                    tvRemainder.text = "请在7日内退回商品，退货成功后完成退款"
+                                }
                                 "退货/退款中"
                             }
 
@@ -182,7 +184,8 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                                 "待平台处理"
                             }
                         }
-                        tvKdName.text = "订单编号：${item.orderCode}\n退货类型：${if (item.afterSaleType ==1)"退货" else "退款"}"
+                        tvKdName.text =
+                            "订单编号：${item.orderCode}\n退货类型：${if (item.afterSaleType == 1) "退货" else "退款"}"
                         tvDeliverTime.text = "申请时间：${item.afterSaleApplyTime ?: ""}"
                         //afterSaleType 1退货 2退款  申请时间afterSaleApplyTime
                     } else {
