@@ -15,6 +15,7 @@ import com.zkxy.shop.entity.goods.RateEntity
 import com.zkxy.shop.entity.home.GoodsEntity
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.entity.home.UserPointEntity
+import com.zkxy.shop.entity.order.AfterSaleDetailEntity
 import com.zkxy.shop.entity.order.ConfirmAddressEntity
 import com.zkxy.shop.entity.order.OrderDetailsEntity
 import com.zkxy.shop.entity.order.OrderListEntity
@@ -266,4 +267,13 @@ interface ApiService {
         @Query("tel") tel: String? = appUserTel,
         @Query("platformId") platformId: Int = appPlatformId
     ): GxyApiResult<RateEntity>
+
+    /**
+     * 售后详情
+     */
+    @POST("/v1/app/shopMallGoods/orderAfterSalesDetails")
+    @FormUrlEncoded
+    suspend fun orderAfterSalesDetails(
+        @Field("orderId") orderId: Int
+    ): GxyApiResult<AfterSaleDetailEntity>
 }

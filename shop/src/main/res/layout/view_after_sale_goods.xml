@@ -41,6 +41,7 @@
         android:layout_marginTop="2dp"
         android:text="900积分+0.99元"
         android:textSize="14sp"
+        android:textColor="#fa5151"
         app:layout_constraintBottom_toTopOf="@+id/tvCount"
         app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
         app:layout_constraintRight_toRightOf="parent"

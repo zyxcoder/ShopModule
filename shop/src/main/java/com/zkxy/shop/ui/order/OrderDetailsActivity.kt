@@ -86,6 +86,12 @@ class OrderDetailsActivity :
                 copyText(detailsEntity?.orderCode ?: "")
                 showToast("复制成功")
             }
+            tvServe.onContinuousClick {
+                AfterSaleDetailActivity.startActivity(
+                    context = this@OrderDetailsActivity,
+                    orderId = orderId
+                )
+            }
         }
     }
 

@@ -8,6 +8,7 @@
     app:toolbar_themecolor="@color/white">
 
     <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
+        android:id="@+id/consecutiveScrollerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -36,6 +37,7 @@
 
 
         <Space
+            android:id="@+id/spaceRefundAddress"
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
