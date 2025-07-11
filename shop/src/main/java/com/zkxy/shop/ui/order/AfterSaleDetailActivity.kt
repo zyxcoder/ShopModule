@@ -158,13 +158,17 @@ class AfterSaleDetailActivity :
 
                             2 -> {
                                 //已拒绝
+                                tvRefundClose.text =
+                                    if (it.afterSaleType == 1) "退货申请已关闭" else "退款申请已关闭"
                                 tvRefundCloseDesc.text =
                                     "平台已拒绝您的售后，售后保障期内，您可以重新发起售后申请"
-                                tvRejectReason.text = "拒绝原因：${it.refundRefuseReason}"
+                                tvRejectReason.text = "拒绝原因：${it.refundRefuseReason ?: ""}"
                             }
 
                             3 -> {
                                 //申请撤销
+                                tvRefundClose.text =
+                                    if (it.afterSaleType == 1) "退货申请已关闭" else "退款申请已关闭"
                                 tvRefundCloseDesc.text =
                                     "您已主动取消售后，售后保障期内，您可以重新发起售后申请"
                                 clRejectReason.isVisible = false
