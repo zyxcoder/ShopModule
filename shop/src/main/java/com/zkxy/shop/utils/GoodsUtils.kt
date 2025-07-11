@@ -4,7 +4,9 @@ import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
+import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import androidx.annotation.ColorInt
 import com.zkxy.shop.ext.normalFormat
 
 /**
@@ -16,6 +18,8 @@ fun formatProductInfo(
     points: Double?,
     mainTextSize: Int = 16,
     minorTextSize: Int = 12,
+    isNeedSpace: Boolean = true,
+    @ColorInt chineseTextColor: Int? = null
 ): SpannableStringBuilder {
     val spannableString = SpannableStringBuilder()
 
@@ -46,23 +50,36 @@ fun formatProductInfo(
             spannableString.setSpan(
                 StyleSpan(Typeface.BOLD), 0, pointsText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-            // 添加空格表示2dp间隔
-            spannableString.append("\u00A0") // 在积分和“积分”之间添加2个空格
+            if (isNeedSpace) {
+                // 添加空格表示2dp间隔
+                spannableString.append("\u00A0") // 在积分和“积分”之间添加2个空格
+            }
+
+            val spaceLength = if (isNeedSpace) 1 else 0
 
             // 添加“积分”字样
             spannableString.append("积分")
             spannableString.setSpan(
                 AbsoluteSizeSpan(minorTextSize, true), // “积分”文本大小为12sp
-                pointsText.length + 1, // 注意这个计算
-                pointsText.length + 3, // 更新长度
+                pointsText.length + spaceLength, // 注意这个计算
+                pointsText.length + 2 + spaceLength, // 更新长度
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
+            chineseTextColor?.let { color ->
+                spannableString.setSpan(
+                    ForegroundColorSpan(color), pointsText.length + spaceLength, // 注意这个计算
+                    pointsText.length + 2 + spaceLength, // 更新长度
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
         }
     }
 
     // 添加空格表示2dp间隔，如果两者都有值
     if (tempPoints != null && tempPoints > 0 && tempPrice != null) {
-        spannableString.append("\u00A0") // 在积分部分和价格之间添加2个空格
+        if (isNeedSpace) {
+            spannableString.append("\u00A0") // 在积分部分和价格之间添加2个空格
+        }
     }
 
     // 处理价格部分
@@ -105,8 +122,10 @@ fun formatProductInfo(
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
-            // 添加空格表示2dp间隔
-            spannableString.append("\u00A0") // 在价格和“元”之间添加2个空格
+            if (isNeedSpace) {
+                // 添加空格表示2dp间隔
+                spannableString.append("\u00A0") // 在价格和“元”之间添加2个空格
+            }
 
             // 添加“元”字样
             spannableString.append("元")
@@ -114,6 +133,14 @@ fun formatProductInfo(
                 AbsoluteSizeSpan(minorTextSize, true), // “元”文本大小为12sp
                 spannableString.length - 1, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
+            chineseTextColor?.let { color ->
+                spannableString.setSpan(
+                    ForegroundColorSpan(color),
+                    spannableString.length - 1,
+                    spannableString.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
         }
     }
     return spannableString

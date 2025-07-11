@@ -38,6 +38,8 @@ data class AfterSaleDetailEntity(
     val orderPlacerTel: String?,
     val payPoints: Double?,
     val payment: Double?,
+    val platformPoints: Double?,
+    val platformMoney: Double?,
     val refundConfirmer: Any?,
     val refundConfirmerId: Int?,
     val refundConfirmerTime: String?,

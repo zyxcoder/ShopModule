@@ -17,8 +17,10 @@ import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
 import com.zkxy.shop.databinding.ActivityAfterSaleDetailBinding
 import com.zkxy.shop.entity.goods.Address
+import com.zkxy.shop.ext.copyText
 import com.zkxy.shop.ui.goods.adapter.ZtPointAdapter
 import com.zkxy.shop.utils.formatProductInfo
+import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 import com.zyxcoder.mvvmroot.utils.ImageOptions
 import com.zyxcoder.mvvmroot.utils.loadImage
@@ -49,6 +51,22 @@ class AfterSaleDetailActivity :
                 mViewModel.fetchOrderAfterSalesDetails(
                     orderId = intent.getIntExtra(ORDER_ID, 0),
                 )
+            }
+            viewAfterSaleGoods.apply {
+                ivCopyOrderCode.onContinuousClick {
+                    copyText(mViewModel.afterSaleDetailData.value?.orderCode ?: "")
+                    showToast("复制订单编号成功")
+                }
+                ivCopyAfterSaleCode.onContinuousClick {
+                    copyText(mViewModel.afterSaleDetailData.value?.saleCode ?: "")
+                    showToast("复制售后编号成功")
+                }
+            }
+            viewRefundAddress.apply {
+                ivCopyName.onContinuousClick {
+                    copyText(mViewModel.afterSaleDetailData.value?.saleAddress?.saleAddress ?: "")
+                    showToast("复制地址成功")
+                }
             }
             viewShopZt.apply {
                 layoutZtList.updateLayoutParams<MarginLayoutParams> {
@@ -166,12 +184,16 @@ class AfterSaleDetailActivity :
                             fallback = com.gxy.common.R.drawable.ps_image_placeholder
                         })
                         tvGoodsName.text = it.goodsName
-                        //todo 修改数据
                         tvPriceAndPoint.text = formatProductInfo(
-                            points = it.payPoints,
-                            price = it.payment,
+                            points = it.platformPoints,
+                            price = it.platformMoney,
                             mainTextSize = 14,
-                            minorTextSize = 14
+                            minorTextSize = 14,
+                            isNeedSpace = false,
+                            chineseTextColor = ContextCompat.getColor(
+                                this@AfterSaleDetailActivity,
+                                R.color.color_04091A
+                            )
                         )
                         tvCount.text = "申请数量：${it.goodsNum ?: 0}"
                         tvOrderCode.text = "订单编号：${it.orderCode}"
@@ -180,7 +202,8 @@ class AfterSaleDetailActivity :
                             points = it.payPoints,
                             price = it.payment,
                             mainTextSize = 12,
-                            minorTextSize = 12
+                            minorTextSize = 12,
+                            isNeedSpace = false
                         )
                         tvRefundType.text =
                             "售后类型：${if (it.afterSaleType == 1) "退货" else "退款"}"
@@ -200,6 +223,7 @@ class AfterSaleDetailActivity :
             placeOrderEntity.observe(this@AfterSaleDetailActivity) {
                 mViewBind.apply {
                     viewShopZt.apply {
+                        layoutZtList.isVisible = !it.addressList.isNullOrEmpty()
                         ZtPointAdapter().apply {
                             rlvZt.adapter = this
                             setNewInstance(it.addressList)
