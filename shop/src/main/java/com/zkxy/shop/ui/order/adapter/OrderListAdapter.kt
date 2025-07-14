@@ -154,7 +154,7 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                     if (isAfterSales) {//售后列表
                         //平台售后状态：1待平台处理; 2已拒绝; 3申请撤销; 4退货/退款中; 5退款失败; 6退款完成
                         tvOrderCode.text = "售后编号：${item.saleCode}"
-                        tvStatus.text = when (item.afterSaleState) {
+                        tvStatus.text = when (item.tmsAfterSaleState) {
                             1 -> {
                                 tvCancelAfterSales.visibility = View.VISIBLE
                                 "待平台处理"
