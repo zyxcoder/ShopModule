@@ -87,49 +87,26 @@
                 tools:text="福临门中粮集团东北优质大米10kg出口品质好大米中粮集团荣誉出品国家免检产品 优质好..." />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="购买限制"
+                android:text="配送方式"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
 
             <TextView
-                android:id="@+id/tvNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="#ff666666"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5"
-                tools:text="不限/每人 5 件" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="配送方式"
-                android:textColor="#ff666666"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <TextView
                 android:id="@+id/tvDeliveryMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ff666666"
+                android:layout_marginStart="8dp"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                app:layout_constraintStart_toStartOf="@+id/tvNum"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toTopOf="@+id/textView6"
                 tools:text="快递/自提" />
 

@@ -123,7 +123,6 @@ class GoodsDetailsActivity :
                 mViewBind.tvGoodsName.text = goodsName
                 mViewBind.tvDes.text = goodsDetails
                 mViewBind.tvDeliveryMode.text = if (deliveryMode == 2) "自提" else "快递"
-                mViewBind.tvNum.text = if (buyEmption == -1) "不限" else "每人${buyEmption}件"
                 mViewBind.tvPoints.text =
                     formatProductInfo(goodsMoneyPrice, goodsScorePrice, mainTextSize = 24)
             }

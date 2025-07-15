@@ -144,8 +144,12 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                     tvStatus.setTextColor(color999999)
                     tvDeliverTime.visibility = View.VISIBLE
                     tvKdName.visibility = View.VISIBLE
-                    tvKdName.text = "取消原因：${item.orderDesc}"
                     tvDeliverTime.text = "取消时间：${item.cancelTime ?: ""}"
+                    if (item.afterSaleState == null) {
+                        tvKdName.text = "取消原因：${item.orderDesc}"
+                    } else {
+                        tvKdName.text = "退款进度：${item.salesProgress}\n取消原因：${item.orderDesc}"
+                    }
                 }
 
                 7 -> {

@@ -48,6 +48,7 @@ data class OrderListEntity(
     val priceRatio: Double?,
     var statusId: Int?,
     var tmsAfterSaleState: Int?,
+    var afterSaleState: Int?,
     val statusName: String?,
     val totalPoints: Int?,
     val afterSaleType: Int?,

@@ -69,6 +69,7 @@
                 android:layout_marginTop="@dimen/dp_4"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvTopPoints"
                 app:layout_constraintTop_toBottomOf="@+id/tvTopPoints"
