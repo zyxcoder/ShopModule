@@ -1,6 +1,5 @@
 package com.zkxy.shop.ui.home.adapter
 
-import androidx.core.view.isVisible
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemGoodsBinding
 import com.zkxy.shop.entity.home.GoodsEntity
@@ -31,7 +30,6 @@ class GoodsAdapter : BaseViewBindingAdapter<GoodsEntity, ItemGoodsBinding>(
                 centerCrop = false
             })
             tvGoodsName.text = item.goodsName
-            clNoInventory.isVisible = (item.goodsCurrentStock ?: 0) == 0
             tvGoodsPrice.text = formatProductInfo(item.goodsPrice, item.goodsPoint)
         }
     }
