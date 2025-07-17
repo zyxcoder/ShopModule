@@ -135,8 +135,8 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                             "快递信息：${item.logisticsCompany}\n快递单号：${item.expressNumber}"
                         tvDeliverTime.text = "发货时间：${item.shippingTime ?: ""}"
                     } else {//自提
-                        tvKdName.text = "自提点：<b>${item.dAddress}</b>".parseAsHtml()
-                        tvDeliverTime.text = "提货时间：${item.dTime ?: ""}"
+                        tvKdName.text = "自提点：<b>${item.deliveryGoodsAddress}</b>".parseAsHtml()
+                        tvDeliverTime.text = "提货时间：${item.deliveryGoodsTime ?: ""}"
                     }
                 }
 

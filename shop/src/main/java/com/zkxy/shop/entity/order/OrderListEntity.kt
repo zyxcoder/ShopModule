@@ -37,8 +37,6 @@ data class OrderListEntity(
     val cancelTime: String?,
     val afterSaleApplyTime: String?,
     val shipmentsAddress: String?,
-    val dTime: String?,
-    val dAddress: String?,
     val deliveryGoodsAddress: String?,
     val afterSaleStatusName: String?,
     val deliveryGoodsTime: String?,
