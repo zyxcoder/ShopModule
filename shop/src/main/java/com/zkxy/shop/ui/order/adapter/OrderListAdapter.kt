@@ -112,6 +112,7 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                 }
 
                 1, 2 -> {
+                    tvCancel.visibility = View.VISIBLE
                     tvStatus.setBackgroundResource(R.drawable.shape_ffe9db_2)
                     tvStatus.setTextColor(colorFB7E2B)
                     if (item.deliveryType == 1) {//快递
