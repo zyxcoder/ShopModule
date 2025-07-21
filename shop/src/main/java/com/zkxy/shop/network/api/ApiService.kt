@@ -168,7 +168,7 @@ interface ApiService {
     /**
      * 支付密码
      */
-    @GET("v1/biz/mall/checkPwd")
+    @GET("v1/app/shopMallGoods/checkPwd")
     suspend fun checkUserPassWord(
         @Query("platformId") platformId: Int = appPlatformId,
         @Query("tel") phoneNumber: String? = appUserTel,
