@@ -168,12 +168,11 @@ interface ApiService {
     /**
      * 支付密码
      */
-    @POST("order/checkUserPassWord")
-    @FormUrlEncoded
+    @GET("v1/biz/mall/checkPwd")
     suspend fun checkUserPassWord(
-        @Field("platformId") platformId: Int = appPlatformId,
-        @Field("tel") phoneNumber: String? = appUserTel,
-        @Field("password") password: String?
+        @Query("platformId") platformId: Int = appPlatformId,
+        @Query("tel") phoneNumber: String? = appUserTel,
+        @Query("password") password: String?
     ): GxyApiResult<String>
 
     //订单列表
