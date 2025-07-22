@@ -170,6 +170,7 @@ interface ApiService {
      */
     @GET("v1/app/shopMallGoods/checkPwd")
     suspend fun checkUserPassWord(
+        @Query("platformId") platformId: Int = appPlatformId,
         @Query("userTel") phoneNumber: String? = appUserTel,
         @Query("payPwd") password: String?
     ): GxyApiResult<String>
