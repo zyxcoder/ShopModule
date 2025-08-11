@@ -99,7 +99,6 @@
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <com.gxy.common.view.InputLayout
         android:id="@+id/tvRefundTime"
         android:layout_width="match_parent"
@@ -107,6 +106,15 @@
         app:is_input="false"
         app:is_show_bottom_line="false"
         app:is_show_enter="false"
-        app:title="处理时间" />
+        app:title="申请时间" />
 
+    <com.gxy.common.view.InputLayout
+        android:id="@+id/tvSuccessTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:is_input="false"
+        app:is_show_bottom_line="false"
+        app:is_show_enter="false"
+        app:title="退款时间" />
 </LinearLayout>

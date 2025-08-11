@@ -235,6 +235,8 @@ class OrderDetailsActivity :
 
                                     6 -> {
                                         color = "#FA5151".toColorInt()
+                                        tvSuccessTime.isVisible = true
+                                        tvSuccessTime.setMessageText(it.refundTime)
                                         "退款成功"
                                     }
 
@@ -246,7 +248,7 @@ class OrderDetailsActivity :
 
                                 tvRefundProgress.setTextColor(color)
                                 tvRefundDesc.text = it.refundDesc
-                                tvRefundTime.setMessageText(it.refundTime)
+                                tvRefundTime.setMessageText(it.afterSaleApplyTime)
                                 tvRefundAmount.setMessageText(it.paymentAmount)
                             }
                         }
@@ -283,7 +285,7 @@ class OrderDetailsActivity :
 
                                     5 -> {
                                         color = "#566BEB".toColorInt()
-                                        "5退款失败"
+                                        "退款失败"
                                     }
 
                                     6 -> {
