@@ -2,7 +2,6 @@ package com.zkxy.shop.ui.order
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -205,28 +204,46 @@ class OrderDetailsActivity :
                             tvStatus.setTextColor(color999999)
                             vsCancelInfoLayout.apply {
                                 val color: Int
-                                //退款进度：1处理中，2已退款，3已拒绝
-                                tvRefundProgress.text = when (it.refundProgress) {
+
+//                              afterSaleState  ：1待平台处理; 2已拒绝; 3申请撤销; 4退货/退款中; 5退款失败; 6退款完成
+
+                                tvRefundProgress.text = when (it.afterSaleState) {
                                     1 -> {
-                                        color = Color.parseColor("#566BEB")
-                                        "退款处理中"
+                                        color = "#566BEB".toColorInt()
+                                        "1待平台处理"
                                     }
 
                                     2 -> {
-                                        color = Color.parseColor("#00B578")
-                                        "退款成功"
-                                    }
-
-                                    3 -> {
-                                        color = Color.parseColor("#FA5151")
+                                        color = "#FA5151".toColorInt()
                                         "已拒绝"
                                     }
 
+                                    3 -> {
+                                        color = "#566BEB".toColorInt()
+                                        "申请撤销"
+                                    }
+
+                                    4 -> {
+                                        color = "#566BEB".toColorInt()
+                                        "退货/退款中"
+                                    }
+
+                                    5 -> {
+                                        color = "#566BEB".toColorInt()
+                                        "5退款失败"
+                                    }
+
+                                    6 -> {
+                                        color = "#FA5151".toColorInt()
+                                        "退款成功"
+                                    }
+
                                     else -> {
-                                        color = Color.parseColor("#566BEB")
+                                        color = "#566BEB".toColorInt()
                                         "退款处理中"
                                     }
                                 }
+
                                 tvRefundProgress.setTextColor(color)
                                 tvRefundDesc.text = it.refundDesc
                                 tvRefundTime.setMessageText(it.refundTime)
@@ -243,25 +260,39 @@ class OrderDetailsActivity :
 
                             vsCancelInfoLayout.apply {
                                 val color: Int
-                                //退款进度：1处理中，2已退款，3已拒绝
-                                tvRefundProgress.text = when (it.refundProgress) {
+                                tvRefundProgress.text = when (it.afterSaleState) {
                                     1 -> {
-                                        color = Color.parseColor("#566BEB")
-                                        "退款处理中"
+                                        color = "#566BEB".toColorInt()
+                                        "1待平台处理"
                                     }
 
                                     2 -> {
-                                        color = Color.parseColor("#00B578")
-                                        "退款成功"
-                                    }
-
-                                    3 -> {
-                                        color = Color.parseColor("#FA5151")
+                                        color = "#FA5151".toColorInt()
                                         "已拒绝"
                                     }
 
+                                    3 -> {
+                                        color = "#566BEB".toColorInt()
+                                        "申请撤销"
+                                    }
+
+                                    4 -> {
+                                        color = "#566BEB".toColorInt()
+                                        "退货/退款中"
+                                    }
+
+                                    5 -> {
+                                        color = "#566BEB".toColorInt()
+                                        "5退款失败"
+                                    }
+
+                                    6 -> {
+                                        color = "#FA5151".toColorInt()
+                                        "退款成功"
+                                    }
+
                                     else -> {
-                                        color = Color.parseColor("#566BEB")
+                                        color = "#566BEB".toColorInt()
                                         "退款处理中"
                                     }
                                 }
