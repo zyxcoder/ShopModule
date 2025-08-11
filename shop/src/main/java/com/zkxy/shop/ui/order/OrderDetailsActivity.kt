@@ -303,7 +303,7 @@ class OrderDetailsActivity :
                                     clDes.isVisible = false
                                 }
                                 tvRefundDesc.text = it.refundDesc
-                                tvRefundTime.setMessageText(it.refundTime)
+                                tvRefundTime.setMessageText(it.afterSaleApplyTime)
                                 tvRefundAmount.setMessageText(it.paymentAmount)
                             }
                         }
