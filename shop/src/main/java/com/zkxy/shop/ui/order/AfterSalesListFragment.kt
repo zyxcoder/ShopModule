@@ -40,7 +40,7 @@ class AfterSalesListFragment(title: String) :
                 val orderListEntity = data[position]
                 AfterSaleDetailActivity.startActivity(
                     context = activity,
-                    orderId = orderListEntity.orderId ?: -1
+                    saleId = orderListEntity.saleId ?: -1
                 )
             }
         }

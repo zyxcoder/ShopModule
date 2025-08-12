@@ -38,9 +38,9 @@ class AfterSaleDetailActivity :
 
     companion object {
         private const val ORDER_ID = "order_id"
-        fun startActivity(context: Context?, orderId: Int) {
+        fun startActivity(context: Context?, saleId: Int) {
             context?.startActivity(Intent(context, AfterSaleDetailActivity::class.java).apply {
-                putExtra(ORDER_ID, orderId)
+                putExtra(ORDER_ID, saleId)
             })
         }
     }
@@ -49,7 +49,7 @@ class AfterSaleDetailActivity :
         mViewBind.apply {
             mPageLoadService = getLoadSir().register(consecutiveScrollerLayout) {
                 mViewModel.fetchOrderAfterSalesDetails(
-                    orderId = intent.getIntExtra(ORDER_ID, 0),
+                    saleId = intent.getIntExtra(ORDER_ID, 0),
                 )
             }
             viewAfterSaleGoods.apply {
@@ -77,7 +77,7 @@ class AfterSaleDetailActivity :
         }
 
         mViewModel.fetchOrderAfterSalesDetails(
-            orderId = intent.getIntExtra(ORDER_ID, 0)
+            saleId = intent.getIntExtra(ORDER_ID, 0)
         )
     }
 
@@ -162,7 +162,7 @@ class AfterSaleDetailActivity :
                                     if (it.afterSaleType == 1) "退货申请已关闭" else "退款申请已关闭"
                                 tvRefundCloseDesc.text =
                                     "平台已拒绝您的售后，售后保障期内，您可以重新发起售后申请"
-                                tvRejectReason.text = "拒绝原因：${it.refundRefuseReason ?: ""}"
+                                tvRejectReason.text = "拒绝原因：${it.afterSaleDesc ?: ""}"
                             }
 
                             3 -> {
