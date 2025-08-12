@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         shopInitArgument(
-            userTel = "18584896026",
+            userTel = "15032980899",
             loadLat = "103.55262001052857",
             loadLon = "30.481401271903536",
             userName = "lh",
-            userToken = ""
+            userToken = "Ou24ytwJiuqnbLhPV/j+ftOfvrBPnU1tB/MUVEYSw7c="
         )
 
         ShopConfigDialog(this){

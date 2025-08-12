@@ -26,7 +26,7 @@ class ShopConfigDialog(
         setContentView(mBinding.root)
         setCanceledOnTouchOutside(false)
         mBinding.apply {
-            llPhone.setPhone("18584896026")
+            llPhone.setPhone("15032980899")
             etHost.doAfterTextChanged {
                 textView.text = "http://${etHost.text}:${etPort.text}"
             }
@@ -42,8 +42,8 @@ class ShopConfigDialog(
                     return@onContinuousClick
                 }
                 modeBaseUrl = if (isTest) {
-                    "http://192.168.1.188:88/"
-//                    "http://39.103.61.134:9091/api/"
+//                    "http://192.168.1.188:88/"
+                    "http://39.103.61.134:51535/"
                 } else {
                     "http://${etHost.text}:${etPort.text}"
                 }

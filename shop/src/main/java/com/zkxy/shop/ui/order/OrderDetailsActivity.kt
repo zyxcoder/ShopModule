@@ -48,19 +48,24 @@ class OrderDetailsActivity :
     private var detailsEntity: OrderDetailsEntity? = null
 
     companion object {
-        const val ORDER_ID = "order_ID"
-        fun startActivity(context: Context?, orderId: Int?) {
+        const val ORDER_ID = "order_id"
+        const val SALE_ID = "sale_id"
+        fun startActivity(context: Context?, orderId: Int?, saleId: Int? = null) {
             context?.startActivity(Intent(context, OrderDetailsActivity::class.java).apply {
                 putExtra(ORDER_ID, orderId)
+                putExtra(SALE_ID, saleId)
             })
         }
     }
 
     private var isOpenWx = false
+    private var orderId: Int? = null
+    private var saleId: Int? = null
 
     override fun init(savedInstanceState: Bundle?) {
-        val orderId = intent.getIntExtra(ORDER_ID, -1)
-        mViewModel.orderDetails(orderId)
+        orderId = intent.getIntExtra(ORDER_ID, -1)
+        saleId = intent.getIntExtra(SALE_ID, -9999)
+        mViewModel.orderDetails(orderId, saleId)
         mViewBind.apply {
             tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
@@ -88,7 +93,7 @@ class OrderDetailsActivity :
             tvServe.onContinuousClick {
                 AfterSaleDetailActivity.startActivity(
                     context = this@OrderDetailsActivity,
-                    orderId = orderId
+                    orderId = orderId ?: -1
                 )
             }
         }
@@ -97,7 +102,7 @@ class OrderDetailsActivity :
     override fun onResume() {
         super.onResume()
         if (isOpenWx) {
-            mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+            mViewModel.orderDetails(orderId, saleId)
             isOpenWx = false
         }
     }
@@ -210,7 +215,7 @@ class OrderDetailsActivity :
                                 tvRefundProgress.text = when (it.afterSaleState) {
                                     1 -> {
                                         color = "#566BEB".toColorInt()
-                                        "1待平台处理"
+                                        "待平台处理"
                                     }
 
                                     2 -> {
@@ -230,7 +235,7 @@ class OrderDetailsActivity :
 
                                     5 -> {
                                         color = "#566BEB".toColorInt()
-                                        "5退款失败"
+                                        "退款失败"
                                     }
 
                                     6 -> {
@@ -265,7 +270,7 @@ class OrderDetailsActivity :
                                 tvRefundProgress.text = when (it.afterSaleState) {
                                     1 -> {
                                         color = "#566BEB".toColorInt()
-                                        "1待平台处理"
+                                        "待平台处理"
                                     }
 
                                     2 -> {
@@ -357,13 +362,13 @@ class OrderDetailsActivity :
             payOrderSuccess.observe(this@OrderDetailsActivity) {
                 if (it) {
                     showToast("支付成功")
-                    mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+                    mViewModel.orderDetails(orderId, saleId)
                 }
             }
             confirmAddressSuccess.observe(this@OrderDetailsActivity) {
                 if (it) {
                     showToast("提交成功")
-                    mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+                    mViewModel.orderDetails(orderId, saleId)
                     vsZtLayout.layoutZtList.isVisible = false
                 }
             }
@@ -402,7 +407,7 @@ class OrderDetailsActivity :
 
         override fun onFinish() {
             tv.visibility = View.GONE
-            mViewModel.orderDetails(intent.getIntExtra(ORDER_ID, -1))
+            mViewModel.orderDetails(orderId, saleId)
         }
     }
 

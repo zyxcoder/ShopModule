@@ -221,6 +221,15 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun orderDetails(
         @Field("orderId") orderId: Int?,
+        @Field("saleId") saleId: Int?,
+        @Field("platformId") platformId: Int = appPlatformId,
+    ): GxyApiResult<OrderDetailsEntity>
+
+    //订单详情
+    @POST("v1/app/shopMallGoods/detailsApp")
+    @FormUrlEncoded
+    suspend fun orderDetails(
+        @Field("orderId") orderId: Int?,
         @Field("platformId") platformId: Int = appPlatformId,
     ): GxyApiResult<OrderDetailsEntity>
 
