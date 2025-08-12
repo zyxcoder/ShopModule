@@ -38,10 +38,9 @@ class AfterSalesListFragment(title: String) :
 
             setOnItemClickListener { _, _, position ->
                 val orderListEntity = data[position]
-                OrderDetailsActivity.startActivity(
-                    activity,
-                    orderId = orderListEntity.orderId,
-                    saleId = orderListEntity.saleId
+                AfterSaleDetailActivity.startActivity(
+                    context = activity,
+                    orderId = orderListEntity.orderId ?: -1
                 )
             }
         }
