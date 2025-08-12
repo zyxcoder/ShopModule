@@ -93,7 +93,7 @@ class OrderDetailsActivity :
             tvServe.onContinuousClick {
                 AfterSaleDetailActivity.startActivity(
                     context = this@OrderDetailsActivity,
-                    saleId = saleId ?: -1
+                    orderId = orderId ?: -1
                 )
             }
         }

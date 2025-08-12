@@ -65,6 +65,15 @@ class OrderListFragment(title: String, private val status: Int) :
                                 }
                             }.show()
                         }
+
+                        R.id.tvCancelAfterSales -> {
+                            CancelDialog(this, onConfirmClickListener = {
+                                mViewModel.orderAfterSalesRevoke(
+                                    orderListEntity.orderId,
+                                    orderListEntity.saleId
+                                )
+                            }, message = "确定撤销售后申请？").show()
+                        }
                     }
                 }
             }
@@ -85,7 +94,7 @@ class OrderListFragment(title: String, private val status: Int) :
         mViewModel.apply {
             cancelOrderSuccess.observe(this@OrderListFragment) {
                 if (it) {
-                    activity?.showToast("取消成功")
+                    activity?.showToast("操作成功")
                     startSearch()
                 }
             }

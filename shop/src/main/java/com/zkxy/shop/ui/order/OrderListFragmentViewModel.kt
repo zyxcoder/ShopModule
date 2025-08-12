@@ -71,5 +71,15 @@ class OrderListFragmentViewModel : BaseCommonListFragmentViewModel<OrderListEnti
         })
     }
 
+    fun orderAfterSalesRevoke(orderId: Int?, saleId: Int?) {
+        request<Job>(block = {
+            loadingChange.showDialog.value = ""
+            apiService.orderAfterSalesRevoke(orderId = orderId, saleId = saleId).apiNoData()
+            cancelOrderSuccess.value = true
+            loadingChange.dismissDialog.value = true
+        }, error = {
+            loadingChange.dismissDialog.value = true
+        })
+    }
 
 }

@@ -38,9 +38,9 @@ class AfterSaleDetailActivity :
 
     companion object {
         private const val ORDER_ID = "order_id"
-        fun startActivity(context: Context?, saleId: Int) {
+        fun startActivity(context: Context?, orderId: Int) {
             context?.startActivity(Intent(context, AfterSaleDetailActivity::class.java).apply {
-                putExtra(ORDER_ID, saleId)
+                putExtra(ORDER_ID, orderId)
             })
         }
     }
@@ -49,7 +49,7 @@ class AfterSaleDetailActivity :
         mViewBind.apply {
             mPageLoadService = getLoadSir().register(consecutiveScrollerLayout) {
                 mViewModel.fetchOrderAfterSalesDetails(
-                    saleId = intent.getIntExtra(ORDER_ID, 0),
+                    orderId = intent.getIntExtra(ORDER_ID, 0),
                 )
             }
             viewAfterSaleGoods.apply {
@@ -77,7 +77,7 @@ class AfterSaleDetailActivity :
         }
 
         mViewModel.fetchOrderAfterSalesDetails(
-            saleId = intent.getIntExtra(ORDER_ID, 0)
+            orderId = intent.getIntExtra(ORDER_ID, 0)
         )
     }
 

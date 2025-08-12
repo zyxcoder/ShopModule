@@ -19,12 +19,11 @@ class AfterSaleDetailViewModel : BaseViewModel() {
     val afterSaleDetailData = MutableLiveData<AfterSaleDetailEntity>()
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
 
-    fun fetchOrderAfterSalesDetails(saleId: Int) {
+    fun fetchOrderAfterSalesDetails(orderId: Int) {
         request<Job>(block = {
             loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
             afterSaleDetailData.value =
-                apiService.orderAfterSalesDetails(saleId = saleId).apiData()
-
+                apiService.orderAfterSalesDetails(orderId = orderId).apiData()
             placeOrderEntity.value = apiService.goodsStockAddressSearch(
                 goodsId = afterSaleDetailData.value?.goodsId, deliveryMode = 2
             ).apiData()

@@ -282,6 +282,6 @@ interface ApiService {
     @POST("/v1/app/shopMallGoods/orderAfterSalesDetails")
     @FormUrlEncoded
     suspend fun orderAfterSalesDetails(
-        @Field("saleId") saleId: Int
+        @Field("orderId") orderId: Int
     ): GxyApiResult<AfterSaleDetailEntity>
 }
