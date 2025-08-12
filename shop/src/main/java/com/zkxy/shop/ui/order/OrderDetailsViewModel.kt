@@ -15,14 +15,9 @@ class OrderDetailsViewModel : BaseViewModel() {
     val orderDetailsEntity = MutableLiveData<OrderDetailsEntity>()
     val placeOrderEntity = MutableLiveData<PlaceOrderEntity>()
     val confirmAddressEntity = MutableLiveData<MutableList<ConfirmAddressEntity>?>()
-    fun orderDetails(orderId: Int?, saleId: Int?) {
+    fun orderDetails(orderId: Int?) {
         request<Job>(block = {
-            val apiData = if (saleId == -9999) {
-                apiService.orderDetails(orderId = orderId).apiData()
-            } else {
-                apiService.orderDetails(orderId = orderId, saleId = saleId).apiData()
-            }
-            apiData.apply {
+            apiService.orderDetails(orderId = orderId).apiData().apply {
                 orderDetailsEntity.value = this
                 if (statusId == 2 && !deliveryCode.isNullOrEmpty()) {
                     confirmAddressEntity.value =

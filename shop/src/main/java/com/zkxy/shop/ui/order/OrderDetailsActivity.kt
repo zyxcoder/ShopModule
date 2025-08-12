@@ -49,23 +49,19 @@ class OrderDetailsActivity :
 
     companion object {
         const val ORDER_ID = "order_id"
-        const val SALE_ID = "sale_id"
-        fun startActivity(context: Context?, orderId: Int?, saleId: Int? = null) {
+        fun startActivity(context: Context?, orderId: Int?) {
             context?.startActivity(Intent(context, OrderDetailsActivity::class.java).apply {
                 putExtra(ORDER_ID, orderId)
-                putExtra(SALE_ID, saleId)
             })
         }
     }
 
     private var isOpenWx = false
     private var orderId: Int? = null
-    private var saleId: Int? = null
 
     override fun init(savedInstanceState: Bundle?) {
         orderId = intent.getIntExtra(ORDER_ID, -1)
-        saleId = intent.getIntExtra(SALE_ID, -9999)
-        mViewModel.orderDetails(orderId, saleId)
+        mViewModel.orderDetails(orderId)
         mViewBind.apply {
             tvConsigneeTel.setIsInput(false)
             tvGoPay.onContinuousClick {
@@ -93,7 +89,7 @@ class OrderDetailsActivity :
             tvServe.onContinuousClick {
                 AfterSaleDetailActivity.startActivity(
                     context = this@OrderDetailsActivity,
-                    orderId = orderId ?: -1
+                    orderId = detailsEntity?.saleId ?: -1
                 )
             }
         }
@@ -102,7 +98,7 @@ class OrderDetailsActivity :
     override fun onResume() {
         super.onResume()
         if (isOpenWx) {
-            mViewModel.orderDetails(orderId, saleId)
+            mViewModel.orderDetails(orderId)
             isOpenWx = false
         }
     }
@@ -358,13 +354,13 @@ class OrderDetailsActivity :
             payOrderSuccess.observe(this@OrderDetailsActivity) {
                 if (it) {
                     showToast("支付成功")
-                    mViewModel.orderDetails(orderId, saleId)
+                    mViewModel.orderDetails(orderId)
                 }
             }
             confirmAddressSuccess.observe(this@OrderDetailsActivity) {
                 if (it) {
                     showToast("提交成功")
-                    mViewModel.orderDetails(orderId, saleId)
+                    mViewModel.orderDetails(orderId)
                     vsZtLayout.layoutZtList.isVisible = false
                 }
             }
@@ -403,7 +399,7 @@ class OrderDetailsActivity :
 
         override fun onFinish() {
             tv.visibility = View.GONE
-            mViewModel.orderDetails(orderId, saleId)
+            mViewModel.orderDetails(orderId)
         }
     }
 

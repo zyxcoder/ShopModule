@@ -26,6 +26,7 @@ data class OrderDetailsEntity(
     val orderCode: String?,
     val goodsImg: String?,
     val orderId: Int?,
+    val saleId: Int?,
     val orderPlacer: String?,
     val orderPlacerTel: String?,
     val paymentAmount: String?,
