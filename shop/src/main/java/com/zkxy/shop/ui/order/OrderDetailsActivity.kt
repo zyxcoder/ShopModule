@@ -117,7 +117,6 @@ class OrderDetailsActivity :
     override fun createObserver() {
         mViewModel.apply {
             orderDetailsEntity.observe(this@OrderDetailsActivity) {
-
                 detailsEntity = it
                 mViewBind.apply {
                     tvRemainder.visibility = View.GONE
@@ -209,9 +208,7 @@ class OrderDetailsActivity :
                             tvStatus.setTextColor(color999999)
                             vsCancelInfoLayout.apply {
                                 val color: Int
-
 //                              afterSaleState  ：1待平台处理; 2已拒绝; 3申请撤销; 4退货/退款中; 5退款失败; 6退款完成
-
                                 tvRefundProgress.text = when (it.afterSaleState) {
                                     1 -> {
                                         color = "#566BEB".toColorInt()
@@ -252,6 +249,7 @@ class OrderDetailsActivity :
                                 }
 
                                 tvRefundProgress.setTextColor(color)
+                                clDes.isVisible = !it.refundDesc.isNullOrEmpty()
                                 tvRefundDesc.text = it.refundDesc
                                 tvRefundTime.setMessageText(it.afterSaleApplyTime)
                                 tvRefundAmount.setMessageText(it.paymentAmount)
@@ -304,9 +302,7 @@ class OrderDetailsActivity :
                                     }
                                 }
                                 tvRefundProgress.setTextColor(color)
-                                if (it.refundDesc.isNullOrEmpty()) {
-                                    clDes.isVisible = false
-                                }
+                                clDes.isVisible = !it.refundDesc.isNullOrEmpty()
                                 tvRefundDesc.text = it.refundDesc
                                 tvRefundTime.setMessageText(it.afterSaleApplyTime)
                                 tvRefundAmount.setMessageText(it.paymentAmount)

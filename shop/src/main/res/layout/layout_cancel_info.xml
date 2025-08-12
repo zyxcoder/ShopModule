@@ -104,7 +104,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:is_input="false"
-        app:is_show_bottom_line="false"
         app:is_show_enter="false"
         app:title="申请时间" />
 

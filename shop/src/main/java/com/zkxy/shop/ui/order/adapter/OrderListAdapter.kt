@@ -201,10 +201,11 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                         tvStatus.text = item.statusName
                         if (item.statusName == "售后中") {
                             tvCancelAfterSales.visibility = View.VISIBLE
+                        }
+                        if (item.title == "1") {
                             tvRemainder.visibility = View.VISIBLE
                             tvRemainder.text = "请在7日内退回商品，退货成功后完成退款"
                         }
-
                     }
                 }
 
