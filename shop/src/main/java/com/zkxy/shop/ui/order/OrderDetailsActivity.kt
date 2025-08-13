@@ -288,7 +288,7 @@ class OrderDetailsActivity :
                                     }
 
                                     6 -> {
-                                        color = "#FA5151".toColorInt()
+                                        color = "#00B42A".toColorInt()
                                         "退款成功"
                                     }
 

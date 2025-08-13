@@ -165,6 +165,10 @@ class OrderListAdapter(private val isAfterSales: Boolean = false) :
                                 "待平台处理"
                             }
 
+                            3 -> {
+                                "申请撤销"
+                            }
+
                             2 -> {
                                 "已拒绝"
                             }
