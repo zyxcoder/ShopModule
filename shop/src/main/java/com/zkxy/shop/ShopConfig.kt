@@ -48,13 +48,15 @@ var appUserToken: String? = ""
 fun shopInit(
     application: Application,
     shopHttpUrl: String?,
-    formId: Int? = 2
+    formId: Int? = 2,
+    api: IWXAPI? = null
 ) {
     Fresco.initialize(application)
     LoadSir.beginBuilder().addCallback(DefaultLoadingCallback()).addCallback(EmptyCallback())
         .addCallback(ErrorCallback()).commit()
     modeBaseUrl = shopHttpUrl
     appPlatformId = formId ?: 2
+    wxApi = api
     isInit = true
 }
 
