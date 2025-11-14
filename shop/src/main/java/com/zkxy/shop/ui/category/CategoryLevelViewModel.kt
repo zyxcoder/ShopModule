@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.category
 
 import androidx.lifecycle.MutableLiveData
-import com.gxy.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadContentStatus
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType

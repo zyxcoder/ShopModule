@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.order
 
-import com.gxy.common.common.activitylist.BaseCommonListFragment
-import com.gxy.common.databinding.FragmentBaseCommonListBinding
+import com.zk.common.common.activitylist.BaseCommonListFragment
+import com.zk.common.databinding.FragmentBaseCommonListBinding
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.AfterSalesDialog
 import com.zkxy.shop.common.dialog.CancelDialog

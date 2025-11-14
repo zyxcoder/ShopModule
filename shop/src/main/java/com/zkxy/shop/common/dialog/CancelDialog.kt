@@ -2,7 +2,7 @@ package com.zkxy.shop.common.dialog
 
 import android.content.Context
 import android.os.Bundle
-import com.gxy.common.common.dialog.CenterDialog
+import com.zk.common.common.dialog.CenterDialog
 import com.zkxy.shop.databinding.DialogCancelBinding
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 

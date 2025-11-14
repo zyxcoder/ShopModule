@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputMateriel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:title="@string/materiel" />
 
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputUnitPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         app:title="@string/unit_price"
         app:unit_content="@string/unit_yuan" />
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         app:title="@string/contract_amount"
         app:unit_content="@string/unit_yuan" />
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputGrossAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

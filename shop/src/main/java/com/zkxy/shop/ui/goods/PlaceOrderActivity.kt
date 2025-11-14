@@ -9,7 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import com.gxy.common.base.BaseViewBindActivity
+import com.zk.common.base.BaseViewBindActivity
 import com.zkxy.shop.R
 import com.zkxy.shop.appUserName
 import com.zkxy.shop.appUserTel

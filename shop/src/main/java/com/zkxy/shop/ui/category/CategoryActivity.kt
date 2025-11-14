@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.common.loadsir.getLoadSir
-import com.gxy.common.common.loadsir.setLoadContentStatus
+import com.zk.common.base.BaseViewBindActivity
+import com.zk.common.common.loadsir.getLoadSir
+import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityCategoryBinding
 import com.zkxy.shop.entity.goods.AllGoodsType

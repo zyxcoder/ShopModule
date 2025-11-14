@@ -1,23 +1,43 @@
 package com.zkxy.shop.utils
 
-import android.content.Context
-import android.widget.ImageView
-import com.facebook.drawee.view.SimpleDraweeView
-import com.youth.banner.loader.ImageLoader
+import com.youth.banner.adapter.BannerImageAdapter
+import com.youth.banner.holder.BannerImageHolder
 import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zyxcoder.mvvmroot.utils.loadImage
 
-/**
- * @author zhangyuxiang
- * @date 2024/10/9
- */
-class HomeBannerImageLoader : ImageLoader() {
-    override fun displayImage(context: Context, path: Any, imageView: ImageView) {
-        val homeShopBannerEntity = path as? HomeShopBannerEntity
-        imageView.loadImage(homeShopBannerEntity?.imageUrl)
-    }
 
-    override fun createImageView(context: Context): ImageView {
-        return SimpleDraweeView(context)
+//
+//import android.content.Context
+//import android.widget.ImageView
+//import com.facebook.drawee.view.SimpleDraweeView
+//import com.youth.banner.loader.ImageLoader
+//import com.zkxy.shop.entity.home.HomeShopBannerEntity
+//import com.zyxcoder.mvvmroot.utils.loadImage
+//
+///**
+// * @author zhangyuxiang
+// * @date 2024/10/9
+// */
+//class HomeBannerImageLoader : ImageLoader() {
+//    override fun displayImage(context: Context, path: Any, imageView: ImageView) {
+//        val homeShopBannerEntity = path as? HomeShopBannerEntity
+//        imageView.loadImage(homeShopBannerEntity?.imageUrl)
+//    }
+//
+//    override fun createImageView(context: Context): ImageView {
+//        return SimpleDraweeView(context)
+//    }
+//}
+
+
+class HomeBannerImageLoader(datas: List<HomeShopBannerEntity>) :
+    BannerImageAdapter<HomeShopBannerEntity>(datas) {
+    override fun onBindView(
+        holder: BannerImageHolder,
+        data: HomeShopBannerEntity?,
+        position: Int,
+        size: Int
+    ) {
+        holder.imageView.loadImage(data?.imageUrl)
     }
 }

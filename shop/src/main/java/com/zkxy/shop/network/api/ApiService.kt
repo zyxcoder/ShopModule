@@ -1,6 +1,6 @@
 package com.zkxy.shop.network.api
 
-import com.gxy.common.network.api.ApiResult
+import com.zk.common.network.api.ApiResult
 import com.zkxy.shop.appLoadLat
 import com.zkxy.shop.appLoadLon
 import com.zkxy.shop.appPlatformId

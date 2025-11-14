@@ -3,6 +3,7 @@ package com.zkxy.shopmodule
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.zkxy.shop.shopInit
 import com.zkxy.shop.shopInitArgument
 import com.zkxy.shop.ui.home.ShopHomeActivity
 
@@ -25,11 +26,14 @@ class MainActivity : AppCompatActivity() {
             loadLat = "103.55262001052857",
             loadLon = "30.481401271903536",
             userName = "lh",
-            userToken = "Ou24ytwJiuqnbLhPV/j+ftOfvrBPnU1tB/MUVEYSw7c="
+            userToken = "tiKOJVhMc4KusnFQNpFFawQYsZhdaMPQ3gIh393vvx4="
         )
 
-        ShopConfigDialog(this){
-            ShopHomeActivity.startActivity(this)
-        }.show()
+//        ShopConfigDialog(this){
+//            ShopHomeActivity.startActivity(this)
+//        }.show()
+
+        ShopHomeActivity.startActivity(this)
+
     }
 }

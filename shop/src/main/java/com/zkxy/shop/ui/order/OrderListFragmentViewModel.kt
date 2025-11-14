@@ -1,8 +1,8 @@
 package com.zkxy.shop.ui.order
 
 import androidx.lifecycle.MutableLiveData
-import com.gxy.common.common.activitylist.BaseCommonListFragmentViewModel
-import com.gxy.common.network.api.ApiResult
+import com.zk.common.common.activitylist.BaseCommonListFragmentViewModel
+import com.zk.common.network.api.ApiResult
 import com.zkxy.shop.entity.order.OrderListEntity
 import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.ext.request

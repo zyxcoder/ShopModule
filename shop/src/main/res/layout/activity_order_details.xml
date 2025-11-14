@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gxy.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zk.common.view.ToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -238,7 +238,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/tvSpecName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
                 app:is_show_enter="false"
                 app:title="规格" />
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/tvNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -305,7 +305,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/tvPayType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -313,7 +313,7 @@
                 app:is_show_enter="false"
                 app:title="支付方式" />
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/tvConsignee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -321,14 +321,14 @@
                 app:is_show_enter="false"
                 app:title="联系人" />
 
-            <com.gxy.common.view.InputPhoneLayout
+            <com.zk.common.view.InputPhoneLayout
                 android:id="@+id/tvConsigneeTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 app:input_phone_title="联系方式" />
 
-            <com.gxy.common.view.InputLayout
+            <com.zk.common.view.InputLayout
                 android:id="@+id/tvDeliveryAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -447,4 +447,4 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.gxy.common.view.ToolbarLayout>
+</com.zk.common.view.ToolbarLayout>

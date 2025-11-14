@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
-import com.gxy.common.base.BaseViewBindActivity
+import com.zk.common.base.BaseViewBindActivity
 import com.zkxy.shop.databinding.ActivityReceiveAddressBinding
 import com.zkxy.shop.entity.goods.AddressBookEntity
 import com.zkxy.shop.utils.SelectAddressUtil

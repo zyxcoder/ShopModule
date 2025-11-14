@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.toColorInt
 import androidx.core.text.parseAsHtml
-import com.gxy.common.ext.copyText
+import com.zk.common.ext.copyText
 import com.zkxy.shop.R
 import com.zkxy.shop.databinding.ItemOrderListBinding
 import com.zkxy.shop.entity.order.OrderListEntity

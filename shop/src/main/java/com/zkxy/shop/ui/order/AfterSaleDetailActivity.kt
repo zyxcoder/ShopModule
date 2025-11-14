@@ -9,9 +9,9 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import com.gxy.common.base.BaseViewBindActivity
-import com.gxy.common.common.loadsir.getLoadSir
-import com.gxy.common.common.loadsir.setLoadContentStatus
+import com.zk.common.base.BaseViewBindActivity
+import com.zk.common.common.loadsir.getLoadSir
+import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
 import com.zkxy.shop.common.dialog.SelectNavigationDialog
@@ -183,9 +183,9 @@ class AfterSaleDetailActivity :
 
                     viewAfterSaleGoods.apply {
                         ivGoods.loadImage(url = it.goodsImg, imageOptions = ImageOptions().apply {
-                            error = com.gxy.common.R.drawable.ps_image_placeholder
-                            placeholder = com.gxy.common.R.drawable.ps_image_placeholder
-                            fallback = com.gxy.common.R.drawable.ps_image_placeholder
+                            error = com.zk.common.R.drawable.ps_image_placeholder
+                            placeholder = com.zk.common.R.drawable.ps_image_placeholder
+                            fallback = com.zk.common.R.drawable.ps_image_placeholder
                         })
                         tvGoodsName.text = it.goodsName
                         tvPriceAndPoint.text = formatProductInfo(

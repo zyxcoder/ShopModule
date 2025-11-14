@@ -63,7 +63,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/inputAccept"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

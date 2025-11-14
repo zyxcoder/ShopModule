@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="11dp">
 
-    <com.gxy.common.view.BottomDialogTextView
+    <com.zk.common.view.BottomDialogTextView
         android:id="@+id/tvClient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintRight_toLeftOf="@+id/tvMateriel"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.gxy.common.view.BottomDialogTextView
+    <com.zk.common.view.BottomDialogTextView
         android:id="@+id/tvMateriel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintRight_toLeftOf="@+id/tvFactory"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.gxy.common.view.BottomDialogTextView
+    <com.zk.common.view.BottomDialogTextView
         android:id="@+id/tvFactory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

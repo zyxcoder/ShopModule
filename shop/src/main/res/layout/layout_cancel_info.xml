@@ -51,7 +51,7 @@
         android:layout_marginEnd="14dp"
         android:background="#33000000" />
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/tvRefundAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/tvRefundTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
         app:is_show_enter="false"
         app:title="申请时间" />
 
-    <com.gxy.common.view.InputLayout
+    <com.zk.common.view.InputLayout
         android:id="@+id/tvSuccessTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -7,7 +7,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.gxy.common.BuildConfig
+import com.zk.common.BuildConfig
 import com.zkxy.shop.appUserToken
 import com.zkxy.shop.ext.isBoolean
 import com.zkxy.shop.ext.isDouble

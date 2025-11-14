@@ -28,7 +28,7 @@
         android:background="@color/common_color_bg"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <com.gxy.common.view.bottomdialog.BottomDialogSearchLayout
+    <com.zk.common.view.bottomdialog.BottomDialogSearchLayout
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

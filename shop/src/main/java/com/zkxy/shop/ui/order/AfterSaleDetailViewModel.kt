@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.order
 
 import androidx.lifecycle.MutableLiveData
-import com.gxy.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadContentStatus
 import com.zkxy.shop.entity.goods.PlaceOrderEntity
 import com.zkxy.shop.entity.order.AfterSaleDetailEntity
 import com.zkxy.shop.network.request.apiService

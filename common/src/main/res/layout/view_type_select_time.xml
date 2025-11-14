@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gxy.common.view.SelectTimeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zk.common.view.SelectTimeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/selectTime"
     android:layout_width="match_parent"
@@ -8,4 +8,4 @@
     app:selectTimeLayoutNeedViewLine="false"
     app:selectTimeLayoutTitle="@string/unloading_time">
 
-</com.gxy.common.view.SelectTimeLayout>
+</com.zk.common.view.SelectTimeLayout>

@@ -3,7 +3,7 @@ package com.zkxy.shopmodule
 import android.content.Context
 import android.os.Bundle
 import androidx.core.widget.doAfterTextChanged
-import com.gxy.common.common.dialog.CenterDialog
+import com.zk.common.common.dialog.CenterDialog
 import com.zkxy.shop.appUserTel
 import com.zkxy.shop.modeBaseUrl
 import com.zkxy.shopmodule.databinding.DialogSelectUrlBinding

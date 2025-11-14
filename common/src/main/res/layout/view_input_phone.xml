@@ -33,7 +33,7 @@
         app:layout_constraintLeft_toRightOf="@+id/tvTitle"
         app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
-    <com.gxy.common.view.EditTextPhone
+    <com.zk.common.view.EditTextPhone
         android:id="@+id/etPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -27,7 +27,7 @@
         android:background="@color/common_color_bg"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <com.gxy.common.view.bottomdialog.BottomDialogSearchLayout
+    <com.zk.common.view.bottomdialog.BottomDialogSearchLayout
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/viewLine" />
 
 
-    <com.gxy.common.view.refresh.HFSmartRefreshLayout
+    <com.zk.common.view.refresh.HFSmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -54,5 +54,5 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
             tools:listitem="@layout/item_bottom_select_list" />
-    </com.gxy.common.view.refresh.HFSmartRefreshLayout>
+    </com.zk.common.view.refresh.HFSmartRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

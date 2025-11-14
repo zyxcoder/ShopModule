@@ -23,9 +23,9 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:indicator_drawable_selected="@color/transparent"
-                app:indicator_drawable_unselected="@color/transparent"
-                app:is_auto_play="false"
+                app:banner_indicator_selected_color="@color/transparent"
+                app:banner_indicator_normal_color="@color/transparent"
+                app:banner_auto_loop="false"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
