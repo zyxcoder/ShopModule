@@ -10,8 +10,8 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.zk.common.base.BaseViewBindActivity
-import com.zk.common.common.loadsir.getLoadSir
-import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.common.loadsir.getZkLoadSir
+import com.zk.common.common.loadsir.setZkLoadContentStatus
 import com.zk.common.utils.getScreenWidth
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.R
@@ -64,10 +64,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
             tabLayoutGoods.isVisible = true
-            mPageLoadService = getLoadSir().register(clRoot) {
+            mPageLoadService = getZkLoadSir().register(clRoot) {
                 mViewModel.fetchCategory()
             }
-            mGoodsLoadService = getLoadSir().register(refreshLayout) {
+            mGoodsLoadService = getZkLoadSir().register(refreshLayout) {
                 fetchGoodsData(isFirst = true, isRefresh = false)
             }
             toobarLayout.onRightIconClickListener = {
@@ -307,10 +307,10 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
         super.createObserver()
         mViewModel.apply {
             loadCategoryContentStatus.observe(this@AllGoodsActivity) {
-                mPageLoadService.setLoadContentStatus(it)
+                mPageLoadService.setZkLoadContentStatus(it)
             }
             loadGoodsContentStatus.observe(this@AllGoodsActivity) {
-                mGoodsLoadService.setLoadContentStatus(it)
+                mGoodsLoadService.setZkLoadContentStatus(it)
             }
             categoryDataList.observe(this@AllGoodsActivity) {
                 it.forEach {

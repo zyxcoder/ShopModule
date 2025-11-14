@@ -3,8 +3,8 @@ package com.zk.common.base
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import com.zk.common.common.loadsir.getLoadSir
-import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.common.loadsir.getZkLoadSir
+import com.zk.common.common.loadsir.setZkLoadContentStatus
 import com.zk.common.databinding.DialogBottomChooseListBinding
 import com.zk.common.entity.common.BottomListEntity
 import com.zk.common.entity.common.BottomRequestEntity
@@ -63,7 +63,7 @@ class BottomChooseDialogFragment :
     override fun initView() {
         checkId = arguments?.getInt(CHECK_ID, Int.MIN_VALUE)
         mViewBind.apply {
-            mLoadService = getLoadSir().register(refreshLayout) {
+            mLoadService = getZkLoadSir().register(refreshLayout) {
                 mViewModel.fetchChooseList(
                     isFirst = true,
                     isRefresh = false,
@@ -162,7 +162,7 @@ class BottomChooseDialogFragment :
     override fun createObserver() {
         mViewModel.apply {
             loadZkContentStatus.observe(this@BottomChooseDialogFragment) {
-                mLoadService.setLoadContentStatus(it)
+                mLoadService.setZkLoadContentStatus(it)
             }
             bottomCommonOptionData.observe(this@BottomChooseDialogFragment) {
                 adapter.setNewInstance(it.toMutableList())

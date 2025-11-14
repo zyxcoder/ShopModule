@@ -9,8 +9,8 @@ import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.zk.common.base.BaseViewBindActivity
 import com.zk.common.common.loadsir.LoadZkContentStatus
-import com.zk.common.common.loadsir.getLoadSir
-import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.common.loadsir.getZkLoadSir
+import com.zk.common.common.loadsir.setZkLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityShopHomeBinding
 import com.zkxy.shop.isInit
@@ -53,7 +53,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
 
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
-            mLoadService = getLoadSir().register(viewLoad) {
+            mLoadService = getZkLoadSir().register(viewLoad) {
                 startSearch(isFirst = true, isRefresh = false, start = 0)
             }
 //            bannerHome.setImageLoader(HomeBannerImageLoader()).setOnBannerListener {
@@ -137,7 +137,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
             loadZkContentStatus.observe(this@ShopHomeActivity) {
                 mViewBind.clLoad.isVisible = it != LoadZkContentStatus.SUCCESS
                 mViewBind.rvGoods.isVisible = it == LoadZkContentStatus.SUCCESS
-                mLoadService.setLoadContentStatus(it)
+                mLoadService.setZkLoadContentStatus(it)
             }
             isRefreshing.observe(this@ShopHomeActivity) {
                 if (!it) {

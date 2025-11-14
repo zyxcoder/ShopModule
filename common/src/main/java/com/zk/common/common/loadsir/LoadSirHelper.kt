@@ -9,11 +9,11 @@ import com.kingja.loadsir.core.LoadSir
  * @date 2024/1/26
  */
 
-fun getLoadSir(): LoadSir {
+fun getZkLoadSir(): LoadSir {
     return LoadSir.getDefault()
 }
 
-fun LoadService<Any>.setLoadContentStatus(loadZkContentStatus: LoadZkContentStatus) {
+fun LoadService<Any>.setZkLoadContentStatus(loadZkContentStatus: LoadZkContentStatus) {
     when (loadZkContentStatus) {
         LoadZkContentStatus.DEFAULT_LOADING -> {
             showCallback(DefaultZkLoadingCallback::class.java)

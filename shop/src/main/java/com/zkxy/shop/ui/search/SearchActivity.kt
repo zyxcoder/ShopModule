@@ -9,8 +9,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.zk.common.base.BaseViewBindActivity
 import com.zk.common.common.loadsir.LoadZkContentStatus
-import com.zk.common.common.loadsir.getLoadSir
-import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.common.loadsir.getZkLoadSir
+import com.zk.common.common.loadsir.setZkLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.common.dialog.ShopCommonDialog
 import com.zkxy.shop.databinding.ActivitySearchBinding
@@ -43,7 +43,7 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
 
     override fun init(savedInstanceState: Bundle?) {
         mViewBind.apply {
-            mLoadService = getLoadSir().register(refreshLayout) {
+            mLoadService = getZkLoadSir().register(refreshLayout) {
                 mViewModel.fetchSearchData(
                     isFirst = true, start = 0, searchWord = shopSearchView.getSearchContent()
                 )
@@ -140,7 +140,7 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                 }
             }
             loadZkContentStatus.observe(this@SearchActivity) {
-                mLoadService.setLoadContentStatus(it)
+                mLoadService.setZkLoadContentStatus(it)
                 mViewBind.clSearchHistory.isVisible = false
                 mViewBind.clSearchResult.isVisible = true
                 mViewBind.tvResultCount.isVisible = it == LoadZkContentStatus.SUCCESS

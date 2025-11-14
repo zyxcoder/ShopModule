@@ -5,8 +5,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.zk.common.base.BaseViewBindFragment
-import com.zk.common.common.loadsir.getLoadSir
-import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.common.loadsir.getZkLoadSir
+import com.zk.common.common.loadsir.setZkLoadContentStatus
 import com.zk.common.databinding.FragmentBaseCommonListBinding
 import com.kingja.loadsir.core.LoadService
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
@@ -96,7 +96,7 @@ abstract class BaseCommonListFragment<VM : BaseCommonListFragmentViewModel<ItemD
 
     override fun initView(savedInstanceState: Bundle?) {
         mViewBind.apply {
-            mLoadService = getLoadSir().register(refreshLayout) {
+            mLoadService = getZkLoadSir().register(refreshLayout) {
                 start = 0
                 mViewModel.getList(
                     isFirst = true,
@@ -137,7 +137,7 @@ abstract class BaseCommonListFragment<VM : BaseCommonListFragmentViewModel<ItemD
     override fun createObserver() {
         mViewModel.apply {
             loadZkContentStatus.observe(this@BaseCommonListFragment) {
-                mLoadService.setLoadContentStatus(it)
+                mLoadService.setZkLoadContentStatus(it)
             }
             isRefreshing.observe(this@BaseCommonListFragment) {
                 if (!it) {

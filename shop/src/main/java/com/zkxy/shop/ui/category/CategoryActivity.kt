@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import com.zk.common.base.BaseViewBindActivity
-import com.zk.common.common.loadsir.getLoadSir
-import com.zk.common.common.loadsir.setLoadContentStatus
+import com.zk.common.common.loadsir.getZkLoadSir
+import com.zk.common.common.loadsir.setZkLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zkxy.shop.databinding.ActivityCategoryBinding
 import com.zkxy.shop.entity.goods.AllGoodsType
@@ -44,7 +44,7 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
         } ?: AllGoodsType.AllGoodsPoint
 
         mViewBind.apply {
-            mLoadService = getLoadSir().register(clCategory) {
+            mLoadService = getZkLoadSir().register(clCategory) {
                 mViewModel.fetchCategory()
             }
             categoryPrimaryAdapter = CategoryPrimaryAdapter().apply {
@@ -82,7 +82,7 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
         super.createObserver()
         mViewModel.apply {
             loadZkContentStatus.observe(this@CategoryActivity) {
-                mLoadService.setLoadContentStatus(it)
+                mLoadService.setZkLoadContentStatus(it)
             }
             categoryDataList.observe(this@CategoryActivity) { categoryEntities ->
                 categoryPrimaryAdapter.setList(categoryEntities)
