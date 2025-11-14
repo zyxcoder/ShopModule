@@ -136,7 +136,7 @@ abstract class BaseCommonListFragment<VM : BaseCommonListFragmentViewModel<ItemD
 
     override fun createObserver() {
         mViewModel.apply {
-            loadContentStatus.observe(this@BaseCommonListFragment) {
+            loadZkContentStatus.observe(this@BaseCommonListFragment) {
                 mLoadService.setLoadContentStatus(it)
             }
             isRefreshing.observe(this@BaseCommonListFragment) {

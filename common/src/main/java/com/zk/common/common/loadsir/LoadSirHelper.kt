@@ -13,22 +13,22 @@ fun getLoadSir(): LoadSir {
     return LoadSir.getDefault()
 }
 
-fun LoadService<Any>.setLoadContentStatus(loadContentStatus: LoadContentStatus) {
-    when (loadContentStatus) {
-        LoadContentStatus.DEFAULT_LOADING -> {
-            showCallback(DefaultLoadingCallback::class.java)
+fun LoadService<Any>.setLoadContentStatus(loadZkContentStatus: LoadZkContentStatus) {
+    when (loadZkContentStatus) {
+        LoadZkContentStatus.DEFAULT_LOADING -> {
+            showCallback(DefaultZkLoadingCallback::class.java)
         }
 
-        LoadContentStatus.SUCCESS -> {
+        LoadZkContentStatus.SUCCESS -> {
             showSuccess()
         }
 
-        LoadContentStatus.DEFAULT_ERROR -> {
-            showCallback(ErrorCallback::class.java)
+        LoadZkContentStatus.DEFAULT_ERROR -> {
+            showCallback(ErrorZkCallback::class.java)
         }
 
-        LoadContentStatus.DEFAULT_EMPTY -> {
-            showCallback(EmptyCallback::class.java)
+        LoadZkContentStatus.DEFAULT_EMPTY -> {
+            showCallback(EmptyZkCallback::class.java)
         }
     }
 }

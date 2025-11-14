@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.zk.common.base.BaseViewBindActivity
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zk.common.common.loadsir.getLoadSir
 import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
@@ -134,9 +134,9 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
-            loadContentStatus.observe(this@ShopHomeActivity) {
-                mViewBind.clLoad.isVisible = it != LoadContentStatus.SUCCESS
-                mViewBind.rvGoods.isVisible = it == LoadContentStatus.SUCCESS
+            loadZkContentStatus.observe(this@ShopHomeActivity) {
+                mViewBind.clLoad.isVisible = it != LoadZkContentStatus.SUCCESS
+                mViewBind.rvGoods.isVisible = it == LoadZkContentStatus.SUCCESS
                 mLoadService.setLoadContentStatus(it)
             }
             isRefreshing.observe(this@ShopHomeActivity) {

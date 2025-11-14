@@ -1,9 +1,9 @@
 package com.zk.common.application
 
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.zk.common.common.loadsir.DefaultLoadingCallback
-import com.zk.common.common.loadsir.EmptyCallback
-import com.zk.common.common.loadsir.ErrorCallback
+import com.zk.common.common.loadsir.DefaultZkLoadingCallback
+import com.zk.common.common.loadsir.EmptyZkCallback
+import com.zk.common.common.loadsir.ErrorZkCallback
 import com.kingja.loadsir.core.LoadSir
 
 
@@ -17,9 +17,9 @@ open class MyApplication : BaseApplication() {
         super.onCreate()
         Fresco.initialize(this)
         LoadSir.beginBuilder()
-            .addCallback(DefaultLoadingCallback())
-            .addCallback(EmptyCallback())
-            .addCallback(ErrorCallback())
+            .addCallback(DefaultZkLoadingCallback())
+            .addCallback(EmptyZkCallback())
+            .addCallback(ErrorZkCallback())
             .commit()
     }
 }

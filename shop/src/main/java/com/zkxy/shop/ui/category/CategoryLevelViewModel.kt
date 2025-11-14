@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.category
 
 import androidx.lifecycle.MutableLiveData
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
@@ -27,7 +27,7 @@ class CategoryLevelViewModel : BaseViewModel() {
     val isLoading = MutableLiveData<Boolean>()
     val firstGoodsDatas = MutableLiveData<MutableList<GoodsEntity>>()
     val moreGoodsDatas = MutableLiveData<MutableList<GoodsEntity>>()
-    val loadContentStatus = MutableLiveData<LoadContentStatus>()
+    val loadZkContentStatus = MutableLiveData<LoadZkContentStatus>()
     val dataHasMore = MutableLiveData<Boolean>()
 
     /**
@@ -49,7 +49,7 @@ class CategoryLevelViewModel : BaseViewModel() {
     ) {
         request<Job>(block = {
             if (isFirst) {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_LOADING
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
@@ -99,9 +99,9 @@ class CategoryLevelViewModel : BaseViewModel() {
             dataHasMore.value = dataList.size >= pageSize
             if (isFirst || isRefresh) {
                 if (dataList.isEmpty()) {
-                    loadContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
+                    loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_EMPTY
                 } else {
-                    loadContentStatus.value = LoadContentStatus.SUCCESS
+                    loadZkContentStatus.value = LoadZkContentStatus.SUCCESS
                 }
             }
             if (isRefresh || isFirst) {
@@ -113,7 +113,7 @@ class CategoryLevelViewModel : BaseViewModel() {
             }
         }, error = {
             if (isFirst || isRefresh) {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_ERROR
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_ERROR
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = false

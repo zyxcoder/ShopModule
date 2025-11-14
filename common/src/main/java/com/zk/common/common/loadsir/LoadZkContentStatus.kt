@@ -4,7 +4,7 @@ package com.zk.common.common.loadsir
  * @author zhangyuxiang
  * @date 2024/1/26
  */
-enum class LoadContentStatus {
+enum class LoadZkContentStatus {
     DEFAULT_LOADING,
     SUCCESS,
     DEFAULT_ERROR,

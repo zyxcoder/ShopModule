@@ -1,7 +1,7 @@
 package com.zk.common.base
 
 import androidx.lifecycle.MutableLiveData
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zk.common.entity.common.BottomListEntity
 import com.zk.common.entity.common.BottomRequestEntity
 import com.zk.common.ext.commonApiService
@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
  */
 class BottomChooseDialogViewModel : BaseViewModel() {
 
-    val loadContentStatus = MutableLiveData<LoadContentStatus>()
+    val loadZkContentStatus = MutableLiveData<LoadZkContentStatus>()
     val isRefreshing = MutableLiveData<Boolean>()
     val isLoading = MutableLiveData<Boolean>()
     val dataHasMore = MutableLiveData<Boolean>()
@@ -40,7 +40,7 @@ class BottomChooseDialogViewModel : BaseViewModel() {
         }
         request<Job>(block = {
             if (isFirst) {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_LOADING
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
@@ -58,9 +58,9 @@ class BottomChooseDialogViewModel : BaseViewModel() {
             }?.isCheck = true
             if (isFirst) {
                 if (dataList.isNullOrEmpty()) {
-                    loadContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
+                    loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_EMPTY
                 } else {
-                    loadContentStatus.value = LoadContentStatus.SUCCESS
+                    loadZkContentStatus.value = LoadZkContentStatus.SUCCESS
                 }
             }
             if (isRefresh || isFirst) {
@@ -76,7 +76,7 @@ class BottomChooseDialogViewModel : BaseViewModel() {
             }
         }, error = {
             if (isFirst) {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_ERROR
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_ERROR
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = false

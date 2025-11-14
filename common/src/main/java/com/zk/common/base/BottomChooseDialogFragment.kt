@@ -161,7 +161,7 @@ class BottomChooseDialogFragment :
 
     override fun createObserver() {
         mViewModel.apply {
-            loadContentStatus.observe(this@BottomChooseDialogFragment) {
+            loadZkContentStatus.observe(this@BottomChooseDialogFragment) {
                 mLoadService.setLoadContentStatus(it)
             }
             bottomCommonOptionData.observe(this@BottomChooseDialogFragment) {

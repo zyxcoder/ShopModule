@@ -139,7 +139,7 @@ abstract class BaseMultipleListFragment<VM : BaseMultipleListFragmentViewModel<I
 
     override fun createObserver() {
         mViewModel.apply {
-            loadContentStatus.observe(this@BaseMultipleListFragment) {
+            loadZkContentStatus.observe(this@BaseMultipleListFragment) {
                 mLoadService.setLoadContentStatus(it)
             }
             isRefreshing.observe(this@BaseMultipleListFragment) {

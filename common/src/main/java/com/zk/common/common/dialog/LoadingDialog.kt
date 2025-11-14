@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.zk.common.R
-import com.zk.common.databinding.LayoutLoadingDialogBinding
+import com.zk.common.databinding.LayoutZkLoadingDialogBinding
 import com.zyxcoder.mvvmroot.utils.loadImage
 
 class LoadingDialog : DialogFragment() {
-    private lateinit var binding: LayoutLoadingDialogBinding
+    private lateinit var binding: LayoutZkLoadingDialogBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = LayoutLoadingDialogBinding.inflate(layoutInflater)
+        binding = LayoutZkLoadingDialogBinding.inflate(layoutInflater)
         return binding.root
     }
 

@@ -2,9 +2,9 @@ package com.zkxy.shop
 
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.zk.common.common.loadsir.DefaultLoadingCallback
-import com.zk.common.common.loadsir.EmptyCallback
-import com.zk.common.common.loadsir.ErrorCallback
+import com.zk.common.common.loadsir.DefaultZkLoadingCallback
+import com.zk.common.common.loadsir.EmptyZkCallback
+import com.zk.common.common.loadsir.ErrorZkCallback
 import com.kingja.loadsir.core.LoadSir
 import com.tencent.mm.opensdk.openapi.IWXAPI
 
@@ -46,16 +46,14 @@ var wxApi: IWXAPI? = null
 fun shopInit(
     application: Application,
     shopHttpUrl: String?,
-    formId: Int? = 2,
-    api: IWXAPI? = null
+    formId: Int? = 2
 ) {
     Fresco.initialize(application)
-    LoadSir.beginBuilder().addCallback(DefaultLoadingCallback()).addCallback(EmptyCallback())
-        .addCallback(ErrorCallback()).commit()
+    LoadSir.beginBuilder().addCallback(DefaultZkLoadingCallback()).addCallback(EmptyZkCallback())
+        .addCallback(ErrorZkCallback()).commit()
     modeBaseUrl = shopHttpUrl
     appPlatformId = formId ?: 2
     isInit = true
-    wxApi = api
 }
 
 /**

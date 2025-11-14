@@ -1,7 +1,7 @@
 package com.zk.common.common.activitylist
 
 import androidx.lifecycle.MutableLiveData
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zk.common.network.api.ApiResult
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
@@ -20,7 +20,7 @@ abstract class BaseMultipleListFragmentViewModel<ItemDataEntity> : BaseViewModel
     val isLoading = MutableLiveData<Boolean>()
     val firstDatas = MutableLiveData<MutableList<ItemDataEntity>>()
     val moreDatas = MutableLiveData<MutableList<ItemDataEntity>>()
-    val loadContentStatus = MutableLiveData<LoadContentStatus>()
+    val loadZkContentStatus = MutableLiveData<LoadZkContentStatus>()
     val dataHasMore = MutableLiveData<Boolean>()
     val listCount = MutableLiveData<Int>()
 
@@ -45,7 +45,7 @@ abstract class BaseMultipleListFragmentViewModel<ItemDataEntity> : BaseViewModel
     ) {
         request<Job>(block = {
             if (isFirst) {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_LOADING
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
@@ -60,9 +60,9 @@ abstract class BaseMultipleListFragmentViewModel<ItemDataEntity> : BaseViewModel
             dataHasMore.value = dataList.size >= pageSize
             if (isFirst) {
                 if (dataList.isEmpty()) {
-                    loadContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
+                    loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_EMPTY
                 } else {
-                    loadContentStatus.value = LoadContentStatus.SUCCESS
+                    loadZkContentStatus.value = LoadZkContentStatus.SUCCESS
                 }
             }
             if (isRefresh || isFirst) {
@@ -75,7 +75,7 @@ abstract class BaseMultipleListFragmentViewModel<ItemDataEntity> : BaseViewModel
             }
         }, error = {
             if (isFirst) {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_ERROR
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_ERROR
             }
             if (isRefresh || isFirst) {
                 listCount.value = 0

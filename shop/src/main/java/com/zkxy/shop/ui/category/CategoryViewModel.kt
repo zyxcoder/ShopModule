@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.category
 
 import androidx.lifecycle.MutableLiveData
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.network.request.apiService
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.Job
  */
 class CategoryViewModel : BaseViewModel() {
 
-    val loadContentStatus = MutableLiveData<LoadContentStatus>()
+    val loadZkContentStatus = MutableLiveData<LoadZkContentStatus>()
 
     val categoryDataList = MutableLiveData<MutableList<GoodsCategoryEntity>>()
 
@@ -30,7 +30,7 @@ class CategoryViewModel : BaseViewModel() {
 
     fun fetchCategory() {
         request<Job>(block = {
-            loadContentStatus.value = LoadContentStatus.DEFAULT_LOADING
+            loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_LOADING
             val apiResult = apiService.getGoodsCategory().apiData().filter {
                 it.children?.isNotEmpty() == true
             }.toMutableList()
@@ -38,12 +38,12 @@ class CategoryViewModel : BaseViewModel() {
             apiResult.firstOrNull()?.isSelect = true
             categoryDataList.value = apiResult
             if (apiResult.isNotEmpty()) {
-                loadContentStatus.value = LoadContentStatus.SUCCESS
+                loadZkContentStatus.value = LoadZkContentStatus.SUCCESS
             } else {
-                loadContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
+                loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_EMPTY
             }
         }, error = {
-            loadContentStatus.value = LoadContentStatus.DEFAULT_ERROR
+            loadZkContentStatus.value = LoadZkContentStatus.DEFAULT_ERROR
         })
     }
 

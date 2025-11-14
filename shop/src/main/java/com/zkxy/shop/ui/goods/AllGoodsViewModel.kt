@@ -1,7 +1,7 @@
 package com.zkxy.shop.ui.goods
 
 import androidx.lifecycle.MutableLiveData
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zkxy.shop.entity.category.GoodsCategoryEntity
 import com.zkxy.shop.entity.goods.AllGoodsType
 import com.zkxy.shop.entity.goods.RuleType
@@ -20,7 +20,7 @@ import kotlinx.coroutines.Job
 class AllGoodsViewModel : BaseViewModel() {
 
 
-    val loadCategoryContentStatus = MutableLiveData<LoadContentStatus>()
+    val loadCategoryContentStatus = MutableLiveData<LoadZkContentStatus>()
 
     val categoryDataList = MutableLiveData<MutableList<GoodsCategoryEntity>>()
 
@@ -32,7 +32,7 @@ class AllGoodsViewModel : BaseViewModel() {
     val isLoading = MutableLiveData<Boolean>()
     val firstGoodsDatas = MutableLiveData<MutableList<GoodsEntity>>()
     val moreGoodsDatas = MutableLiveData<MutableList<GoodsEntity>>()
-    val loadGoodsContentStatus = MutableLiveData<LoadContentStatus>()
+    val loadGoodsContentStatus = MutableLiveData<LoadZkContentStatus>()
     val dataHasMore = MutableLiveData<Boolean>()
 
     /**
@@ -55,7 +55,7 @@ class AllGoodsViewModel : BaseViewModel() {
 
         request<Job>(block = {
             if (isFirst) {
-                loadGoodsContentStatus.value = LoadContentStatus.DEFAULT_LOADING
+                loadGoodsContentStatus.value = LoadZkContentStatus.DEFAULT_LOADING
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = true
@@ -104,9 +104,9 @@ class AllGoodsViewModel : BaseViewModel() {
             dataHasMore.value = dataList.size >= pageSize
             if (isFirst || isRefresh) {
                 if (dataList.isEmpty()) {
-                    loadGoodsContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
+                    loadGoodsContentStatus.value = LoadZkContentStatus.DEFAULT_EMPTY
                 } else {
-                    loadGoodsContentStatus.value = LoadContentStatus.SUCCESS
+                    loadGoodsContentStatus.value = LoadZkContentStatus.SUCCESS
                 }
             }
             if (isRefresh || isFirst) {
@@ -118,7 +118,7 @@ class AllGoodsViewModel : BaseViewModel() {
             }
         }, error = {
             if (isFirst || isRefresh) {
-                loadGoodsContentStatus.value = LoadContentStatus.DEFAULT_ERROR
+                loadGoodsContentStatus.value = LoadZkContentStatus.DEFAULT_ERROR
             }
             if (isRefresh || isFirst) {
                 isRefreshing.value = false
@@ -132,7 +132,7 @@ class AllGoodsViewModel : BaseViewModel() {
 
     fun fetchCategory() {
         request<Job>(block = {
-            loadCategoryContentStatus.value = LoadContentStatus.DEFAULT_LOADING
+            loadCategoryContentStatus.value = LoadZkContentStatus.DEFAULT_LOADING
             val apiResult = apiService.getGoodsCategory().apiData()
             //手动添加一个”全部“标签
             apiResult.add(
@@ -152,12 +152,12 @@ class AllGoodsViewModel : BaseViewModel() {
             )
             categoryDataList.value = apiResult
             if (apiResult.isNotEmpty()) {
-                loadCategoryContentStatus.value = LoadContentStatus.SUCCESS
+                loadCategoryContentStatus.value = LoadZkContentStatus.SUCCESS
             } else {
-                loadCategoryContentStatus.value = LoadContentStatus.DEFAULT_EMPTY
+                loadCategoryContentStatus.value = LoadZkContentStatus.DEFAULT_EMPTY
             }
         }, error = {
-            loadCategoryContentStatus.value = LoadContentStatus.DEFAULT_ERROR
+            loadCategoryContentStatus.value = LoadZkContentStatus.DEFAULT_ERROR
         })
     }
 }

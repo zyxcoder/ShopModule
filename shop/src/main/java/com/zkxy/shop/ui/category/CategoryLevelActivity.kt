@@ -341,7 +341,7 @@ class CategoryLevelActivity :
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
-            loadContentStatus.observe(this@CategoryLevelActivity) {
+            loadZkContentStatus.observe(this@CategoryLevelActivity) {
                 mLoadService.setLoadContentStatus(it)
             }
             isRefreshing.observe(this@CategoryLevelActivity) {

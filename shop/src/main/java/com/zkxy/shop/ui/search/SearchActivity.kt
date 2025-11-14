@@ -8,7 +8,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.zk.common.base.BaseViewBindActivity
-import com.zk.common.common.loadsir.LoadContentStatus
+import com.zk.common.common.loadsir.LoadZkContentStatus
 import com.zk.common.common.loadsir.getLoadSir
 import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
@@ -139,11 +139,11 @@ class SearchActivity : BaseViewBindActivity<SearchViewModel, ActivitySearchBindi
                     mViewBind.flSearchHistory.addView(generateSearchWordView(searchWordList[it]))
                 }
             }
-            loadContentStatus.observe(this@SearchActivity) {
+            loadZkContentStatus.observe(this@SearchActivity) {
                 mLoadService.setLoadContentStatus(it)
                 mViewBind.clSearchHistory.isVisible = false
                 mViewBind.clSearchResult.isVisible = true
-                mViewBind.tvResultCount.isVisible = it == LoadContentStatus.SUCCESS
+                mViewBind.tvResultCount.isVisible = it == LoadZkContentStatus.SUCCESS
             }
             isRefreshing.observe(this@SearchActivity) {
                 if (!it) {

@@ -7,6 +7,6 @@ import com.kingja.loadsir.callback.Callback
  * @author zhangyuxiang
  * @date 2024/1/26
  */
-class ErrorCallback : Callback() {
-    override fun onCreateView(): Int = R.layout.view_error_result
+class ErrorZkCallback : Callback() {
+    override fun onCreateView(): Int = R.layout.view_zk_error_result
 }

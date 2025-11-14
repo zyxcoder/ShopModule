@@ -81,7 +81,7 @@ class CategoryActivity : BaseViewBindActivity<CategoryViewModel, ActivityCategor
     override fun createObserver() {
         super.createObserver()
         mViewModel.apply {
-            loadContentStatus.observe(this@CategoryActivity) {
+            loadZkContentStatus.observe(this@CategoryActivity) {
                 mLoadService.setLoadContentStatus(it)
             }
             categoryDataList.observe(this@CategoryActivity) { categoryEntities ->
