@@ -14,7 +14,7 @@
         android:layout_width="4dp"
         android:layout_height="16dp"
         android:layout_marginStart="10dp"
-        android:background="@drawable/shape_566beb_2"
+        android:background="@drawable/shape_38a3ee_2"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"

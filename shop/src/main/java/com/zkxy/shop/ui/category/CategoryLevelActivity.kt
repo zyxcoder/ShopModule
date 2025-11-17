@@ -251,7 +251,7 @@ class CategoryLevelActivity :
             findViewById<TextView>(R.id.tvTabText).apply {
                 setTextColor(
                     ContextCompat.getColor(
-                        context, if (isSelect) R.color.clolor_566beb else R.color.clolor_666666
+                        context, if (isSelect) R.color.color_38A3EE else R.color.color_8D93A6
                     )
                 )
                 paint.isFakeBoldText = isSelect
@@ -277,7 +277,7 @@ class CategoryLevelActivity :
             arrayListOf(tvDefaultSort, tvPriceOrPointSort, tvPointSort).forEach {
                 it.setTextColor(
                     ContextCompat.getColor(
-                        this@CategoryLevelActivity, R.color.clolor_666666
+                        this@CategoryLevelActivity, R.color.color_565D73
                     )
                 )
             }
@@ -293,7 +293,7 @@ class CategoryLevelActivity :
                 SortRule.DEFAULT_SORT -> {
                     tvDefaultSort.setTextColor(
                         ContextCompat.getColor(
-                            this@CategoryLevelActivity, R.color.clolor_566beb
+                            this@CategoryLevelActivity, R.color.color_38A3EE
                         )
                     )
                 }
@@ -302,7 +302,7 @@ class CategoryLevelActivity :
                     tvPriceOrPointSort.apply {
                         setTextColor(
                             ContextCompat.getColor(
-                                this@CategoryLevelActivity, R.color.clolor_566beb
+                                this@CategoryLevelActivity, R.color.color_38A3EE
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(
@@ -323,7 +323,7 @@ class CategoryLevelActivity :
                         text = currentSortRule.ruleType?.content
                         setTextColor(
                             ContextCompat.getColor(
-                                this@CategoryLevelActivity, R.color.clolor_566beb
+                                this@CategoryLevelActivity, R.color.color_38A3EE
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(

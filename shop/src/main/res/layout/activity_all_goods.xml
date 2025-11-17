@@ -29,10 +29,10 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutGoods"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="7dp"
-                android:background="@drawable/shape_f2f5f9_6"
+                android:background="@drawable/shape_f1f9ff_241"
                 android:paddingStart="2dp"
                 android:paddingEnd="2dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -41,13 +41,13 @@
                 app:tabIndicator="@drawable/shape_full_tab_indicator"
                 app:tabIndicatorColor="@color/white"
                 app:tabIndicatorFullWidth="true"
-                app:tabIndicatorHeight="34dp"
+                app:tabIndicatorHeight="38dp"
                 app:tabMinWidth="0dp"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"
-                app:tabSelectedTextColor="@color/color_566BEB"
+                app:tabSelectedTextColor="@color/color_38A3EE"
                 app:tabTextAppearance="@style/TabTextStyle"
-                app:tabTextColor="@color/color_666666">
+                app:tabTextColor="@color/color_8D93A6">
 
             </com.google.android.material.tabs.TabLayout>
 
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="默认排序"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/color_565D73"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -155,7 +155,7 @@
                     android:drawableRight="@drawable/ic_sort_down_unselect"
                     android:drawablePadding="4dp"
                     android:text="排序"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/color_565D73"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/tvDefaultSort"
@@ -169,7 +169,7 @@
                     android:drawableRight="@drawable/ic_sort_down_unselect"
                     android:drawablePadding="4dp"
                     android:text="积分区间"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@color/color_565D73"
                     android:textSize="14sp"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"

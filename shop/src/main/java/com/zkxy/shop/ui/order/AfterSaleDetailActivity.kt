@@ -129,7 +129,7 @@ class AfterSaleDetailActivity :
                                 this@AfterSaleDetailActivity, R.color.color_04091A
                             )
                         )
-                        viewLineOne.setBackgroundResource(R.color.color_3B82F6)
+                        viewLineOne.setBackgroundResource(R.color.color_38A3EE)
                         ivHandle.setImageResource(R.drawable.ic_after_sale_handle)
                         tvHandle.setTextColor(
                             ContextCompat.getColor(
@@ -143,7 +143,7 @@ class AfterSaleDetailActivity :
                                 if (it.tmsAfterSaleState == 4 || it.tmsAfterSaleState == 5 || it.tmsAfterSaleState == 6) R.color.color_04091A else R.color.color_565D73
                             )
                         )
-                        viewLineTwo.setBackgroundResource(if (it.tmsAfterSaleState == 4 || it.tmsAfterSaleState == 5 || it.tmsAfterSaleState == 6) R.color.color_3B82F6 else R.color.color_B8BDCC)
+                        viewLineTwo.setBackgroundResource(if (it.tmsAfterSaleState == 4 || it.tmsAfterSaleState == 5 || it.tmsAfterSaleState == 6) R.color.color_38A3EE else R.color.color_B8BDCC)
                         ivComplete.setImageResource(if (it.tmsAfterSaleState == 6) R.drawable.ic_after_sale_handle else R.drawable.ic_after_sale_no_complete)
                         tvComplete.setTextColor(
                             ContextCompat.getColor(
@@ -151,7 +151,7 @@ class AfterSaleDetailActivity :
                                 if (it.tmsAfterSaleState == 6) R.color.color_04091A else R.color.color_565D73
                             )
                         )
-                        viewLineThree.setBackgroundResource(if (it.tmsAfterSaleState == 6) R.color.color_3B82F6 else R.color.color_B8BDCC)
+                        viewLineThree.setBackgroundResource(if (it.tmsAfterSaleState == 6) R.color.color_38A3EE else R.color.color_B8BDCC)
                     }
                     viewRefundColse.apply {
                         when (it.tmsAfterSaleState) {

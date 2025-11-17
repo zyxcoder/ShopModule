@@ -216,7 +216,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             findViewById<TextView>(R.id.tvTabText).apply {
                 setTextColor(
                     ContextCompat.getColor(
-                        context, if (isSelect) R.color.clolor_566beb else R.color.clolor_666666
+                        context, if (isSelect) R.color.color_38A3EE else R.color.color_8D93A6
                     )
                 )
                 paint.isFakeBoldText = isSelect
@@ -242,7 +242,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
             arrayListOf(tvDefaultSort, tvPriceOrPointSort, tvPointSort).forEach {
                 it.setTextColor(
                     ContextCompat.getColor(
-                        this@AllGoodsActivity, R.color.clolor_666666
+                        this@AllGoodsActivity, R.color.color_565D73
                     )
                 )
             }
@@ -258,7 +258,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                 SortRule.DEFAULT_SORT -> {
                     tvDefaultSort.setTextColor(
                         ContextCompat.getColor(
-                            this@AllGoodsActivity, R.color.clolor_566beb
+                            this@AllGoodsActivity, R.color.color_38A3EE
                         )
                     )
                 }
@@ -267,7 +267,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                     tvPriceOrPointSort.apply {
                         setTextColor(
                             ContextCompat.getColor(
-                                this@AllGoodsActivity, R.color.clolor_566beb
+                                this@AllGoodsActivity, R.color.color_38A3EE
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(
@@ -288,7 +288,7 @@ class AllGoodsActivity : BaseViewBindActivity<AllGoodsViewModel, ActivityAllGood
                         text = currentSortRule.ruleType?.content
                         setTextColor(
                             ContextCompat.getColor(
-                                this@AllGoodsActivity, R.color.clolor_566beb
+                                this@AllGoodsActivity, R.color.color_38A3EE
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(

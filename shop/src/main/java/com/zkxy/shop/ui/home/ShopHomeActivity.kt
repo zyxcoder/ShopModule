@@ -12,9 +12,8 @@ import com.zk.common.common.loadsir.LoadContentStatus
 import com.zk.common.common.loadsir.getLoadSir
 import com.zk.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
-import com.youth.banner.adapter.BannerImageAdapter
+import com.youth.banner.indicator.CircleIndicator
 import com.zkxy.shop.databinding.ActivityShopHomeBinding
-import com.zkxy.shop.entity.home.HomeShopBannerEntity
 import com.zkxy.shop.isInit
 import com.zkxy.shop.ui.goods.AllGoodsActivity
 import com.zkxy.shop.ui.goods.GoodsDetailsActivity
@@ -80,6 +79,7 @@ class ShopHomeActivity : BaseViewBindActivity<ShopHomeViewModel, ActivityShopHom
 //                }
 //            }
             bannerHome.setAdapter(HomeBannerImageLoader(arrayListOf()))
+                .setIndicator(CircleIndicator(this@ShopHomeActivity))
                 .addBannerLifecycleObserver(this@ShopHomeActivity)
             goodsAdapter = GoodsAdapter().apply {
                 onGoodsItemClickListener = {
