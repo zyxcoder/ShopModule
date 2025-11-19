@@ -45,7 +45,7 @@
                 app:tabMinWidth="0dp"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"
-                app:tabSelectedTextColor="@color/color_566BEB"
+                app:tabSelectedTextColor="@color/color_FF6600"
                 app:tabTextAppearance="@style/TabTextStyle"
                 app:tabTextColor="@color/color_666666">
 

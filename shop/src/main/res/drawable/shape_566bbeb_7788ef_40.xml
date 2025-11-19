@@ -4,6 +4,6 @@
 
     <corners android:radius="@dimen/dp_40" />
     <gradient
-        android:endColor="#7788EF"
-        android:startColor="#566BEB" />
+        android:endColor="@color/color_FF6600"
+        android:startColor="@color/color_FF6600" />
 </shape>

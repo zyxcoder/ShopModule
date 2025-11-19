@@ -31,7 +31,7 @@ class CategoryPrimaryAdapter :
             tvTitle.setTextColor(
                 ContextCompat.getColor(
                     context,
-                    if (item.isSelect == true) R.color.clolor_566beb else R.color.clolor_666666
+                    if (item.isSelect == true) R.color.color_FF6600 else R.color.clolor_666666
                 )
             )
             tvTitle.setTextSize(if (item.isSelect == true) 16f else 14f)

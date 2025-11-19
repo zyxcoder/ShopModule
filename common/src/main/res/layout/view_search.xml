@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="搜索"
-        android:textColor="#587af7"
+        android:textColor="#ff6600"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

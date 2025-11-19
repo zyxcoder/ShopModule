@@ -251,7 +251,7 @@ class CategoryLevelActivity :
             findViewById<TextView>(R.id.tvTabText).apply {
                 setTextColor(
                     ContextCompat.getColor(
-                        context, if (isSelect) R.color.clolor_566beb else R.color.clolor_666666
+                        context, if (isSelect) R.color.color_FF6600 else R.color.clolor_666666
                     )
                 )
                 paint.isFakeBoldText = isSelect
@@ -293,7 +293,7 @@ class CategoryLevelActivity :
                 SortRule.DEFAULT_SORT -> {
                     tvDefaultSort.setTextColor(
                         ContextCompat.getColor(
-                            this@CategoryLevelActivity, R.color.clolor_566beb
+                            this@CategoryLevelActivity, R.color.color_FF6600
                         )
                     )
                 }
@@ -302,7 +302,7 @@ class CategoryLevelActivity :
                     tvPriceOrPointSort.apply {
                         setTextColor(
                             ContextCompat.getColor(
-                                this@CategoryLevelActivity, R.color.clolor_566beb
+                                this@CategoryLevelActivity, R.color.color_FF6600
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(
@@ -323,7 +323,7 @@ class CategoryLevelActivity :
                         text = currentSortRule.ruleType?.content
                         setTextColor(
                             ContextCompat.getColor(
-                                this@CategoryLevelActivity, R.color.clolor_566beb
+                                this@CategoryLevelActivity, R.color.color_FF6600
                             )
                         )
                         setCompoundDrawablesWithIntrinsicBounds(
