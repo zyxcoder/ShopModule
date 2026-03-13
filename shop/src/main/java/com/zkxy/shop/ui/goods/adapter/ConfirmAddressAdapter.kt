@@ -16,7 +16,7 @@ class ConfirmAddressAdapter :
         item: ConfirmAddressEntity
     ) {
         holder.viewBind.apply {
-            tvAddress.text = item.label
+            tvAddress.text = item.pickName
             ivCheck.setImageResource(if (item.isCheck) R.drawable.ic_save_book_checked else R.drawable.ic_save_book_normal)
         }
     }

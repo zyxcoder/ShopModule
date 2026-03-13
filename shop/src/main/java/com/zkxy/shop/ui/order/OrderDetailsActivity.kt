@@ -371,8 +371,8 @@ class OrderDetailsActivity :
                         mViewModel.shipmentsApp(
                             orderId = detailsEntity?.orderId,
                             deliveryCode = deliveryCode,
-                            shipmentsAddress = it.label,
-                            shipmentsAddressId = it.value
+                            shipmentsAddress = it.pickName,
+                            shipmentsAddressId = it.shipmentsAddressId
                         )
                     }
                     mViewBind.tvConfirm.onContinuousClick {
